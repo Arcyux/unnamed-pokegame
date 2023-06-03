@@ -7,7 +7,7 @@ EventScript_RepelWoreOff::
 	checkitem ITEM_MAX_REPEL, 1
 	goto_if_eq VAR_RESULT, TRUE, EventScript_RepelUseAnother
 .else
-	checkitem VAR_LAST_REPEL_LURE_USED, 1
+	checkitem I_VAR_LAST_REPEL_LURE_USED, 1
 	goto_if_eq VAR_RESULT, TRUE, EventScript_RepelUseAnother
 .endif
 	lock
@@ -38,11 +38,11 @@ EventScript_RepelWoreOff_End:
 	end
 
 EventScript_UsedRepel:
-	bufferitemname 1, VAR_LAST_REPEL_LURE_USED
+	bufferitemname 1, I_VAR_LAST_REPEL_LURE_USED
 	playse SE_REPEL
 	lock
 	msgbox Text_UsedNewRepelLure, MSGBOX_SIGN
-	removeitem VAR_LAST_REPEL_LURE_USED, 1
+	removeitem I_VAR_LAST_REPEL_LURE_USED, 1
 	waitse
 	callnative HandleUseExpiredRepel
 	release
@@ -57,7 +57,7 @@ EventScript_LureWoreOff::
 	checkitem ITEM_MAX_LURE, 1
 	goto_if_eq VAR_RESULT, TRUE, EventScript_LureUseAnother
 .else
-	checkitem VAR_LAST_REPEL_LURE_USED, 1
+	checkitem I_VAR_LAST_REPEL_LURE_USED, 1
 	goto_if_eq VAR_RESULT, TRUE, EventScript_LureUseAnother
 .endif
 	lock
@@ -88,11 +88,11 @@ EventScript_LureWoreOff_End:
 	end
 
 EventScript_UsedLure:
-	bufferitemname 1, VAR_LAST_REPEL_LURE_USED
+	bufferitemname 1, I_VAR_LAST_REPEL_LURE_USED
 	playse SE_REPEL
 	lock
 	msgbox Text_UsedNewRepelLure, MSGBOX_SIGN
-	removeitem VAR_LAST_REPEL_LURE_USED, 1
+	removeitem I_VAR_LAST_REPEL_LURE_USED, 1
 	waitse
 	callnative HandleUseExpiredLure
 	release

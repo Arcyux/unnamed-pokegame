@@ -651,16 +651,16 @@
 #define FLAG_HIDDEN_ITEM_ROUTE_123_RARE_CANDY                (FLAG_HIDDEN_ITEMS_START + 0x6E)
 #define FLAG_HIDDEN_ITEM_ROUTE_105_BIG_PEARL                 (FLAG_HIDDEN_ITEMS_START + 0x6F)
 
-#define FLAG_UNUSED_0x264  0x264 // Unused Flag
-#define FLAG_UNUSED_0x265  0x265 // Unused Flag
-#define FLAG_UNUSED_0x266  0x266 // Unused Flag
-#define FLAG_UNUSED_0x267  0x267 // Unused Flag
-#define FLAG_UNUSED_0x268  0x268 // Unused Flag
-#define FLAG_UNUSED_0x269  0x269 // Unused Flag
-#define FLAG_UNUSED_0x26A  0x26A // Unused Flag
-#define FLAG_UNUSED_0x26B  0x26B // Unused Flag
-#define FLAG_UNUSED_0x26C  0x26C // Unused Flag
-#define FLAG_UNUSED_0x26D  0x26D // Unused Flag
+#define FLAG_NO_COLLISION       0x264 // Toggles collision
+#define FLAG_NO_ENCOUNTER       0x265 // Toggles the ability to encounter wild mons
+#define FLAG_NO_TRAINER_SEE     0x266 // Toggles whether trianer battles activate on sight
+#define FLAG_INVERSE_BATTLE     0x267 // Toggles inverse battle type chart
+#define FLAG_FORCE_DOUBLE_WILD  0x268 // Toggles if wild battles are double battles
+#define FLAG_SMART_WILD_AI      0x269 // Toggles if wild pokemon use trainer ai
+#define FLAG_NO_BAG_USE         0x26A // Toggles if the player can use their bag during battle
+#define FLAG_NO_CATCHING        0x26B // Toggles if catching is enabled
+#define FLAG_FORCE_SHINY        0x26C // Toggles if wild and gift mon are forced shiny
+#define FLAG_FORCE_NO_SHINY     0x26D // Toggles if wild and gift mon are forced not shiny
 #define FLAG_UNUSED_0x26E  0x26E // Unused Flag
 #define FLAG_UNUSED_0x26F  0x26F // Unused Flag
 #define FLAG_UNUSED_0x270  0x270 // Unused Flag

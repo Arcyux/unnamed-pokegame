@@ -4214,11 +4214,11 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
         switch (gLastUsedAbility)
         {
         case ABILITYEFFECT_SWITCH_IN_TERRAIN:
-            if (VarGet(VAR_TERRAIN) & STATUS_FIELD_TERRAIN_ANY)
+            if (VarGet(B_VAR_TERRAIN) & STATUS_FIELD_TERRAIN_ANY)
             {
-                u16 terrainFlags = VarGet(VAR_TERRAIN) & STATUS_FIELD_TERRAIN_ANY;    // only works for status flag (1 << 15)
+                u16 terrainFlags = VarGet(B_VAR_TERRAIN) & STATUS_FIELD_TERRAIN_ANY;    // only works for status flag (1 << 15)
                 gFieldStatuses = terrainFlags | STATUS_FIELD_TERRAIN_PERMANENT; // terrain is permanent
-                switch (VarGet(VAR_TERRAIN) & STATUS_FIELD_TERRAIN_ANY)
+                switch (VarGet(B_VAR_TERRAIN) & STATUS_FIELD_TERRAIN_ANY)
                 {
                 case STATUS_FIELD_ELECTRIC_TERRAIN:
                     gBattleCommunication[MULTISTRING_CHOOSER] = 2;

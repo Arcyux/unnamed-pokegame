@@ -129,8 +129,8 @@ void TryDrawRepelMenu(void)
         if (CheckBagHasItem(repelItems[i], 1))
         {
             VarSet(VAR_0x8004 + count, repelItems[i]);
-        #if VAR_LAST_REPEL_LURE_USED != 0
-            if (VarGet(VAR_LAST_REPEL_LURE_USED) == repelItems[i])
+        #if I_VAR_LAST_REPEL_LURE_USED != 0
+            if (VarGet(I_VAR_LAST_REPEL_LURE_USED) == repelItems[i])
                 menuPos = count;
         #endif
             menuItems[count].text = ItemId_GetName(repelItems[i]);
@@ -148,8 +148,8 @@ void HandleRepelMenuChoice(void)
 {
     gSpecialVar_0x8004 = VarGet(VAR_0x8004 + gSpecialVar_Result); // Get item Id;
     VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(gSpecialVar_0x8004));
-#if VAR_LAST_REPEL_LURE_USED != 0
-    VarSet(VAR_LAST_REPEL_LURE_USED, gSpecialVar_0x8004);
+#if I_VAR_LAST_REPEL_LURE_USED != 0
+    VarSet(I_VAR_LAST_REPEL_LURE_USED, gSpecialVar_0x8004);
 #endif
 }
 
@@ -165,8 +165,8 @@ void TryDrawLureMenu(void)
         if (CheckBagHasItem(lureItems[i], 1))
         {
             VarSet(VAR_0x8004 + count, lureItems[i]);
-        #if VAR_LAST_REPEL_LURE_USED != 0
-            if (VarGet(VAR_LAST_REPEL_LURE_USED) == lureItems[i])
+        #if I_VAR_LAST_REPEL_LURE_USED != 0
+            if (VarGet(I_VAR_LAST_REPEL_LURE_USED) == lureItems[i])
                 menuPos = count;
         #endif
             menuItems[count].text = ItemId_GetName(lureItems[i]);
@@ -184,8 +184,8 @@ void HandleLureMenuChoice(void)
 {
     gSpecialVar_0x8004 = VarGet(VAR_0x8004 + gSpecialVar_Result); // Get item Id;
     VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(gSpecialVar_0x8004) | REPEL_LURE_MASK);
-#if VAR_LAST_REPEL_LURE_USED != 0
-    VarSet(VAR_LAST_REPEL_LURE_USED, gSpecialVar_0x8004);
+#if I_VAR_LAST_REPEL_LURE_USED != 0
+    VarSet(I_VAR_LAST_REPEL_LURE_USED, gSpecialVar_0x8004);
 #endif
 }
 #endif //I_REPEL_LURE_MENU == TRUE
