@@ -1,0 +1,27 @@
+Tutorials used:
+- Surf Dismount Ground Effects
+- Fix Snow Weather
+- Make Key Items That Cannot Be Used In The Field Not Show A Use or Register Option
+- Change bag sound with the ones from FR
+- Repeated Medicine Use
+- Remove Map Popups On Maps With The Same Map Section
+
+Things to add:
+- multiple registered items
+- show tm compatability
+- move item in party option
+- bag sorting
+- choose item from bag in overworld
+- multiple choice options
+- quick run hotkey
+
+Things to change:
+- text speed
+- graphics to newer gens/custom
+- allow list wrapping (go up at top of list to go to bottom)
+
+Things to consider:
+- reworking hms
+    - replacing with items or
+    - not requiring the move to be taught to be used
+- adding pc to start menu
