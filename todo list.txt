@@ -19,6 +19,7 @@ Things to change:
 - text speed
 - graphics to newer gens/custom
 - allow list wrapping (go up at top of list to go to bottom)
+- convert tmhms to bitfield
 
 Things to consider:
 - reworking hms

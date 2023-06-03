@@ -300,8 +300,7 @@ static const u8 sContextMenuItems_BallsPocket[] = {
 };
 
 static const u8 sContextMenuItems_TmHmPocket[] = {
-    ACTION_USE,         ACTION_GIVE,
-    ACTION_DUMMY,       ACTION_CANCEL
+    ACTION_USE,         ACTION_CANCEL
 };
 
 static const u8 sContextMenuItems_BerriesPocket[] = {
@@ -2075,7 +2074,7 @@ static void Task_ItemContext_Sell(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    if (ItemId_GetPrice(gSpecialVar_ItemId) == 0)
+    if (ItemId_GetPrice(gSpecialVar_ItemId) == 0 || gBagPosition.pocket == TMHM_POCKET)
     {
         CopyItemName(gSpecialVar_ItemId, gStringVar2);
         StringExpandPlaceholders(gStringVar4, gText_CantBuyKeyItem);
