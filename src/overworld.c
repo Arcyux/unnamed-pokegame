@@ -1969,7 +1969,8 @@ static bool32 LoadMapInStepsLocal(u8 *state, bool32 a2)
         (*state)++;
         break;
     case 11:
-        if (gMapHeader.showMapName == TRUE && SecretBaseMapPopupEnabled() == TRUE)
+        // TODO: don't show the same cave popup name repeatedly
+        if (gMapHeader.showMapName == TRUE && SecretBaseMapPopupEnabled() == TRUE/* && gMapHeader.regionMapSectionId != sLastMapSectionId*/)
             ShowMapNamePopup();
         (*state)++;
         break;

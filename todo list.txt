@@ -7,6 +7,7 @@ Tutorials used:
 - Remove Map Popups On Maps With The Same Map Section
 
 Things to add:
+- figure out how to do hidden items
 - multiple registered items
 - show tm compatability
 - move item in party option
@@ -14,6 +15,10 @@ Things to add:
 - choose item from bag in overworld
 - multiple choice options
 - quick run hotkey
+- dexnev
+- don't allow repeated talking to nurse
+- party rename & relearn
+- gigantamax forms as megas (like rr)
 
 Things to change:
 - text speed
@@ -25,4 +30,6 @@ Things to consider:
 - reworking hms
     - replacing with items or
     - not requiring the move to be taught to be used
-- adding pc to start menu
+- adding pc and/or healing to start menu
+- make snowy grass that acts like ash grass
+- reusable consumed held items
