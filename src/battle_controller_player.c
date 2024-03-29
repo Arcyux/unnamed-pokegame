@@ -1726,21 +1726,6 @@ static void MoveSelectionDisplayPpNumber(u32 battler)
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_REMAINING);
 }
 
-static u8 TypeColor(u32 move, u32 moveType, u32 battlerAtk, u32 battlerDef)
-{
-    uq4_12_t eff = CalcTypeEffectivenessMultiplier(move, moveType, battlerAtk, battlerDef, gBattleMons[battlerDef].ability, FALSE);
-    switch (eff) {
-        case UQ_4_12(0):
-            return B_WIN_TYPE_NO_EFF;
-        case UQ_4_12(0.5):
-            return B_WIN_TYPE_NOT_VERY_EFF;
-        case UQ_4_12(1):
-            return B_WIN_MOVE_TYPE;
-        default:
-            return B_WIN_TYPE_SUPER_EFF;
-    }
-}
-
 static void MoveSelectionDisplayMoveTypeDoubles(u32 battlerAtk, u32 battlerDef)
 {
     MoveSelectionDisplayMoveType(battlerAtk, battlerDef);
@@ -1758,18 +1743,12 @@ static void MoveSelectionDisplayMoveTypeSingles(u32 battler)
 
 static void MoveSelectionDisplayMoveType(u32 battlerAtk, u32 battlerDef)
 {
-    //u8 *txtPtr;
     u8 type;
     u32 speciesId;
     struct Pokemon *mon;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battlerAtk][4]);
     u16 move = moveInfo->moves[gMoveSelectionCursor[battlerAtk]];
     u16 holdEffect = GetBattlerHoldEffect(battlerAtk, TRUE);
-
-    //txtPtr = gDisplayedStringBattle;
-    //*(txtPtr)++ = EXT_CTRL_CODE_BEGIN;
-    //*(txtPtr)++ = EXT_CTRL_CODE_FONT;
-    //*(txtPtr)++ = FONT_NORMAL;
 
     if (move == MOVE_IVY_CUDGEL)
     {
@@ -1793,21 +1772,53 @@ static void MoveSelectionDisplayMoveType(u32 battlerAtk, u32 battlerDef)
     else
         type = gMovesInfo[move].type;
 
-    //StringCopy(txtPtr, gTypesInfo[type].name);
-    //BattlePutTextOnWindow(gDisplayedStringBattle, TypeColor(move, type, battlerAtk, battlerDef));
-
+    // move category
     u8 icon = GetBattleMoveCategory(move) + MENU_TYPE_CAT_PHYSICAL;
-    ListMenuLoadStdPalAt(BG_PLTT_ID(10), icon);
-    FillWindowPixelRect(B_WIN_MOVE_CAT, PIXEL_FILL(0x1), 2, 0, 30, 16);
-    BlitMenuInfoIcon(B_WIN_MOVE_CAT, icon, 10, 3);
-    PutWindowTilemap(B_WIN_MOVE_CAT);
-    CopyWindowToVram(B_WIN_MOVE_CAT, COPYWIN_FULL);
+    FillWindowPixelBuffer(B_WIN_MOVE_CAT, PIXEL_FILL(1));
+    BlitMenuInfoIcon(B_WIN_MOVE_CAT, icon, 2, 3);
 
-    ListMenuLoadStdPalAt(BG_PLTT_ID(9), type);
-    FillWindowPixelBuffer(B_WIN_MOVE_TYPE, PIXEL_FILL(0x1));
+    // move type
+    FillWindowPixelBuffer(B_WIN_MOVE_TYPE, PIXEL_FILL(1));
     BlitMenuInfoIcon(B_WIN_MOVE_TYPE, type, 2, 3);
-    PutWindowTilemap(B_WIN_MOVE_TYPE);
+
+    // move effectiveness and stab
+    FillWindowPixelBuffer(B_WIN_MOVE_EFF, PIXEL_FILL(1));
+
+    if (icon != MENU_TYPE_CAT_STATUS) {
+        u8 x = 10, y = 4;
+
+        // move effectiveness
+        u16 effectiveness = CalcTypeEffectivenessMultiplier(move, type, battlerAtk, battlerDef, gBattleMons[battlerDef].ability, FALSE);
+        u8 iconId = 0;
+        if (effectiveness == UQ_4_12(0.0))
+            iconId = MENU_TYPE_NO_EFF;
+        else if (effectiveness > UQ_4_12(1.0))
+            iconId = MENU_TYPE_SUPER_EFF;
+        else if (effectiveness < UQ_4_12(1.0))
+            iconId = MENU_TYPE_NOTVERY_EFF;
+
+        if (iconId) {
+            BlitMenuInfoIcon(B_WIN_MOVE_EFF, iconId, x, y);
+            x += 14;
+        }
+
+        // move stab
+        if (type == gBattleMons[battlerAtk].type1 ||
+            type == gBattleMons[battlerAtk].type2 ||
+            type == gBattleMons[battlerAtk].type3)
+            BlitMenuInfoIcon(B_WIN_MOVE_EFF, MENU_TYPE_STAB, x, y);
+    }
+
+    // place all on screen
+    CopyWindowToVram(B_WIN_MOVE_CAT, COPYWIN_FULL);
     CopyWindowToVram(B_WIN_MOVE_TYPE, COPYWIN_FULL);
+    CopyWindowToVram(B_WIN_MOVE_EFF, COPYWIN_FULL);
+    PutWindowTilemap(B_WIN_MOVE_CAT);
+    PutWindowTilemap(B_WIN_MOVE_TYPE);
+    PutWindowTilemap(B_WIN_MOVE_EFF);
+    ListMenuLoadStdPalAt(BG_PLTT_ID(10), icon);
+    ListMenuLoadStdPalAt(BG_PLTT_ID(9), type);
+    ListMenuLoadStdPalAt(BG_PLTT_ID(11), MENU_TYPE_STAB);
 }
 
 void MoveSelectionCreateCursorAt(u8 cursorPosition, u8 baseTileNum)

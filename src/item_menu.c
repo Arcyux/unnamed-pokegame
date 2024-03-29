@@ -97,6 +97,8 @@ enum {
     WIN_POCKET_NAME,
     WIN_TMHM_INFO_ICONS,
     WIN_TMHM_INFO,
+    WIN_TMHM_TYPE,
+    WIN_TMHM_CAT,
     WIN_MESSAGE, // Identical to ITEMWIN_MESSAGE. Unused?
 };
 
@@ -389,7 +391,7 @@ static const u8 sFontColorTable[][3] = {
     [COLORID_POCKET_NAME] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,      TEXT_COLOR_RED},
     [COLORID_GRAY_CURSOR] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_GRAY, TEXT_COLOR_GREEN},
     [COLORID_UNUSED]      = {TEXT_COLOR_DARK_GRAY,   TEXT_COLOR_WHITE,      TEXT_COLOR_LIGHT_GRAY},
-    [COLORID_TMHM_INFO]   = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY,  TEXT_DYNAMIC_COLOR_6}
+    [COLORID_TMHM_INFO]   = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY,  TEXT_COLOR_LIGHT_GRAY}
 };
 
 static const struct WindowTemplate sDefaultBagWindows[] =
@@ -419,25 +421,43 @@ static const struct WindowTemplate sDefaultBagWindows[] =
         .width = 8,
         .height = 2,
         .paletteNum = 1,
-        .baseBlock = 0x1A1,
+        .baseBlock = 0x1AF,
     },
     [WIN_TMHM_INFO_ICONS] = {
+        .bg = 1,
+        .tilemapLeft = 1,
+        .tilemapTop = 14,
+        .width = 5,
+        .height = 5,
+        .paletteNum = 12,
+        .baseBlock = 0x175,
+    },
+    [WIN_TMHM_INFO] = {
+        .bg = 1,
+        .tilemapLeft = 7,
+        .tilemapTop = 14,
+        .width = 4,
+        .height = 5,
+        .paletteNum = 12,
+        .baseBlock = 0x196,
+    },
+    [WIN_TMHM_TYPE] =  {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 13,
         .width = 5,
-        .height = 6,
+        .height = 2,
         .paletteNum = 11,
         .baseBlock = 0x16B,
     },
-    [WIN_TMHM_INFO] = {
+    [WIN_TMHM_CAT] = {
         .bg = 0,
         .tilemapLeft = 7,
         .tilemapTop = 13,
         .width = 4,
-        .height = 6,
-        .paletteNum = 12,
-        .baseBlock = 0x189,
+        .height = 2,
+        .paletteNum = 10,
+        .baseBlock = 0x18F,
     },
     [WIN_MESSAGE] = {
         .bg = 1,
@@ -496,7 +516,7 @@ static const struct WindowTemplate sContextMenuWindowTemplates[] =
         .width = 27,
         .height = 4,
         .paletteNum = 15,
-        .baseBlock = 0x1B1,
+        .baseBlock = 0x1BF,
     },
     [ITEMWIN_YESNO_LOW] = { // Yes/No tucked in corner, for toss confirm
         .bg = 1,
@@ -505,7 +525,7 @@ static const struct WindowTemplate sContextMenuWindowTemplates[] =
         .width = 5,
         .height = 4,
         .paletteNum = 15,
-        .baseBlock = 0x21D,
+        .baseBlock = 0x22C,
     },
     [ITEMWIN_YESNO_HIGH] = { // Yes/No higher up, positioned above a lower message box
         .bg = 1,
@@ -514,7 +534,7 @@ static const struct WindowTemplate sContextMenuWindowTemplates[] =
         .width = 5,
         .height = 4,
         .paletteNum = 15,
-        .baseBlock = 0x21D,
+        .baseBlock = 0x22C,
     },
     [ITEMWIN_QUANTITY] = { // Used for quantity of items to Toss/Deposit
         .bg = 1,
@@ -523,7 +543,7 @@ static const struct WindowTemplate sContextMenuWindowTemplates[] =
         .width = 5,
         .height = 2,
         .paletteNum = 15,
-        .baseBlock = 0x21D,
+        .baseBlock = 0x22C,
     },
     [ITEMWIN_QUANTITY_WIDE] = { // Used for quantity and price of items to Sell
         .bg = 1,
@@ -532,7 +552,7 @@ static const struct WindowTemplate sContextMenuWindowTemplates[] =
         .width = 10,
         .height = 2,
         .paletteNum = 15,
-        .baseBlock = 0x245,
+        .baseBlock = 0x253,
     },
     [ITEMWIN_MONEY] = {
         .bg = 1,
@@ -541,7 +561,7 @@ static const struct WindowTemplate sContextMenuWindowTemplates[] =
         .width = 10,
         .height = 2,
         .paletteNum = 15,
-        .baseBlock = 0x231,
+        .baseBlock = 0x23F,
     },
 };
 
@@ -1292,6 +1312,8 @@ static void ReturnToItemList(u8 taskId)
     CreatePocketSwitchArrowPair();
     ClearWindowTilemap(WIN_TMHM_INFO_ICONS);
     ClearWindowTilemap(WIN_TMHM_INFO);
+    ClearWindowTilemap(WIN_TMHM_TYPE);
+    ClearWindowTilemap(WIN_TMHM_CAT);
     PutWindowTilemap(WIN_DESCRIPTION);
     ScheduleBgCopyTilemapToVram(0);
     gTasks[taskId].func = Task_BagMenu_HandleInput;
@@ -1658,6 +1680,8 @@ static void OpenContextMenu(u8 taskId)
     {
         ClearWindowTilemap(WIN_DESCRIPTION);
         PrintTMHMMoveData(gSpecialVar_ItemId);
+        PutWindowTilemap(WIN_TMHM_TYPE);
+        PutWindowTilemap(WIN_TMHM_CAT);
         PutWindowTilemap(WIN_TMHM_INFO_ICONS);
         PutWindowTilemap(WIN_TMHM_INFO);
         ScheduleBgCopyTilemapToVram(0);
@@ -2463,7 +2487,8 @@ static void LoadBagMenuTextWindows(void)
     DeactivateAllTextPrinters();
     LoadUserWindowBorderGfx(0, 1, BG_PLTT_ID(14));
     LoadMessageBoxGfx(0, 10, BG_PLTT_ID(13));
-    ListMenuLoadStdPalAt(BG_PLTT_ID(12), MENU_TYPE_CAT_PHYSICAL);
+    ListMenuLoadStdPalAt(BG_PLTT_ID(12), MENU_TYPE_STAB);
+    ListMenuLoadStdPalAt(BG_PLTT_ID(10), MENU_TYPE_CAT_PHYSICAL);
     LoadPalette(&gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     for (i = 0; i <= WIN_POCKET_NAME; i++)
     {
@@ -2552,9 +2577,9 @@ static void RemoveMoneyWindow(void)
 static void PrepareTMHMMoveWindow()
 {
     FillWindowPixelBuffer(WIN_TMHM_INFO_ICONS, PIXEL_FILL(0));
-    BlitMenuInfoIcon(WIN_TMHM_INFO_ICONS, MENU_INFO_ICON_POWER, 0, 12);
-    BlitMenuInfoIcon(WIN_TMHM_INFO_ICONS, MENU_INFO_ICON_ACCURACY, 0, 24);
-    BlitMenuInfoIcon(WIN_TMHM_INFO_ICONS, MENU_INFO_ICON_PP, 0, 36);
+    BlitMenuInfoIcon(WIN_TMHM_INFO_ICONS, MENU_INFO_ICON_POWER, 0, 4);
+    BlitMenuInfoIcon(WIN_TMHM_INFO_ICONS, MENU_INFO_ICON_ACCURACY, 0, 16);
+    BlitMenuInfoIcon(WIN_TMHM_INFO_ICONS, MENU_INFO_ICON_PP, 0, 28);
     CopyWindowToVram(WIN_TMHM_INFO_ICONS, COPYWIN_GFX);
 }
 
@@ -2565,6 +2590,8 @@ static void PrintTMHMMoveData(u16 itemId)
     const u8 *text;
 
     FillWindowPixelBuffer(WIN_TMHM_INFO, PIXEL_FILL(0));
+    FillWindowPixelBuffer(WIN_TMHM_TYPE, PIXEL_FILL(0));
+    FillWindowPixelBuffer(WIN_TMHM_CAT, PIXEL_FILL(0));
     if (itemId == ITEM_NONE)
     {
         for (i = 0; i < 4; i++)
@@ -2575,8 +2602,8 @@ static void PrintTMHMMoveData(u16 itemId)
     {
         moveId = ItemIdToBattleMoveId(itemId);
         ListMenuLoadStdPalAt(BG_PLTT_ID(11), gMovesInfo[moveId].type);
-        BlitMenuInfoIcon(WIN_TMHM_INFO_ICONS, gMovesInfo[moveId].type, 3, 0);
-        BlitMenuInfoIcon(WIN_TMHM_INFO, gMovesInfo[moveId].category + MENU_TYPE_CAT_PHYSICAL, 5, 0);
+        BlitMenuInfoIcon(WIN_TMHM_TYPE, gMovesInfo[moveId].type, 3, 0);
+        BlitMenuInfoIcon(WIN_TMHM_CAT, gMovesInfo[moveId].category + MENU_TYPE_CAT_PHYSICAL, 4, 0);
 
         // Print TMHM power
         if (gMovesInfo[moveId].power <= 1)
@@ -2588,7 +2615,7 @@ static void PrintTMHMMoveData(u16 itemId)
             ConvertIntToDecimalStringN(gStringVar1, gMovesInfo[moveId].power, STR_CONV_MODE_RIGHT_ALIGN, 3);
             text = gStringVar1;
         }
-        BagMenu_Print(WIN_TMHM_INFO, FONT_NORMAL, text, 7, 12, 0, 0, TEXT_SKIP_DRAW, COLORID_TMHM_INFO);
+        BagMenu_Print(WIN_TMHM_INFO, FONT_NORMAL, text, 7, 4, 0, 0, TEXT_SKIP_DRAW, COLORID_TMHM_INFO);
 
         // Print TMHM accuracy
         if (gMovesInfo[moveId].accuracy == 0)
@@ -2600,13 +2627,15 @@ static void PrintTMHMMoveData(u16 itemId)
             ConvertIntToDecimalStringN(gStringVar1, gMovesInfo[moveId].accuracy, STR_CONV_MODE_RIGHT_ALIGN, 3);
             text = gStringVar1;
         }
-        BagMenu_Print(WIN_TMHM_INFO, FONT_NORMAL, text, 7, 24, 0, 0, TEXT_SKIP_DRAW, COLORID_TMHM_INFO);
+        BagMenu_Print(WIN_TMHM_INFO, FONT_NORMAL, text, 7, 16, 0, 0, TEXT_SKIP_DRAW, COLORID_TMHM_INFO);
 
         // Print TMHM pp
         ConvertIntToDecimalStringN(gStringVar1, gMovesInfo[moveId].pp, STR_CONV_MODE_RIGHT_ALIGN, 3);
-        BagMenu_Print(WIN_TMHM_INFO, FONT_NORMAL, gStringVar1, 7, 36, 0, 0, TEXT_SKIP_DRAW, COLORID_TMHM_INFO);
+        BagMenu_Print(WIN_TMHM_INFO, FONT_NORMAL, gStringVar1, 7, 28, 0, 0, TEXT_SKIP_DRAW, COLORID_TMHM_INFO);
 
         CopyWindowToVram(WIN_TMHM_INFO_ICONS, COPYWIN_GFX);
         CopyWindowToVram(WIN_TMHM_INFO, COPYWIN_GFX);
+        CopyWindowToVram(WIN_TMHM_TYPE, COPYWIN_GFX);
+        CopyWindowToVram(WIN_TMHM_CAT, COPYWIN_GFX);
     }
 }

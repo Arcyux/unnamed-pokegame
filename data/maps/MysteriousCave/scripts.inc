@@ -243,7 +243,7 @@ RandomArceusStarter_1:
 # 102 "data/maps/MysteriousCave/scripts.pory"
 	call RandomArceus
 # 104 "data/maps/MysteriousCave/scripts.pory"
-	givemon SPECIES_ARCEUS, 1, ITEM_LEGEND_PLATE, , , , , , , , , , , , , , , , , , , , , , , VAR_TEMP_2
+	givemon SPECIES_ARCEUS, 1, ITEM_LEGEND_PLATE, , , , , , , , , , , , , , , , , , , MOVE_JUDGMENT, , , , VAR_TEMP_2
 # 105 "data/maps/MysteriousCave/scripts.pory"
 	msgbox RandomArceusStarter_Text_0
 # 106 "data/maps/MysteriousCave/scripts.pory"
@@ -260,8 +260,6 @@ RandomArceusStarter_3:
 	setflag FLAG_SYS_POKEMON_GET
 # 116 "data/maps/MysteriousCave/scripts.pory"
 	setflag FLAG_SYS_POKEDEX_GET
-# 118 "data/maps/MysteriousCave/scripts.pory"
-	setmonmove 0, 2, MOVE_JUDGMENT
 	return
 
 RandomArceusStarter_4:
@@ -273,40 +271,40 @@ RandomArceusStarter_4:
 
 
 RandomArceusEncounter::
-# 123 "data/maps/MysteriousCave/scripts.pory"
+# 121 "data/maps/MysteriousCave/scripts.pory"
 	lock
-# 124 "data/maps/MysteriousCave/scripts.pory"
+# 122 "data/maps/MysteriousCave/scripts.pory"
 	waitse
-# 126 "data/maps/MysteriousCave/scripts.pory"
+# 124 "data/maps/MysteriousCave/scripts.pory"
 	call RandomArceusStarter
-# 128 "data/maps/MysteriousCave/scripts.pory"
+# 126 "data/maps/MysteriousCave/scripts.pory"
 	playmoncry SPECIES_ARCEUS, CRY_MODE_ENCOUNTER
-# 129 "data/maps/MysteriousCave/scripts.pory"
+# 127 "data/maps/MysteriousCave/scripts.pory"
 	waitmoncry
-# 131 "data/maps/MysteriousCave/scripts.pory"
+# 129 "data/maps/MysteriousCave/scripts.pory"
 	call RandomArceus
-# 132 "data/maps/MysteriousCave/scripts.pory"
+# 130 "data/maps/MysteriousCave/scripts.pory"
 	copyvar VAR_TEMP_3, VAR_TEMP_0
-# 133 "data/maps/MysteriousCave/scripts.pory"
+# 131 "data/maps/MysteriousCave/scripts.pory"
 	copyvar VAR_TEMP_4, VAR_TEMP_1
-# 134 "data/maps/MysteriousCave/scripts.pory"
+# 132 "data/maps/MysteriousCave/scripts.pory"
 	call RandomArceus
-# 136 "data/maps/MysteriousCave/scripts.pory"
+# 134 "data/maps/MysteriousCave/scripts.pory"
 	setwildbattle VAR_TEMP_0, 1, VAR_TEMP_1, VAR_TEMP_3, 1, VAR_TEMP_4
-# 137 "data/maps/MysteriousCave/scripts.pory"
+# 135 "data/maps/MysteriousCave/scripts.pory"
 	dowildbattle
-# 139 "data/maps/MysteriousCave/scripts.pory"
+# 137 "data/maps/MysteriousCave/scripts.pory"
 	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq RandomArceusEncounter_2
 RandomArceusEncounter_1:
-# 148 "data/maps/MysteriousCave/scripts.pory"
+# 146 "data/maps/MysteriousCave/scripts.pory"
 	releaseall
 	return
 
 RandomArceusEncounter_2:
-# 140 "data/maps/MysteriousCave/scripts.pory"
+# 138 "data/maps/MysteriousCave/scripts.pory"
 	playse SE_CLICK
-# 145 "data/maps/MysteriousCave/scripts.pory"
+# 143 "data/maps/MysteriousCave/scripts.pory"
 	call OpenCloseExit
 	goto RandomArceusEncounter_1
 

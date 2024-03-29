@@ -132,13 +132,17 @@ static const struct MenuInfoIcon sMenuInfoIcons[] =
     [TYPE_DRAGON]   = { .width = 32, .height = 12, .x = 0,  .y = 80, .pal = 1 },
     [TYPE_DARK]     = { .width = 32, .height = 12, .x = 96, .y = 64, .pal = 1 },
     [TYPE_FAIRY]    = { .width = 32, .height = 12, .x = 0,  .y = 0,  .pal = 0  },
-    [MENU_INFO_ICON_TYPE]     = { .width = 42, .height = 12, .x = 64, .y = 80,  .pal = 0 },
-    [MENU_INFO_ICON_POWER]    = { .width = 42, .height = 12, .x = 0,  .y = 96,  .pal = 0 },
-    [MENU_INFO_ICON_ACCURACY] = { .width = 42, .height = 12, .x = 64, .y = 96,  .pal = 0 },
-    [MENU_INFO_ICON_PP]       = { .width = 42, .height = 12, .x = 0,  .y = 112, .pal = 0 },
+    [MENU_INFO_ICON_TYPE]     = { .width = 42, .height = 12, .x = 64, .y = 80,  .pal = 3 },
+    [MENU_INFO_ICON_POWER]    = { .width = 42, .height = 12, .x = 0,  .y = 96,  .pal = 3 },
+    [MENU_INFO_ICON_ACCURACY] = { .width = 42, .height = 12, .x = 64, .y = 96,  .pal = 3 },
+    [MENU_INFO_ICON_PP]       = { .width = 42, .height = 12, .x = 0,  .y = 112, .pal = 3 },
     [MENU_TYPE_CAT_PHYSICAL] = { .width = 20, .height = 12, .x = 68,  .y = 0, .pal = 2 },
     [MENU_TYPE_CAT_SPECIAL]  = { .width = 20, .height = 12, .x = 88,  .y = 0, .pal = 2 },
     [MENU_TYPE_CAT_STATUS]   = { .width = 20, .height = 12, .x = 108, .y = 0, .pal = 2 },
+    [MENU_TYPE_NOTVERY_EFF] = { .width = 10, .height = 10, .x = 32, .y = 0, .pal = 3},
+    [MENU_TYPE_SUPER_EFF]   = { .width = 10, .height = 10, .x = 42, .y = 0, .pal = 3},
+    [MENU_TYPE_NO_EFF]      = { .width = 10, .height = 10, .x = 52, .y = 0, .pal = 3},
+    [MENU_TYPE_STAB]        = { .width = 6,  .height = 10, .x = 62, .y = 0, .pal = 3}
 };
 
 void InitStandardTextBoxWindows(void)
@@ -2091,6 +2095,9 @@ void ListMenuLoadStdPalAt(u8 palOffset, u8 iconId)
             break;
         case 2:
             palette = gMenuInfoElements3_Pal;
+            break;
+        case 3:
+            palette = gMenuInfoElements4_Pal;
             break;
     }
 
