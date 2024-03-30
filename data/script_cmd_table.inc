@@ -229,7 +229,6 @@ gScriptCmdTable::
 	.4byte ScrCmd_bufferitemnameplural              @ 0xe2
 	.4byte ScrCmd_dynmultichoice                    @ 0xe3
 	.4byte ScrCmd_dynmultipush                      @ 0xe4
-@@@ new script commands go here
     .4byte ScrCmd_setfollower					@ 0xe3
     .4byte ScrCmd_destroyfollower			@ 0xe4
     .4byte ScrCmd_facefollower				@ 0xe5
