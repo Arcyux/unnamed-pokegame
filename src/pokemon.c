@@ -59,6 +59,12 @@
 
 #define FRIENDSHIP_EVO_THRESHOLD ((P_FRIENDSHIP_EVO_THRESHOLD >= GEN_9) ? 160 : 220)
 
+#define ALLOC_FAIL_BUFFER (1 << 0)
+#define ALLOC_FAIL_STRUCT (1 << 1)
+#define GFX_MANAGER_ACTIVE 0xA3 // Arbitrary value
+#define GFX_MANAGER_SPR_SIZE (MON_PIC_SIZE * 4) // * 4 is unnecessary, MON_PIC_SIZE is sufficient
+#define GFX_MANAGER_NUM_FRAMES 2  // Only 2 frames are needed 
+
 struct SpeciesItem
 {
     u16 species;
@@ -80,7 +86,7 @@ EWRAM_DATA u8 gEnemyPartyCount = 0;
 EWRAM_DATA struct Pokemon gPlayerParty[PARTY_SIZE] = {0};
 EWRAM_DATA struct Pokemon gEnemyParty[PARTY_SIZE] = {0};
 EWRAM_DATA struct SpriteTemplate gMultiuseSpriteTemplate = {0};
-EWRAM_DATA static struct MonSpritesGfxManager *sMonSpritesGfxManagers[MON_SPR_GFX_MANAGERS_COUNT] = {NULL};
+EWRAM_DATA static struct MonSpritesGfxManager *sMonSpritesGfxManager = NULL;
 EWRAM_DATA static u8 sTriedEvolving = 0;
 
 #include "data/moves_info.h"
@@ -1904,12 +1910,8 @@ void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition)
 {
     if (gMonSpritesGfxPtr != NULL)
         gMultiuseSpriteTemplate = gMonSpritesGfxPtr->templates[battlerPosition];
-    else if (sMonSpritesGfxManagers[MON_SPR_GFX_MANAGER_A])
-        gMultiuseSpriteTemplate = sMonSpritesGfxManagers[MON_SPR_GFX_MANAGER_A]->templates[battlerPosition];
-    else if (sMonSpritesGfxManagers[MON_SPR_GFX_MANAGER_B])
-        gMultiuseSpriteTemplate = sMonSpritesGfxManagers[MON_SPR_GFX_MANAGER_B]->templates[battlerPosition];
-    else
-        gMultiuseSpriteTemplate = gBattlerSpriteTemplates[battlerPosition];
+    else if (sMonSpritesGfxManager)
+        gMultiuseSpriteTemplate = sMonSpritesGfxManager->templates[battlerPosition];
 
     gMultiuseSpriteTemplate.paletteTag = speciesTag;
     if (battlerPosition == B_POSITION_PLAYER_LEFT || battlerPosition == B_POSITION_PLAYER_RIGHT)
@@ -2273,24 +2275,6 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
         case MON_DATA_SPDEF_EV:
             retVal = substruct2->spDefenseEV;
             break;
-        case MON_DATA_COOL:
-            retVal = substruct2->cool;
-            break;
-        case MON_DATA_BEAUTY:
-            retVal = substruct2->beauty;
-            break;
-        case MON_DATA_CUTE:
-            retVal = substruct2->cute;
-            break;
-        case MON_DATA_SMART:
-            retVal = substruct2->smart;
-            break;
-        case MON_DATA_TOUGH:
-            retVal = substruct2->tough;
-            break;
-        case MON_DATA_SHEEN:
-            retVal = substruct2->sheen;
-            break;
         case MON_DATA_POKERUS:
             retVal = substruct3->pokerus;
             break;
@@ -2333,57 +2317,6 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
         case MON_DATA_ABILITY_NUM:
             retVal = substruct3->abilityNum;
             break;
-        case MON_DATA_COOL_RIBBON:
-            retVal = substruct3->coolRibbon;
-            break;
-        case MON_DATA_BEAUTY_RIBBON:
-            retVal = substruct3->beautyRibbon;
-            break;
-        case MON_DATA_CUTE_RIBBON:
-            retVal = substruct3->cuteRibbon;
-            break;
-        case MON_DATA_SMART_RIBBON:
-            retVal = substruct3->smartRibbon;
-            break;
-        case MON_DATA_TOUGH_RIBBON:
-            retVal = substruct3->toughRibbon;
-            break;
-        case MON_DATA_CHAMPION_RIBBON:
-            retVal = substruct3->championRibbon;
-            break;
-        case MON_DATA_WINNING_RIBBON:
-            retVal = substruct3->winningRibbon;
-            break;
-        case MON_DATA_VICTORY_RIBBON:
-            retVal = substruct3->victoryRibbon;
-            break;
-        case MON_DATA_ARTIST_RIBBON:
-            retVal = substruct3->artistRibbon;
-            break;
-        case MON_DATA_EFFORT_RIBBON:
-            retVal = substruct3->effortRibbon;
-            break;
-        case MON_DATA_MARINE_RIBBON:
-            retVal = substruct3->marineRibbon;
-            break;
-        case MON_DATA_LAND_RIBBON:
-            retVal = substruct3->landRibbon;
-            break;
-        case MON_DATA_SKY_RIBBON:
-            retVal = substruct3->skyRibbon;
-            break;
-        case MON_DATA_COUNTRY_RIBBON:
-            retVal = substruct3->countryRibbon;
-            break;
-        case MON_DATA_NATIONAL_RIBBON:
-            retVal = substruct3->nationalRibbon;
-            break;
-        case MON_DATA_EARTH_RIBBON:
-            retVal = substruct3->earthRibbon;
-            break;
-        case MON_DATA_WORLD_RIBBON:
-            retVal = substruct3->worldRibbon;
-            break;
         case MON_DATA_MODERN_FATEFUL_ENCOUNTER:
             retVal = substruct3->modernFatefulEncounter;
             break;
@@ -2420,49 +2353,9 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
             break;
         case MON_DATA_RIBBON_COUNT:
             retVal = 0;
-            if (substruct0->species && !substruct3->isEgg)
-            {
-                retVal += substruct3->coolRibbon;
-                retVal += substruct3->beautyRibbon;
-                retVal += substruct3->cuteRibbon;
-                retVal += substruct3->smartRibbon;
-                retVal += substruct3->toughRibbon;
-                retVal += substruct3->championRibbon;
-                retVal += substruct3->winningRibbon;
-                retVal += substruct3->victoryRibbon;
-                retVal += substruct3->artistRibbon;
-                retVal += substruct3->effortRibbon;
-                retVal += substruct3->marineRibbon;
-                retVal += substruct3->landRibbon;
-                retVal += substruct3->skyRibbon;
-                retVal += substruct3->countryRibbon;
-                retVal += substruct3->nationalRibbon;
-                retVal += substruct3->earthRibbon;
-                retVal += substruct3->worldRibbon;
-            }
             break;
         case MON_DATA_RIBBONS:
             retVal = 0;
-            if (substruct0->species && !substruct3->isEgg)
-            {
-                retVal = substruct3->championRibbon
-                    | (substruct3->coolRibbon << 1)
-                    | (substruct3->beautyRibbon << 4)
-                    | (substruct3->cuteRibbon << 7)
-                    | (substruct3->smartRibbon << 10)
-                    | (substruct3->toughRibbon << 13)
-                    | (substruct3->winningRibbon << 16)
-                    | (substruct3->victoryRibbon << 17)
-                    | (substruct3->artistRibbon << 18)
-                    | (substruct3->effortRibbon << 19)
-                    | (substruct3->marineRibbon << 20)
-                    | (substruct3->landRibbon << 21)
-                    | (substruct3->skyRibbon << 22)
-                    | (substruct3->countryRibbon << 23)
-                    | (substruct3->nationalRibbon << 24)
-                    | (substruct3->earthRibbon << 25)
-                    | (substruct3->worldRibbon << 26);
-            }
             break;
         case MON_DATA_HYPER_TRAINED_HP:
             retVal = substruct1->hyperTrainedHP;
@@ -2481,15 +2374,6 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
             break;
         case MON_DATA_HYPER_TRAINED_SPDEF:
             retVal = substruct1->hyperTrainedSpDefense;
-            break;
-        case MON_DATA_IS_SHADOW:
-            retVal = substruct3->isShadow;
-            break;
-        case MON_DATA_DYNAMAX_LEVEL:
-            retVal = substruct3->dynamaxLevel;
-            break;
-        case MON_DATA_GIGANTAMAX_FACTOR:
-            retVal = substruct3->gigantamaxFactor;
             break;
         case MON_DATA_TERA_TYPE:
         {
@@ -2749,24 +2633,6 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         case MON_DATA_SPDEF_EV:
             SET8(substruct2->spDefenseEV);
             break;
-        case MON_DATA_COOL:
-            SET8(substruct2->cool);
-            break;
-        case MON_DATA_BEAUTY:
-            SET8(substruct2->beauty);
-            break;
-        case MON_DATA_CUTE:
-            SET8(substruct2->cute);
-            break;
-        case MON_DATA_SMART:
-            SET8(substruct2->smart);
-            break;
-        case MON_DATA_TOUGH:
-            SET8(substruct2->tough);
-            break;
-        case MON_DATA_SHEEN:
-            SET8(substruct2->sheen);
-            break;
         case MON_DATA_POKERUS:
             SET8(substruct3->pokerus);
             break;
@@ -2819,57 +2685,6 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         case MON_DATA_ABILITY_NUM:
             SET8(substruct3->abilityNum);
             break;
-        case MON_DATA_COOL_RIBBON:
-            SET8(substruct3->coolRibbon);
-            break;
-        case MON_DATA_BEAUTY_RIBBON:
-            SET8(substruct3->beautyRibbon);
-            break;
-        case MON_DATA_CUTE_RIBBON:
-            SET8(substruct3->cuteRibbon);
-            break;
-        case MON_DATA_SMART_RIBBON:
-            SET8(substruct3->smartRibbon);
-            break;
-        case MON_DATA_TOUGH_RIBBON:
-            SET8(substruct3->toughRibbon);
-            break;
-        case MON_DATA_CHAMPION_RIBBON:
-            SET8(substruct3->championRibbon);
-            break;
-        case MON_DATA_WINNING_RIBBON:
-            SET8(substruct3->winningRibbon);
-            break;
-        case MON_DATA_VICTORY_RIBBON:
-            SET8(substruct3->victoryRibbon);
-            break;
-        case MON_DATA_ARTIST_RIBBON:
-            SET8(substruct3->artistRibbon);
-            break;
-        case MON_DATA_EFFORT_RIBBON:
-            SET8(substruct3->effortRibbon);
-            break;
-        case MON_DATA_MARINE_RIBBON:
-            SET8(substruct3->marineRibbon);
-            break;
-        case MON_DATA_LAND_RIBBON:
-            SET8(substruct3->landRibbon);
-            break;
-        case MON_DATA_SKY_RIBBON:
-            SET8(substruct3->skyRibbon);
-            break;
-        case MON_DATA_COUNTRY_RIBBON:
-            SET8(substruct3->countryRibbon);
-            break;
-        case MON_DATA_NATIONAL_RIBBON:
-            SET8(substruct3->nationalRibbon);
-            break;
-        case MON_DATA_EARTH_RIBBON:
-            SET8(substruct3->earthRibbon);
-            break;
-        case MON_DATA_WORLD_RIBBON:
-            SET8(substruct3->worldRibbon);
-            break;
         case MON_DATA_MODERN_FATEFUL_ENCOUNTER:
             SET8(substruct3->modernFatefulEncounter);
             break;
@@ -2901,15 +2716,6 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
             break;
         case MON_DATA_HYPER_TRAINED_SPDEF:
             SET8(substruct1->hyperTrainedSpDefense);
-            break;
-        case MON_DATA_IS_SHADOW:
-            SET8(substruct3->isShadow);
-            break;
-        case MON_DATA_DYNAMAX_LEVEL:
-            SET8(substruct3->dynamaxLevel);
-            break;
-        case MON_DATA_GIGANTAMAX_FACTOR:
-            SET8(substruct3->gigantamaxFactor);
             break;
         case MON_DATA_TERA_TYPE:
         {
@@ -5923,7 +5729,7 @@ static bool8 ShouldSkipFriendshipChange(void)
 
 static void InitMonSpritesGfx_Battle(struct MonSpritesGfxManager* gfx)
 {
-    u16 i, j;
+    u32 i, j;
     for (i = 0; i < gfx->numSprites; i++)
     {
         gfx->templates[i] = gBattlerSpriteTemplates[i];
@@ -5934,7 +5740,7 @@ static void InitMonSpritesGfx_Battle(struct MonSpritesGfxManager* gfx)
     }
 }
 
-static void InitMonSpritesGfx_FullParty(struct MonSpritesGfxManager* gfx)
+/*static void InitMonSpritesGfx_FullParty(struct MonSpritesGfxManager* gfx)
 {
     u16 i, j;
     for (i = 0; i < gfx->numSprites; i++)
@@ -5947,43 +5753,23 @@ static void InitMonSpritesGfx_FullParty(struct MonSpritesGfxManager* gfx)
         gfx->templates[i].anims = gAnims_MonPic;
         gfx->templates[i].paletteTag = i;
     }
-}
+}*/
 
-struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 managerId, u8 mode)
+struct MonSpritesGfxManager *CreateMonSpritesGfxManager()
 {
-    u8 i;
+    u32 i;
     u8 failureFlags;
     struct MonSpritesGfxManager *gfx;
-
+ 
     failureFlags = 0;
-    managerId %= MON_SPR_GFX_MANAGERS_COUNT;
     gfx = AllocZeroed(sizeof(*gfx));
     if (gfx == NULL)
         return NULL;
-
-    switch (mode)
-    {
-    case MON_SPR_GFX_MODE_FULL_PARTY:
-        gfx->numSprites = PARTY_SIZE + 1;
-        gfx->numSprites2 = PARTY_SIZE + 1;
-        gfx->numFrames = MAX_MON_PIC_FRAMES;
-        gfx->dataSize = 1;
-        gfx->mode = MON_SPR_GFX_MODE_FULL_PARTY;
-        break;
- // case MON_SPR_GFX_MODE_BATTLE:
-    case MON_SPR_GFX_MODE_NORMAL:
-    default:
-        gfx->numSprites = MAX_BATTLERS_COUNT;
-        gfx->numSprites2 = MAX_BATTLERS_COUNT;
-        gfx->numFrames = MAX_MON_PIC_FRAMES;
-        gfx->dataSize = 1;
-        gfx->mode = MON_SPR_GFX_MODE_NORMAL;
-        break;
-    }
-
-    // Set up sprite / sprite pointer buffers
-    gfx->spriteBuffer = AllocZeroed(gfx->dataSize * MON_PIC_SIZE * MAX_MON_PIC_FRAMES * gfx->numSprites);
-    gfx->spritePointers = AllocZeroed(gfx->numSprites * 32); // ? Only * 4 is necessary, perhaps they were thinking bits.
+ 
+    gfx->numSprites = MAX_BATTLERS_COUNT;
+    gfx->numFrames = GFX_MANAGER_NUM_FRAMES;
+    gfx->spriteBuffer = AllocZeroed(GFX_MANAGER_SPR_SIZE * gfx->numSprites);
+    gfx->spritePointers = AllocZeroed(gfx->numSprites * 4);
     if (gfx->spriteBuffer == NULL || gfx->spritePointers == NULL)
     {
         failureFlags |= ALLOC_FAIL_BUFFER;
@@ -5991,9 +5777,9 @@ struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 managerId, u8 mode)
     else
     {
         for (i = 0; i < gfx->numSprites; i++)
-            gfx->spritePointers[i] = gfx->spriteBuffer + (gfx->dataSize * MON_PIC_SIZE * MAX_MON_PIC_FRAMES * i);
+            gfx->spritePointers[i] = gfx->spriteBuffer + (GFX_MANAGER_SPR_SIZE * i);
     }
-
+ 
     // Set up sprite structs
     gfx->templates = AllocZeroed(sizeof(struct SpriteTemplate) * gfx->numSprites);
     gfx->frameImages = AllocZeroed(sizeof(struct SpriteFrameImage) * gfx->numSprites * gfx->numFrames);
@@ -6005,20 +5791,9 @@ struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 managerId, u8 mode)
     {
         for (i = 0; i < gfx->numFrames * gfx->numSprites; i++)
             gfx->frameImages[i].size = MON_PIC_SIZE;
-
-        switch (gfx->mode)
-        {
-        case MON_SPR_GFX_MODE_FULL_PARTY:
-            InitMonSpritesGfx_FullParty(gfx);
-            break;
-        case MON_SPR_GFX_MODE_NORMAL:
-        case MON_SPR_GFX_MODE_BATTLE:
-        default:
-            InitMonSpritesGfx_Battle(gfx);
-            break;
-        }
+        InitMonSpritesGfx_Battle(gfx);
     }
-
+ 
     // If either of the allocations failed free their respective members
     if (failureFlags & ALLOC_FAIL_STRUCT)
     {
@@ -6030,7 +5805,7 @@ struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 managerId, u8 mode)
         TRY_FREE_AND_SET_NULL(gfx->spritePointers);
         TRY_FREE_AND_SET_NULL(gfx->spriteBuffer);
     }
-
+ 
     if (failureFlags)
     {
         // Clear, something failed to allocate
@@ -6039,27 +5814,21 @@ struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 managerId, u8 mode)
     }
     else
     {
-        gfx->active = GFX_MANAGER_ACTIVE;
-        sMonSpritesGfxManagers[managerId] = gfx;
+        gfx->active = TRUE;
+        sMonSpritesGfxManager = gfx;
     }
-
-    return sMonSpritesGfxManagers[managerId];
+ 
+    return sMonSpritesGfxManager;
 }
 
-void DestroyMonSpritesGfxManager(u8 managerId)
+void DestroyMonSpritesGfxManager()
 {
-    struct MonSpritesGfxManager *gfx;
-
-    managerId %= MON_SPR_GFX_MANAGERS_COUNT;
-    gfx = sMonSpritesGfxManagers[managerId];
+    struct MonSpritesGfxManager *gfx = sMonSpritesGfxManager;
+ 
     if (gfx == NULL)
         return;
-
-    if (gfx->active != GFX_MANAGER_ACTIVE)
-    {
-        memset(gfx, 0, sizeof(*gfx));
-    }
-    else
+ 
+    if (gfx->active)
     {
         TRY_FREE_AND_SET_NULL(gfx->frameImages);
         TRY_FREE_AND_SET_NULL(gfx->templates);
@@ -6068,22 +5837,22 @@ void DestroyMonSpritesGfxManager(u8 managerId)
         memset(gfx, 0, sizeof(*gfx));
         Free(gfx);
     }
+    else
+        memset(gfx, 0, sizeof(*gfx));
 }
 
-u8 *MonSpritesGfxManager_GetSpritePtr(u8 managerId, u8 spriteNum)
+u8 *MonSpritesGfxManager_GetSpritePtr(u8 spriteNum)
 {
-    struct MonSpritesGfxManager *gfx = sMonSpritesGfxManagers[managerId % MON_SPR_GFX_MANAGERS_COUNT];
-    if (gfx->active != GFX_MANAGER_ACTIVE)
-    {
-        return NULL;
-    }
-    else
+    struct MonSpritesGfxManager *gfx = sMonSpritesGfxManager;
+ 
+    if (gfx->active)
     {
         if (spriteNum >= gfx->numSprites)
             spriteNum = 0;
-
+ 
         return gfx->spritePointers[spriteNum];
     }
+    return NULL;
 }
 
 u16 GetFormSpeciesId(u16 speciesId, u8 formId)
