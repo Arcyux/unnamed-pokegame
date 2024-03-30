@@ -21,7 +21,6 @@
 #include "data.h"
 #include "link.h"
 #include "field_message_box.h"
-#include "tv.h"
 #include "battle_factory.h"
 #include "constants/abilities.h"
 #include "constants/apprentice.h"
@@ -2828,7 +2827,6 @@ static void AwardBattleTowerRibbons(void)
             {
                 gSpecialVar_Result = TRUE;
                 SetMonData(&gSaveBlock1Ptr->playerParty[partyIndex], ribbonType, &gSpecialVar_Result);
-                ribbons[i].count = GetRibbonCount(&gSaveBlock1Ptr->playerParty[partyIndex]);
             }
         }
     }
@@ -2844,10 +2842,6 @@ static void AwardBattleTowerRibbons(void)
                 ribbons[0] = ribbons[i];
                 ribbons[i] = prevBest;
             }
-        }
-        if (ribbons[0].count > NUM_CUTIES_RIBBONS)
-        {
-            TryPutSpotTheCutiesOnAir(&gSaveBlock1Ptr->playerParty[ribbons[0].partyIndex], ribbonType);
         }
     }
 }
@@ -3001,13 +2995,6 @@ static void CopyEReaderTrainerFarewellMessage(void)
 
 void TryHideBattleTowerReporter(void)
 {
-    if (gSaveBlock2Ptr->frontier.challengeStatus == CHALLENGE_STATUS_SAVING)
-        HideBattleTowerReporter();
-    if (FlagGet(FLAG_CANCEL_BATTLE_ROOM_CHALLENGE) == TRUE)
-    {
-        HideBattleTowerReporter();
-        FlagClear(FLAG_CANCEL_BATTLE_ROOM_CHALLENGE);
-    }
 }
 
 #define STEVEN_OTID 61226

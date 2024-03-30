@@ -3,7 +3,6 @@
 @ Note: The local IDs of Gabby and Ty are hard-coded in GetGabbyAndTyLocalIds
 GabbyAndTy_EventScript_UpdateLocation::
 	cleartrainerflag TRAINER_GABBY_AND_TY_6
-	specialvar VAR_RESULT, GabbyAndTyGetBattleNum
 	switch VAR_RESULT
 	case 0, GabbyAndTy_EventScript_MoveForBattle1
 	case 1, GabbyAndTy_EventScript_MoveForBattle2
@@ -125,85 +124,58 @@ GabbyAndTy_EventScript_ShowAtRoute118_3::
 	return
 
 GabbyAndTy_EventScript_GabbyBattle1::
-	trainerbattle_double TRAINER_GABBY_AND_TY_1, GabbyAndTy_Text_GabbyPreFirstBattle, GabbyAndTy_Text_GabbyDefeatFirstTime, GabbyAndTy_Text_GabbyNotEnoughMons, GabbyAndTy_EventScript_FirstInterview
-	msgbox GabbyAndTy_Text_KeepingAnEyeOutForYou, MSGBOX_DEFAULT
 	release
 	end
 
 GabbyAndTy_EventScript_TyBattle1::
-	trainerbattle_double TRAINER_GABBY_AND_TY_1, GabbyAndTy_Text_TyPreFirstBattle, GabbyAndTy_Text_TyDefeatFirstTime, GabbyAndTy_Text_TyNotEnoughMons, GabbyAndTy_EventScript_FirstInterview
-	msgbox GabbyAndTy_Text_TyPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
 GabbyAndTy_EventScript_GabbyBattle2::
-	trainerbattle_double TRAINER_GABBY_AND_TY_2, GabbyAndTy_Text_GabbyIntro, GabbyAndTy_Text_GabbyDefeat, GabbyAndTy_Text_GabbyNotEnoughMons, GabbyAndTy_EventScript_RequestInterview
-	msgbox GabbyAndTy_Text_KeepingAnEyeOutForYou, MSGBOX_DEFAULT
 	release
 	end
 
 GabbyAndTy_EventScript_TyBattle2::
-	trainerbattle_double TRAINER_GABBY_AND_TY_2, GabbyAndTy_Text_TyIntro, GabbyAndTy_Text_TyDefeat, GabbyAndTy_Text_TyNotEnoughMons, GabbyAndTy_EventScript_RequestInterview
-	msgbox GabbyAndTy_Text_TyPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
 GabbyAndTy_EventScript_GabbyBattle3::
-	trainerbattle_double TRAINER_GABBY_AND_TY_3, GabbyAndTy_Text_GabbyIntro, GabbyAndTy_Text_GabbyDefeat, GabbyAndTy_Text_GabbyNotEnoughMons, GabbyAndTy_EventScript_RequestInterview
-	msgbox GabbyAndTy_Text_KeepingAnEyeOutForYou, MSGBOX_DEFAULT
 	release
 	end
 
 GabbyAndTy_EventScript_TyBattle3::
-	trainerbattle_double TRAINER_GABBY_AND_TY_3, GabbyAndTy_Text_TyIntro, GabbyAndTy_Text_TyDefeat, GabbyAndTy_Text_TyNotEnoughMons, GabbyAndTy_EventScript_RequestInterview
-	msgbox GabbyAndTy_Text_TyPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
 GabbyAndTy_EventScript_GabbyBattle4::
-	trainerbattle_double TRAINER_GABBY_AND_TY_4, GabbyAndTy_Text_GabbyIntro, GabbyAndTy_Text_GabbyDefeat, GabbyAndTy_Text_GabbyNotEnoughMons, GabbyAndTy_EventScript_RequestInterview
-	msgbox GabbyAndTy_Text_KeepingAnEyeOutForYou, MSGBOX_DEFAULT
 	release
 	end
 
 GabbyAndTy_EventScript_TyBattle4::
-	trainerbattle_double TRAINER_GABBY_AND_TY_4, GabbyAndTy_Text_TyIntro, GabbyAndTy_Text_TyDefeat, GabbyAndTy_Text_TyNotEnoughMons, GabbyAndTy_EventScript_RequestInterview
-	msgbox GabbyAndTy_Text_TyPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
 GabbyAndTy_EventScript_GabbyBattle5::
-	trainerbattle_double TRAINER_GABBY_AND_TY_5, GabbyAndTy_Text_GabbyIntro, GabbyAndTy_Text_GabbyDefeat, GabbyAndTy_Text_GabbyNotEnoughMons, GabbyAndTy_EventScript_RequestInterview
-	msgbox GabbyAndTy_Text_KeepingAnEyeOutForYou, MSGBOX_DEFAULT
 	release
 	end
 
 GabbyAndTy_EventScript_TyBattle5::
-	trainerbattle_double TRAINER_GABBY_AND_TY_5, GabbyAndTy_Text_TyIntro, GabbyAndTy_Text_TyDefeat, GabbyAndTy_Text_TyNotEnoughMons, GabbyAndTy_EventScript_RequestInterview
-	msgbox GabbyAndTy_Text_TyPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
 GabbyAndTy_EventScript_GabbyBattle6::
-	trainerbattle_double TRAINER_GABBY_AND_TY_6, GabbyAndTy_Text_GabbyIntro, GabbyAndTy_Text_GabbyDefeat, GabbyAndTy_Text_GabbyNotEnoughMons, GabbyAndTy_EventScript_RequestInterview
-	msgbox GabbyAndTy_Text_KeepingAnEyeOutForYou, MSGBOX_DEFAULT
 	release
 	end
 
 GabbyAndTy_EventScript_TyBattle6::
-	trainerbattle_double TRAINER_GABBY_AND_TY_6, GabbyAndTy_Text_TyIntro, GabbyAndTy_Text_TyDefeat, GabbyAndTy_Text_TyNotEnoughMons, GabbyAndTy_EventScript_RequestInterview
-	msgbox GabbyAndTy_Text_TyPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
 GabbyAndTy_EventScript_FirstInterview::
-	special GabbyAndTyBeforeInterview
-	special GetGabbyAndTyLocalIds
 	call_if_eq VAR_FACING, DIR_NORTH, GabbyAndTy_EventScript_FacePlayerNorth
 	call_if_eq VAR_FACING, DIR_SOUTH, GabbyAndTy_EventScript_FacePlayerSouth
 	call_if_eq VAR_FACING, DIR_EAST, GabbyAndTy_EventScript_FacePlayerEast
 	goto_if_set FLAG_TEMP_SKIP_GABBY_INTERVIEW, GabbyAndTy_EventScript_KeepingAnEyeOutForYou
-	msgbox GabbyAndTy_Text_WhoAreYouInterview, MSGBOX_YESNO
 	goto GabbyAndTy_EventScript_Interview
 	end
 
@@ -225,16 +197,11 @@ GabbyAndTy_EventScript_FacePlayerEast::
 	return
 
 GabbyAndTy_EventScript_RequestInterview::
-	special GabbyAndTyBeforeInterview
-	special GetGabbyAndTyLocalIds
 	call_if_eq VAR_FACING, DIR_NORTH, GabbyAndTy_EventScript_FacePlayerNorth
 	call_if_eq VAR_FACING, DIR_SOUTH, GabbyAndTy_EventScript_FacePlayerSouth
 	call_if_eq VAR_FACING, DIR_EAST, GabbyAndTy_EventScript_FacePlayerEast
 	goto_if_set FLAG_TEMP_SKIP_GABBY_INTERVIEW, GabbyAndTy_EventScript_KeepingAnEyeOutForYou
-	specialvar VAR_RESULT, GabbyAndTyGetLastQuote
 	goto_if_eq VAR_RESULT, 0, GabbyAndTy_EventScript_DidntInterviewLastTime
-	msgbox GabbyAndTy_Text_QuoteFromLastInterview, MSGBOX_DEFAULT
-	specialvar VAR_RESULT, GabbyAndTyGetLastBattleTrivia
 	switch VAR_RESULT
 	case 0, GabbyAndTy_EventScript_RequestInterviewNoTrivia
 	case 1, GabbyAndTy_EventScript_RequestInterviewShortBattle
@@ -256,56 +223,45 @@ GabbyAndTy_Movement_WalkInPlaceLeft:
 	step_end
 
 GabbyAndTy_EventScript_DidntInterviewLastTime::
-	msgbox GabbyAndTy_Text_GiveUsAnInterviewThisTime, MSGBOX_YESNO
 	goto GabbyAndTy_EventScript_Interview
 	end
 
 GabbyAndTy_EventScript_RequestInterviewNoTrivia::
-	msgbox GabbyAndTy_Text_InterviewAgain, MSGBOX_YESNO
 	goto GabbyAndTy_EventScript_Interview
 	end
 
 GabbyAndTy_EventScript_RequestInterviewShortBattle::
-	msgbox GabbyAndTy_Text_YouStompedUsInterviewAgain, MSGBOX_YESNO
 	goto GabbyAndTy_EventScript_Interview
 	end
 
 GabbyAndTy_EventScript_RequestInterviewThrewBall::
-	msgbox GabbyAndTy_Text_YouThrewABallAtUsInterviewAgain, MSGBOX_YESNO
 	goto GabbyAndTy_EventScript_Interview
 	end
 
 GabbyAndTy_EventScript_RequestInterviewUsedItems::
-	msgbox GabbyAndTy_Text_CleverItemSkillsInterviewAgain, MSGBOX_YESNO
 	goto GabbyAndTy_EventScript_Interview
 	end
 
 GabbyAndTy_EventScript_RequestInterviewLostAMon::
-	msgbox GabbyAndTy_Text_WeLookedRespectableInterviewAgain, MSGBOX_YESNO
 	goto GabbyAndTy_EventScript_Interview
 	end
 
 GabbyAndTy_EventScript_Interview::
 	goto_if_eq VAR_RESULT, NO, GabbyAndTy_EventScript_DontGiveUpKeepingEyeOut
-	msgbox GabbyAndTy_Text_DescribeYourFeelings, MSGBOX_DEFAULT
 	setvar VAR_0x8004, EASY_CHAT_TYPE_GABBY_AND_TY
 	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	goto_if_eq VAR_RESULT, 0, GabbyAndTy_EventScript_DontGiveUpKeepingEyeOut
-	msgbox GabbyAndTy_Text_PerfectWellBeSeeingYou, MSGBOX_DEFAULT
-	special GabbyAndTyAfterInterview
 	setflag FLAG_TEMP_SKIP_GABBY_INTERVIEW
 	release
 	end
 
 GabbyAndTy_EventScript_DontGiveUpKeepingEyeOut::
-	msgbox GabbyAndTy_Text_DontGiveUpKeepingEyeOut, MSGBOX_DEFAULT
 	setflag FLAG_TEMP_SKIP_GABBY_INTERVIEW
 	release
 	end
 
 GabbyAndTy_EventScript_KeepingAnEyeOutForYou::
-	msgbox GabbyAndTy_Text_KeepingAnEyeOutForYou, MSGBOX_DEFAULT
 	release
 	end

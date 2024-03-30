@@ -6,7 +6,6 @@
 #include "load_save.h"
 #include "overworld.h"
 #include "script_pokemon_util.h"
-#include "tv.h"
 #include "constants/heal_locations.h"
 
 int GameClear(void)
@@ -52,7 +51,6 @@ int GameClear(void)
         {
             u8 val[1] = {TRUE};
             SetMonData(mon, MON_DATA_CHAMPION_RIBBON, val);
-            ribbonCounts[i].count = GetRibbonCount(mon);
             ribbonGet = TRUE;
         }
     }
@@ -70,11 +68,6 @@ int GameClear(void)
                 ribbonCounts[0] = ribbonCounts[i];
                 ribbonCounts[i] = prevBest;
             }
-        }
-
-        if (ribbonCounts[0].count > NUM_CUTIES_RIBBONS)
-        {
-            TryPutSpotTheCutiesOnAir(&gPlayerParty[ribbonCounts[0].partyIndex], MON_DATA_CHAMPION_RIBBON);
         }
     }
 

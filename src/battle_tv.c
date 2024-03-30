@@ -7,7 +7,6 @@
 #include "constants/battle_anim.h"
 #include "constants/moves.h"
 #include "battle_message.h"
-#include "tv.h"
 #include "constants/battle_move_effects.h"
 
 // this file's functions
@@ -799,129 +798,10 @@ void BattleTv_SetDataBasedOnMove(u16 move, u16 weatherFlags, struct DisableStruc
 
 void BattleTv_SetDataBasedOnAnimation(u8 animationId)
 {
-    struct BattleTv *tvPtr;
-    u32 atkSide;
-
-    if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
-        return;
-
-    tvPtr = &gBattleStruct->tv;
-    atkSide = GetBattlerSide(gBattlerAttacker);
-    switch (animationId)
-    {
-    case B_ANIM_FUTURE_SIGHT_HIT:
-        if (tvPtr->side[atkSide].futureSightMonId != 0)
-        {
-            AddMovePoints(PTS_SET_UP, 0, atkSide,
-                        (tvPtr->side[atkSide].futureSightMonId - 1) * 4 + tvPtr->side[atkSide].futureSightMoveSlot);
-            tvPtr->side[atkSide].faintCause = FNT_FUTURE_SIGHT;
-        }
-        break;
-    case B_ANIM_DOOM_DESIRE_HIT:
-        if (tvPtr->side[atkSide].doomDesireMonId != 0)
-        {
-            AddMovePoints(PTS_SET_UP, 1, atkSide,
-                        (tvPtr->side[atkSide].doomDesireMonId - 1) * 4 + tvPtr->side[atkSide].doomDesireMoveSlot);
-            tvPtr->side[atkSide].faintCause = FNT_DOOM_DESIRE;
-        }
-        break;
-    }
 }
 
 void TryPutLinkBattleTvShowOnAir(void)
 {
-    u16 playerBestSpecies = 0, opponentBestSpecies = 0;
-    s16 playerBestSum = 0, opponentBestSum = SHRT_MAX;
-    u8 playerBestMonId = 0, opponentBestMonId = 0;
-    struct BattleTvMovePoints *movePoints = NULL;
-    u8 countPlayer = 0, countOpponent = 0;
-    s16 sum = 0;
-    u16 species = 0;
-    u16 moveId = 0;
-    s32 i, j;
-    int zero = 0, one = 1; //needed for matching
-
-    if (gBattleStruct->anyMonHasTransformed)
-        return;
-
-    movePoints = &gBattleStruct->tvMovePoints;
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL) != SPECIES_NONE)
-            countPlayer++;
-        if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES, NULL) != SPECIES_NONE)
-            countOpponent++;
-    }
-
-    if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) || countPlayer != countOpponent)
-        return;
-
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
-        if (species != SPECIES_NONE && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG, NULL))
-        {
-            for (sum = 0, j = 0; j < MAX_MON_MOVES; j++)
-                sum += movePoints->points[zero][i * 4 + j];
-
-            if (playerBestSum < sum)
-            {
-                playerBestMonId = i;
-                playerBestSum = sum;
-                playerBestSpecies = species;
-            }
-        }
-
-        species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES, NULL);
-        if (species != SPECIES_NONE && !GetMonData(&gEnemyParty[i], MON_DATA_IS_EGG, NULL))
-        {
-            for (sum = 0, j = 0; j < MAX_MON_MOVES; j++)
-                sum += movePoints->points[one][i * 4 + j];
-
-            if (opponentBestSum == sum)
-            {
-                if (GetMonData(&gEnemyParty[i], MON_DATA_EXP, NULL) > GetMonData(&gEnemyParty[opponentBestMonId], MON_DATA_EXP, NULL))
-                {
-                    opponentBestMonId = i;
-                    opponentBestSum = sum;
-                    opponentBestSpecies = species;
-                }
-            }
-            else if (opponentBestSum > sum)
-            {
-                opponentBestMonId = i;
-                opponentBestSum = sum;
-                opponentBestSpecies = species;
-            }
-        }
-    }
-
-    for (sum = 0, i = 0, j = 0; j < MAX_MON_MOVES; j++)
-    {
-        if (sum < movePoints->points[zero][playerBestMonId * 4 + j])
-        {
-            sum = movePoints->points[zero][playerBestMonId * 4 + j];
-            i = j;
-        }
-    }
-
-    moveId = GetMonData(&gPlayerParty[playerBestMonId], MON_DATA_MOVE1 + i, NULL);
-    if (playerBestSum == 0 || moveId == 0)
-        return;
-
-    if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
-    {
-        if ((playerBestMonId < MULTI_PARTY_SIZE && !GetLinkTrainerFlankId(gBattleScripting.multiplayerId))
-         || (playerBestMonId >= MULTI_PARTY_SIZE && GetLinkTrainerFlankId(gBattleScripting.multiplayerId)))
-        {
-            j = (opponentBestMonId < MULTI_PARTY_SIZE) ? FALSE : TRUE;
-            PutBattleUpdateOnTheAir(GetOpposingLinkMultiBattlerId(j, gBattleScripting.multiplayerId), moveId, playerBestSpecies, opponentBestSpecies);
-        }
-    }
-    else
-    {
-        PutBattleUpdateOnTheAir(gBattleScripting.multiplayerId ^ 1, moveId, playerBestSpecies, opponentBestSpecies);
-    }
 }
 
 static void AddMovePoints(u8 caseId, u16 arg1, u8 arg2, u8 arg3)
@@ -1263,31 +1143,6 @@ static void TrySetBattleSeminarShow(void)
             dmgByMove[i] = gBattleMoveDamage;
             if (dmgByMove[i] == 0 && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
                 dmgByMove[i] = 1;
-        }
-    }
-
-    for (i = 0; i < MAX_MON_MOVES; i++)
-    {
-        if (i != gMoveSelectionCursor[gBattlerAttacker] && dmgByMove[i] > dmgByMove[gMoveSelectionCursor[gBattlerAttacker]])
-        {
-            u16 opponentSpecies, playerSpecies;
-            s32 bestMoveId;
-
-            if (gMoveSelectionCursor[gBattlerAttacker] != 0)
-                bestMoveId = 0;
-            else
-                bestMoveId = 1;
-
-            for (i = 0; i < MAX_MON_MOVES; i++)
-            {
-                if (i != gMoveSelectionCursor[gBattlerAttacker] && dmgByMove[i] > dmgByMove[bestMoveId])
-                    bestMoveId = i;
-            }
-
-            opponentSpecies = GetMonData(&gEnemyParty [gBattlerPartyIndexes[gBattlerTarget]],   MON_DATA_SPECIES, NULL);
-            playerSpecies   = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]], MON_DATA_SPECIES, NULL);
-            TryPutBattleSeminarOnAir(opponentSpecies, playerSpecies, gMoveSelectionCursor[gBattlerAttacker], gBattleMons[gBattlerAttacker].moves, gBattleMons[gBattlerAttacker].moves[bestMoveId]);
-            break;
         }
     }
 

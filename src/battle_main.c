@@ -49,7 +49,6 @@
 #include "test_runner.h"
 #include "text.h"
 #include "trig.h"
-#include "tv.h"
 #include "util.h"
 #include "wild_encounter.h"
 #include "window.h"
@@ -5729,20 +5728,6 @@ static void HandleEndTurn_FinishBattle(void)
                     }
                 }
             }
-            TryPutPokemonTodayOnAir();
-        }
-
-        if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK
-                                  | BATTLE_TYPE_RECORDED_LINK
-                                  | BATTLE_TYPE_TRAINER
-                                  | BATTLE_TYPE_FIRST_BATTLE
-                                  | BATTLE_TYPE_SAFARI
-                                  | BATTLE_TYPE_FRONTIER
-                                  | BATTLE_TYPE_EREADER_TRAINER
-                                  | BATTLE_TYPE_WALLY_TUTORIAL))
-            && gBattleResults.shinyWildMon)
-        {
-            TryPutBreakingNewsOnAir();
         }
 
         RecordedBattle_SetPlaybackFinished();

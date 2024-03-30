@@ -27,7 +27,6 @@
 #include "menu.h"
 #include "pokeblock.h"
 #include "trig.h"
-#include "tv.h"
 #include "item_menu.h"
 #include "battle_records.h"
 #include "graphics.h"
@@ -3578,7 +3577,6 @@ static bool8 PrintBlendingResults(void)
         TryAddContestLinkTvShow(&pokeblock, &sBerryBlender->tvBlender);
 
         CreateTask(Task_PlayPokeblockFanfare, 6);
-        IncrementDailyBerryBlender();
 
         RemoveBagItem(gSpecialVar_ItemId, 1);
         AddPokeblock(&pokeblock);
@@ -3827,12 +3825,6 @@ static bool32 TryAddContestLinkTvShow(struct Pokeblock *pokeblock, struct TvBlen
             // Player came first, try to put on air
             StringCopy(tvBlender->name, gLinkPlayers[sBerryBlender->playerPlaces[sBerryBlender->numPlayers - 1]].name);
             tvBlender->pokeblockFlavor = GetPokeblocksFlavor(pokeblock);
-            if (Put3CheersForPokeblocksOnTheAir(tvBlender->name, tvBlender->pokeblockFlavor,
-                                            tvBlender->pokeblockColor, tvBlender->pokeblockSheen,
-                                            gLinkPlayers[sBerryBlender->playerPlaces[sBerryBlender->numPlayers - 1]].language))
-            {
-                return TRUE;
-            }
 
             return FALSE;
         }
@@ -3841,12 +3833,6 @@ static bool32 TryAddContestLinkTvShow(struct Pokeblock *pokeblock, struct TvBlen
             // Player came last, try to put on air
             StringCopy(tvBlender->name, gLinkPlayers[sBerryBlender->playerPlaces[0]].name);
             tvBlender->pokeblockFlavor = GetPokeblocksFlavor(pokeblock);
-            if (Put3CheersForPokeblocksOnTheAir(tvBlender->name, tvBlender->pokeblockFlavor,
-                                            tvBlender->pokeblockColor, tvBlender->pokeblockSheen,
-                                            gLinkPlayers[sBerryBlender->playerPlaces[0]].language))
-            {
-                return TRUE;
-            }
 
             return FALSE;
         }

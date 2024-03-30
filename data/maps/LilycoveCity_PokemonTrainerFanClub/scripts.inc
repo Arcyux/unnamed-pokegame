@@ -107,7 +107,6 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions::
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_HideOrShowInterviewer::
-	specialvar VAR_RESULT, ShouldHideFanClubInterviewer
 	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_PokemonTrainerFanClub_EventScript_HideInterviewer
 	clearflag FLAG_HIDE_LILYCOVE_FAN_CLUB_INTERVIEWER
 	clearflag FLAG_FAN_CLUB_STRENGTH_SHARED
@@ -153,7 +152,6 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan::
 	return
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_TrySetUpTVShow::
-	special TryPutTrainerFanClubOnAir
 	return
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember1ToFarTable::
@@ -471,13 +469,10 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_Interviewer::
 @ The interviewer doesnt count as an individual fan club member
 @ Instead they always ask about whoever the Lass would be interested in, if not the player
 LilycoveCity_PokemonTrainerFanClub_EventScript_Interview::
-	setvar VAR_0x8005, TVSHOW_FAN_CLUB_SPECIAL
-	special InterviewBefore
 	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_PokemonTrainerFanClub_EventScript_AlreadyInterviewed2
 	copyvar VAR_0x800A, VAR_0x8006
 	setvar VAR_0x8004, FANCLUB_MEMBER1
 	special BufferFanClubTrainerName
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_WhatsYourOpinionOfTrainer, MSGBOX_DEFAULT
 	setvar VAR_0x8004, EASY_CHAT_TYPE_FAN_QUESTION
 	copyvar VAR_0x8005, VAR_0x800A
 	call Common_ShowEasyChatScreen
@@ -488,14 +483,12 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_Interview::
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_SubmitOpinion::
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_ThatsWhatYouThink, MSGBOX_DEFAULT
 	goto LilycoveCity_PokemonTrainerFanClub_EventScript_RateTrainer
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_CancelGiveOpinion::
 	setvar VAR_0x8004, FANCLUB_MEMBER1
 	special BufferFanClubTrainerName
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_HaveYouForgottenTrainer, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, LilycoveCity_PokemonTrainerFanClub_EventScript_ForgetTrainer
 	goto_if_eq VAR_RESULT, NO, LilycoveCity_PokemonTrainerFanClub_EventScript_AskForOpinion
 	end
@@ -503,7 +496,6 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_CancelGiveOpinion::
 LilycoveCity_PokemonTrainerFanClub_EventScript_AskForOpinion::
 	setvar VAR_0x8004, FANCLUB_MEMBER1
 	special BufferFanClubTrainerName
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_WhatsYourOpinionOfTrainer2, MSGBOX_DEFAULT
 	setvar VAR_0x8004, EASY_CHAT_TYPE_FAN_QUESTION
 	copyvar VAR_0x8005, VAR_0x800A
 	call Common_ShowEasyChatScreen
@@ -516,7 +508,6 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_AskForOpinion::
 LilycoveCity_PokemonTrainerFanClub_EventScript_RateTrainer::
 	setvar VAR_0x8004, FANCLUB_MEMBER1
 	special BufferFanClubTrainerName
-	message LilycoveCity_PokemonTrainerFanClub_Text_HowStrongRateTrainer
 	waitmessage
 	setvar VAR_0x8004, SCROLL_MULTI_POKEMON_FAN_CLUB_RATER
 	special ShowScrollableMultichoice
@@ -529,14 +520,12 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_RateTrainer::
 	special BufferFanClubTrainerName
 	copyvar VAR_0x8006, VAR_0x800A
 	copyvar VAR_0x8005, VAR_RESULT
-	special PutFanClubSpecialOnTheAir
 	goto LilycoveCity_PokemonTrainerFanClub_EventScript_CompleteInterview
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_CancelRateTrainer::
 	setvar VAR_0x8004, FANCLUB_MEMBER1
 	special BufferFanClubTrainerName
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_HaveYouForgottenTrainer2, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, LilycoveCity_PokemonTrainerFanClub_EventScript_ForgetTrainer
 	goto_if_eq VAR_RESULT, NO, LilycoveCity_PokemonTrainerFanClub_EventScript_RateTrainer
 	end
@@ -544,14 +533,12 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_CancelRateTrainer::
 LilycoveCity_PokemonTrainerFanClub_EventScript_ForgetTrainer::
 	setvar VAR_0x8004, FANCLUB_MEMBER1
 	special BufferFanClubTrainerName
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_YouShouldMeetTrainer, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_CompleteInterview::
 	setvar VAR_0x8004, FANCLUB_MEMBER1
 	special BufferFanClubTrainerName
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_ThankYouIllShareThisInfo, MSGBOX_DEFAULT
 	setflag FLAG_FAN_CLUB_STRENGTH_SHARED
 	release
 	end
@@ -559,7 +546,6 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_CompleteInterview::
 LilycoveCity_PokemonTrainerFanClub_EventScript_AlreadyInterviewed::
 	setvar VAR_0x8004, FANCLUB_MEMBER1
 	special BufferFanClubTrainerName
-	msgbox LilycoveCity_PokemonTrainerFanClub_HopeYouCatchTVSpecial, MSGBOX_DEFAULT
 	release
 	end
 

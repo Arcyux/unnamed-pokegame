@@ -73,20 +73,6 @@ gSpecials::
 	def_special BattleSetup_StartRematchBattle
 	def_special ShowPokemonStorageSystemPC
 	def_special HasEnoughMonsForDoubleBattle
-	def_special TurnOffTVScreen
-	def_special DoTVShow
-	def_special DoPokeNews
-	def_special GetRandomActiveShowIdx
-	def_special GetSelectedTVShow
-	def_special InterviewBefore
-	def_special InterviewAfter
-	def_special IsLeadMonNicknamedOrNotEnglish
-	def_special SetContestCategoryStringVarForInterview
-	def_special GetNextActiveShowIfMassOutbreak
-	def_special IsTVShowAlreadyInQueue
-	def_special CheckForPlayersHouseNews
-	def_special GetMomOrDadStringForTVMessage
-	def_special ResetTVShowState
 	def_special GetContestWinnerId
 	def_special GetContestPlayerId
 	def_special GetNpcContestantLocalId
@@ -134,9 +120,6 @@ gSpecials::
 	def_special CompareSeedotSize
 	def_special GetLotadSizeRecordInfo
 	def_special CompareLotadSize
-	def_special TryPutNameRaterShowOnTheAir
-	def_special BufferMonNickname
-	def_special IsMonOTIDNotPlayers
 	def_special BufferTrendyPhraseString
 	def_special IsTrendyPhraseBoring
 	def_special BufferDeepLinkPhrase
@@ -169,7 +152,6 @@ gSpecials::
 	def_special Special_ViewWallClock
 	def_special ChooseStarter
 	def_special StartWallyTutorialBattle
-	def_special ChangePokemonNickname
 	def_special ChoosePartyMon
 	def_special GetFirstFreePokeblockSlot
 	def_special DoBerryBlending
@@ -183,14 +165,6 @@ gSpecials::
 	def_special UpdateTrainerFanClubGameClear
 	def_special Script_TryGainNewFanFromCounter
 	def_special RockSmashWildEncounter
-	def_special GabbyAndTyGetBattleNum
-	def_special GabbyAndTyAfterInterview
-	def_special GabbyAndTyBeforeInterview
-	def_special DoTVShowInSearchOfTrainers
-	def_special IsGabbyAndTyShowOnTheAir
-	def_special GabbyAndTyGetLastQuote
-	def_special GabbyAndTyGetLastBattleTrivia
-	def_special GetGabbyAndTyLocalIds
 	def_special GetBattleOutcome
 	def_special GetDaycareMonNicknames
 	def_special GetDaycareState
@@ -351,14 +325,7 @@ gSpecials::
 	def_special DoesPartyHaveEnigmaBerry
 	def_special GenerateContestRand
 	def_special SetChampionSaveWarp
-	def_special TryPutTreasureInvestigatorsOnAir
-	def_special TryPutLotteryWinnerReportOnAir
-	def_special TryPutTrainerFanClubOnAir
-	def_special ShouldHideFanClubInterviewer
 	def_special ShowGlassWorkshopMenu
-	def_special PutFanClubSpecialOnTheAir
-	def_special IncrementDailyPlantedBerries
-	def_special IncrementDailyPickedBerries
 	def_special InitSecretBaseVars
 	def_special CheckInteractedWithFriendsSandOrnament
 	def_special DeclinedSecretBaseBattle
@@ -412,7 +379,6 @@ gSpecials::
 	def_special SetContestLadyGivenPokeblock
 	def_special GetContestLadyMonSpecies
 	def_special GetContestLadyCategory
-	def_special PutLilycoveContestLadyShowOnTheAir
 	def_special CloseBattlePikeCurtain
 	def_special CallApprenticeFunction
 	def_special ShouldTryGetTrainerScript
@@ -492,7 +458,6 @@ gSpecials::
 	def_special StartMirageTowerDisintegration
 	def_special StartMirageTowerShake
 	def_special StartMirageTowerFossilFallAndSink
-	def_special ChangeBoxPokemonNickname
 	def_special GetPCBoxToSendMon
 	def_special ShouldShowBoxWasFullMessage
 	def_special SetMatchCallRegisteredFlag
@@ -508,7 +473,6 @@ gSpecials::
 	def_special EnableNationalPokedex
 	def_special ScriptMenu_CreateLilycoveSSTidalMultichoice
 	def_special GetLilycoveSSTidalSelection
-	def_special TurnOnTVScreen
 	def_special SetMewAboveGrass
 	def_special ShouldDistributeEonTicket
 	def_special LinkRetireStatusWithBattleTowerPartner

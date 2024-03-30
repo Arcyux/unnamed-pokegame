@@ -52,7 +52,6 @@
 #include "constants/trade.h"
 #include "constants/trainer_hill.h"
 #include "constants/trainers.h"
-#include "constants/tv.h"
 #include "constants/union_room.h"
 #include "constants/vars.h"
 #include "constants/weather.h"
@@ -814,7 +813,6 @@ Common_EventScript_FerryDepartIsland::
 
 Common_EventScript_NameReceivedPartyMon::
 	fadescreen FADE_TO_BLACK
-	special ChangePokemonNickname
 	waitstate
 	return
 
@@ -1029,8 +1027,6 @@ EventScript_VsSeekerChargingDone::
 	.include "data/text/contest_link.inc"
 	.include "data/text/contest_painting.inc"
 	.include "data/text/trick_house_mechadolls.inc"
-	.include "data/scripts/tv.inc"
-	.include "data/text/tv.inc"
 	.include "data/scripts/interview.inc"
 	.include "data/scripts/gabby_and_ty.inc"
 	.include "data/text/pokemon_news.inc"

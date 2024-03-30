@@ -432,8 +432,6 @@ LilycoveCity_PokemonCenter_1F_EventScript_CheckAirContestLadyShow::
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_AirContestLadyShow::
-	msgbox LilycoveCity_PokemonCenter_1F_Text_ReadyToEnterContests, MSGBOX_DEFAULT
-	special PutLilycoveContestLadyShowOnTheAir
 	release
 	end
 

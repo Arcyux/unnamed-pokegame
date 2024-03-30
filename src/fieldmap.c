@@ -13,7 +13,6 @@
 #include "script.h"
 #include "secret_base.h"
 #include "trainer_hill.h"
-#include "tv.h"
 #include "constants/rgb.h"
 #include "constants/metatile_behaviors.h"
 
@@ -78,7 +77,6 @@ void InitMapFromSavedGame(void)
     SetOccupiedSecretBaseEntranceMetatiles(gMapHeader.events);
     LoadSavedMapView();
     RunOnLoadMapScript();
-    UpdateTVScreensOnMap(gBackupMapLayout.width, gBackupMapLayout.height);
 }
 
 void InitBattlePyramidMap(bool8 setPlayerPosition)

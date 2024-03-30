@@ -17,7 +17,6 @@
 #include "string_util.h"
 #include "new_game.h"
 #include "link.h"
-#include "tv.h"
 #include "apprentice.h"
 #include "pokedex.h"
 #include "recorded_battle.h"
@@ -1484,122 +1483,6 @@ static void ShowLinkContestResultsWindow(void)
 
 static void CheckPutFrontierTVShowOnAir(void)
 {
-    u8 name[32];
-    s32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
-    s32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-
-    switch (facility)
-    {
-    case FRONTIER_FACILITY_TOWER:
-        if (gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] > gSaveBlock2Ptr->frontier.towerRecordWinStreaks[battleMode][lvlMode])
-        {
-            gSaveBlock2Ptr->frontier.towerRecordWinStreaks[battleMode][lvlMode] = gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode];
-            if (battleMode == FRONTIER_MODE_LINK_MULTIS)
-            {
-                StringCopy(name, gLinkPlayers[gBattleScripting.multiplayerId ^ 1].name);
-                StripExtCtrlCodes(name);
-                StringCopy(gSaveBlock2Ptr->frontier.opponentNames[lvlMode], name);
-                SetTrainerId(gLinkPlayers[gBattleScripting.multiplayerId ^ 1].trainerId, gSaveBlock2Ptr->frontier.opponentTrainerIds[lvlMode]);
-            }
-            if (gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] > 1
-                && ShouldAirFrontierTVShow())
-            {
-                switch (battleMode)
-                {
-                case FRONTIER_MODE_SINGLES:
-                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode], FRONTIER_SHOW_TOWER_SINGLES);
-                    break;
-                case FRONTIER_MODE_DOUBLES:
-                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode], FRONTIER_SHOW_TOWER_DOUBLES);
-                    break;
-                case FRONTIER_MODE_MULTIS:
-                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode], FRONTIER_SHOW_TOWER_MULTIS);
-                    break;
-                case FRONTIER_MODE_LINK_MULTIS:
-                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode], FRONTIER_SHOW_TOWER_LINK_MULTIS);
-                    break;
-                }
-            }
-        }
-        break;
-    case FRONTIER_FACILITY_DOME:
-        if (gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode] > gSaveBlock2Ptr->frontier.domeRecordWinStreaks[battleMode][lvlMode])
-        {
-            gSaveBlock2Ptr->frontier.domeRecordWinStreaks[battleMode][lvlMode] = gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode];
-            if (gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode] > 1
-                && ShouldAirFrontierTVShow())
-            {
-                if (battleMode == FRONTIER_MODE_SINGLES)
-                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode], FRONTIER_SHOW_DOME_SINGLES);
-                else
-                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode], FRONTIER_SHOW_DOME_DOUBLES);
-            }
-        }
-        break;
-    case FRONTIER_FACILITY_PALACE:
-        if (gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode] > gSaveBlock2Ptr->frontier.palaceRecordWinStreaks[battleMode][lvlMode])
-        {
-            gSaveBlock2Ptr->frontier.palaceRecordWinStreaks[battleMode][lvlMode] = gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode];
-            if (gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode] > 1
-                && ShouldAirFrontierTVShow())
-            {
-                if (battleMode == FRONTIER_MODE_SINGLES)
-                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode], FRONTIER_SHOW_PALACE_SINGLES);
-                else
-                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode], FRONTIER_SHOW_PALACE_DOUBLES);
-            }
-        }
-        break;
-    case FRONTIER_FACILITY_ARENA:
-        if (gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode] > gSaveBlock2Ptr->frontier.arenaRecordStreaks[lvlMode])
-        {
-            gSaveBlock2Ptr->frontier.arenaRecordStreaks[lvlMode] = gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode];
-            if (gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode] > 1
-                && ShouldAirFrontierTVShow())
-            {
-                TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode], FRONTIER_SHOW_ARENA);
-            }
-        }
-        break;
-    case FRONTIER_FACILITY_FACTORY:
-        if (gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] > gSaveBlock2Ptr->frontier.factoryRecordWinStreaks[battleMode][lvlMode])
-        {
-            gSaveBlock2Ptr->frontier.factoryRecordWinStreaks[battleMode][lvlMode] = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode];
-            gSaveBlock2Ptr->frontier.factoryRecordRentsCount[battleMode][lvlMode] = gSaveBlock2Ptr->frontier.factoryRentsCount[battleMode][lvlMode];
-            if (gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] > 1
-                && ShouldAirFrontierTVShow())
-            {
-                if (battleMode == FRONTIER_MODE_SINGLES)
-                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode], FRONTIER_SHOW_FACTORY_SINGLES);
-                else
-                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode], FRONTIER_SHOW_FACTORY_DOUBLES);
-            }
-        }
-        break;
-    case FRONTIER_FACILITY_PIKE:
-        if (gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode] > gSaveBlock2Ptr->frontier.pikeRecordStreaks[lvlMode])
-        {
-            gSaveBlock2Ptr->frontier.pikeRecordStreaks[lvlMode] = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode];
-            if (gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode] > 1
-                && ShouldAirFrontierTVShow())
-            {
-                TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode], FRONTIER_SHOW_PIKE);
-            }
-        }
-        break;
-    case FRONTIER_FACILITY_PYRAMID:
-        if (gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode] > gSaveBlock2Ptr->frontier.pyramidRecordStreaks[lvlMode])
-        {
-            gSaveBlock2Ptr->frontier.pyramidRecordStreaks[lvlMode] = gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode];
-            if (gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode] > 1
-                && ShouldAirFrontierTVShow())
-            {
-                TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode], FRONTIER_SHOW_PYRAMID);
-            }
-        }
-        break;
-    }
 }
 
 static void Script_GetFrontierBrainStatus(void)
@@ -1863,12 +1746,6 @@ static void GiveBattlePoints(void)
 
     points = gSaveBlock2Ptr->frontier.cardBattlePoints;
     points += sBattlePointAwards[facility][battleMode][challengeNum];
-    IncrementDailyBattlePoints(sBattlePointAwards[facility][battleMode][challengeNum]);
-    if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
-    {
-        points += 10;
-        IncrementDailyBattlePoints(10);
-    }
     if (points > 0xFFFF)
         points = 0xFFFF;
     gSaveBlock2Ptr->frontier.cardBattlePoints = points;

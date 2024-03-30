@@ -190,7 +190,6 @@ SECTIONS {
         src/contest_effect.o(.text);
         src/record_mixing.o(.text);
         src/secret_base.o(.text);
-        src/tv.o(.text);
         src/contest_util.o(.text);
         src/script_pokemon_util.o(.text);
         src/field_poison.o(.text);
@@ -572,7 +571,6 @@ SECTIONS {
         src/contest_effect.o(.rodata);
         src/record_mixing.o(.rodata);
         src/secret_base.o(.rodata);
-        src/tv.o(.rodata);
         src/contest_util.o(.rodata);
         src/script_pokemon_util.o(.rodata);
         src/pokemon_size_record.o(.rodata)

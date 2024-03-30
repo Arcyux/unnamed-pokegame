@@ -55,7 +55,6 @@
 #include "time_events.h"
 #include "trainer_hill.h"
 #include "trainer_pokemon_sprites.h"
-#include "tv.h"
 #include "scanline_effect.h"
 #include "wild_encounter.h"
 #include "vs_seeker.h"
@@ -907,7 +906,6 @@ if (I_VS_SEEKER_CHARGING != 0)
 
     if (a1 != TRUE && isIndoors)
     {
-        UpdateTVScreensOnMap(gBackupMapLayout.width, gBackupMapLayout.height);
         InitSecretBaseAppearance(TRUE);
     }
 }
@@ -1779,12 +1777,10 @@ void CB2_ContinueSavedGame(void)
         ClearContinueGameWarpStatus();
         SetWarpDestinationToContinueGameWarp();
         WarpIntoMap();
-        TryPutTodaysRivalTrainerOnAir();
         SetMainCallback2(CB2_LoadMap);
     }
     else
     {
-        TryPutTodaysRivalTrainerOnAir();
         gFieldCallback = FieldCB_FadeTryShowMapPopup;
         SetMainCallback1(CB1_Overworld);
         CB2_ReturnToField();

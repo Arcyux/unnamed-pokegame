@@ -44,7 +44,6 @@
 #include "strings.h"
 #include "task.h"
 #include "text.h"
-#include "tv.h"
 #include "wallclock.h"
 #include "window.h"
 #include "constants/battle_frontier.h"
@@ -493,7 +492,6 @@ u8 GetLinkPartnerNames(void)
     {
         if (myLinkPlayerNumber != i)
         {
-            StringCopy(gTVStringVarPtrs[j], gLinkPlayers[i].name);
             j++;
         }
     }
@@ -1316,24 +1314,8 @@ u16 GetSlotMachineId(void)
         SLOT_MACHINE_LUCKIER,
         SLOT_MACHINE_LUCKIEST
     };
-    static const u8 sSlotMachineServiceDayIds[SLOT_MACHINE_COUNT] = {
-        SLOT_MACHINE_LUCKY,
-        SLOT_MACHINE_LUCKY,
-        SLOT_MACHINE_LUCKY,
-        SLOT_MACHINE_LUCKY,
-        SLOT_MACHINE_LUCKY,
-        SLOT_MACHINE_LUCKY,
-        SLOT_MACHINE_LUCKIER,
-        SLOT_MACHINE_LUCKIER,
-        SLOT_MACHINE_LUCKIER,
-        SLOT_MACHINE_LUCKIER,
-        SLOT_MACHINE_LUCKIEST,
-        SLOT_MACHINE_LUCKIEST
-    };
 
     u32 rnd = gSaveBlock1Ptr->dewfordTrends[0].trendiness + gSaveBlock1Ptr->dewfordTrends[0].rand + sSlotMachineRandomSeeds[gSpecialVar_0x8004];
-    if (IsPokeNewsActive(POKENEWS_GAME_CORNER))
-        return sSlotMachineServiceDayIds[rnd % SLOT_MACHINE_COUNT];
 
     return sSlotMachineIds[rnd % SLOT_MACHINE_COUNT];
 }
@@ -1396,8 +1378,6 @@ void GiveLeadMonEffortRibbon(void)
     ribbonSet = TRUE;
     leadMon = &gPlayerParty[GetLeadMonIndex()];
     SetMonData(leadMon, MON_DATA_EFFORT_RIBBON, &ribbonSet);
-    if (GetRibbonCount(leadMon) > NUM_CUTIES_RIBBONS)
-        TryPutSpotTheCutiesOnAir(leadMon, MON_DATA_EFFORT_RIBBON);
 }
 
 bool8 Special_AreLeadMonEVsMaxedOut(void)
@@ -1595,11 +1575,25 @@ bool8 MonOTNameNotPlayer(void)
     return TRUE;
 }
 
+static size_t CountDigits(int value)
+{
+    if (value / 10 == 0)        return 1;
+    if (value / 100 == 0)       return 2;
+    if (value / 1000 == 0)      return 3;
+    if (value / 10000 == 0)     return 4;
+    if (value / 100000 == 0)    return 5;
+    if (value / 1000000 == 0)   return 6;
+    if (value / 10000000 == 0)  return 7;
+    if (value / 100000000 == 0) return 8;
+
+    return 1;
+}
+
 void BufferLottoTicketNumber(void)
 {
     if (gSpecialVar_Result >= 10000)
     {
-        ConvertIntToDecimalString(0, gSpecialVar_Result);
+        //ConvertIntToDecimalString(0, gSpecialVar_Result);
     }
     else if (gSpecialVar_Result >= 1000)
     {

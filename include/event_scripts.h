@@ -518,7 +518,6 @@ extern const u8 EventScript_PC[];
 extern const u8 EventScript_AccessPokemonBoxLink[];
 extern const u8 EventScript_TestSignpostMsg[];
 extern const u8 EventScript_HiddenItemScript[];
-extern const u8 EventScript_TV[];
 extern const u8 EventScript_ClosedSootopolisDoor[];
 extern const u8 SkyPillar_Outside_EventScript_ClosedDoor[];
 extern const u8 EventScript_CableBoxResults[];

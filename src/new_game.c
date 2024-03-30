@@ -19,7 +19,6 @@
 #include "event_data.h"
 #include "money.h"
 #include "trainer_hill.h"
-#include "tv.h"
 #include "coins.h"
 #include "text.h"
 #include "overworld.h"
@@ -164,8 +163,6 @@ void NewGameInitData(void)
     PlayTimeCounter_Reset();
     ClearPokedexFlags();
     InitEventData();
-    ClearTVShowData();
-    ResetGabbyAndTy();
     ClearSecretBases();
     ClearBerryTrees();
     SetMoney(&gSaveBlock1Ptr->money, 0);

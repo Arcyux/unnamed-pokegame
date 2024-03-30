@@ -46,7 +46,6 @@
 #include "text.h"
 #include "text_window.h"
 #include "trainer_see.h"
-#include "tv.h"
 #include "window.h"
 #include "list_menu.h"
 #include "malloc.h"
@@ -1714,6 +1713,20 @@ bool8 ScrCmd_buffermovename(struct ScriptContext *ctx)
     return FALSE;
 }
 
+static size_t CountDigits(int value)
+{
+    if (value / 10 == 0)        return 1;
+    if (value / 100 == 0)       return 2;
+    if (value / 1000 == 0)      return 3;
+    if (value / 10000 == 0)     return 4;
+    if (value / 100000 == 0)    return 5;
+    if (value / 1000000 == 0)   return 6;
+    if (value / 10000000 == 0)  return 7;
+    if (value / 100000000 == 0) return 8;
+
+    return 1;
+}
+
 bool8 ScrCmd_buffernumberstring(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
@@ -2041,9 +2054,6 @@ bool8 ScrCmd_setberrytree(struct ScriptContext *ctx)
 
 bool8 ScrCmd_getpokenewsactive(struct ScriptContext *ctx)
 {
-    u16 newsKind = VarGet(ScriptReadHalfword(ctx));
-
-    gSpecialVar_Result = IsPokeNewsActive(newsKind);
     return FALSE;
 }
 
