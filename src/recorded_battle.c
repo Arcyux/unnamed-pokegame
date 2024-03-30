@@ -678,7 +678,6 @@ void RecordedBattle_CopyBattlerMoves(u32 battler)
 }
 
 // This is a special battle action only used by this function
-// It shares a value with B_ACTION_SAFARI_POKEBLOCK, which can never occur in a recorded battle.
 #define ACTION_MOVE_CHANGE 6
 
 void RecordedBattle_CheckMovesetChanges(u8 mode)

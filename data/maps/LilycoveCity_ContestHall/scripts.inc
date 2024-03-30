@@ -39,7 +39,6 @@ LilycoveCity_ContestHall_EventScript_Boy2::
 	end
 
 LilycoveCity_ContestHall_EventScript_Girl::
-	msgbox LilycoveCity_ContestHall_Text_ManWhoWonEarlierHadPokeblocks, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestHall_EventScript_Sailor::
@@ -349,12 +348,6 @@ LilycoveCity_ContestHall_Text_EnteredBunchOfContests:
 	.string "cool moves go over as appeals.\p"
 	.string "But smart moves and cute moves\n"
 	.string "don't go over well, for instance.$"
-
-LilycoveCity_ContestHall_Text_ManWhoWonEarlierHadPokeblocks:
-	.string "That young man who won earlier had\n"
-	.string "a whole bunch of different {POKEBLOCK}S.\p"
-	.string "Can you win if you had that many\n"
-	.string "of those things?$"
 
 LilycoveCity_ContestHall_Text_IsntThisPlaceHumongous:
 	.string "Whoa, isn't this place humongous!\p"

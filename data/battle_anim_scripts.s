@@ -986,7 +986,7 @@ gBattleAnims_General::
 	.4byte General_StatsChange              @ B_ANIM_STATS_CHANGE
 	.4byte General_SubstituteFade           @ B_ANIM_SUBSTITUTE_FADE
 	.4byte General_SubstituteAppear         @ B_ANIM_SUBSTITUTE_APPEAR
-	.4byte General_PokeblockThrow           @ B_ANIM_POKEBLOCK_THROW
+	.4byte 0                                @ Unused
 	.4byte General_ItemKnockoff             @ B_ANIM_ITEM_KNOCKOFF
 	.4byte General_TurnTrap                 @ B_ANIM_TURN_TRAP
 	.4byte General_HeldItemEffect           @ B_ANIM_HELD_ITEM_EFFECT
@@ -27845,19 +27845,6 @@ General_SubstituteFade:
 
 General_SubstituteAppear:
 	createvisualtask AnimTask_MonToSubstitute, 2
-	end
-
-General_PokeblockThrow:
-	createvisualtask AnimTask_SetAttackerTargetLeftPos, 2, 0
-	createvisualtask AnimTask_LoadPokeblockGfx, 2
-	delay 0
-	waitplaysewithpan SE_M_JUMP_KICK, SOUND_PAN_ATTACKER, 22
-	createsprite gPokeblockSpriteTemplate, ANIM_TARGET, 3, -18, 12, 0, 32
-	delay 50
-	loopsewithpan SE_M_TAIL_WHIP, SOUND_PAN_TARGET, 19, 2
-	createvisualtask AnimTask_SwayMon, 5, 1, 8, 1536, 2, ANIM_TARGET
-	waitforvisualfinish
-	createvisualtask AnimTask_FreePokeblockGfx, 2
 	end
 
 General_ItemKnockoff:

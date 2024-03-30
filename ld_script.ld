@@ -239,7 +239,6 @@ SECTIONS {
         src/wallclock.o(.text);
         src/fldeff_rocksmash.o(.text);
         src/fldeff_dig.o(.text);
-        src/pokeblock.o(.text);
         src/fldeff_flash.o(.text);
         src/post_battle_event_funcs.o(.text);
         src/time_events.o(.text);
@@ -274,7 +273,6 @@ SECTIONS {
         src/decoration_inventory.o(.text);
         src/roamer.o(.text);
         src/battle_tower.o(.text);
-        src/use_pokeblock.o(.text);
         src/battle_controller_wally.o(.text);
         src/player_pc.o(.text);
         src/intro.o(.text);
@@ -289,7 +287,6 @@ SECTIONS {
         src/mystery_event_menu.o(.text);
         src/save_failed_screen.o(.text);
         src/braille_puzzles.o(.text);
-        src/pokeblock_feed.o(.text);
         src/clear_save_data_screen.o(.text);
         src/intro_credits_graphics.o(.text);
         src/evolution_graphics.o(.text);
@@ -615,7 +612,6 @@ SECTIONS {
         src/trader.o(.rodata);
         src/starter_choose.o(.rodata);
         src/wallclock.o(.rodata);
-        src/pokeblock.o(.rodata);
         src/fldeff_flash.o(.rodata);
         src/time_events.o(.rodata);
         src/field_specials.o(.rodata);
@@ -638,7 +634,6 @@ SECTIONS {
         src/move_relearner.o(.rodata);
         src/roamer.o(.rodata);
         src/battle_tower.o(.rodata);
-        src/use_pokeblock.o(.rodata);
         src/battle_controller_wally.o(.rodata);
         src/player_pc.o(.rodata);
         src/intro.o(.rodata);
@@ -653,7 +648,6 @@ SECTIONS {
         src/mystery_event_menu.o(.rodata);
         src/save_failed_screen.o(.rodata);
         src/braille_puzzles.o(.rodata);
-        src/pokeblock_feed.o(.rodata);
         src/clear_save_data_screen.o(.rodata);
         src/intro_credits_graphics.o(.rodata);
         src/evolution_graphics.o(.rodata);

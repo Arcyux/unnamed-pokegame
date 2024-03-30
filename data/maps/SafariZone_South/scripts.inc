@@ -38,7 +38,6 @@ SafariZone_South_Movement_ExitAttendantBlockDoor:
 	step_end
 
 SafariZone_South_EventScript_Boy::
-	msgbox SafariZone_South_Text_Boy, MSGBOX_NPC
 	end
 
 SafariZone_South_EventScript_Man::
@@ -46,7 +45,6 @@ SafariZone_South_EventScript_Man::
 	end
 
 SafariZone_South_EventScript_Youngster::
-	msgbox SafariZone_South_Text_Youngster, MSGBOX_NPC
 	end
 
 SafariZone_South_EventScript_ExitAttendant::

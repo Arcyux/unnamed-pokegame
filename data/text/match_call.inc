@@ -944,20 +944,6 @@ MatchCall_PersonalizedText27::
 	.string "I have to go now.\n"
 	.string "It's time for our snack!$"
 
-MatchCall_PersonalizedText28::
-	.string "I love POKéMON!\n"
-	.string "It's {STR_VAR_1} from the FAN CLUB!\p"
-	.string "You have to hear this!\n"
-	.string "My sweet POKéMON…\p"
-	.string "Snort! Wahaha!\n"
-	.string "I can't say any more! It's a secret!\l"
-	.string "It's just too cute for words!\p"
-	.string "Oh, my sweet {STR_VAR_2} is begging\n"
-	.string "for a {POKEBLOCK}!\p"
-	.string "It's the picture of cuteness!\p"
-	.string "Sorry, but I can't talk now!\n"
-	.string "You'll have to hear this next time!$"
-
 MatchCall_PersonalizedText29::
 	.string "Ohoho!\p"
 	.string "This is {STR_VAR_1}! I can't wait to\n"
@@ -1217,15 +1203,6 @@ MatchCall_PersonalizedText51::
 	.string "If you're going to focus on raising\n"
 	.string "POKéMON, you should come out to\l"
 	.string "{STR_VAR_2}. Take care now.$"
-
-MatchCall_PersonalizedText52::
-	.string "Hi, this is {STR_VAR_1}.\p"
-	.string "I gave a {POKEBLOCK} to my {STR_VAR_2}.\n"
-	.string "It seemed to enjoy it very much.\p"
-	.string "It looks like POKéMON have their\n"
-	.string "likes and dislikes with {POKEBLOCK}S.\p"
-	.string "I find that quite fascinating.\n"
-	.string "Please do take care.$"
 
 MatchCall_PersonalizedText53::
 	.string "{STR_VAR_1} here.\p"

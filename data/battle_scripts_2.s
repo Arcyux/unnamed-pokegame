@@ -30,7 +30,6 @@ gBattlescriptsForUsingItem::
 gBattlescriptsForSafariActions::
 	.4byte BattleScript_ActionWatchesCarefully
 	.4byte BattleScript_ActionGetNear
-	.4byte BattleScript_ActionThrowPokeblock
 	.4byte BattleScript_ActionWallyThrow
 
 BattleScript_ItemEnd:
@@ -214,14 +213,6 @@ BattleScript_ActionWatchesCarefully:
 
 BattleScript_ActionGetNear:
 	printfromtable gSafariGetNearStringIds
-	waitmessage B_WAIT_TIME_LONG
-	end2
-
-BattleScript_ActionThrowPokeblock:
-	printstring STRINGID_THREWPOKEBLOCKATPKMN
-	waitmessage B_WAIT_TIME_LONG
-	playanimation BS_ATTACKER, B_ANIM_POKEBLOCK_THROW, NULL
-	printfromtable gSafariPokeblockResultStringIds
 	waitmessage B_WAIT_TIME_LONG
 	end2
 

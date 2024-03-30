@@ -872,9 +872,6 @@ gText_PokemonTrainerSchoolEmail::
 gText_PlayerHouseBootPC::
 	.string "{PLAYER} booted up the PC.$"
 
-gText_PokeblockLinkCanceled::
-	.string "The link was canceled.$"
-
 gText_UnusedNicknameReceivedPokemon::
 	.string "Want to give a nickname to\n"
 	.string "the {STR_VAR_2} you received?$"

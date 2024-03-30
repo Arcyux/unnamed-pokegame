@@ -275,7 +275,6 @@ const u8 gText_MatchCallPkmnBreeder_Lydia_Intro2[] = _("love to raise POKéMON."
 
 const u8 gText_MatchCallPkmnBreeder_Isaac_Strategy[] = _("Full-on attack!");
 const u8 gText_MatchCallPkmnBreeder_Isaac_Pokemon[] = _("Anything. I'll raise it.");
-const u8 gText_MatchCallPkmnBreeder_Isaac_Intro1[] = _("I give them {POKEBLOCK}S for");
 const u8 gText_MatchCallPkmnBreeder_Isaac_Intro2[] = _("going after CONTEST titles.");
 
 const u8 gText_MatchCallPkmnBreeder_Gabrielle_Strategy[] = _("I raise POKéMON with care.");
@@ -445,7 +444,6 @@ const u8 *const gMatchCallFlavorTexts[REMATCH_TABLE_ENTRIES][CHECK_PAGE_ENTRY_CO
     [REMATCH_CORY] = MCFLAVOR(Sailor_Cory),
     [REMATCH_EDWIN] = MCFLAVOR(Collector_Edwin),
     [REMATCH_LYDIA] = MCFLAVOR(PkmnBreeder_Lydia),
-    [REMATCH_ISAAC] = MCFLAVOR(PkmnBreeder_Isaac),
     [REMATCH_GABRIELLE] = MCFLAVOR(PkmnBreeder_Gabrielle),
     [REMATCH_CATHERINE] = MCFLAVOR(PkmnRanger_Catherine),
     [REMATCH_JACKSON] = MCFLAVOR(PkmnRanger_Jackson),

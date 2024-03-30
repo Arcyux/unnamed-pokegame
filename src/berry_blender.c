@@ -25,7 +25,6 @@
 #include "international_string_util.h"
 #include "random.h"
 #include "menu.h"
-#include "pokeblock.h"
 #include "trig.h"
 #include "item_menu.h"
 #include "battle_records.h"
@@ -134,9 +133,6 @@ struct BlenderGameBlock
 struct TvBlenderStruct
 {
     u8 name[11];
-    u8 pokeblockFlavor;
-    u8 pokeblockColor;
-    u8 pokeblockSheen;
 };
 
 struct BerryBlender
@@ -197,7 +193,6 @@ static void Task_HandleOpponent1(u8);
 static void Task_HandleOpponent2(u8);
 static void Task_HandleOpponent3(u8);
 static void Task_HandleBerryMaster(u8);
-static void Task_PlayPokeblockFanfare(u8);
 static void SpriteCB_PlayerArrow(struct Sprite *);
 static void SpriteCB_ScoreSymbol(struct Sprite *);
 static void SpriteCB_CountdownNumber(struct Sprite *);
@@ -232,16 +227,9 @@ static bool8 PrintBlendingResults(void);
 static void CB2_CheckPlayAgainLocal(void);
 static void CB2_CheckPlayAgainLink(void);
 static void UpdateProgressBar(u16, u16);
-static void PrintMadePokeblockString(struct Pokeblock *, u8 *);
-static bool32 TryAddContestLinkTvShow(struct Pokeblock *, struct TvBlenderStruct *);
 
 EWRAM_DATA static struct BerryBlender *sBerryBlender = NULL;
-EWRAM_DATA static s32 sDebug_PokeblockFactorFlavors[FLAVOR_COUNT] = {0};
-EWRAM_DATA static s32 sDebug_PokeblockFactorFlavorsAfterRPM[FLAVOR_COUNT] = {0};
-EWRAM_DATA static u32 sDebug_PokeblockFactorRPM = 0;
 
-static s16 sPokeblockFlavors[FLAVOR_COUNT + 1]; // + 1 for feel
-static s16 sPokeblockPresentFlavors[FLAVOR_COUNT + 1];
 static s16 sDebug_MaxRPMStage;
 static s16 sDebug_GameTimeStage;
 
@@ -286,9 +274,7 @@ static const u8 sText_PleaseWaitAWhile[] = _("Please wait a while.");
 static const u8 sText_CommunicationStandby[] = _("Communication standby…");
 static const u8 sText_WouldLikeToBlendAnotherBerry[] = _("Would you like to blend another BERRY?");
 static const u8 sText_RunOutOfBerriesForBlending[] = _("You've run out of BERRIES for\nblending in the BERRY BLENDER.\p");
-static const u8 sText_YourPokeblockCaseIsFull[] = _("Your {POKEBLOCK} CASE is full.\p");
 static const u8 sText_HasNoBerriesToPut[] = _(" has no BERRIES to put in\nthe BERRY BLENDER.");
-static const u8 sText_ApostropheSPokeblockCaseIsFull[] = _("'s {POKEBLOCK} CASE is full.\p");
 static const u8 sText_BlendingResults[] = _("RESULTS OF BLENDING");
 static const u8 sText_BerryUsed[] = _("BERRY USED");
 static const u8 sText_SpaceBerry[] = _(" BERRY");
@@ -900,20 +886,6 @@ static const u8 sBerryMasterBerries[] = {
 
 // "0 players" is link
 static const u8 sNumPlayersToSpeedDivisor[] = {1, 1, 2, 3, 4};
-
-// Black pokeblocks will use one of these random combinations of flavors
-static const u8 sBlackPokeblockFlavorFlags[] = {
-    (1 << FLAVOR_SOUR)   | (1 << FLAVOR_BITTER) | (1 << FLAVOR_SWEET),
-    (1 << FLAVOR_SOUR)   | (1 << FLAVOR_SWEET)  | (1 << FLAVOR_DRY),
-    (1 << FLAVOR_SOUR)   | (1 << FLAVOR_DRY)    | (1 << FLAVOR_SPICY),
-    (1 << FLAVOR_SOUR)   | (1 << FLAVOR_BITTER) | (1 << FLAVOR_DRY),
-    (1 << FLAVOR_SOUR)   | (1 << FLAVOR_BITTER) | (1 << FLAVOR_SPICY),
-    (1 << FLAVOR_BITTER) | (1 << FLAVOR_SWEET)  | (1 << FLAVOR_DRY),
-    (1 << FLAVOR_BITTER) | (1 << FLAVOR_SWEET)  | (1 << FLAVOR_SPICY),
-    (1 << FLAVOR_BITTER) | (1 << FLAVOR_DRY)    | (1 << FLAVOR_SPICY),
-    (1 << FLAVOR_SWEET)  | (1 << FLAVOR_DRY)    | (1 << FLAVOR_SPICY),
-    (1 << FLAVOR_SOUR)   | (1 << FLAVOR_SWEET)  | (1 << FLAVOR_SPICY),
-};
 
 static const u8 sUnused[] =
 {
@@ -2251,127 +2223,6 @@ static void Blender_DummiedOutFunc(s16 bgX, s16 bgY)
 
 }
 
-static bool8 AreBlenderBerriesSame(struct BlenderBerry* berries, u8 a, u8 b)
-{
-    // First check to itemId is pointless (and wrong anyway?), always false when this is called
-    // Only used to determine if two enigma berries are equivalent
-    if (berries[a].itemId != berries[b].itemId
-     || (StringCompare(berries[a].name, berries[b].name) == 0
-      && (berries[a].flavors[FLAVOR_SPICY] == berries[b].flavors[FLAVOR_SPICY]
-       && berries[a].flavors[FLAVOR_DRY] == berries[b].flavors[FLAVOR_DRY]
-       && berries[a].flavors[FLAVOR_SWEET] == berries[b].flavors[FLAVOR_SWEET]
-       && berries[a].flavors[FLAVOR_BITTER] == berries[b].flavors[FLAVOR_BITTER]
-       && berries[a].flavors[FLAVOR_SOUR] == berries[b].flavors[FLAVOR_SOUR]
-       && berries[a].flavors[FLAVOR_COUNT] == berries[b].flavors[FLAVOR_COUNT])))
-        return TRUE;
-    else
-        return FALSE;
-}
-
-static u32 CalculatePokeblockColor(struct BlenderBerry* berries, s16 *_flavors, u8 numPlayers, u8 negativeFlavors)
-{
-    s16 flavors[FLAVOR_COUNT + 1];
-    s32 i, j;
-    u8 numFlavors;
-
-    for (i = 0; i < FLAVOR_COUNT + 1; i++)
-        flavors[i] = _flavors[i];
-
-    j = 0;
-    for (i = 0; i < FLAVOR_COUNT; i++)
-    {
-        if (flavors[i] == 0)
-            j++;
-    }
-
-    // If all 5 flavors are 0, or if 4-5 flavors were negative,
-    // or if players used the same berry, color is black
-    if (j == FLAVOR_COUNT || negativeFlavors > 3)
-        return PBLOCK_CLR_BLACK;
-
-    for (i = 0; i < numPlayers; i++)
-    {
-        for (j = 0; j < numPlayers; j++)
-        {
-            if (berries[i].itemId == berries[j].itemId && i != j
-                && (berries[i].itemId != ITEM_ENIGMA_BERRY_E_READER || AreBlenderBerriesSame(berries, i, j)))
-                    return PBLOCK_CLR_BLACK;
-        }
-    }
-
-    numFlavors = 0;
-    for (numFlavors = 0, i = 0; i < FLAVOR_COUNT; i++)
-    {
-        if (flavors[i] > 0)
-            numFlavors++;
-    }
-
-    // Check for special colors (White/Gray/Gold)
-    if (numFlavors > 3)
-        return PBLOCK_CLR_WHITE;
-
-    if (numFlavors == 3)
-        return PBLOCK_CLR_GRAY;
-
-    for (i = 0; i < FLAVOR_COUNT; i++)
-    {
-        if (flavors[i] > 50)
-            return PBLOCK_CLR_GOLD;
-    }
-
-    // Only 1 flavor present, return corresponding color
-    if (numFlavors == 1 && flavors[FLAVOR_SPICY] > 0)
-        return PBLOCK_CLR_RED;
-    if (numFlavors == 1 && flavors[FLAVOR_DRY] > 0)
-        return PBLOCK_CLR_BLUE;
-    if (numFlavors == 1 && flavors[FLAVOR_SWEET] > 0)
-        return PBLOCK_CLR_PINK;
-    if (numFlavors == 1 && flavors[FLAVOR_BITTER] > 0)
-        return PBLOCK_CLR_GREEN;
-    if (numFlavors == 1 && flavors[FLAVOR_SOUR] > 0)
-        return PBLOCK_CLR_YELLOW;
-
-    if (numFlavors == 2)
-    {
-        // Determine which 2 flavors are present
-        s32 idx = 0;
-        for (i = 0; i < FLAVOR_COUNT; i++)
-        {
-            if (flavors[i] > 0)
-                sPokeblockPresentFlavors[idx++] = i;
-        }
-        // Use the stronger flavor to determine color
-        // The weaker flavor is returned in the upper 16 bits, but this is ignored in the color assignment
-        if (flavors[sPokeblockPresentFlavors[0]] >= flavors[sPokeblockPresentFlavors[1]])
-        {
-            if (sPokeblockPresentFlavors[0] == FLAVOR_SPICY)
-                return (sPokeblockPresentFlavors[1] << 16) | PBLOCK_CLR_PURPLE;
-            if (sPokeblockPresentFlavors[0] == FLAVOR_DRY)
-                return (sPokeblockPresentFlavors[1] << 16) | PBLOCK_CLR_INDIGO;
-            if (sPokeblockPresentFlavors[0] == FLAVOR_SWEET)
-                return (sPokeblockPresentFlavors[1] << 16) | PBLOCK_CLR_BROWN;
-            if (sPokeblockPresentFlavors[0] == FLAVOR_BITTER)
-                return (sPokeblockPresentFlavors[1] << 16) | PBLOCK_CLR_LITE_BLUE;
-            if (sPokeblockPresentFlavors[0] == FLAVOR_SOUR)
-                return (sPokeblockPresentFlavors[1] << 16) | PBLOCK_CLR_OLIVE;
-        }
-        else
-        {
-            if (sPokeblockPresentFlavors[1] == FLAVOR_SPICY)
-                return (sPokeblockPresentFlavors[0] << 16) | PBLOCK_CLR_PURPLE;
-            if (sPokeblockPresentFlavors[1] == FLAVOR_DRY)
-                return (sPokeblockPresentFlavors[0] << 16) | PBLOCK_CLR_INDIGO;
-            if (sPokeblockPresentFlavors[1] == FLAVOR_SWEET)
-                return (sPokeblockPresentFlavors[0] << 16) | PBLOCK_CLR_BROWN;
-            if (sPokeblockPresentFlavors[1] == FLAVOR_BITTER)
-                return (sPokeblockPresentFlavors[0] << 16) | PBLOCK_CLR_LITE_BLUE;
-            if (sPokeblockPresentFlavors[1] == FLAVOR_SOUR)
-                return (sPokeblockPresentFlavors[0] << 16) | PBLOCK_CLR_OLIVE;
-        }
-    }
-    return PBLOCK_CLR_NONE;
-}
-
 static void Debug_SetMaxRPMStage(s16 value)
 {
     sDebug_MaxRPMStage = value;
@@ -2390,118 +2241,6 @@ static void Debug_SetGameTimeStage(s16 value)
 static s16 UNUSED Debug_GetGameTimeStage(void)
 {
     return sDebug_GameTimeStage;
-}
-
-static void CalculatePokeblock(struct BlenderBerry *berries, struct Pokeblock *pokeblock, u8 numPlayers, u8 *flavors, u16 maxRPM)
-{
-    s32 i, j;
-    s32 multiuseVar;
-    u8 numNegatives;
-
-    for (i = 0; i < FLAVOR_COUNT + 1; i++)
-        sPokeblockFlavors[i] = 0;
-
-    // Add up the flavor + feel of each players berry
-    for (i = 0; i < numPlayers; i++)
-    {
-        for (j = 0; j < FLAVOR_COUNT + 1; j++)
-            sPokeblockFlavors[j] += berries[i].flavors[j];
-    }
-
-    // Subtract each flavor total from the prev one
-    // The idea is to focus on only the flavors with the highest totals
-    // Bad way to do it though (order matters here)
-    multiuseVar = sPokeblockFlavors[0];
-    sPokeblockFlavors[FLAVOR_SPICY]  -= sPokeblockFlavors[FLAVOR_DRY];
-    sPokeblockFlavors[FLAVOR_DRY]    -= sPokeblockFlavors[FLAVOR_SWEET];
-    sPokeblockFlavors[FLAVOR_SWEET]  -= sPokeblockFlavors[FLAVOR_BITTER];
-    sPokeblockFlavors[FLAVOR_BITTER] -= sPokeblockFlavors[FLAVOR_SOUR];
-    sPokeblockFlavors[FLAVOR_SOUR]   -= multiuseVar;
-
-    // Count (and reset) the resulting negative flavors
-    multiuseVar = 0;
-    for (i = 0; i < FLAVOR_COUNT; i++)
-    {
-        if (sPokeblockFlavors[i] < 0)
-        {
-            sPokeblockFlavors[i] = 0;
-            multiuseVar++;
-        }
-    }
-    numNegatives = multiuseVar;
-
-    // Subtract the number of negative flavor totals from each positive total (without going below 0)
-    for (i = 0; i < FLAVOR_COUNT; i++)
-    {
-        if (sPokeblockFlavors[i] > 0)
-        {
-            if (sPokeblockFlavors[i] < multiuseVar)
-                sPokeblockFlavors[i] = 0;
-            else
-                sPokeblockFlavors[i] -= multiuseVar;
-        }
-    }
-
-    for (i = 0; i < FLAVOR_COUNT; i++)
-        sDebug_PokeblockFactorFlavors[i] = sPokeblockFlavors[i];
-
-    // Factor in max RPM and round
-    sDebug_PokeblockFactorRPM = multiuseVar = maxRPM / 333 + 100;
-    for (i = 0; i < FLAVOR_COUNT; i++)
-    {
-        s32 remainder;
-        s32 flavor = sPokeblockFlavors[i];
-        flavor = (flavor * multiuseVar) / 10;
-        remainder = flavor % 10;
-        flavor /= 10;
-        if (remainder > 4)
-            flavor++;
-        sPokeblockFlavors[i] = flavor;
-    }
-
-    for (i = 0; i < FLAVOR_COUNT; i++)
-        sDebug_PokeblockFactorFlavorsAfterRPM[i] = sPokeblockFlavors[i];
-
-    // Calculate color and feel of pokeblock
-    pokeblock->color = CalculatePokeblockColor(berries, &sPokeblockFlavors[0], numPlayers, numNegatives);
-    sPokeblockFlavors[FLAVOR_COUNT] = (sPokeblockFlavors[FLAVOR_COUNT] / numPlayers) - numPlayers;
-
-    if (sPokeblockFlavors[FLAVOR_COUNT] < 0)
-        sPokeblockFlavors[FLAVOR_COUNT] = 0;
-
-    if (pokeblock->color == PBLOCK_CLR_BLACK)
-    {
-        // Black pokeblocks get their flavors randomly reassigned
-        multiuseVar = Random() % ARRAY_COUNT(sBlackPokeblockFlavorFlags);
-        for (i = 0; i < FLAVOR_COUNT; i++)
-        {
-            if ((sBlackPokeblockFlavorFlags[multiuseVar] >> i) & 1)
-                sPokeblockFlavors[i] = 2;
-            else
-                sPokeblockFlavors[i] = 0;
-        }
-    }
-
-    for (i = 0; i < FLAVOR_COUNT + 1; i++)
-    {
-        if (sPokeblockFlavors[i] > 255)
-            sPokeblockFlavors[i] = 255;
-    }
-
-    pokeblock->spicy  = sPokeblockFlavors[FLAVOR_SPICY];
-    pokeblock->dry    = sPokeblockFlavors[FLAVOR_DRY];
-    pokeblock->sweet  = sPokeblockFlavors[FLAVOR_SWEET];
-    pokeblock->bitter = sPokeblockFlavors[FLAVOR_BITTER];
-    pokeblock->sour   = sPokeblockFlavors[FLAVOR_SOUR];
-    pokeblock->feel   = sPokeblockFlavors[FLAVOR_COUNT];
-
-    for (i = 0; i < FLAVOR_COUNT + 1; i++)
-        flavors[i] = sPokeblockFlavors[i];
-}
-
-static void UNUSED Debug_CalculatePokeblock(struct BlenderBerry* berries, struct Pokeblock* pokeblock, u8 numPlayers, u8 *flavors, u16 maxRPM)
-{
-    CalculatePokeblock(berries, pokeblock, numPlayers, flavors, maxRPM);
 }
 
 static void Debug_SetStageVars(void)
@@ -2660,11 +2399,6 @@ static void CB2_EndBlenderGame(void)
     case 6:
         if (PrintBlendingResults())
         {
-            if (gInGameOpponentsNo == 0)
-                IncrementGameStat(GAME_STAT_POKEBLOCKS_WITH_FRIENDS);
-            else
-                IncrementGameStat(GAME_STAT_POKEBLOCKS);
-
             sBerryBlender->gameEndState++;
         }
         break;
@@ -2716,12 +2450,6 @@ static void CB2_EndBlenderGame(void)
                 // No berries
                 sBerryBlender->playAgainState = CANT_PLAY_NO_BERRIES;
                 gSendCmd[BLENDER_COMM_RESP] = LINKCMD_BLENDER_NO_BERRIES;
-            }
-            else if (GetFirstFreePokeblockSlot() == -1)
-            {
-                // No space for pokeblocks
-                sBerryBlender->playAgainState = CANT_PLAY_NO_PKBLCK_SPACE;
-                gSendCmd[BLENDER_COMM_RESP] = LINKCMD_BLENDER_NO_PBLOCK_SPACE;
             }
             else
             {
@@ -2855,7 +2583,6 @@ static void CB2_CheckPlayAgainLink(void)
     case 1:
         sBerryBlender->gameEndState = 3;
         StringCopy(gStringVar4, gLinkPlayers[sBerryBlender->canceledPlayerId].name);
-        StringAppend(gStringVar4, sText_ApostropheSPokeblockCaseIsFull);
         break;
     case 2:
         sBerryBlender->gameEndState++;
@@ -2962,7 +2689,6 @@ static void CB2_CheckPlayAgainLocal(void)
     case 1:
         sBerryBlender->gameEndState = 3;
         sBerryBlender->textState = 0;
-        StringCopy(gStringVar4, sText_YourPokeblockCaseIsFull);
         break;
     case 2:
         sBerryBlender->gameEndState++;
@@ -3465,8 +3191,6 @@ static bool8 PrintBlendingResults(void)
     u16 i;
     s32 xPos, yPos;
 
-    struct Pokeblock pokeblock;
-    u8 flavors[FLAVOR_COUNT + 1];
     u8 text[40];
     u16 UNUSED berryIds[4];
 
@@ -3572,14 +3296,8 @@ static bool8 PrintBlendingResults(void)
         }
 
         Debug_SetStageVars();
-        CalculatePokeblock(sBerryBlender->blendedBerries, &pokeblock, sBerryBlender->numPlayers, flavors, sBerryBlender->maxRPM);
-        PrintMadePokeblockString(&pokeblock, sBerryBlender->stringVar);
-        TryAddContestLinkTvShow(&pokeblock, &sBerryBlender->tvBlender);
-
-        CreateTask(Task_PlayPokeblockFanfare, 6);
 
         RemoveBagItem(gSpecialVar_ItemId, 1);
-        AddPokeblock(&pokeblock);
 
         sBerryBlender->textState = 0;
         sBerryBlender->mainState++;
@@ -3594,31 +3312,6 @@ static bool8 PrintBlendingResults(void)
     }
 
     return FALSE;
-}
-
-static void PrintMadePokeblockString(struct Pokeblock *pokeblock, u8 *dst)
-{
-    u8 text[12];
-    u8 flavorLvl, feel;
-
-    dst[0] = EOS;
-    StringCopy(dst, gPokeblockNames[pokeblock->color]);
-    StringAppend(dst, sText_WasMade);
-    StringAppend(dst, sText_NewLine);
-
-    flavorLvl = GetHighestPokeblocksFlavorLevel(pokeblock);
-    feel = GetPokeblocksFeel(pokeblock);
-
-    StringAppend(dst, sText_TheLevelIs);
-    ConvertIntToDecimalStringN(text, flavorLvl, STR_CONV_MODE_LEFT_ALIGN, 3);
-    StringAppend(dst, text);
-
-    StringAppend(dst, sText_TheFeelIs);
-    ConvertIntToDecimalStringN(text, feel, STR_CONV_MODE_LEFT_ALIGN, 3);
-    StringAppend(dst, text);
-
-    StringAppend(dst, sText_Dot2);
-    StringAppend(dst, sText_NewParagraph);
 }
 
 static void SortBasedOnPoints(u8 *places, u8 playersNum, u32 *scores)
@@ -3793,52 +3486,6 @@ void ShowBerryBlenderRecordWindow(void)
 
     PutWindowTilemap(gRecordsWindowId);
     CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
-}
-
-static void Task_PlayPokeblockFanfare(u8 taskId)
-{
-    if (gTasks[taskId].data[0] == 0)
-    {
-        PlayFanfare(MUS_LEVEL_UP);
-        gTasks[taskId].data[0]++;
-    }
-    if (IsFanfareTaskInactive())
-    {
-        PlayBGM(sBerryBlender->savedMusic);
-        DestroyTask(taskId);
-    }
-}
-
-static bool32 TryAddContestLinkTvShow(struct Pokeblock *pokeblock, struct TvBlenderStruct *tvBlender)
-{
-    u8 flavorLevel = GetHighestPokeblocksFlavorLevel(pokeblock);
-    u16 sheen = (flavorLevel * 10) / GetPokeblocksFeel(pokeblock);
-
-    tvBlender->pokeblockSheen = sheen;
-    tvBlender->pokeblockColor = pokeblock->color;
-    tvBlender->name[0] = EOS;
-
-    if (gReceivedRemoteLinkPlayers)
-    {
-        if (sBerryBlender->ownRanking == 0 && sheen > 20)
-        {
-            // Player came first, try to put on air
-            StringCopy(tvBlender->name, gLinkPlayers[sBerryBlender->playerPlaces[sBerryBlender->numPlayers - 1]].name);
-            tvBlender->pokeblockFlavor = GetPokeblocksFlavor(pokeblock);
-
-            return FALSE;
-        }
-        else if (sBerryBlender->ownRanking == sBerryBlender->numPlayers - 1 && sheen <= 20)
-        {
-            // Player came last, try to put on air
-            StringCopy(tvBlender->name, gLinkPlayers[sBerryBlender->playerPlaces[0]].name);
-            tvBlender->pokeblockFlavor = GetPokeblocksFlavor(pokeblock);
-
-            return FALSE;
-        }
-    }
-
-    return FALSE;
 }
 
 static void Blender_AddTextPrinter(u8 windowId, const u8 *string, u8 x, u8 y, s32 speed, s32 caseId)

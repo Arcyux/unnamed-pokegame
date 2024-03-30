@@ -65,7 +65,6 @@ SlateportCity_PokemonFanClub_EventScript_CountReceivedScarf::
 	return
 
 SlateportCity_PokemonFanClub_EventScript_NoHighConditions::
-	msgbox SlateportCity_PokemonFanClub_Text_GiveMonMorePokeblocks, MSGBOX_DEFAULT
 	release
 	end
 
@@ -299,14 +298,6 @@ SlateportCity_PokemonFanClub_Text_HowIsYourPokemonGrowing:
 SlateportCity_PokemonFanClub_Text_HmHmISee:
 	.string "Hm, hm…\n"
 	.string "I see…$"
-
-SlateportCity_PokemonFanClub_Text_GiveMonMorePokeblocks:
-	.string "Hmmm… It's not bad, but it's not\n"
-	.string "good, either…\p"
-	.string "You, the TRAINER, must put more\n"
-	.string "effort into raising this POKéMON!\p"
-	.string "For instance, may I suggest that\n"
-	.string "you give it more {POKEBLOCK}S?$"
 
 SlateportCity_PokemonFanClub_Text_NoSpaceForReward:
 	.string "Oh, my…\p"

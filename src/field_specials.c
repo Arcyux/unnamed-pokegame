@@ -29,7 +29,6 @@
 #include "menu.h"
 #include "overworld.h"
 #include "party_menu.h"
-#include "pokeblock.h"
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
 #include "random.h"
@@ -1275,11 +1274,6 @@ void RemoveCameraObject(void)
 {
     CameraObjectSetFollowedSpriteId(GetPlayerAvatarSpriteId());
     RemoveObjectEventByLocalIdAndMap(OBJ_EVENT_ID_CAMERA, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
-}
-
-u8 GetPokeblockNameByMonNature(void)
-{
-    return CopyMonFavoritePokeblockName(GetNature(&gPlayerParty[GetLeadMonIndex()]), gStringVar1);
 }
 
 void GetSecretBaseNearbyMapName(void)

@@ -3,7 +3,6 @@
 #include "overworld.h"
 #include "fldeff.h"
 #include "field_specials.h"
-#include "pokeblock.h"
 #include "event_data.h"
 #include "script.h"
 #include "random.h"
@@ -598,8 +597,6 @@ void QuizLadyClearQuestionForRecordMix(const LilycoveLady *lilycoveLady)
 static void ResetContestLadyContestData(void)
 {
     sContestLadyPtr->playerName[0] = EOS;
-    sContestLadyPtr->numGoodPokeblocksGiven = 0;
-    sContestLadyPtr->numOtherPokeblocksGiven = 0;
     sContestLadyPtr->maxSheen = 0;
     sContestLadyPtr->category = Random() % CONTEST_CATEGORIES_COUNT;
 }
@@ -608,7 +605,6 @@ static void InitLilycoveContestLady(void)
 {
     sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
     sContestLadyPtr->id = LILYCOVE_LADY_CONTEST;
-    sContestLadyPtr->givenPokeblock = FALSE;
     ResetContestLadyContestData();
     sContestLadyPtr->language = gGameLanguage;
 }
@@ -617,79 +613,6 @@ static void ResetContestLadyForRecordMix(void)
 {
     sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
     sContestLadyPtr->id = LILYCOVE_LADY_CONTEST;
-    sContestLadyPtr->givenPokeblock = FALSE;
-
-    if (sContestLadyPtr->numGoodPokeblocksGiven == LILYCOVE_LADY_GIFT_THRESHOLD
-     || sContestLadyPtr->numOtherPokeblocksGiven == LILYCOVE_LADY_GIFT_THRESHOLD)
-        ResetContestLadyContestData();
-}
-
-static void ContestLadySavePlayerNameIfHighSheen(u8 sheen)
-{
-    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
-    if (sContestLadyPtr->maxSheen <= sheen)
-    {
-        sContestLadyPtr->maxSheen = sheen;
-        memset(sContestLadyPtr->playerName, EOS, sizeof(sContestLadyPtr->playerName));
-        memcpy(sContestLadyPtr->playerName, gSaveBlock2Ptr->playerName, sizeof(sContestLadyPtr->playerName));
-        sContestLadyPtr->language = gGameLanguage;
-    }
-}
-
-bool8 GivePokeblockToContestLady(struct Pokeblock *pokeblock)
-{
-    u8 sheen = 0;
-    bool8 correctFlavor = FALSE;
-
-    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
-    switch (sContestLadyPtr->category)
-    {
-    case CONTEST_CATEGORY_COOL:
-        if (pokeblock->spicy != 0)
-        {
-            sheen = pokeblock->spicy;
-            correctFlavor = TRUE;
-        }
-        break;
-    case CONTEST_CATEGORY_BEAUTY:
-        if (pokeblock->dry != 0)
-        {
-            sheen = pokeblock->dry;
-            correctFlavor = TRUE;
-        }
-        break;
-    case CONTEST_CATEGORY_CUTE:
-        if (pokeblock->sweet != 0)
-        {
-            sheen = pokeblock->sweet;
-            correctFlavor = TRUE;
-        }
-        break;
-    case CONTEST_CATEGORY_SMART:
-        if (pokeblock->bitter != 0)
-        {
-            sheen = pokeblock->bitter;
-            correctFlavor = TRUE;
-        }
-        break;
-    case CONTEST_CATEGORY_TOUGH:
-        if (pokeblock->sour != 0)
-        {
-            sheen = pokeblock->sour;
-            correctFlavor = TRUE;
-        }
-        break;
-    }
-    if (correctFlavor == TRUE)
-    {
-        ContestLadySavePlayerNameIfHighSheen(sheen);
-        sContestLadyPtr->numGoodPokeblocksGiven++;
-    }
-    else
-    {
-        sContestLadyPtr->numOtherPokeblocksGiven++;
-    }
-    return correctFlavor;
 }
 
 static void BufferContestLadyCategoryAndMonName(u8 *category, u8 *nickname)
@@ -723,35 +646,11 @@ void BufferContestName(u8 *dest, u8 category)
     StringCopy(dest, sContestNames[category]);
 }
 
-// Used by the Contest Lady's TV show to determine how well she performed
-u8 GetContestLadyPokeblockState(void)
-{
-    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
-    if (sContestLadyPtr->numGoodPokeblocksGiven >= LILYCOVE_LADY_GIFT_THRESHOLD)
-        return CONTEST_LADY_GOOD;
-    else if (sContestLadyPtr->numGoodPokeblocksGiven == 0)
-        return CONTEST_LADY_BAD;
-    else
-        return CONTEST_LADY_NORMAL;
-}
-
-
-bool8 HasPlayerGivenContestLadyPokeblock(void)
-{
-    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
-    if (sContestLadyPtr->givenPokeblock == TRUE)
-        return TRUE;
-    return FALSE;
-}
-
 bool8 ShouldContestLadyShowGoOnAir(void)
 {
     bool8 putOnAir = FALSE;
 
     sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
-    if (sContestLadyPtr->numGoodPokeblocksGiven >= LILYCOVE_LADY_GIFT_THRESHOLD
-     || sContestLadyPtr->numOtherPokeblocksGiven >= LILYCOVE_LADY_GIFT_THRESHOLD)
-        putOnAir = TRUE;
 
     return putOnAir;
 }
@@ -759,17 +658,6 @@ bool8 ShouldContestLadyShowGoOnAir(void)
 void Script_BufferContestLadyCategoryAndMonName(void)
 {
     BufferContestLadyCategoryAndMonName(gStringVar2, gStringVar1);
-}
-
-void OpenPokeblockCaseForContestLady(void)
-{
-    OpenPokeblockCase(PBLOCK_CASE_GIVE, CB2_ReturnToField);
-}
-
-void SetContestLadyGivenPokeblock(void)
-{
-    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
-    sContestLadyPtr->givenPokeblock = TRUE;
 }
 
 void GetContestLadyMonSpecies(void)

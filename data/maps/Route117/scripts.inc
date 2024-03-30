@@ -77,7 +77,6 @@ Route117_EventScript_RegisterLydia::
 
 Route117_EventScript_RematchLydia::
 	trainerbattle_rematch TRAINER_LYDIA_1, Route117_Text_LydiaRematchIntro, Route117_Text_LydiaRematchDefeat
-	msgbox Route117_Text_LydiaPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_Dylan::

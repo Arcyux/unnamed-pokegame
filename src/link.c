@@ -1014,11 +1014,6 @@ static u32 UNUSED GetBerryBlenderKeySendAttempts(void)
     return gBerryBlenderKeySendAttempts;
 }
 
-static void UNUSED SendBerryBlenderNoSpaceForPokeblocks(void)
-{
-    BuildSendCmd(LINKCMD_BLENDER_NO_PBLOCK_SPACE);
-}
-
 u8 GetMultiplayerId(void)
 {
     if (gWirelessCommType == TRUE)

@@ -1048,12 +1048,6 @@ static const struct Story sStorytellerStories[] = {
         MauvilleCity_PokemonCenter_1F_Text_BattleTowerChallengesStory
     },
     {
-        GAME_STAT_POKEBLOCKS, 1,
-        MauvilleCity_PokemonCenter_1F_Text_MadePokeblocksTitle,
-        MauvilleCity_PokemonCenter_1F_Text_MadePokeblocksAction,
-        MauvilleCity_PokemonCenter_1F_Text_MadePokeblocksStory
-    },
-    {
         GAME_STAT_ENTERED_CONTEST, 1,
         MauvilleCity_PokemonCenter_1F_Text_EnteredContestsTitle,
         MauvilleCity_PokemonCenter_1F_Text_EnteredContestsAction,

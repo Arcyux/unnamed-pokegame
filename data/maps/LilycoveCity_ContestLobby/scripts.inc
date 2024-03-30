@@ -494,7 +494,6 @@ LilycoveCity_ContestLobby_EventScript_Fisherman::
 	end
 
 LilycoveCity_ContestLobby_EventScript_NinjaBoy::
-	msgbox LilycoveCity_ContestLobby_Text_MadePokeblocksWithFamily, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_ContestWinner1::
@@ -544,7 +543,6 @@ LilycoveCity_ContestLobby_EventScript_Blender3Boy::
 	end
 
 LilycoveCity_ContestLobby_EventScript_Blender3Girl::
-	msgbox BerryBlender_Text_WhatKindOfPokeblockWillIGet, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_BerryBlenderSpeedRecords::
@@ -591,7 +589,6 @@ LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker3::
 LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker4::
 	lock
 	faceplayer
-	msgbox BerryBlender_Text_MadeAmazingPokeblocksWithMaster, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_FaceOriginalDirection
 	end
 
@@ -971,25 +968,12 @@ LilycoveCity_ContestLobby_Movement_LinkReceptionistFacePlayer:
 LilycoveCity_ContestLobby_EventScript_LittleGirl::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_POKEBLOCK_CASE, LilycoveCity_ContestLobby_EventScript_LittleGirlHaveCase
-	msgbox LilycoveCity_ContestLobby_Text_LadyGaveMePokeblockCase, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_ContestLobby_EventScript_LittleGirlHaveCase::
-	msgbox LilycoveCity_ContestLobby_Text_MakePokeblocksDifferentBerries, MSGBOX_DEFAULT
 	release
 	end
-
-LilycoveCity_ContestLobby_Text_LadyGaveMePokeblockCase:
-	.string "Yippee!\p"
-	.string "The lady at the reception counter\n"
-	.string "gave me a case for {POKEBLOCK}S!$"
-
-LilycoveCity_ContestLobby_Text_MakePokeblocksDifferentBerries:
-	.string "Make {POKEBLOCK}S and put them in there.\p"
-	.string "When you make a {POKEBLOCK}, everyone\n"
-	.string "has to put in a different BERRY.$"
 
 LilycoveCity_ContestLobby_Text_YourPokemonSpurredMeToPaint:
 	.string "Congratulations!\p"
@@ -1076,10 +1060,4 @@ LilycoveCity_ContestLobby_Text_LavishedCareOnMon:
 	.string "on this POKéMON.\p"
 	.string "Its condition is peaking.\n"
 	.string "Today, victory is mine!$"
-
-LilycoveCity_ContestLobby_Text_MadePokeblocksWithFamily:
-	.string "I made {POKEBLOCK}S with Mom, Dad, and\n"
-	.string "Big Sister. They turned out great!\p"
-	.string "I bet you can make smoother, better\n"
-	.string "{POKEBLOCK}S if you have more people.$"
 

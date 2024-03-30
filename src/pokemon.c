@@ -24,7 +24,6 @@
 #include "m4a.h"
 #include "party_menu.h"
 #include "pokedex.h"
-#include "pokeblock.h"
 #include "pokemon.h"
 #include "pokemon_animation.h"
 #include "pokemon_icon.h"
@@ -5301,18 +5300,6 @@ bool8 IsMoveHM(u16 move)
 bool8 IsMonSpriteNotFlipped(u16 species)
 {
     return gSpeciesInfo[species].noFlip;
-}
-
-s8 GetMonFlavorRelation(struct Pokemon *mon, u8 flavor)
-{
-    u8 nature = GetNature(mon);
-    return gPokeblockFlavorCompatibilityTable[nature * FLAVOR_COUNT + flavor];
-}
-
-s8 GetFlavorRelationByPersonality(u32 personality, u8 flavor)
-{
-    u8 nature = GetNatureFromPersonality(personality);
-    return gPokeblockFlavorCompatibilityTable[nature * FLAVOR_COUNT + flavor];
 }
 
 bool8 IsTradedMon(struct Pokemon *mon)

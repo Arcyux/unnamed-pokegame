@@ -579,20 +579,6 @@ MauvilleCity_PokemonCenter_1F_Text_BattleTowerChallengesStory::
 	.string "{STR_VAR_3} is a TRAINER who aspires\n"
 	.string "for excellence in the BATTLE TOWER!$"
 
-MauvilleCity_PokemonCenter_1F_Text_MadePokeblocksTitle::
-	.string "The Blend-Loving TRAINER$"
-
-MauvilleCity_PokemonCenter_1F_Text_MadePokeblocksAction::
-	.string "Made {POKEBLOCK}S$"
-
-MauvilleCity_PokemonCenter_1F_Text_MadePokeblocksStory::
-	.string "This is a tale of a TRAINER\n"
-	.string "named {STR_VAR_3}.\p"
-	.string "This TRAINER made {POKEBLOCK}S\n"
-	.string "{STR_VAR_1} times!\p"
-	.string "There is none better at using a BERRY\n"
-	.string "BLENDER than {STR_VAR_3}!$"
-
 MauvilleCity_PokemonCenter_1F_Text_EnteredContestsTitle::
 	.string "The CONTEST-Loving TRAINER$"
 

@@ -11,7 +11,6 @@
 #include "match_call.h"
 #include "lilycove_lady.h"
 #include "load_save.h"
-#include "pokeblock.h"
 #include "dewford_trend.h"
 #include "berry.h"
 #include "rtc.h"
@@ -141,7 +140,6 @@ void ResetMenuAndMonGlobals(void)
     ZeroPlayerPartyMons();
     ZeroEnemyPartyMons();
     ResetBagScrollPositions();
-    ResetPokeblockScrollPositions();
 }
 
 void NewGameInitData(void)
@@ -181,7 +179,6 @@ void NewGameInitData(void)
     gSaveBlock1Ptr->registeredItem = ITEM_NONE;
     ClearBag();
     NewGameInitPCItems();
-    ClearPokeblocks();
     ClearDecorationInventories();
     InitEasyChatPhrases();
     SetMauvilleOldMan();

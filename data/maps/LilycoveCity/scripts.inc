@@ -49,7 +49,6 @@ LilycoveCity_EventScript_BerryGentleman::
 	end
 
 LilycoveCity_EventScript_ReceivedBerry::
-	msgbox LilycoveCity_Text_PokeblocksSuitPokemon, MSGBOX_DEFAULT
 	release
 	end
 
@@ -405,11 +404,9 @@ LilycoveCity_EventScript_SchoolKidM::
 	end
 
 LilycoveCity_EventScript_KnowAboutBerryBlender::
-	msgbox LilycoveCity_Text_FasterSpinBetterPokeblocks, MSGBOX_DEFAULT
 	return
 
 LilycoveCity_EventScript_DontKnowAboutBerryBlender::
-	msgbox LilycoveCity_Text_ExplainBerryBlender, MSGBOX_DEFAULT
 	return
 
 LilycoveCity_Text_MayShoppingLetsBattle:
@@ -721,18 +718,6 @@ LilycoveCity_Text_MoveDeletersHouseSign:
 LilycoveCity_Text_DoYouKnowAboutBerryBlender:
 	.string "Do you know about the machine\n"
 	.string "BERRY BLENDER?$"
-
-LilycoveCity_Text_FasterSpinBetterPokeblocks:
-	.string "People have to work together to get it\n"
-	.string "to spin faster.\p"
-	.string "The faster you can make it spin, the\n"
-	.string "better {POKEBLOCK}S you can get, I've heard.$"
-
-LilycoveCity_Text_ExplainBerryBlender:
-	.string "It's used for making a kind of candy\n"
-	.string "called a {POKEBLOCK}.\p"
-	.string "If you give a good {POKEBLOCK} to a POKéMON,\n"
-	.string "its condition will improve by a lot.$"
 
 LilycoveCity_Text_HeardTowerCalledSkyPillar:
 	.string "I heard there's a tower somewhere out\n"

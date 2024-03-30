@@ -8,7 +8,6 @@
 #include "event_data.h"
 #include "safari_zone.h"
 #include "overworld.h"
-#include "pokeblock.h"
 #include "battle_setup.h"
 #include "roamer.h"
 #include "link.h"
@@ -383,25 +382,6 @@ static u16 GetCurrentMapWildMonHeaderId(void)
 
 u8 PickWildMonNature(void)
 {
-    u8 i;
-    struct Pokeblock *safariPokeblock;
-    u8 natures[NUM_NATURES];
-
-    if (GetSafariZoneFlag() == TRUE && Random() % 100 < 80)
-    {
-        safariPokeblock = SafariZoneGetActivePokeblock();
-        if (safariPokeblock != NULL)
-        {
-            for (i = 0; i < NUM_NATURES; i++)
-                natures[i] = i;
-            Shuffle(natures, NUM_NATURES, sizeof(natures[0]));
-            for (i = 0; i < NUM_NATURES; i++)
-            {
-                if (PokeblockGetGain(natures[i], safariPokeblock) > 0)
-                    return natures[i];
-            }
-        }
-    }
     // check synchronize for a Pokémon with the same ability
     if (OW_SYNCHRONIZE_NATURE < GEN_9
         && !GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG)

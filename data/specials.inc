@@ -153,7 +153,6 @@ gSpecials::
 	def_special ChooseStarter
 	def_special StartWallyTutorialBattle
 	def_special ChoosePartyMon
-	def_special GetFirstFreePokeblockSlot
 	def_special DoBerryBlending
 	def_special PlayRoulette
 	def_special IsFanClubMemberFanOfPlayer
@@ -191,8 +190,6 @@ gSpecials::
 	def_special ResetSSTidalFlag
 	def_special EnterSafariMode
 	def_special ExitSafariMode
-	def_special GetPokeblockFeederInFront
-	def_special OpenPokeblockCaseOnFeeder
 	def_special IsMirageIslandPresent
 	def_special UpdateShoalTideFlag
 	def_special InitBirchState
@@ -261,7 +258,6 @@ gSpecials::
 	def_special ShowGlassWorkshopMenu
 	def_special SpawnCameraObject
 	def_special RemoveCameraObject
-	def_special GetPokeblockNameByMonNature
 	def_special GetSecretBaseNearbyMapName
 	def_special CheckRelicanthWailord
 	def_special ShouldDoBrailleRegirockEffectOld
@@ -373,10 +369,7 @@ gSpecials::
 	def_special BufferQuizPrizeName
 	def_special QuizLadyPickNewQuestion
 	def_special ShouldContestLadyShowGoOnAir
-	def_special HasPlayerGivenContestLadyPokeblock
 	def_special Script_BufferContestLadyCategoryAndMonName
-	def_special OpenPokeblockCaseForContestLady
-	def_special SetContestLadyGivenPokeblock
 	def_special GetContestLadyMonSpecies
 	def_special GetContestLadyCategory
 	def_special CloseBattlePikeCurtain
