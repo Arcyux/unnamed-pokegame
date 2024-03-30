@@ -230,13 +230,6 @@ struct PyramidBag
 #endif
 };
 
-struct BerryCrush
-{
-    u16 pressingSpeeds[4]; // For the record with each possible group size, 2-5 players
-    u32 berryPowderAmount;
-    u32 unk;
-};
-
 struct ApprenticeMon
 {
     u16 species;
@@ -517,7 +510,6 @@ struct SaveBlock2
     /*0xAC*/ u32 encryptionKey;
     /*0xB0*/ struct PlayersApprentice playerApprentice;
     /*0xDC*/ struct Apprentice apprentices[APPRENTICE_COUNT];
-    /*0x1EC*/ struct BerryCrush berryCrush;
 #if FREE_POKEMON_JUMP == FALSE
     /*0x1FC*/ struct PokemonJumpRecords pokeJump;
 #endif //FREE_POKEMON_JUMP
@@ -967,7 +959,6 @@ struct SaveBlock1
 #if FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK1 == FALSE
     /*0x988*/ u8 filler1[0x34]; // Previously Dex Flags, feel free to remove.
 #endif //FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK1
-    /*0x9BC*/ u16 berryBlenderRecords[3];
     /*0x9C2*/ u8 unused_9C2[6];
 #if FREE_MATCH_CALL == FALSE
     /*0x9C8*/ u16 trainerRematchStepCounter;

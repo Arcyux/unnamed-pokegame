@@ -45,7 +45,7 @@ gSpecials::
 	def_special PlayerEnteredTradeSeat
 	def_special Script_StartWiredTrade
 	def_special CableClubSaveGame
-	def_special TryBerryBlenderLinkup
+	def_special 0
 	def_special GetLinkPartnerNames
 	def_special SpawnLinkPartnerObjectEvent
 	def_special SavePlayerParty
@@ -153,7 +153,7 @@ gSpecials::
 	def_special ChooseStarter
 	def_special StartWallyTutorialBattle
 	def_special ChoosePartyMon
-	def_special DoBerryBlending
+	def_special 0
 	def_special PlayRoulette
 	def_special IsFanClubMemberFanOfPlayer
 	def_special GetNumFansOfPlayerInTrainerFanClub
@@ -240,7 +240,7 @@ gSpecials::
 	def_special GetWeekCount
 	def_special RetrieveLotteryNumber
 	def_special PickLotteryCornerTicket
-	def_special ShowBerryBlenderRecordWindow
+	def_special 0
 	def_special ResetTrickHouseNuggetFlag
 	def_special SetTrickHouseNuggetFlag
 	def_special ScriptMenu_CreatePCMultichoice
@@ -429,11 +429,11 @@ gSpecials::
 	def_special GetFrontierBattlePoints
 	def_special ShowFrontierExchangeCornerItemIconWindow
 	def_special CloseFrontierExchangeCornerItemIconWindow
-	def_special DisplayBerryPowderVendorMenu
-	def_special RemoveBerryPowderVendorMenu
-	def_special HasEnoughBerryPowder
-	def_special TakeBerryPowder
-	def_special PrintPlayerBerryPowderAmount
+	def_special 0
+	def_special 0
+	def_special 0
+	def_special 0
+	def_special 0
 	def_special ShowFrontierGamblerLookingMessage
 	def_special ShowFrontierGamblerGoMessage
 	def_special Script_DoRayquazaScene
@@ -474,7 +474,7 @@ gSpecials::
 	def_special Script_DoRayquazaScene @ Listed twice
 	def_special LoopWingFlapSE
 	def_special DestroyMewEmergingGrassSprite
-	def_special ShowBerryCrushRankings
+	def_special 0
 	def_special TryBufferWaldaPhrase
 	def_special DoWaldaNamingScreen
 	def_special TryGetWallpaperWithWaldaPhrase

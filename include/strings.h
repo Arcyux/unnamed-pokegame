@@ -1205,7 +1205,6 @@ extern const u8 gText_RecordCorner[];
 extern const u8 gText_SingleBattle[];
 extern const u8 gText_DoubleBattle[];
 extern const u8 gText_MultiBattle[];
-extern const u8 gText_BerryCrush3[];
 extern const u8 gText_PokemonJump[];
 extern const u8 gText_DodrioBerryPicking[];
 extern const u8 gText_JoinGroup[];
@@ -1291,7 +1290,6 @@ extern const u8 CableClub_Text_CancelSelectedItem[];
 extern const u8 CableClub_Text_YouMayTradeHere[];
 extern const u8 CableClub_Text_YouMayBattleHere[];
 extern const u8 CableClub_Text_CanMixRecords[];
-extern const u8 CableClub_Text_CanMakeBerryPowder[];
 
 // Rotom Catalog text
 extern const u8 gText_LightBulb[];
@@ -2528,7 +2526,6 @@ extern const u8 gText_Var1sTrainerCard[];
 extern const u8 gText_HallOfFameDebut[];
 extern const u8 gText_WinsLosses[];
 extern const u8 gText_PokemonTrades[];
-extern const u8 gText_BerryCrush[];
 extern const u8 gText_UnionTradesAndBattles[];
 extern const u8 gText_WonContestsWFriends[];
 extern const u8 gText_WinsStraight[];
@@ -2731,9 +2728,6 @@ extern const u8 gJPText_NewTrainerHasComeToHoenn[];
 extern const u8 gJPText_PleaseWaitAMoment[];
 extern const u8 gJPText_WriteErrorUnableToSaveData[];
 
-// Berry Powder Menu
-extern const u8 gText_Powder[];
-
 // Union Room Chat
 extern const u8 gText_F700JoinedChat[];
 extern const u8 gText_F700LeftChat[];
@@ -2874,42 +2868,6 @@ extern const u8 gText_JumpsInARow[];
 extern const u8 gText_BestScore2[];
 extern const u8 gText_ExcellentsInARow[];
 
-// Berry crush
-extern const u8 gText_Var1Berry[];
-extern const u8 gText_XDotY[];
-extern const u8 gText_1DotBlueF700[];
-extern const u8 gText_1DotF700[];
-extern const u8 gText_TimeColon[];
-extern const u8 gText_SpaceSec[];
-extern const u8 gText_XDotY2[];
-extern const u8 gText_SpaceMin[];
-extern const u8 gText_StrVar1[];
-extern const u8 gText_PressingSpeed[];
-extern const u8 gText_TimesPerSec[];
-extern const u8 gText_XDotY3[];
-extern const u8 gText_Silkiness[];
-extern const u8 gText_Var1Percent[];
-extern const u8 gText_PressesRankings[];
-extern const u8 gText_CrushingResults[];
-extern const u8 gText_BerryCrush2[];
-extern const u8 gText_PressingSpeedRankings[];
-extern const u8 gText_Var1Players[];
-extern const u8 gText_ReadyPickBerry[];
-extern const u8 gText_WaitForAllChooseBerry[];
-extern const u8 gText_EndedWithXUnitsPowder[];
-extern const u8 gText_RecordingGameResults[];
-extern const u8 gText_PlayBerryCrushAgain[];
-extern const u8 gText_YouHaveNoBerries[];
-extern const u8 gText_MemberDroppedOut[];
-extern const u8 gText_TimesUpNoGoodPowder[];
-extern const u8 gText_CommunicationStandby2[];
-extern const u8 gText_SpaceTimes2[];
-extern const u8 gText_XDotY[];
-extern const u8 gText_Var1Berry[];
-extern const u8 gText_NeatnessRankings[];
-extern const u8 gText_CoopRankings[];
-extern const u8 gText_PressingPowerRankings[];
-
 // Lilycove Lady
 extern const u8 gText_ContestLady_Handsome[];
 extern const u8 gText_ContestLady_Vinny[];
@@ -2971,11 +2929,6 @@ extern const u8 gText_Toughness[];
 extern const u8 gText_Smartness[];
 extern const u8 gText_Cuteness[];
 extern const u8 gText_Beauty3[];
-
-// Berry Blender
-extern const u8 gText_SavingDontTurnOff2[];
-extern const u8 gText_BlenderMaxSpeedRecord[];
-extern const u8 gText_234Players[];
 
 // Battle Factory Screen
 extern const u8 gText_RentalPkmn2[];

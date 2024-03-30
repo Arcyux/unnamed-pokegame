@@ -397,17 +397,8 @@ LilycoveCity_EventScript_RivalFlyAway::
 LilycoveCity_EventScript_SchoolKidM::
 	lock
 	faceplayer
-	msgbox LilycoveCity_Text_DoYouKnowAboutBerryBlender, MSGBOX_YESNO
-	call_if_eq VAR_RESULT, YES, LilycoveCity_EventScript_KnowAboutBerryBlender
-	call_if_eq VAR_RESULT, NO, LilycoveCity_EventScript_DontKnowAboutBerryBlender
 	release
 	end
-
-LilycoveCity_EventScript_KnowAboutBerryBlender::
-	return
-
-LilycoveCity_EventScript_DontKnowAboutBerryBlender::
-	return
 
 LilycoveCity_Text_MayShoppingLetsBattle:
 	.string "MAY: Oh, hey?\n"
@@ -714,10 +705,6 @@ LilycoveCity_Text_DepartmentStoreSign:
 LilycoveCity_Text_MoveDeletersHouseSign:
 	.string "MOVE DELETER'S HOUSE\p"
 	.string "“Unwanted POKéMON moves deleted.”$"
-
-LilycoveCity_Text_DoYouKnowAboutBerryBlender:
-	.string "Do you know about the machine\n"
-	.string "BERRY BLENDER?$"
 
 LilycoveCity_Text_HeardTowerCalledSkyPillar:
 	.string "I heard there's a tower somewhere out\n"

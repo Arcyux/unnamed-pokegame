@@ -4717,7 +4717,7 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(SE_TRUCK_STOP) \
     X(SE_TRUCK_UNLOAD) \
     X(SE_TRUCK_DOOR) \
-    X(SE_BERRY_BLENDER) \
+    X(SE_UNUSED_53) \
     X(SE_CARD) \
     X(SE_SAVE) \
     X(SE_BALL_BOUNCE_1) \

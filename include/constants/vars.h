@@ -249,7 +249,7 @@
 #define VAR_UNUSED_0x40E5                                0x40E5 // Unused Var
 #define VAR_DAILY_SLOTS                                  0x40E6
 #define VAR_DAILY_WILDS                                  0x40E7
-#define VAR_DAILY_BLENDER                                0x40E8
+#define VAR_UNUSED_0x40E8                                0x40E8
 #define VAR_DAILY_PLANTED_BERRIES                        0x40E9
 #define VAR_DAILY_PICKED_BERRIES                         0x40EA
 #define VAR_DAILY_ROULETTE                               0x40EB

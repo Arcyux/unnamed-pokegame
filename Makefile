@@ -316,10 +316,6 @@ tidycheck:
 	rm -f $(TESTELF) $(HEADLESSELF)
 	rm -rf $(TEST_OBJ_DIR_NAME)
 
-ifneq ($(MODERN),0)
-$(C_BUILDDIR)/berry_crush.o: override CFLAGS += -Wno-address-of-packed-member
-endif
-
 include graphics_file_rules.mk
 include map_data_rules.mk
 include spritesheet_rules.mk

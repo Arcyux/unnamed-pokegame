@@ -1,4 +1,3 @@
-@ Note: data/scripts/berry_blender.inc is for the same map, so shares local IDs
 .set LOCALID_RECEPTIONIST, 1
 .set LOCALID_LINK_RECEPTIONIST, 2
 .set LOCALID_ARTIST, 4
@@ -9,23 +8,10 @@ LilycoveCity_ContestLobby_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, LilycoveCity_ContestLobby_OnFrame
 	.byte 0
 
-@ Some scripts for this room are split into data/scripts/contest_hall and data/scripts/berry_blender
 
 LilycoveCity_ContestLobby_OnTransition:
 	call LilycoveCity_ContestLobby_EventScript_TryShowContestReporter
-	call LilycoveCity_ContestLobby_EventScript_TryShowBlendMaster
 	end
-
-LilycoveCity_ContestLobby_EventScript_TryShowBlendMaster::
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_ContestLobby_EventScript_ShowBlendMaster
-	clearflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_REPLACEMENT
-	setflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER
-	return
-
-LilycoveCity_ContestLobby_EventScript_ShowBlendMaster::
-	setflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_REPLACEMENT
-	clearflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER
-	return
 
 LilycoveCity_ContestLobby_OnFrame:
 	map_script_2 VAR_LILYCOVE_CONTEST_LOBBY_STATE, 1, LilycoveCity_ContestLobby_EventScript_TryDoContestArtist
@@ -538,72 +524,12 @@ LilycoveCity_ContestLobby_EventScript_ContestWinner6::
 	releaseall
 	end
 
-LilycoveCity_ContestLobby_EventScript_Blender3Boy::
-	msgbox BerryBlender_Text_LetsGetBlendingAlready, MSGBOX_NPC
-	end
-
-LilycoveCity_ContestLobby_EventScript_Blender3Girl::
-	end
-
-LilycoveCity_ContestLobby_EventScript_BerryBlenderSpeedRecords::
-	lockall
-	special ShowBerryBlenderRecordWindow
-	waitbuttonpress
-	special RemoveRecordsWindow
-	releaseall
-	end
-
 LilycoveCity_ContestLobby_EventScript_LinkContestResults::
 	lockall
 	frontier_results FACILITY_LINK_CONTEST
 	waitbuttonpress
 	special RemoveRecordsWindow
 	releaseall
-	end
-
-LilycoveCity_ContestLobby_EventScript_BlendMaster::
-	lock
-	faceplayer
-	msgbox BerryBlender_Text_BlendWithTheBlendMaster, MSGBOX_DEFAULT
-	goto LilycoveCity_ContestLobby_EventScript_FaceOriginalDirection
-	end
-
-LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker1::
-	lock
-	msgbox BerryBlender_Text_WhoaAwesome, MSGBOX_DEFAULT
-	release
-	end
-
-LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker2::
-	lock
-	msgbox BerryBlender_Text_WickedlyFast, MSGBOX_DEFAULT
-	release
-	end
-
-LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker3::
-	lock
-	msgbox BerryBlender_Text_WhatAnExpert, MSGBOX_DEFAULT
-	release
-	end
-
-LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker4::
-	lock
-	faceplayer
-	goto LilycoveCity_ContestLobby_EventScript_FaceOriginalDirection
-	end
-
-LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker5::
-	lock
-	faceplayer
-	msgbox BerryBlender_Text_QualitiesOfBlendMaster, MSGBOX_DEFAULT
-	goto LilycoveCity_ContestLobby_EventScript_FaceOriginalDirection
-	end
-
-LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker6::
-	lock
-	faceplayer
-	msgbox BerryBlender_Text_MasterWorksOnSkillsInMountains, MSGBOX_DEFAULT
-	goto LilycoveCity_ContestLobby_EventScript_FaceOriginalDirection
 	end
 
 LilycoveCity_ContestLobby_EventScript_FaceOriginalDirection::

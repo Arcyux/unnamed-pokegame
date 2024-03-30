@@ -954,9 +954,6 @@ $(MID_SUBDIR)/se_effective.s: %.s: %.mid
 $(MID_SUBDIR)/se_puddle.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V020 -P4
 
-$(MID_SUBDIR)/se_berry_blender.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V090 -P4
-
 $(MID_SUBDIR)/se_switch.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V100 -P4
 

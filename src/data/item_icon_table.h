@@ -752,7 +752,6 @@ const u32 *const gItemIconTable[ITEMS_COUNT + 1][2] =
     [ITEM_BERRY_POUCH] = {gItemIcon_BerryPouch, gItemIconPalette_BerryPouch},
     [ITEM_POKEMON_BOX_LINK] = {gItemIcon_PokemonBoxLink, gItemIconPalette_PokemonBoxLink},
     [ITEM_COIN_CASE] = {gItemIcon_CoinCase, gItemIconPalette_CoinCase},
-    [ITEM_POWDER_JAR] = {gItemIcon_PowderJar, gItemIconPalette_PowderJar},
     [ITEM_WAILMER_PAIL] = {gItemIcon_WailmerPail, gItemIconPalette_WailmerPail},
     [ITEM_POKE_RADAR] = {gItemIcon_PokeRadar, gItemIconPalette_PokeRadar},
     [ITEM_SOOT_SACK] = {gItemIcon_SootSack, gItemIconPalette_SootSack},

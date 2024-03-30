@@ -95,8 +95,6 @@ SECTIONS {
         src/mystery_gift_link.o(.text);
         src/wonder_news.o(.text);
         src/union_room_chat.o(.text);
-        src/berry_crush.o(.text);
-        src/berry_powder.o(.text);
         src/dodrio_berry_picking.o(.text);
         src/pokemon_jump.o(.text);
         src/minigame_countdown.o(.text);
@@ -128,7 +126,6 @@ SECTIONS {
         src/pokeball.o(.text);
         src/load_save.o(.text);
         src/trade.o(.text);
-        src/berry_blender.o(.text);
         src/play_time.o(.text);
         src/new_game.o(.text);
         src/overworld.o(.text);
@@ -482,8 +479,6 @@ SECTIONS {
         src/mystery_gift_scripts.o(.rodata);
         src/wonder_news.o(.rodata);
         src/union_room_chat.o(.rodata);
-        src/berry_crush.o(.rodata);
-        src/berry_powder.o(.rodata);
         src/dodrio_berry_picking.o(.rodata);
         src/pokemon_jump.o(.rodata);
         src/minigame_countdown.o(.rodata);
@@ -512,7 +507,6 @@ SECTIONS {
         src/battle_interface.o(.rodata);
         src/pokeball.o(.rodata);
         src/trade.o(.rodata);
-        src/berry_blender.o(.rodata);
         src/new_game.o(.rodata);
         src/overworld.o(.rodata);
         src/tilesets.o(.rodata);
@@ -774,7 +768,6 @@ SECTIONS {
         sound/songs/midi/se_truck_stop.o(.rodata);
         sound/songs/midi/se_truck_unload.o(.rodata);
         sound/songs/midi/se_truck_door.o(.rodata);
-        sound/songs/midi/se_berry_blender.o(.rodata);
         sound/songs/midi/se_card.o(.rodata);
         sound/songs/midi/se_save.o(.rodata);
         sound/songs/midi/se_ball_bounce_1.o(.rodata);

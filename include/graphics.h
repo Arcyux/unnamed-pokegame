@@ -1510,8 +1510,6 @@ extern const u32 gItemIcon_PokemonBoxLink[];
 extern const u32 gItemIconPalette_PokemonBoxLink[];
 extern const u32 gItemIcon_CoinCase[];
 extern const u32 gItemIconPalette_CoinCase[];
-extern const u32 gItemIcon_PowderJar[];
-extern const u32 gItemIconPalette_PowderJar[];
 extern const u32 gItemIcon_WailmerPail[];
 extern const u32 gItemIconPalette_WailmerPail[];
 extern const u32 gItemIcon_PokeRadar[];
@@ -3039,18 +3037,6 @@ extern const u32 gEnemyMonShadow_Gfx[];
 
 extern const u32 gBattleAnimFogTilemap[];
 
-// Berry blender
-extern const u32 gBerryBlenderPlayerArrow_Gfx[];
-extern const u32 gBerryBlenderStart_Gfx[];
-extern const u32 gBerryBlenderScoreSymbols_Gfx[];
-extern const u32 gBerryBlenderParticles_Gfx[];
-extern const u32 gBerryBlenderCountdownNumbers_Gfx[];
-extern const u16 gBerryBlenderMiscPalette[];
-extern const u16 gBerryBlenderArrowPalette[];
-extern const u32 gBerryBlenderCenter_Gfx[];
-extern const u32 gBerryBlenderOuter_Gfx[];
-extern const u32 gBerryBlenderOuter_Tilemap[];
-
 // Slot Machine
 extern const u32 gSlotMachineDigitalDisplay_Gfx[];
 extern const u8 gSlotMachineReelTimeNumber0[];
@@ -3226,11 +3212,6 @@ extern const u32 gUnionRoomChat_RButtonLabels[];
 
 extern const u8 gPokenavConditionCancel_Gfx[];
 extern const u16 gPokenavConditionCancel_Pal[];
-
-// Berry Crush
-extern const u32 gBerryCrush_Crusher_Gfx[];
-extern const u16 gBerryCrush_Crusher_Pal[];
-extern const u32 gBerryCrush_TextWindows_Tilemap[];
 
 // PokéNav
 extern const u32 gPokenavMessageBox_Gfx[];

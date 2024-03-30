@@ -700,13 +700,6 @@ static void Task_ValidateMixingGameLanguage(u8 taskId)
     }
 }
 
-void TryBerryBlenderLinkup(void)
-{
-    gLinkType = LINKTYPE_BERRY_BLENDER_SETUP;
-    gBattleTypeFlags = 0;
-    CreateLinkupTask(2, 4);
-}
-
 void TryContestGModeLinkup(void)
 {
     gLinkType = LINKTYPE_CONTEST_GMODE;
