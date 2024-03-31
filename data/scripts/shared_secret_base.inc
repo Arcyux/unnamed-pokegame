@@ -23,28 +23,11 @@ SecretBase_OnResume:
 	setstepcallback STEP_CB_SECRET_BASE
 	end
 
-SecretBase_EventScript_PC::
-	lockall
-	playse SE_PC_LOGIN
-	message SecretBase_Text_BootUpPC
-	dofieldeffect FLDEFF_PCTURN_ON
-	waitstate
-	waitmessage
-	waitbuttonpress
-	playse SE_SELECT
-	goto SecretBase_EventScript_PCShowMainMenu
-	end
-
 SecretBase_EventScript_PCShowMainMenu::
 	message SecretBase_Text_WhatWouldYouLikeToDo
 	waitmessage
 	goto_if_set FLAG_SECRET_BASE_REGISTRY_ENABLED, SecretBase_EventScript_PCMainMenuWithRegister
 	goto SecretBase_EventScript_PCMainMenuWithoutRegister
-	end
-
-SecretBase_EventScript_PCCancel::
-	lockall
-	goto SecretBase_EventScript_PCShowMainMenu
 	end
 
 SecretBase_EventScript_PCMainMenuWithRegister::
@@ -82,18 +65,6 @@ SecretBase_EventScript_PCRegistryMenu::
 	special ShowSecretBaseRegistryMenu
 	end
 
-SecretBase_EventScript_RecordMixingPC::
-	lockall
-	message SecretBase_Text_BootUpPC
-	playse SE_PC_LOGIN
-	dofieldeffect FLDEFF_PCTURN_ON
-	waitstate
-	waitmessage
-	waitbuttonpress
-	playse SE_SELECT
-	goto SecretBase_EventScript_PCRegisterMenu
-	end
-
 SecretBase_EventScript_PCRegisterMenu::
 	message SecretBase_Text_WhatWouldYouLikeToDo
 	waitmessage
@@ -104,11 +75,6 @@ SecretBase_EventScript_PCRegisterMenu::
 	case 2, SecretBase_EventScript_PCRegistryInfo
 	case 3, SecretBase_EventScript_PCTurnOff
 	case MULTI_B_PRESSED, SecretBase_EventScript_PCTurnOff
-	end
-
-SecretBase_EventScript_ShowRegisterMenu::
-	lockall
-	goto SecretBase_EventScript_PCRegisterMenu
 	end
 
 SecretBase_EventScript_PCRegister::
@@ -171,20 +137,6 @@ SecretBase_EventScript_FurnitureTop::
 	special CheckInteractedWithFriendsFurnitureTop
 	end
 
-SecretBase_EventScript_SandOrnament::
-	special CheckInteractedWithFriendsSandOrnament
-	dofieldeffect FLDEFF_SAND_PILLAR
-	waitstate
-	end
-
-SecretBase_EventScript_ShieldOrToyTV::
-	special InteractWithShieldOrTVDecoration
-	goto_if_eq VAR_RESULT, 0, SecretBase_EventScript_BattleTowerShield
-	goto_if_eq VAR_RESULT, 1, SecretBase_EventScript_ToyTV
-	goto_if_eq VAR_RESULT, 2, SecretBase_EventScript_SeedotTV
-	goto_if_eq VAR_RESULT, 3, SecretBase_EventScript_SkittyTV
-	end
-
 SecretBase_EventScript_BattleTowerShield::
 	msgbox SecretBase_Text_BattleTowerShield, MSGBOX_SIGN
 	end
@@ -200,16 +152,6 @@ SecretBase_EventScript_SeedotTV::
 SecretBase_EventScript_SkittyTV::
 	msgbox SecretBase_Text_SkittyTV, MSGBOX_SIGN
 	end
-
-SecretBase_Text_SmallIndentInWall::
-	.string "There's a small indent in the wall.$"
-
-SecretBase_Text_IndentUseSecretPower::
-	.string "There's a small indent in the wall.\p"
-	.string "Use the SECRET POWER?$"
-
-SecretBase_Text_DiscoveredSmallCavern::
-	.string "Discovered a small cavern!$"
 
 SecretBase_Text_WantToMakeYourSecretBaseHere:
 	.string "Want to make your SECRET BASE here?$"

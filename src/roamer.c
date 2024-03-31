@@ -34,26 +34,6 @@ EWRAM_DATA static u8 sRoamerLocation[2] = {0};
 //         from that map when it lands there.
 static const u8 sRoamerLocations[][6] =
 {
-    { MAP_NUM(ROUTE110), MAP_NUM(ROUTE111), MAP_NUM(ROUTE117), MAP_NUM(ROUTE118), MAP_NUM(ROUTE134), ___ },
-    { MAP_NUM(ROUTE111), MAP_NUM(ROUTE110), MAP_NUM(ROUTE117), MAP_NUM(ROUTE118), ___, ___ },
-    { MAP_NUM(ROUTE117), MAP_NUM(ROUTE111), MAP_NUM(ROUTE110), MAP_NUM(ROUTE118), ___, ___ },
-    { MAP_NUM(ROUTE118), MAP_NUM(ROUTE117), MAP_NUM(ROUTE110), MAP_NUM(ROUTE111), MAP_NUM(ROUTE119), MAP_NUM(ROUTE123) },
-    { MAP_NUM(ROUTE119), MAP_NUM(ROUTE118), MAP_NUM(ROUTE120), ___, ___, ___ },
-    { MAP_NUM(ROUTE120), MAP_NUM(ROUTE119), MAP_NUM(ROUTE121), ___, ___, ___ },
-    { MAP_NUM(ROUTE121), MAP_NUM(ROUTE120), MAP_NUM(ROUTE122), MAP_NUM(ROUTE123), ___, ___ },
-    { MAP_NUM(ROUTE122), MAP_NUM(ROUTE121), MAP_NUM(ROUTE123), ___, ___, ___ },
-    { MAP_NUM(ROUTE123), MAP_NUM(ROUTE122), MAP_NUM(ROUTE118), ___, ___, ___ },
-    { MAP_NUM(ROUTE124), MAP_NUM(ROUTE121), MAP_NUM(ROUTE125), MAP_NUM(ROUTE126), ___, ___ },
-    { MAP_NUM(ROUTE125), MAP_NUM(ROUTE124), MAP_NUM(ROUTE127), ___, ___, ___ },
-    { MAP_NUM(ROUTE126), MAP_NUM(ROUTE124), MAP_NUM(ROUTE127), ___, ___, ___ },
-    { MAP_NUM(ROUTE127), MAP_NUM(ROUTE125), MAP_NUM(ROUTE126), MAP_NUM(ROUTE128), ___, ___ },
-    { MAP_NUM(ROUTE128), MAP_NUM(ROUTE127), MAP_NUM(ROUTE129), ___, ___, ___ },
-    { MAP_NUM(ROUTE129), MAP_NUM(ROUTE128), MAP_NUM(ROUTE130), ___, ___, ___ },
-    { MAP_NUM(ROUTE130), MAP_NUM(ROUTE129), MAP_NUM(ROUTE131), ___, ___, ___ },
-    { MAP_NUM(ROUTE131), MAP_NUM(ROUTE130), MAP_NUM(ROUTE132), ___, ___, ___ },
-    { MAP_NUM(ROUTE132), MAP_NUM(ROUTE131), MAP_NUM(ROUTE133), ___, ___, ___ },
-    { MAP_NUM(ROUTE133), MAP_NUM(ROUTE132), MAP_NUM(ROUTE134), ___, ___, ___ },
-    { MAP_NUM(ROUTE134), MAP_NUM(ROUTE133), MAP_NUM(ROUTE110), ___, ___, ___ },
     { ___, ___, ___, ___, ___, ___ },
 };
 
@@ -83,25 +63,28 @@ void ClearRoamerLocationData(void)
 
 static void CreateInitialRoamerMon(bool16 createLatios)
 {
-    if (!createLatios)
-        ROAMER->species = SPECIES_LATIAS;
-    else
-        ROAMER->species = SPECIES_LATIOS;
+    int num_location_sets = NUM_LOCATION_SETS;
+    if (num_location_sets > 0) {
+        if (!createLatios)
+            ROAMER->species = SPECIES_LATIAS;
+        else
+            ROAMER->species = SPECIES_LATIOS;
 
-    CreateMon(&gEnemyParty[0], ROAMER->species, 40, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
-    ROAMER->level = 40;
-    ROAMER->status = 0;
-    ROAMER->active = TRUE;
-    ROAMER->ivs = GetMonData(&gEnemyParty[0], MON_DATA_IVS);
-    ROAMER->personality = GetMonData(&gEnemyParty[0], MON_DATA_PERSONALITY);
-    ROAMER->hp = GetMonData(&gEnemyParty[0], MON_DATA_MAX_HP);
-    ROAMER->cool = GetMonData(&gEnemyParty[0], MON_DATA_COOL);
-    ROAMER->beauty = GetMonData(&gEnemyParty[0], MON_DATA_BEAUTY);
-    ROAMER->cute = GetMonData(&gEnemyParty[0], MON_DATA_CUTE);
-    ROAMER->smart = GetMonData(&gEnemyParty[0], MON_DATA_SMART);
-    ROAMER->tough = GetMonData(&gEnemyParty[0], MON_DATA_TOUGH);
-    sRoamerLocation[MAP_GRP] = ROAMER_MAP_GROUP;
-    sRoamerLocation[MAP_NUM] = sRoamerLocations[Random() % NUM_LOCATION_SETS][0];
+        CreateMon(&gEnemyParty[0], ROAMER->species, 40, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
+        ROAMER->level = 40;
+        ROAMER->status = 0;
+        ROAMER->active = TRUE;
+        ROAMER->ivs = GetMonData(&gEnemyParty[0], MON_DATA_IVS);
+        ROAMER->personality = GetMonData(&gEnemyParty[0], MON_DATA_PERSONALITY);
+        ROAMER->hp = GetMonData(&gEnemyParty[0], MON_DATA_MAX_HP);
+        ROAMER->cool = GetMonData(&gEnemyParty[0], MON_DATA_COOL);
+        ROAMER->beauty = GetMonData(&gEnemyParty[0], MON_DATA_BEAUTY);
+        ROAMER->cute = GetMonData(&gEnemyParty[0], MON_DATA_CUTE);
+        ROAMER->smart = GetMonData(&gEnemyParty[0], MON_DATA_SMART);
+        ROAMER->tough = GetMonData(&gEnemyParty[0], MON_DATA_TOUGH);
+        sRoamerLocation[MAP_GRP] = ROAMER_MAP_GROUP;
+        sRoamerLocation[MAP_NUM] = sRoamerLocations[Random() % num_location_sets][0];
+    }
 }
 
 // gSpecialVar_0x8004 here corresponds to the options in the multichoice MULTI_TV_LATI (0 for 'Red', 1 for 'Blue')
@@ -133,11 +116,13 @@ void RoamerMoveToOtherLocationSet(void)
 
     sRoamerLocation[MAP_GRP] = ROAMER_MAP_GROUP;
 
+    int num_location_sets = NUM_LOCATION_SETS;
+
     // Choose a location set that starts with a map
     // different from the roamer's current map
-    while (1)
+    while (num_location_sets > 0)
     {
-        mapNum = sRoamerLocations[Random() % NUM_LOCATION_SETS][0];
+        mapNum = sRoamerLocations[Random() % num_location_sets][0];
         if (sRoamerLocation[MAP_NUM] != mapNum)
         {
             sRoamerLocation[MAP_NUM] = mapNum;

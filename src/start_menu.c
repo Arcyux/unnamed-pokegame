@@ -134,8 +134,6 @@ static u8 SaveReturnSuccessCallback(void);
 static u8 SaveErrorCallback(void);
 static u8 SaveReturnErrorCallback(void);
 static u8 BattlePyramidConfirmRetireCallback(void);
-static u8 BattlePyramidRetireYesNoCallback(void);
-static u8 BattlePyramidRetireInputCallback(void);
 
 // Task callbacks
 static void StartMenuTask(u8 taskId);
@@ -918,7 +916,6 @@ static bool8 BattlePyramidRetireCallback(void)
         ClearDialogWindowAndFrameToTransparent(0, TRUE);
         ScriptUnfreezeObjectEvents();
         UnlockPlayerFieldControls();
-        ScriptContext_SetupScript(BattlePyramid_Retire);
         return TRUE;
     }
 
@@ -1034,7 +1031,6 @@ static u8 SaveConfirmSaveCallback(void)
 
     if (InBattlePyramid())
     {
-        ShowSaveMessage(gText_BattlePyramidConfirmRest, SaveYesNoCallback);
     }
     else
     {
@@ -1218,30 +1214,6 @@ static u8 BattlePyramidConfirmRetireCallback(void)
 {
     ClearStdWindowAndFrame(GetStartMenuWindowId(), FALSE);
     RemoveStartMenuWindow();
-    ShowSaveMessage(gText_BattlePyramidConfirmRetire, BattlePyramidRetireYesNoCallback);
-
-    return SAVE_IN_PROGRESS;
-}
-
-static u8 BattlePyramidRetireYesNoCallback(void)
-{
-    DisplayYesNoMenuWithDefault(1); // Show Yes/No menu (No selected as default)
-    sSaveDialogCallback = BattlePyramidRetireInputCallback;
-
-    return SAVE_IN_PROGRESS;
-}
-
-static u8 BattlePyramidRetireInputCallback(void)
-{
-    switch (Menu_ProcessInputNoWrapClearOnChoose())
-    {
-    case 0: // Yes
-        return SAVE_CANCELED;
-    case MENU_B_PRESSED:
-    case 1: // No
-        HideSaveMessageWindow();
-        return SAVE_SUCCESS;
-    }
 
     return SAVE_IN_PROGRESS;
 }

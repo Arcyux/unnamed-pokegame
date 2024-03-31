@@ -43,7 +43,6 @@ SecretBase_EventScript_Cave::
 	lockall
 	goto_if_eq VAR_RESULT, PARTY_SIZE, SecretBase_EventScript_CaveNoSecretPower
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
-	msgbox SecretBase_Text_IndentUseSecretPower, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, SecretBase_EventScript_CancelOnEntrance
 	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
 	closemessage
@@ -60,12 +59,10 @@ SecretBase_EventScript_CaveUseSecretPower::
 	end
 
 SecretBase_EventScript_CaveNoSecretPower::
-	msgbox SecretBase_Text_SmallIndentInWall, MSGBOX_DEFAULT
 	releaseall
 	end
 
 SecretBase_EventScript_CaveEnter::
-	msgbox SecretBase_Text_DiscoveredSmallCavern, MSGBOX_DEFAULT
 	goto SecretBase_EventScript_InitSecretBase
 	end
 
@@ -147,7 +144,6 @@ SecretBase_EventScript_FirstEntrance::
 	applymovement OBJ_EVENT_ID_PLAYER, SecretBase_Movement_EnterBase
 	waitmovement 0
 	setvar VAR_INIT_SECRET_BASE, 1
-	msgbox SecretBase_Text_WantToMakeYourSecretBaseHere, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, SecretBase_EventScript_SetAsBase
 	closemessage
 	playse SE_EXIT

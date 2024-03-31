@@ -679,7 +679,6 @@ static void DecorationMenuAction_Cancel(u8 taskId)
     RemoveDecorationWindow(WINDOW_MAIN_MENU);
     if (!sDecorationContext.isPlayerRoom)
     {
-        ScriptContext_SetupScript(SecretBase_EventScript_PCCancel);
         DestroyTask(taskId);
     }
     else

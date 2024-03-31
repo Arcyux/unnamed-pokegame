@@ -30,9 +30,10 @@
 //   determined by the data for the corresponding MAPSEC in gRegionMapEntries.
 
 // Only maps in the following map groups have their encounters considered for the area screen
-#define MAP_GROUP_TOWNS_AND_ROUTES MAP_GROUP(PETALBURG_CITY)
-#define MAP_GROUP_DUNGEONS MAP_GROUP(METEOR_FALLS_1F_1R)
-#define MAP_GROUP_SPECIAL_AREA MAP_GROUP(SAFARI_ZONE_NORTHWEST)
+#define MAP_GROUP_TOWNS_AND_ROUTES 0
+#define MAP_GROUP_DUNGEONS 1
+#define MAP_INDOOR_DYNAMIC 2
+#define MAP_GROUP_SPECIAL_AREA 3
 
 #define AREA_SCREEN_WIDTH 32
 #define AREA_SCREEN_HEIGHT 20
@@ -117,25 +118,15 @@ static const u16 sSpeciesHiddenFromAreaScreen[] = { SPECIES_WYNAUT };
 
 static const u16 sMovingRegionMapSections[3] =
 {
-    MAPSEC_MARINE_CAVE,
-    MAPSEC_UNDERWATER_MARINE_CAVE,
-    MAPSEC_TERRA_CAVE
 };
 
 static const u16 sFeebasData[][3] =
 {
-    {SPECIES_FEEBAS, MAP_GROUP(ROUTE119), MAP_NUM(ROUTE119)},
     {NUM_SPECIES}
 };
 
 static const u16 sLandmarkData[][2] =
 {
-    {MAPSEC_SKY_PILLAR,       FLAG_LANDMARK_SKY_PILLAR},
-    {MAPSEC_SEAFLOOR_CAVERN,  FLAG_LANDMARK_SEAFLOOR_CAVERN},
-    {MAPSEC_ALTERING_CAVE,    FLAG_LANDMARK_ALTERING_CAVE},
-    {MAPSEC_MIRAGE_TOWER,     FLAG_LANDMARK_MIRAGE_TOWER},
-    {MAPSEC_DESERT_UNDERPASS, FLAG_LANDMARK_DESERT_UNDERPASS},
-    {MAPSEC_ARTISAN_CAVE,     FLAG_LANDMARK_ARTISAN_CAVE},
     {MAPSEC_NONE}
 };
 
@@ -380,14 +371,6 @@ static u16 GetRegionMapSectionId(u8 mapGroup, u8 mapNum)
 
 static bool8 MapHasSpecies(const struct WildPokemonHeader *info, u16 species)
 {
-    // If this is a header for Altering Cave, skip it if it's not the current Altering Cave encounter set
-    if (GetRegionMapSectionId(info->mapGroup, info->mapNum) == MAPSEC_ALTERING_CAVE)
-    {
-        sPokedexAreaScreen->alteringCaveCounter++;
-        if (sPokedexAreaScreen->alteringCaveCounter != sPokedexAreaScreen->alteringCaveId + 1)
-            return FALSE;
-    }
-
     if (MonListHasSpecies(info->landMonsInfo, species, LAND_WILD_COUNT))
         return TRUE;
     if (MonListHasSpecies(info->waterMonsInfo, species, WATER_WILD_COUNT))
