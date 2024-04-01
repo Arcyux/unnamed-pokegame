@@ -990,7 +990,7 @@
 #define ITEMS_COUNT 830
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
-// A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations
+// A special item id associated with "Cancel"/"Exit" etc. in a list of items
 // Its icon is defined at ITEMS_COUNT as the "return to field" arrow
 #define ITEM_LIST_END 0xFFFF
 

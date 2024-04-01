@@ -1,7 +1,6 @@
 #include "global.h"
 #include "constants/songs.h"
 #include "bg.h"
-#include "decoration.h"
 #include "event_scripts.h"
 #include "event_object_movement.h"
 #include "field_screen_effect.h"
@@ -32,7 +31,6 @@
 // Top level PC menu options
 enum {
     MENU_ITEMSTORAGE,
-    MENU_DECORATION,
     MENU_TURNOFF
 };
 
@@ -100,7 +98,6 @@ static void PlayerPCProcessMenuInput(u8);
 static void InitItemStorageMenu(u8, u8);
 
 static void PlayerPC_ItemStorage(u8);
-static void PlayerPC_Decoration(u8);
 static void PlayerPC_TurnOff(u8);
 
 static void ItemStorage_Withdraw(u8);
@@ -162,14 +159,12 @@ static const u8 *const sItemStorage_OptionDescriptions[] =
 static const struct MenuAction sPlayerPCMenuActions[] =
 {
     [MENU_ITEMSTORAGE] = { gText_ItemStorage, {PlayerPC_ItemStorage} },
-    [MENU_DECORATION]  = { gText_Decoration,  {PlayerPC_Decoration} },
     [MENU_TURNOFF]     = { gText_TurnOff,     {PlayerPC_TurnOff} }
 };
 
 static const u8 sBedroomPC_OptionOrder[] =
 {
     MENU_ITEMSTORAGE,
-    MENU_DECORATION,
     MENU_TURNOFF
 };
 #define NUM_BEDROOM_PC_OPTIONS ARRAY_COUNT(sBedroomPC_OptionOrder)
@@ -411,11 +406,6 @@ static void PlayerPC_ItemStorage(u8 taskId)
 {
     InitItemStorageMenu(taskId, MENU_WITHDRAW);
     gTasks[taskId].func = ItemStorageMenuProcessInput;
-}
-
-static void PlayerPC_Decoration(u8 taskId)
-{
-    DoPlayerRoomDecorationMenu(taskId);
 }
 
 static void PlayerPC_TurnOff(u8 taskId)

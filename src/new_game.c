@@ -34,8 +34,6 @@
 #include "item_menu.h"
 #include "pokemon_storage_system.h"
 #include "pokemon_jump.h"
-#include "decoration_inventory.h"
-#include "secret_base.h"
 #include "player_pc.h"
 #include "field_specials.h"
 #include "mystery_gift.h"
@@ -160,7 +158,6 @@ void NewGameInitData(void)
     PlayTimeCounter_Reset();
     ClearPokedexFlags();
     InitEventData();
-    ClearSecretBases();
     ClearBerryTrees();
     SetMoney(&gSaveBlock1Ptr->money, 0);
     SetCoins(0);
@@ -178,7 +175,6 @@ void NewGameInitData(void)
     gSaveBlock1Ptr->registeredItem = ITEM_NONE;
     ClearBag();
     NewGameInitPCItems();
-    ClearDecorationInventories();
     InitEasyChatPhrases();
     SetMauvilleOldMan();
     InitDewfordTrend();

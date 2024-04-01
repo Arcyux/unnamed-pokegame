@@ -14,7 +14,6 @@
 #include "battle_tower.h"
 #include "window.h"
 #include "mystery_event_script.h"
-#include "secret_base.h"
 #include "mauville_old_man.h"
 #include "sound.h"
 #include "constants/songs.h"
@@ -50,7 +49,6 @@ struct RecordMixingHallRecords
 
 struct PlayerRecordRS
 {
-    struct SecretBase secretBases[SECRET_BASES_COUNT];
     OldMan oldMan;
     struct DewfordTrend dewfordTrends[SAVED_TRENDS_COUNT];
     struct RSBattleTowerRecord battleTowerRecord;
@@ -60,7 +58,6 @@ struct PlayerRecordRS
 
 struct PlayerRecordEmerald
 {
-    /* 0x0000 */ struct SecretBase secretBases[SECRET_BASES_COUNT];
     /* 0x1044 */ OldMan oldMan;
     /* 0x1084 */ struct DewfordTrend dewfordTrends[SAVED_TRENDS_COUNT];
     /* 0x1124 */ struct EmeraldBattleTowerRecord battleTowerRecord;
@@ -78,7 +75,6 @@ union PlayerRecord
 };
 
 static bool8 sReadyToReceive;
-static struct SecretBase *sSecretBasesSave;
 static OldMan *sOldManSave;
 static struct DewfordTrend *sDewfordTrendsSave;
 static void *sBattleTowerSave;
@@ -142,7 +138,6 @@ void RecordMixingPlayerSpotTriggered(void)
 // these variables were const in R/S, but had to become changeable because of saveblocks changing RAM position
 static void SetSrcLookupPointers(void)
 {
-    sSecretBasesSave = gSaveBlock1Ptr->secretBases;
     sOldManSave = &gSaveBlock1Ptr->oldMan;
     sDewfordTrendsSave = gSaveBlock1Ptr->dewfordTrends;
     sBattleTowerSave = &gSaveBlock2Ptr->frontier.towerPlayer;
@@ -153,7 +148,6 @@ static void SetSrcLookupPointers(void)
 
 static void PrepareUnknownExchangePacket(struct PlayerRecordRS *dest)
 {
-    memcpy(dest->secretBases, sSecretBasesSave, sizeof(dest->secretBases));
     memcpy(&dest->oldMan, sOldManSave, sizeof(dest->oldMan));
     memcpy(dest->dewfordTrends, sDewfordTrendsSave, sizeof(dest->dewfordTrends));
     EmeraldBattleTowerRecordToRuby(sBattleTowerSave, &dest->battleTowerRecord);
@@ -164,8 +158,6 @@ static void PrepareUnknownExchangePacket(struct PlayerRecordRS *dest)
 
 static void PrepareExchangePacketForRubySapphire(struct PlayerRecordRS *dest)
 {
-    memcpy(dest->secretBases, sSecretBasesSave, sizeof(dest->secretBases));
-    ClearJapaneseSecretBases(dest->secretBases);
     memcpy(&dest->oldMan, sOldManSave, sizeof(dest->oldMan));
     SanitizeMauvilleOldManForRuby(&dest->oldMan);
     memcpy(dest->dewfordTrends, sDewfordTrendsSave, sizeof(dest->dewfordTrends));
@@ -178,7 +170,6 @@ static void PrepareExchangePacketForRubySapphire(struct PlayerRecordRS *dest)
 
 static void PrepareExchangePacket(void)
 {
-    SetPlayerSecretBaseParty();
     SetSrcLookupPointers();
 
     if (Link_AnyPartnersPlayingRubyOrSapphire())
@@ -190,7 +181,6 @@ static void PrepareExchangePacket(void)
     }
     else
     {
-        memcpy(sSentRecord->emerald.secretBases, sSecretBasesSave, sizeof(sSentRecord->emerald.secretBases));
         memcpy(&sSentRecord->emerald.oldMan, sOldManSave, sizeof(sSentRecord->emerald.oldMan));
         memcpy(&sSentRecord->emerald.lilycoveLady, sLilycoveLadySave, sizeof(sSentRecord->emerald.lilycoveLady));
         memcpy(sSentRecord->emerald.dewfordTrends, sDewfordTrendsSave, sizeof(sSentRecord->emerald.dewfordTrends));
@@ -210,7 +200,6 @@ static void ReceiveExchangePacket(u32 multiplayerId)
     if (Link_AnyPartnersPlayingRubyOrSapphire())
     {
         // Ruby/Sapphire
-        ReceiveSecretBasesData(sReceivedRecords->ruby.secretBases, sizeof(sReceivedRecords->ruby), multiplayerId);
         ReceiveBattleTowerData(&sReceivedRecords->ruby.battleTowerRecord, sizeof(sReceivedRecords->ruby), multiplayerId);
         ReceiveOldManData(&sReceivedRecords->ruby.oldMan, sizeof(sReceivedRecords->ruby), multiplayerId);
         ReceiveDewfordTrendData(sReceivedRecords->ruby.dewfordTrends, sizeof(sReceivedRecords->ruby), multiplayerId);
@@ -219,7 +208,6 @@ static void ReceiveExchangePacket(u32 multiplayerId)
     else
     {
         // Emerald
-        ReceiveSecretBasesData(sReceivedRecords->emerald.secretBases, sizeof(sReceivedRecords->emerald), multiplayerId);
         ReceiveOldManData(&sReceivedRecords->emerald.oldMan, sizeof(sReceivedRecords->emerald), multiplayerId);
         ReceiveDewfordTrendData(sReceivedRecords->emerald.dewfordTrends, sizeof(sReceivedRecords->emerald), multiplayerId);
         ReceiveBattleTowerData(&sReceivedRecords->emerald.battleTowerRecord, sizeof(sReceivedRecords->emerald), multiplayerId);

@@ -12,17 +12,9 @@ bool8 FldEff_UseSecretPowerTree(void);
 bool8 FldEff_SecretPowerTree(void);
 bool8 FldEff_UseSecretPowerShrub(void);
 bool8 FldEff_SecretPowerShrub(void);
-bool8 FldEff_SecretBasePCTurnOn(void);
-void DoSecretBasePCTurnOffEffect(void);
-void PopSecretBaseBalloon(s16 metatileId, s16 x, s16 y);
 bool8 FldEff_Nop47(void);
 bool8 FldEff_Nop48(void);
-void ShatterSecretBaseBreakableDoor(s16 x, s16 y);
-void PlaySecretBaseMusicNoteMatSound(s16 metatileId);
-void DoSecretBaseGlitterMatSparkle(void);
 bool8 FldEff_SandPillar(void);
-void InteractWithShieldOrTVDecoration(void);
-bool8 IsLargeBreakableDecoration(u16 metatileId, bool8 checkBase);
 void FldEffPoison_Start(void);
 bool32 FldEffPoison_IsActive(void);
 void DoWateringBerryTreeAnim(void);
@@ -32,6 +24,5 @@ void DestroyRecordMixingLights(void);
 extern const struct SpritePalette gSpritePalette_SecretPower_Cave;
 extern const struct SpritePalette gSpritePalette_SecretPower_Plant;
 extern const struct SpritePalette gFieldEffectObjectPaletteInfo9;
-extern const u16 gTilesetPalettes_SecretBase[][16];
 
 #endif //GUARD_FLDEFF_MISC_H

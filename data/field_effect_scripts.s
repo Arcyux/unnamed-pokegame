@@ -58,7 +58,7 @@ gFieldEffectScriptPointers::
 	.4byte gFieldEffectScript_AshPuff                   @ FLDEFF_ASH_PUFF
 	.4byte gFieldEffectScript_AshLaunch                 @ FLDEFF_ASH_LAUNCH
 	.4byte gFieldEffectScript_SweetScent                @ FLDEFF_SWEET_SCENT
-	.4byte gFieldEffectScript_SandPillar                @ FLDEFF_SAND_PILLAR
+	.4byte 0                                            @ FLDEFF_SAND_PILLAR
 	.4byte gFieldEffectScript_Bubbles                   @ FLDEFF_BUBBLES
 	.4byte gFieldEffectScript_Sparkle                   @ FLDEFF_SPARKLE
 	.4byte gFieldEffectScript_ShowSecretPowerCave       @ FLDEFF_SECRET_POWER_CAVE
@@ -67,7 +67,7 @@ gFieldEffectScriptPointers::
 	.4byte gFieldEffectScript_ShowCutGrass              @ FLDEFF_CUT_GRASS
 	.4byte gFieldEffectScript_FieldMoveShowMonInit      @ FLDEFF_FIELD_MOVE_SHOW_MON_INIT
 	.4byte gFieldEffectScript_UsePuzzleEffect           @ FLDEFF_USE_TOMB_PUZZLE_EFFECT
-	.4byte gFieldEffectScript_SecretBaseBootPC          @ FLDEFF_PCTURN_ON
+	.4byte 0                                            @ FLDEFF_PCTURN_ON
 	.4byte gFieldEffectScript_HallOfFameRecord          @ FLDEFF_HALL_OF_FAME_RECORD
 	.4byte gFieldEffectScript_UseTeleport               @ FLDEFF_USE_TELEPORT
 	.4byte gFieldEffectScript_RayquazaSpotlight         @ FLDEFF_RAYQUAZA_SPOTLIGHT
@@ -287,10 +287,6 @@ gFieldEffectScript_SweetScent::
 	field_eff_callnative FldEff_SweetScent
 	field_eff_end
 
-gFieldEffectScript_SandPillar::
-	field_eff_loadfadedpal_callnative gSpritePalette_SandPillar, FldEff_SandPillar
-	field_eff_end
-
 gFieldEffectScript_Bubbles::
 	field_eff_loadfadedpal_callnative gSpritePalette_GeneralFieldEffect0, FldEff_Bubbles
 	field_eff_end
@@ -321,10 +317,6 @@ gFieldEffectScript_FieldMoveShowMonInit::
 
 gFieldEffectScript_UsePuzzleEffect::
 	field_eff_callnative FldEff_UsePuzzleEffect
-	field_eff_end
-
-gFieldEffectScript_SecretBaseBootPC::
-	field_eff_callnative FldEff_SecretBasePCTurnOn
 	field_eff_end
 
 gFieldEffectScript_HallOfFameRecord::

@@ -14,7 +14,6 @@ const u8 gEasyChatWord_BattleTower[] = _("BATTLE TOWER");
 const u8 gEasyChatWord_Leaders[] = _("LEADERS");
 const u8 gEasyChatWord_BattleRoom[] = _("BATTLE ROOM");
 const u8 gEasyChatWord_Hidden[] = _("HIDDEN");
-const u8 gEasyChatWord_SecretBase[] = _("SECRET BASE");
 const u8 gEasyChatWord_Blend[] = _("BLEND");
 const u8 gEasyChatWord_Master[] = _("MASTER");
 const u8 gEasyChatWord_Rank[] = _("RANK");
@@ -122,12 +121,6 @@ const struct EasyChatWordInfo gEasyChatGroup_Events[] = {
     {
         .text = gEasyChatWord_Hidden,
         .alphabeticalOrder = 13,
-        .enabled = TRUE,
-    },
-    [EC_INDEX(EC_WORD_SECRET_BASE)] =
-    {
-        .text = gEasyChatWord_SecretBase,
-        .alphabeticalOrder = 19,
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_BLEND)] =

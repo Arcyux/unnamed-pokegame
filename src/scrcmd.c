@@ -8,8 +8,6 @@
 #include "contest_util.h"
 #include "contest_painting.h"
 #include "data.h"
-#include "decoration.h"
-#include "decoration_inventory.h"
 #include "event_data.h"
 #include "field_door.h"
 #include "field_effect.h"
@@ -546,38 +544,6 @@ bool8 ScrCmd_checkpcitem(struct ScriptContext *ctx)
     u16 quantity = VarGet(ScriptReadHalfword(ctx));
 
     gSpecialVar_Result = CheckPCHasItem(itemId, quantity);
-    return FALSE;
-}
-
-bool8 ScrCmd_adddecoration(struct ScriptContext *ctx)
-{
-    u32 decorId = VarGet(ScriptReadHalfword(ctx));
-
-    gSpecialVar_Result = DecorationAdd(decorId);
-    return FALSE;
-}
-
-bool8 ScrCmd_removedecoration(struct ScriptContext *ctx)
-{
-    u32 decorId = VarGet(ScriptReadHalfword(ctx));
-
-    gSpecialVar_Result = DecorationRemove(decorId);
-    return FALSE;
-}
-
-bool8 ScrCmd_checkdecorspace(struct ScriptContext *ctx)
-{
-    u32 decorId = VarGet(ScriptReadHalfword(ctx));
-
-    gSpecialVar_Result = DecorationCheckSpace(decorId);
-    return FALSE;
-}
-
-bool8 ScrCmd_checkdecor(struct ScriptContext *ctx)
-{
-    u32 decorId = VarGet(ScriptReadHalfword(ctx));
-
-    gSpecialVar_Result = CheckHasDecoration(decorId);
     return FALSE;
 }
 
@@ -1695,15 +1661,6 @@ bool8 ScrCmd_bufferitemnameplural(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_bufferdecorationname(struct ScriptContext *ctx)
-{
-    u8 stringVarIndex = ScriptReadByte(ctx);
-    u16 decorId = VarGet(ScriptReadHalfword(ctx));
-
-    StringCopy(sScriptStringVars[stringVarIndex], gDecorations[decorId].name);
-    return FALSE;
-}
-
 bool8 ScrCmd_buffermovename(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
@@ -2007,25 +1964,6 @@ bool8 ScrCmd_pokemart(struct ScriptContext *ctx)
     const void *ptr = (void *)ScriptReadWord(ctx);
 
     CreatePokemartMenu(ptr);
-    ScriptContext_Stop();
-    return TRUE;
-}
-
-bool8 ScrCmd_pokemartdecoration(struct ScriptContext *ctx)
-{
-    const void *ptr = (void *)ScriptReadWord(ctx);
-
-    CreateDecorationShop1Menu(ptr);
-    ScriptContext_Stop();
-    return TRUE;
-}
-
-// Changes clerk dialogue slightly from above. See MART_TYPE_DECOR2
-bool8 ScrCmd_pokemartdecoration2(struct ScriptContext *ctx)
-{
-    const void *ptr = (void *)ScriptReadWord(ctx);
-
-    CreateDecorationShop2Menu(ptr);
     ScriptContext_Stop();
     return TRUE;
 }

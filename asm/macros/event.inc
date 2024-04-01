@@ -53,7 +53,6 @@
 	@ callstd function names
 	STD_OBTAIN_ITEM = 0
 	STD_FIND_ITEM = 1
-	STD_OBTAIN_DECORATION = 7
 	STD_REGISTER_MATCH_CALL = 8
 
 	@ Calls the script in gStdScripts at index function.
@@ -561,31 +560,6 @@
 	.byte 0x4a
 	.2byte \itemId
 	.2byte \quantity
-	.endm
-
-	@ Adds a decoration to the player's PC.
-	.macro adddecoration decoration:req
-	.byte 0x4b
-	.2byte \decoration
-	.endm
-
-	@ Removes a decoration from the player's PC.
-	.macro removedecoration decoration:req
-	.byte 0x4c
-	.2byte \decoration
-	.endm
-
-	@ Checks for decoration in the player's PC.
-	.macro checkdecor decoration:req
-	.byte 0x4d
-	.2byte \decoration
-	.endm
-
-	@ Checks if the player has enough space in their PC to hold the decoration.
-	@ Sets VAR_RESULT to TRUE if there is room, or FALSE is there is no room.
-	.macro checkdecorspace decoration:req
-	.byte 0x4e
-	.2byte \decoration
 	.endm
 
 	@ Applies the movement data at movements to the specified (localId) object. If no map is specified, then the current map is used.
@@ -1112,13 +1086,6 @@
 	.2byte \item
 	.endm
 
-	@ Writes the name of the specified decoration to the specified buffer.
-	.macro bufferdecorationname stringVarId:req, decoration:req
-	.byte 0x81
-	stringvar \stringVarId
-	.2byte \decoration
-	.endm
-
 	@ Writes the name of the specified move to the specified buffer.
 	.macro buffermovename stringVarId:req, move:req
 	.byte 0x82
@@ -1151,19 +1118,6 @@
 	@ Products should be a list of .2byte item values preceded by an .align 2
 	.macro pokemart products:req
 	.byte 0x86
-	.4byte \products
-	.endm
-
-	@ Opens the Pokemart system and treats the list of items as decorations.
-	@ Products should be a list of .2byte decoration values preceded by an .align 2
-	.macro pokemartdecoration products:req
-	.byte 0x87
-	.4byte \products
-	.endm
-
-	@ Identical to pokemartdecoration, but with slight changes to the clerk dialogue. See uses of MART_TYPE_DECOR2.
-	.macro pokemartdecoration2 products:req
-	.byte 0x88
 	.4byte \products
 	.endm
 
@@ -1985,12 +1939,6 @@
 	setorcopyvar VAR_0x8000, \item
 	setorcopyvar VAR_0x8001, \amount
 	callstd STD_FIND_ITEM
-	.endm
-
-	@ Equivalent to giveitem but for a single decoration.
-	.macro givedecoration decoration:req
-	setorcopyvar VAR_0x8000, \decoration
-	callstd STD_OBTAIN_DECORATION
 	.endm
 
 	@ Registers the specified trainer in Match Call and plays a fanfare with a notification message.

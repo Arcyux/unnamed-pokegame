@@ -9,7 +9,6 @@
 #include "trig.h"
 #include "overworld.h"
 #include "event_data.h"
-#include "secret_base.h"
 #include "string_util.h"
 #include "international_string_util.h"
 #include "strings.h"
@@ -906,15 +905,6 @@ static void InitMapBasedOnPlayerLocation(void)
             x = 1;
             y = 1;
         }
-        break;
-    case MAP_TYPE_SECRET_BASE:
-        mapHeader = Overworld_GetMapHeaderByGroupAndId((u16)gSaveBlock1Ptr->dynamicWarp.mapGroup, (u16)gSaveBlock1Ptr->dynamicWarp.mapNum);
-        sRegionMap->mapSecId = mapHeader->regionMapSectionId;
-        sRegionMap->playerIsInCave = TRUE;
-        mapWidth = mapHeader->mapLayout->width;
-        mapHeight = mapHeader->mapLayout->height;
-        x = gSaveBlock1Ptr->dynamicWarp.x;
-        y = gSaveBlock1Ptr->dynamicWarp.y;
         break;
     case MAP_TYPE_INDOOR:
         sRegionMap->mapSecId = gMapHeader.regionMapSectionId;

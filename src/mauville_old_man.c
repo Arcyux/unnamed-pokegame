@@ -19,7 +19,6 @@
 #include "overworld.h"
 #include "field_message_box.h"
 #include "script_menu.h"
-#include "trader.h"
 #include "m4a.h"
 #include "constants/mauville_old_man.h"
 
@@ -68,7 +67,6 @@ static const u8 *const sGiddyQuestions[GIDDY_MAX_QUESTIONS] = {
     GiddyText_WhatsTheBottomOfTheSeaLike,
     GiddyText_WhenYouSeeTheSettingSunDoesIt,
     GiddyText_LyingBackInTheGreenGrass,
-    GiddyText_SecretBasesAreSoWonderful
 };
 
 static void SetupBard(void)
@@ -106,11 +104,6 @@ static void SetupGiddy(void)
     giddy->language = gGameLanguage;
 }
 
-static void SetupTrader(void)
-{
-    TraderSetup();
-}
-
 void SetMauvilleOldMan(void)
 {
     u16 trainerId = (gSaveBlock2Ptr->playerTrainerId[1] << 8) | gSaveBlock2Ptr->playerTrainerId[0];
@@ -124,9 +117,6 @@ void SetMauvilleOldMan(void)
         break;
     case MAUVILLE_MAN_HIPSTER:
         SetupHipster();
-        break;
-    case MAUVILLE_MAN_TRADER:
-        SetupTrader();
         break;
     case MAUVILLE_MAN_STORYTELLER:
         SetupStoryteller();
@@ -369,11 +359,6 @@ static void ResetHipsterFlag(void)
     (&gSaveBlock1Ptr->oldMan.hipster)->taughtWord = FALSE;
 }
 
-static void ResetTraderFlag(void)
-{
-    Trader_ResetFlag();
-}
-
 static void ResetStorytellerFlag(void)
 {
     Storyteller_ResetFlag();
@@ -391,9 +376,6 @@ void ResetMauvilleOldManFlag(void)
         break;
     case MAUVILLE_MAN_STORYTELLER:
         ResetStorytellerFlag();
-        break;
-    case MAUVILLE_MAN_TRADER:
-        ResetTraderFlag();
         break;
     case MAUVILLE_MAN_GIDDY:
         break;
@@ -703,16 +685,6 @@ void SanitizeMauvilleOldManForRuby(union OldMan * oldMan)
 
     switch (oldMan->common.id)
     {
-    case MAUVILLE_MAN_TRADER:
-    {
-        struct MauvilleOldManTrader * trader = &oldMan->trader;
-        for (i = 0; i < NUM_TRADER_ITEMS; i++)
-        {
-            if (trader->language[i] == LANGUAGE_JAPANESE)
-                ConvertInternationalString(trader->playerNames[i], LANGUAGE_JAPANESE);
-        }
-        break;
-    }
     case MAUVILLE_MAN_STORYTELLER:
     {
         struct MauvilleManStoryteller * storyteller = &oldMan->storyteller;
@@ -742,19 +714,6 @@ static void UNUSED SetMauvilleOldManLanguage(union OldMan * oldMan, u32 language
 
     switch (oldMan->common.id)
     {
-    case MAUVILLE_MAN_TRADER:
-    {
-        struct MauvilleOldManTrader * trader = &oldMan->trader;
-
-        for (i = 0; i < NUM_TRADER_ITEMS; i++)
-        {
-            if (IsStringJapanese(trader->playerNames[i]))
-                trader->language[i] = language1;
-            else
-                trader->language[i] = language2;
-        }
-    }
-    break;
     case MAUVILLE_MAN_STORYTELLER:
     {
         struct MauvilleManStoryteller * storyteller = &oldMan->storyteller;
@@ -830,37 +789,6 @@ void SanitizeReceivedRubyOldMan(union OldMan * oldMan, u32 version, u32 language
 
     switch (oldMan->common.id)
     {
-    case MAUVILLE_MAN_TRADER:
-    {
-        struct MauvilleOldManTrader * trader = &oldMan->trader;
-        s32 i;
-
-        if (isRuby)
-        {
-            for (i = 0; i < NUM_TRADER_ITEMS; i++)
-            {
-                u8 *str = trader->playerNames[i];
-                if (str[0] == EXT_CTRL_CODE_BEGIN && str[1] == EXT_CTRL_CODE_JPN)
-                {
-                    StripExtCtrlCodes(str);
-                    trader->language[i] = LANGUAGE_JAPANESE;
-                }
-                else
-                    trader->language[i] = language;
-            }
-        }
-        else
-        {
-            for (i = 0; i < NUM_TRADER_ITEMS; i++)
-            {
-                if (trader->language[i] == LANGUAGE_JAPANESE)
-                {
-                    StripExtCtrlCodes(trader->playerNames[i]);
-                }
-            }
-        }
-    }
-    break;
     case MAUVILLE_MAN_STORYTELLER:
     {
 
@@ -1010,12 +938,6 @@ static const struct Story sStorytellerStories[] = {
         MauvilleCity_PokemonCenter_1F_Text_UsedRockSmashTitle,
         MauvilleCity_PokemonCenter_1F_Text_UsedRockSmashAction,
         MauvilleCity_PokemonCenter_1F_Text_UsedRockSmashStory
-    },
-    {
-        GAME_STAT_MOVED_SECRET_BASE, 1,
-        MauvilleCity_PokemonCenter_1F_Text_MovedBasesTitle,
-        MauvilleCity_PokemonCenter_1F_Text_MovedBasesAction,
-        MauvilleCity_PokemonCenter_1F_Text_MovedBasesStory
     },
     {
         GAME_STAT_USED_SPLASH, 1,

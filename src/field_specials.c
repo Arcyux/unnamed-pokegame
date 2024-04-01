@@ -5,7 +5,6 @@
 #include "battle_tower.h"
 #include "cable_club.h"
 #include "data.h"
-#include "decoration.h"
 #include "diploma.h"
 #include "event_data.h"
 #include "event_object_movement.h"
@@ -48,7 +47,6 @@
 #include "constants/battle_frontier.h"
 #include "constants/battle_pyramid.h"
 #include "constants/battle_tower.h"
-#include "constants/decorations.h"
 #include "constants/event_objects.h"
 #include "constants/event_object_movement.h"
 #include "constants/field_effects.h"
@@ -1265,11 +1263,6 @@ void RemoveCameraObject(void)
 {
     CameraObjectSetFollowedSpriteId(GetPlayerAvatarSpriteId());
     RemoveObjectEventByLocalIdAndMap(OBJ_EVENT_ID_CAMERA, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
-}
-
-void GetSecretBaseNearbyMapName(void)
-{
-    GetMapName(gStringVar1, VarGet(VAR_SECRET_BASE_MAP), 0);
 }
 
 u16 GetBattleTowerSinglesStreak(void)
@@ -2783,32 +2776,6 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection)
         FillWindowPixelRect(0, PIXEL_FILL(1), 0, 0, 216, 32);
         switch (menu)
         {
-        case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1:
-            AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_Decor1Descriptions[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-            if (sFrontierExchangeCorner_Decor1[selection] == ITEM_LIST_END)
-            {
-                ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Decor1[selection]);
-            }
-            else
-            {
-                FreeSpriteTilesByTag(TAG_ITEM_ICON);
-                FreeSpritePaletteByTag(TAG_ITEM_ICON);
-                sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor1[selection], 33, 88, 0, TAG_ITEM_ICON, TAG_ITEM_ICON);
-            }
-            break;
-        case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2:
-            AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_Decor2Descriptions[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-            if (sFrontierExchangeCorner_Decor2[selection] == ITEM_LIST_END)
-            {
-                ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Decor2[selection]);
-            }
-            else
-            {
-                FreeSpriteTilesByTag(TAG_ITEM_ICON);
-                FreeSpritePaletteByTag(TAG_ITEM_ICON);
-                sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor2[selection], 33, 88, 0, TAG_ITEM_ICON, TAG_ITEM_ICON);
-            }
-            break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
             AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_VitaminsDescriptions[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
             ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Vitamins[selection]);
@@ -3590,7 +3557,7 @@ void UpdateTrainerFanClubGameClear(void)
 
 // If the player has < 3 fans, gain a new fan whenever the counter reaches 20+
 // Defeating Drake or participating in a Contest increments the counter by 2
-// Participating at Battle Tower or in a Secret Base battle increments the counter by 1
+// Participating at Battle Tower increments the counter by 1
 u8 TryGainNewFanFromCounter(u8 incrementId)
 {
     static const u8 sCounterIncrements[] =

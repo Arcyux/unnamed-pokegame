@@ -23,7 +23,6 @@
 #include "pokemon.h"
 #include "safari_zone.h"
 #include "script.h"
-#include "secret_base.h"
 #include "sound.h"
 #include "start_menu.h"
 #include "trainer_see.h"
@@ -246,9 +245,7 @@ static bool8 TryStartInteractionScript(struct MapPosition *position, u16 metatil
         return FALSE;
 
     // Don't play interaction sound for certain scripts.
-    if (script != SecretBase_EventScript_DollInteract
-     && script != SecretBase_EventScript_CushionInteract
-     && script != EventScript_PC)
+    if (script != EventScript_PC)
         PlaySE(SE_SELECT);
 
     ScriptContext_SetupScript(script);
@@ -400,14 +397,6 @@ static const u8 *GetInteractedBackgroundEventScript(struct MapPosition *position
         if (FlagGet(gSpecialVar_0x8004) == TRUE)
             return NULL;
         return EventScript_HiddenItemScript;
-    case BG_EVENT_SECRET_BASE:
-        if (direction == DIR_NORTH)
-        {
-            gSpecialVar_0x8004 = bgEvent->bgUnion.secretBaseId;
-            if (TrySetCurSecretBase())
-                return SecretBase_EventScript_CheckEntrance;
-        }
-        return NULL;
     }
 
     return bgEvent->bgUnion.script;
@@ -415,8 +404,6 @@ static const u8 *GetInteractedBackgroundEventScript(struct MapPosition *position
 
 static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 metatileBehavior, u8 direction)
 {
-    s8 elevation;
-
     if (MetatileBehavior_IsPC(metatileBehavior) == TRUE)
         return EventScript_PC;
     if (MetatileBehavior_IsCableBoxResults1(metatileBehavior) == TRUE)
@@ -447,31 +434,6 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
         return EventScript_Questionnaire;
     if (MetatileBehavior_IsTrainerHillTimer(metatileBehavior) == TRUE)
         return EventScript_TrainerHillTimer;
-
-    elevation = position->elevation;
-    if (elevation == MapGridGetElevationAt(position->x, position->y))
-    {
-        if (MetatileBehavior_IsSecretBaseDecorationBase(metatileBehavior) == TRUE)
-        {
-            CheckInteractedWithFriendsFurnitureBottom();
-            return NULL;
-        }
-        if (MetatileBehavior_HoldsLargeDecoration(metatileBehavior) == TRUE)
-        {
-            CheckInteractedWithFriendsFurnitureMiddle();
-            return NULL;
-        }
-        if (MetatileBehavior_HoldsSmallDecoration(metatileBehavior) == TRUE)
-        {
-            CheckInteractedWithFriendsFurnitureTop();
-            return NULL;
-        }
-    }
-    else if (MetatileBehavior_IsSecretBasePoster(metatileBehavior) == TRUE)
-    {
-        CheckInteractedWithFriendsPosterDecor();
-        return NULL;
-    }
 
     return NULL;
 }
@@ -538,8 +500,6 @@ static bool8 TryStartCoordEventScript(struct MapPosition *position)
 
 static bool8 TryStartMiscWalkingScripts(u16 metatileBehavior)
 {
-    s16 x, y;
-
     if (MetatileBehavior_IsCrackedFloorHole(metatileBehavior))
     {
         ScriptContext_SetupScript(EventScript_FallDownHole);
@@ -548,17 +508,6 @@ static bool8 TryStartMiscWalkingScripts(u16 metatileBehavior)
     else if (MetatileBehavior_IsBattlePyramidWarp(metatileBehavior))
     {
         return TRUE;
-    }
-    else if (MetatileBehavior_IsSecretBaseGlitterMat(metatileBehavior) == TRUE)
-    {
-        DoSecretBaseGlitterMatSparkle();
-        return FALSE;
-    }
-    else if (MetatileBehavior_IsSecretBaseSoundMat(metatileBehavior) == TRUE)
-    {
-        PlayerGetDestCoords(&x, &y);
-        PlaySecretBaseMusicNoteMatSound(MapGridGetMetatileIdAt(x, y));
-        return FALSE;
     }
     return FALSE;
 }
@@ -669,22 +618,19 @@ static bool8 UpdatePoisonStepCounter(void)
 {
     u16 *ptr;
 
-    if (gMapHeader.mapType != MAP_TYPE_SECRET_BASE)
+    ptr = GetVarPointer(VAR_POISON_STEP_COUNTER);
+    (*ptr)++;
+    (*ptr) %= 4;
+    if (*ptr == 0)
     {
-        ptr = GetVarPointer(VAR_POISON_STEP_COUNTER);
-        (*ptr)++;
-        (*ptr) %= 4;
-        if (*ptr == 0)
+        switch (DoPoisonFieldEffect())
         {
-            switch (DoPoisonFieldEffect())
-            {
-            case FLDPSN_NONE:
-                return FALSE;
-            case FLDPSN_PSN:
-                return FALSE;
-            case FLDPSN_FNT:
-                return TRUE;
-            }
+        case FLDPSN_NONE:
+            return FALSE;
+        case FLDPSN_PSN:
+            return FALSE;
+        case FLDPSN_FNT:
+            return TRUE;
         }
     }
     return FALSE;
@@ -871,12 +817,6 @@ static bool8 TryDoorWarp(struct MapPosition *position, u16 metatileBehavior, u8 
 
     if (direction == DIR_NORTH)
     {
-        if (MetatileBehavior_IsOpenSecretBaseDoor(metatileBehavior) == TRUE)
-        {
-            WarpIntoSecretBase(position, gMapHeader.events);
-            return TRUE;
-        }
-
         if (MetatileBehavior_IsWarpDoor(metatileBehavior) == TRUE)
         {
             warpEventId = GetWarpEventAtMapPosition(&gMapHeader, position);

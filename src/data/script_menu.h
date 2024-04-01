@@ -33,7 +33,6 @@ static const struct MenuAction MultichoiceList_ContestType[] =
 
 static const struct MenuAction MultichoiceList_BasePCWithRegistry[] =
 {
-    {gText_Decoration2},
     {gText_PackUp},
     {gText_Registry},
     {gText_Exit},
@@ -41,7 +40,6 @@ static const struct MenuAction MultichoiceList_BasePCWithRegistry[] =
 
 static const struct MenuAction MultichoiceList_BasePCNoRegistry[] =
 {
-    {gText_Decoration2},
     {gText_PackUp},
     {gText_Exit},
 };

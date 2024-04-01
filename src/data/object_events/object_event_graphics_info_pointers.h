@@ -239,7 +239,6 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Lugia;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_HoOh;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Bard;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Hipster;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Trader;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Storyteller;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Giddy;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedMauvilleOldMan1;
@@ -491,7 +490,6 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
 const struct ObjectEventGraphicsInfo *const gMauvilleOldManGraphicsInfoPointers[] = {
     [MAUVILLE_MAN_BARD]        = &gObjectEventGraphicsInfo_Bard,
     [MAUVILLE_MAN_HIPSTER]     = &gObjectEventGraphicsInfo_Hipster,
-    [MAUVILLE_MAN_TRADER]      = &gObjectEventGraphicsInfo_Trader,
     [MAUVILLE_MAN_STORYTELLER] = &gObjectEventGraphicsInfo_Storyteller,
     [MAUVILLE_MAN_GIDDY]       = &gObjectEventGraphicsInfo_Giddy,
     [MAUVILLE_MAN_UNUSED1]     = &gObjectEventGraphicsInfo_UnusedMauvilleOldMan1,

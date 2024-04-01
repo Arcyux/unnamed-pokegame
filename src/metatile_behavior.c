@@ -107,21 +107,8 @@ static const u8 sTileBitAttributes[NUM_METATILE_BEHAVIORS] =
     [MB_BRIDGE_OVER_POND_HIGH_EDGE_2]    = TILE_FLAG_UNUSED,
     [MB_UNUSED_BRIDGE]                   = TILE_FLAG_UNUSED,
     [MB_BIKE_BRIDGE_OVER_BARRIER]        = TILE_FLAG_UNUSED,
-    [MB_SECRET_BASE_SCENERY]             = TILE_FLAG_UNUSED,
-    [MB_SECRET_BASE_TRAINER_SPOT]        = TILE_FLAG_UNUSED,
-    [MB_HOLDS_SMALL_DECORATION]          = TILE_FLAG_UNUSED,
-    [MB_SECRET_BASE_BALLOON]             = TILE_FLAG_UNUSED,
-    [MB_SECRET_BASE_IMPASSABLE]          = TILE_FLAG_UNUSED,
-    [MB_SECRET_BASE_GLITTER_MAT]         = TILE_FLAG_UNUSED,
-    [MB_SECRET_BASE_JUMP_MAT]            = TILE_FLAG_UNUSED,
-    [MB_SECRET_BASE_SPIN_MAT]            = TILE_FLAG_UNUSED,
-    [MB_SECRET_BASE_SOUND_MAT]           = TILE_FLAG_UNUSED,
-    [MB_SECRET_BASE_BREAKABLE_DOOR]      = TILE_FLAG_UNUSED,
     [MB_IMPASSABLE_SOUTH_AND_NORTH]      = TILE_FLAG_UNUSED,
     [MB_IMPASSABLE_WEST_AND_EAST]        = TILE_FLAG_UNUSED,
-    [MB_SECRET_BASE_HOLE]                = TILE_FLAG_UNUSED,
-    [MB_HOLDS_LARGE_DECORATION]          = TILE_FLAG_UNUSED,
-    [MB_SECRET_BASE_TV_SHIELD]           = TILE_FLAG_UNUSED,
     [MB_PLAYER_ROOM_PC_ON]               = TILE_FLAG_UNUSED,
     [MB_MUDDY_SLOPE]                     = TILE_FLAG_UNUSED,
     [MB_BUMPY_SLOPE]                     = TILE_FLAG_UNUSED,
@@ -347,9 +334,7 @@ bool8 MetatileBehavior_IsForcedMovementTile(u8 metatileBehavior)
      || metatileBehavior == MB_MUDDY_SLOPE
      || metatileBehavior == MB_CRACKED_FLOOR
      || metatileBehavior == MB_WATERFALL
-     || metatileBehavior == MB_ICE
-     || metatileBehavior == MB_SECRET_BASE_JUMP_MAT
-     || metatileBehavior == MB_SECRET_BASE_SPIN_MAT)
+     || metatileBehavior == MB_ICE)
         return TRUE;
     else
         return FALSE;
@@ -504,202 +489,6 @@ bool8 MetatileBehavior_IsPC(u8 metatileBehavior)
 bool8 MetatileBehavior_IsCableBoxResults1(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_CABLE_BOX_RESULTS_1)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-bool8 MetatileBehavior_IsOpenSecretBaseDoor(u8 metatileBehavior)
-{
-    if (metatileBehavior == MB_SECRET_BASE_SPOT_RED_CAVE_OPEN
-     || metatileBehavior == MB_SECRET_BASE_SPOT_BROWN_CAVE_OPEN
-     || metatileBehavior == MB_SECRET_BASE_SPOT_YELLOW_CAVE_OPEN
-     || metatileBehavior == MB_SECRET_BASE_SPOT_TREE_LEFT_OPEN
-     || metatileBehavior == MB_SECRET_BASE_SPOT_SHRUB_OPEN
-     || metatileBehavior == MB_SECRET_BASE_SPOT_BLUE_CAVE_OPEN
-     || metatileBehavior == MB_SECRET_BASE_SPOT_TREE_RIGHT_OPEN)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-bool8 MetatileBehavior_IsSecretBaseCave(u8 metatileBehavior)
-{
-    if (metatileBehavior == MB_SECRET_BASE_SPOT_RED_CAVE
-     || metatileBehavior == MB_SECRET_BASE_SPOT_BROWN_CAVE
-     || metatileBehavior == MB_SECRET_BASE_SPOT_YELLOW_CAVE
-     || metatileBehavior == MB_SECRET_BASE_SPOT_BLUE_CAVE)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-bool8 MetatileBehavior_IsSecretBaseTree(u8 metatileBehavior)
-{
-    if (metatileBehavior == MB_SECRET_BASE_SPOT_TREE_LEFT
-     || metatileBehavior == MB_SECRET_BASE_SPOT_TREE_RIGHT)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-bool8 MetatileBehavior_IsSecretBaseShrub(u8 metatileBehavior)
-{
-    if (metatileBehavior == MB_SECRET_BASE_SPOT_SHRUB)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-bool8 MetatileBehavior_IsSecretBasePC(u8 metatileBehavior)
-{
-    if (metatileBehavior == MB_SECRET_BASE_PC)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-bool8 MetatileBehavior_IsRecordMixingSecretBasePC(u8 metatileBehavior)
-{
-    if (metatileBehavior == MB_SECRET_BASE_REGISTER_PC)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-// Used by the rock/grass floor spaces that the secret base trainer is not standing on
-bool8 MetatileBehavior_IsSecretBaseScenery1(u8 metatileBehavior)
-{
-    if (metatileBehavior == MB_SECRET_BASE_SCENERY)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-// Used by the rock/grass floor space that the secret base trainer stands on
-bool8 MetatileBehavior_IsSecretBaseTrainerSpot(u8 metatileBehavior)
-{
-    if (metatileBehavior == MB_SECRET_BASE_TRAINER_SPOT)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-bool8 MetatileBehavior_IsSecretBaseImpassable(u8 metatileBehavior)
-{
-    if (metatileBehavior == MB_SECRET_BASE_IMPASSABLE)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-bool8 MetatileBehavior_IsSecretBaseDecorationBase(u8 metatileBehavior)
-{
-    if (metatileBehavior == MB_SECRET_BASE_DECORATION_BASE)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-bool8 MetatileBehavior_IsSecretBasePoster(u8 metatileBehavior)
-{
-    if (metatileBehavior == MB_SECRET_BASE_POSTER)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-bool8 MetatileBehavior_IsNormal(u8 metatileBehavior)
-{
-    if (metatileBehavior == MB_NORMAL)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-bool8 MetatileBehavior_IsSecretBaseNorthWall(u8 metatileBehavior)
-{
-    if (metatileBehavior == MB_SECRET_BASE_NORTH_WALL)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-bool8 MetatileBehavior_IsSecretBaseScenery2(u8 metatileBehavior)
-{
-    if (metatileBehavior == MB_SECRET_BASE_SCENERY)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-bool8 MetatileBehavior_HoldsSmallDecoration(u8 metatileBehavior)
-{
-    if (metatileBehavior == MB_HOLDS_SMALL_DECORATION)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-bool8 MetatileBehavior_HoldsLargeDecoration(u8 metatileBehavior)
-{
-    if (metatileBehavior == MB_HOLDS_LARGE_DECORATION)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-bool8 MetatileBehavior_IsSecretBaseHole(u8 metatileBehavior)
-{
-    if (metatileBehavior == MB_SECRET_BASE_HOLE)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-bool8 MetatileBehavior_IsSecretBaseBalloon(u8 metatileBehavior)
-{
-    if (metatileBehavior == MB_SECRET_BASE_BALLOON)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-bool8 MetatileBehavior_IsSecretBaseBreakableDoor(u8 metatileBehavior)
-{
-    if (metatileBehavior == MB_SECRET_BASE_BREAKABLE_DOOR)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-bool8 MetatileBehavior_IsSecretBaseSoundMat(u8 metatileBehavior)
-{
-    if (metatileBehavior == MB_SECRET_BASE_SOUND_MAT)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-bool8 MetatileBehavior_IsSecretBaseGlitterMat(u8 metatileBehavior)
-{
-    if (metatileBehavior == MB_SECRET_BASE_GLITTER_MAT)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-bool8 MetatileBehavior_IsSecretBaseSandOrnament(u8 metatileBehavior)
-{
-    if (metatileBehavior == MB_SECRET_BASE_SAND_ORNAMENT)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-bool8 MetatileBehavior_IsSecretBaseShieldOrToyTV(u8 metatileBehavior)
-{
-    if (metatileBehavior == MB_SECRET_BASE_TV_SHIELD)
         return TRUE;
     else
         return FALSE;
@@ -940,8 +729,7 @@ bool8 MetatileBehavior_IsEastBlocked(u8 metatileBehavior)
     if (metatileBehavior == MB_IMPASSABLE_EAST
      || metatileBehavior == MB_IMPASSABLE_NORTHEAST
      || metatileBehavior == MB_IMPASSABLE_SOUTHEAST
-     || metatileBehavior == MB_IMPASSABLE_WEST_AND_EAST
-     || metatileBehavior == MB_SECRET_BASE_BREAKABLE_DOOR)
+     || metatileBehavior == MB_IMPASSABLE_WEST_AND_EAST)
         return TRUE;
     else
         return FALSE;
@@ -952,8 +740,7 @@ bool8 MetatileBehavior_IsWestBlocked(u8 metatileBehavior)
     if (metatileBehavior == MB_IMPASSABLE_WEST
      || metatileBehavior == MB_IMPASSABLE_NORTHWEST
      || metatileBehavior == MB_IMPASSABLE_SOUTHWEST
-     || metatileBehavior == MB_IMPASSABLE_WEST_AND_EAST
-     || metatileBehavior == MB_SECRET_BASE_BREAKABLE_DOOR)
+     || metatileBehavior == MB_IMPASSABLE_WEST_AND_EAST)
         return TRUE;
     else
         return FALSE;
@@ -1091,22 +878,6 @@ bool8 MetatileBehavior_IsSkyPillarClosedDoor(u8 metatileBehavior)
 bool8 MetatileBehavior_IsRoulette(u8 metatileBehavior) // unused
 {
     if (metatileBehavior == MB_ROULETTE)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-bool8 MetatileBehavior_IsSecretBaseJumpMat(u8 metatileBehavior)
-{
-    if (metatileBehavior == MB_SECRET_BASE_JUMP_MAT)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-bool8 MetatileBehavior_IsSecretBaseSpinMat(u8 metatileBehavior)
-{
-    if (metatileBehavior == MB_SECRET_BASE_SPIN_MAT)
         return TRUE;
     else
         return FALSE;

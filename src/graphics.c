@@ -1655,7 +1655,6 @@ const u32 gShopMenuMoney_Gfx[] = INCBIN_U32("graphics/shop/money.4bpp.lz");
 #include "data/graphics/berries.h"
 #include "data/graphics/rayquaza_scene.h"
 #include "data/graphics/items.h"
-#include "data/graphics/decorations.h"
 
 const u32 gBattleAnimSpritePal_Shock3[] = INCBIN_U32("graphics/battle_anims/sprites/shock_3.gbapal.lz");
 const u32 gBattleAnimSpriteGfx_Shock3[] = INCBIN_U32("graphics/battle_anims/sprites/shock_3.4bpp.lz");

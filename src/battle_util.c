@@ -1587,8 +1587,7 @@ u32 GetBattlerAffectionHearts(u32 battler)
           || (gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER
                                 | BATTLE_TYPE_FRONTIER
                                 | BATTLE_TYPE_LINK
-                                | BATTLE_TYPE_RECORDED_LINK
-                                | BATTLE_TYPE_SECRET_BASE)))
+                                | BATTLE_TYPE_RECORDED_LINK)))
         return AFFECTION_NO_HEARTS;
 
     return GetMonAffectionHearts(&party[gBattlerPartyIndexes[battler]]);
@@ -10622,8 +10621,6 @@ bool32 ShouldGetStatBadgeBoost(u16 badgeFlag, u32 battler)
             return FALSE;
         else if (GetBattlerSide(battler) != B_SIDE_PLAYER)
             return FALSE;
-        else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
-            return FALSE;
         else if (FlagGet(badgeFlag))
             return TRUE;
     }
@@ -10803,7 +10800,6 @@ bool32 CanStealItem(u32 battlerStealing, u32 battlerItem, u16 item)
               | BATTLE_TYPE_FRONTIER
               | BATTLE_TYPE_LINK
               | BATTLE_TYPE_RECORDED_LINK
-              | BATTLE_TYPE_SECRET_BASE
               | (B_TRAINERS_KNOCK_OFF_ITEMS == TRUE ? BATTLE_TYPE_TRAINER : 0)
               )))
     {
@@ -10813,8 +10809,7 @@ bool32 CanStealItem(u32 battlerStealing, u32 battlerItem, u16 item)
           (BATTLE_TYPE_EREADER_TRAINER
            | BATTLE_TYPE_FRONTIER
            | BATTLE_TYPE_LINK
-           | BATTLE_TYPE_RECORDED_LINK
-           | BATTLE_TYPE_SECRET_BASE))
+           | BATTLE_TYPE_RECORDED_LINK))
         && (gWishFutureKnock.knockedOffMons[stealerSide] & gBitTable[gBattlerPartyIndexes[battlerStealing]]))
     {
         return FALSE;

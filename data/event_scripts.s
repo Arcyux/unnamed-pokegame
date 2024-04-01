@@ -19,7 +19,6 @@
 #include "constants/coins.h"
 #include "constants/contest.h"
 #include "constants/daycare.h"
-#include "constants/decorations.h"
 #include "constants/easy_chat.h"
 #include "constants/event_objects.h"
 #include "constants/event_object_movement.h"
@@ -45,7 +44,6 @@
 #include "constants/pokemon.h"
 #include "constants/roulette.h"
 #include "constants/script_menu.h"
-#include "constants/secret_bases.h"
 #include "constants/songs.h"
 #include "constants/sound.h"
 #include "constants/species.h"
@@ -97,7 +95,7 @@ gStdScripts::
 	.4byte Std_MsgboxDefault           @ MSGBOX_DEFAULT
 	.4byte Std_MsgboxYesNo             @ MSGBOX_YESNO
 	.4byte Std_MsgboxAutoclose         @ MSGBOX_AUTOCLOSE
-	.4byte Std_ObtainDecoration        @ STD_OBTAIN_DECORATION
+	.4byte 0                           @ unused
 	.4byte Std_RegisteredInMatchCall   @ STD_REGISTER_MATCH_CALL
 	.4byte Std_MsgboxGetPoints         @ MSGBOX_GETPOINTS
 	.4byte Std_MsgboxPokenav           @ MSGBOX_POKENAV
@@ -228,15 +226,6 @@ Common_EventScript_ShowBagIsFull::
 
 Common_EventScript_BagIsFull::
 	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
-	return
-
-Common_EventScript_ShowNoRoomForDecor::
-	msgbox gText_NoRoomLeftForAnother, MSGBOX_DEFAULT
-	release
-	end
-
-Common_EventScript_NoRoomForDecor::
-	msgbox gText_NoRoomLeftForAnother, MSGBOX_DEFAULT
 	return
 
 Common_EventScript_SetAbnormalWeather::
@@ -541,7 +530,6 @@ EventScript_VsSeekerChargingDone::
 	.include "data/scripts/abnormal_weather.inc"
 	.include "data/scripts/trainer_script.inc"
 	.include "data/scripts/berry_tree.inc"
-	.include "data/scripts/secret_base.inc"
 	.include "data/scripts/cable_club.inc"
 	.include "data/text/cable_club.inc"
 	.include "data/scripts/contest_hall.inc"

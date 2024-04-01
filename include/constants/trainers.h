@@ -11,7 +11,7 @@
 #define TRAINER_EREADER                     500
 #define TRAINER_FRONTIER_BRAIN              1022
 #define TRAINER_PLAYER                      1023
-#define TRAINER_SECRET_BASE                 1024
+#define TRAINER_UNUSED_1024                 1024
 #define TRAINER_LINK_OPPONENT               2048
 #define TRAINER_UNION_ROOM                  3072
 

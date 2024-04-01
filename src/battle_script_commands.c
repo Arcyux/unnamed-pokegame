@@ -3431,8 +3431,7 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                             (BATTLE_TYPE_EREADER_TRAINER
                             | BATTLE_TYPE_FRONTIER
                             | BATTLE_TYPE_LINK
-                            | BATTLE_TYPE_RECORDED_LINK
-                            | BATTLE_TYPE_SECRET_BASE)))
+                            | BATTLE_TYPE_RECORDED_LINK)))
                     {
                         gBattlescriptCurrInstr++;
                     }
@@ -3440,8 +3439,7 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                             (BATTLE_TYPE_EREADER_TRAINER
                             | BATTLE_TYPE_FRONTIER
                             | BATTLE_TYPE_LINK
-                            | BATTLE_TYPE_RECORDED_LINK
-                            | BATTLE_TYPE_SECRET_BASE))
+                            | BATTLE_TYPE_RECORDED_LINK))
                         && (gWishFutureKnock.knockedOffMons[side] & gBitTable[gBattlerPartyIndexes[gBattlerAttacker]]))
                     {
                         gBattlescriptCurrInstr++;
@@ -7519,26 +7517,19 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
     u32 lastMonLevel = 0;
     u32 moneyReward;
     u8 trainerMoney = 0;
+    
+    const struct TrainerMon *party = GetTrainerPartyFromId(trainerId);
+    if (party == NULL)
+        return 20;
+    lastMonLevel = party[GetTrainerPartySizeFromId(trainerId) - 1].lvl;
+    trainerMoney = gTrainerClasses[GetTrainerClassFromId(trainerId)].money;
 
-    if (trainerId == TRAINER_SECRET_BASE)
-    {
-        moneyReward = 20 * gBattleResources->secretBase->party.levels[0] * gBattleStruct->moneyMultiplier;
-    }
+    if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
+        moneyReward = 4 * lastMonLevel * gBattleStruct->moneyMultiplier * trainerMoney;
+    else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+        moneyReward = 4 * lastMonLevel * gBattleStruct->moneyMultiplier * 2 * trainerMoney;
     else
-    {
-        const struct TrainerMon *party = GetTrainerPartyFromId(trainerId);
-        if (party == NULL)
-            return 20;
-        lastMonLevel = party[GetTrainerPartySizeFromId(trainerId) - 1].lvl;
-        trainerMoney = gTrainerClasses[GetTrainerClassFromId(trainerId)].money;
-
-        if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
-            moneyReward = 4 * lastMonLevel * gBattleStruct->moneyMultiplier * trainerMoney;
-        else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-            moneyReward = 4 * lastMonLevel * gBattleStruct->moneyMultiplier * 2 * trainerMoney;
-        else
-            moneyReward = 4 * lastMonLevel * gBattleStruct->moneyMultiplier * trainerMoney;
-    }
+        moneyReward = 4 * lastMonLevel * gBattleStruct->moneyMultiplier * trainerMoney;
 
     return moneyReward;
 }
@@ -14007,7 +13998,6 @@ static void Cmd_tryswapitems(void)
             && !(gBattleTypeFlags & (BATTLE_TYPE_LINK
                                   | BATTLE_TYPE_EREADER_TRAINER
                                   | BATTLE_TYPE_FRONTIER
-                                  | BATTLE_TYPE_SECRET_BASE
                                   | BATTLE_TYPE_RECORDED_LINK
                                   | (B_TRAINERS_KNOCK_OFF_ITEMS == TRUE ? BATTLE_TYPE_TRAINER : 0)
                                   ))))
@@ -14023,7 +14013,6 @@ static void Cmd_tryswapitems(void)
         if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK
                              | BATTLE_TYPE_EREADER_TRAINER
                              | BATTLE_TYPE_FRONTIER
-                             | BATTLE_TYPE_SECRET_BASE
                              | BATTLE_TYPE_RECORDED_LINK))
             && (gWishFutureKnock.knockedOffMons[sideAttacker] & gBitTable[gBattlerPartyIndexes[gBattlerAttacker]]
                 || gWishFutureKnock.knockedOffMons[sideTarget] & gBitTable[gBattlerPartyIndexes[gBattlerTarget]]))

@@ -23,7 +23,6 @@
 #include "sound.h"
 #include "strings.h"
 #include "trainer_hill.h"
-#include "secret_base.h"
 #include "string_util.h"
 #include "overworld.h"
 #include "field_weather.h"
@@ -664,8 +663,6 @@ u8 BattleSetup_GetTerrainId(void)
             return BATTLE_TERRAIN_POND;
         return BATTLE_TERRAIN_CAVE;
     case MAP_TYPE_INDOOR:
-    case MAP_TYPE_SECRET_BASE:
-        return BATTLE_TERRAIN_BUILDING;
     case MAP_TYPE_UNDERWATER:
         return BATTLE_TERRAIN_UNDERWATER;
     case MAP_TYPE_OCEAN_ROUTE:
@@ -828,7 +825,6 @@ u8 GetSpecialBattleTransition(s32 id)
         switch (id)
         {
         case B_TRANSITION_GROUP_TRAINER_HILL:
-        case B_TRANSITION_GROUP_SECRET_BASE:
         case B_TRANSITION_GROUP_E_READER:
             return B_TRANSITION_POKEBALLS_TRAIL;
         case B_TRANSITION_GROUP_B_PYRAMID:
@@ -845,7 +841,6 @@ u8 GetSpecialBattleTransition(s32 id)
         switch (id)
         {
         case B_TRANSITION_GROUP_TRAINER_HILL:
-        case B_TRANSITION_GROUP_SECRET_BASE:
         case B_TRANSITION_GROUP_E_READER:
             return B_TRANSITION_BIG_POKEBALL;
         case B_TRANSITION_GROUP_B_PYRAMID:
@@ -1323,12 +1318,7 @@ static void CB2_EndTrainerBattle(void)
 {
     HandleBattleVariantEndParty();
 
-    if (gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
-    {
-        DowngradeBadPoison();
-        SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
-    }
-    else if (IsPlayerDefeated(gBattleOutcome) == TRUE)
+    if (IsPlayerDefeated(gBattleOutcome) == TRUE)
     {
         if (InBattlePyramid() || InTrainerHillChallenge() || (!NoAliveMonsForPlayer()))
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
@@ -1349,12 +1339,7 @@ static void CB2_EndTrainerBattle(void)
 
 static void CB2_EndRematchBattle(void)
 {
-    if (gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
-    {
-        DowngradeBadPoison();
-        SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
-    }
-    else if (IsPlayerDefeated(gBattleOutcome) == TRUE)
+    if (IsPlayerDefeated(gBattleOutcome) == TRUE)
     {
         SetMainCallback2(CB2_WhiteOut);
     }
@@ -1517,14 +1502,7 @@ static const u8 *GetIntroSpeechOfApproachingTrainer(void)
 
 const u8 *GetTrainerALoseText(void)
 {
-    const u8 *string;
-
-    if (gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
-        string = GetSecretBaseTrainerLoseText();
-    else
-        string = sTrainerADefeatSpeech;
-
-    StringExpandPlaceholders(gStringVar4, ReturnEmptyStringIfNull(string));
+    StringExpandPlaceholders(gStringVar4, ReturnEmptyStringIfNull(sTrainerADefeatSpeech));
     return gStringVar4;
 }
 

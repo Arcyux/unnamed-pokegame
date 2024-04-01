@@ -110,9 +110,6 @@ extern const u8 gText_First[];
 extern const u8 gText_Second[];
 extern const u8 gText_Third[];
 
-extern const u8 gText_NoDecorations[];
-extern const u8 gText_NoDecorationsInUse[];
-
 extern const u8 gText_Exit[];
 extern const u8 gText_Cancel[];
 
@@ -122,19 +119,10 @@ extern const u8 gText_Var1ThrownAway[];
 extern const u8 gText_Color161Shadow161[];
 extern const u8 gText_GoBackPrevMenu[];
 extern const u8 gText_CantPlaceInRoom[];
-extern const u8 gText_NoMoreDecorations[];
-extern const u8 gText_NoMoreDecorations2[];
 extern const u8 gText_InUseAlready[];
-extern const u8 gText_CancelDecorating[];
 extern const u8 gText_PlaceItHere[];
 extern const u8 gText_CantBePlacedHere[];
-extern const u8 gText_DecorationReturnedToPC[];
-extern const u8 gText_StopPuttingAwayDecorations[];
-extern const u8 gText_ReturnDecorationToPC[];
-extern const u8 gText_NoDecorationHere[];
-extern const u8 gText_DecorationWillBeDiscarded[];
 extern const u8 gText_CantThrowAwayInUse[];
-extern const u8 gText_DecorationThrownAway[];
 
 extern const u8 gText_PokeBalls[];
 extern const u8 gText_Berries[];
@@ -147,17 +135,12 @@ extern const u8 gText_Ornament[];
 extern const u8 gText_Mat[];
 extern const u8 gText_Poster[];
 
-extern const u8 gText_PutOutSelectedDecorItem[];
-extern const u8 gText_StoreChosenDecorInPC[];
-extern const u8 gText_ThrowAwayUnwantedDecors[];
 extern const u8 gText_Doll[];
 extern const u8 gText_Cushion[];
-extern const u8 gText_Decorate[];
 extern const u8 gText_PutAway[];
 extern const u8 gText_Toss2[];
 extern const u8 gText_Hoenn[];
 extern const u8 gText_Ferry[];
-extern const u8 gText_SecretBase[];
 extern const u8 gText_Hideout[];
 extern const u8 gText_FlyToWhere[];
 extern const u8 gText_PokemonLeague[];
@@ -544,7 +527,6 @@ extern const u8 gText_ThrowAwayItemsInPC[];
 extern const u8 gText_GoBackPrevMenu[];
 
 extern const u8 gText_ItemStorage[];
-extern const u8 gText_Decoration[];
 extern const u8 gText_TurnOff[];
 
 extern const u8 gText_WithdrawItem[];
@@ -906,7 +888,6 @@ extern const u8 gText_Info2[];
 extern const u8 gText_WhatsAContest[];
 extern const u8 gText_TypesOfContests[];
 extern const u8 gText_Ranks[];
-extern const u8 gText_Decoration2[];
 extern const u8 gText_PackUp[];
 extern const u8 gText_Registry[];
 extern const u8 gText_Information[];

@@ -21,7 +21,7 @@
 #define GAME_STAT_ENTERED_SAFARI_ZONE         17
 #define GAME_STAT_USED_CUT                    18
 #define GAME_STAT_USED_ROCK_SMASH             19
-#define GAME_STAT_MOVED_SECRET_BASE           20
+#define GAME_STAT_UNUSED_20                   20
 #define GAME_STAT_POKEMON_TRADES              21
 #define GAME_STAT_UNKNOWN_22                  22
 #define GAME_STAT_LINK_BATTLE_WINS            23

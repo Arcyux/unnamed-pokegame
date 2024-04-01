@@ -2646,7 +2646,7 @@ const struct BattleFrontierTrainer gFallarborBattleTentTrainers[NUM_BATTLE_TENT_
     [FALLARBOR_TENT_TRAINER_EVELYN] = {
         .facilityClass = FACILITY_CLASS_SWIMMER_F,
         .trainerName = _("EVELYN"),
-        .speechBefore = {EC_WORD_MY, EC_WORD_PC, EC_WORD_IS, EC_WORD_MY, EC_WORD_SECRET_BASE, EC_WORD_EXCL},
+        .speechBefore = {EC_WORD_MY, EC_WORD_PC, EC_WORD_IS, EC_WORD_MY, EC_WORD_EXCL},
         .speechWin = {EC_WORD_IT_S, EC_WORD_ALL, EC_WORD_SECRET, EC_WORD_ON, EC_WORD_MY, EC_WORD_PC},
         .speechLose = {EC_WORD_NO, EC_WORD_EXCL, -1, EC_WORD_I, EC_WORD_REJECT, EC_WORD_THIS},
         .monSet = gFallarborBattleTentTrainerMons_Evelyn

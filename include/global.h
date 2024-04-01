@@ -524,35 +524,6 @@ struct SaveBlock2
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
 
-struct SecretBaseParty
-{
-    u32 personality[PARTY_SIZE];
-    u16 moves[PARTY_SIZE * MAX_MON_MOVES];
-    u16 species[PARTY_SIZE];
-    u16 heldItems[PARTY_SIZE];
-    u8 levels[PARTY_SIZE];
-    u8 EVs[PARTY_SIZE];
-};
-
-struct SecretBase
-{
-    /*0x1A9C*/ u8 secretBaseId;
-    /*0x1A9D*/ bool8 toRegister:4;
-    /*0x1A9D*/ u8 gender:1;
-    /*0x1A9D*/ u8 battledOwnerToday:1;
-    /*0x1A9D*/ u8 registryStatus:2;
-    /*0x1A9E*/ u8 trainerName[PLAYER_NAME_LENGTH];
-    /*0x1AA5*/ u8 trainerId[TRAINER_ID_LENGTH]; // byte 0 is used for determining trainer class
-    /*0x1AA9*/ u8 language;
-    /*0x1AAA*/ u16 numSecretBasesReceived;
-    /*0x1AAC*/ u8 numTimesEntered;
-    /*0x1AAD*/ u8 unused;
-    /*0x1AAE*/ u8 decorations[DECOR_MAX_SECRET_BASE];
-    /*0x1ABE*/ u8 decorationPositions[DECOR_MAX_SECRET_BASE];
-    /*0x1ACE*/ //u8 padding[2];
-    /*0x1AD0*/ struct SecretBaseParty party;
-};
-
 #include "constants/game_stat.h"
 #include "global.fieldmap.h"
 #include "global.berry.h"
@@ -666,22 +637,12 @@ struct MauvilleManHipster
     u8 language;
 };
 
-struct MauvilleOldManTrader
-{
-    u8 id;
-    u8 decorations[NUM_TRADER_ITEMS];
-    u8 playerNames[NUM_TRADER_ITEMS][11];
-    u8 alreadyTraded;
-    u8 language[NUM_TRADER_ITEMS];
-};
-
 typedef union OldMan
 {
     struct MauvilleManCommon common;
     struct MauvilleManBard bard;
     struct MauvilleManGiddy giddy;
     struct MauvilleManHipster hipster;
-    struct MauvilleOldManTrader trader;
     struct MauvilleManStoryteller storyteller;
     u8 filler[0x40];
 } OldMan;
@@ -971,17 +932,6 @@ struct SaveBlock1
     /*0x139C*/ u16 vars[VARS_COUNT];
     /*0x159C*/ u32 gameStats[NUM_GAME_STATS];
     /*0x169C*/ struct BerryTree berryTrees[BERRY_TREES_COUNT];
-    /*0x1A9C*/ struct SecretBase secretBases[SECRET_BASES_COUNT];
-    /*0x271C*/ u8 playerRoomDecorations[DECOR_MAX_PLAYERS_HOUSE];
-    /*0x2728*/ u8 playerRoomDecorationPositions[DECOR_MAX_PLAYERS_HOUSE];
-    /*0x2734*/ u8 decorationDesks[10];
-    /*0x273E*/ u8 decorationChairs[10];
-    /*0x2748*/ u8 decorationPlants[10];
-    /*0x2752*/ u8 decorationOrnaments[30];
-    /*0x2770*/ u8 decorationMats[30];
-    /*0x278E*/ u8 decorationPosters[10];
-    /*0x2798*/ u8 decorationDolls[40];
-    /*0x27C0*/ u8 decorationCushions[10];
     /*0x2B90*/ u16 outbreakPokemonSpecies;
     /*0x2B92*/ u8 outbreakLocationMapNum;
     /*0x2B93*/ u8 outbreakLocationMapGroup;

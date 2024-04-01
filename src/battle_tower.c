@@ -1909,13 +1909,6 @@ static void HandleSpecialTrainerBattleEnd(void)
             gSaveBlock2Ptr->frontier.battlesCount = 0xFFFFFF;
         }
         break;
-    case SPECIAL_BATTLE_SECRET_BASE:
-        for (i = 0; i < PARTY_SIZE; i++)
-        {
-            u16 itemBefore = GetMonData(&gSaveBlock1Ptr->playerParty[i], MON_DATA_HELD_ITEM);
-            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &itemBefore);
-        }
-        break;
     case SPECIAL_BATTLE_EREADER:
         CopyEReaderTrainerFarewellMessage();
         break;
@@ -1943,8 +1936,6 @@ static void Task_StartBattleAfterTransition(u8 taskId)
 
 void DoSpecialTrainerBattle(void)
 {
-    s32 i;
-
     gBattleScripting.specialTrainerBattleType = gSpecialVar_0x8004;
     switch (gSpecialVar_0x8004)
     {
@@ -1973,16 +1964,6 @@ void DoSpecialTrainerBattle(void)
         CreateTask(Task_StartBattleAfterTransition, 1);
         PlayMapChosenOrBattleBGM(0);
         BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_TOWER));
-        break;
-    case SPECIAL_BATTLE_SECRET_BASE:
-        for (i = 0; i < PARTY_SIZE; i++)
-        {
-            u16 itemBefore = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
-            SetMonData(&gSaveBlock1Ptr->playerParty[i], MON_DATA_HELD_ITEM, &itemBefore);
-        }
-        CreateTask(Task_StartBattleAfterTransition, 1);
-        PlayMapChosenOrBattleBGM(0);
-        BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_SECRET_BASE));
         break;
     case SPECIAL_BATTLE_EREADER:
     #if FREE_BATTLE_TOWER_E_READER == FALSE 

@@ -1,7 +1,6 @@
 #include "global.h"
 #include "data.h"
 #include "pokemon_icon.h"
-#include "decoration.h"
 #include "battle_main.h"
 #include "item.h"
 #include "pokeball.h"
@@ -29,7 +28,6 @@ struct GFRomHeader
     const struct SpritePalette * monIconPalettes;
     const u8 (* monSpeciesNames)[];
     const u8 (* moveNames)[];
-    const struct Decoration * decorations;
     u32 flagsOffset;
     u32 varsOffset;
     u32 pokedexOffset;
@@ -111,7 +109,6 @@ static const struct GFRomHeader sGFRomHeader = {
     .monIconPalettes = gMonIconPaletteTable,
     //.monSpeciesNames = gSpeciesNames, // Handled in gSpeciesInfo
     //.moveNames = gMoveNames, // Handled in gMovesInfo
-    .decorations = gDecorations,
     .flagsOffset = offsetof(struct SaveBlock1, flags),
     .varsOffset = offsetof(struct SaveBlock1, vars),
     .pokedexOffset = offsetof(struct SaveBlock2, pokedex),

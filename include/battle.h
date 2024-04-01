@@ -389,7 +389,6 @@ struct StatsArray
 
 struct BattleResources
 {
-    struct SecretBase* secretBase;
     struct ResourceFlags *flags;
     struct BattleScriptsStack* battleScriptsStack;
     struct BattleCallbacksStack* battleCallbackStack;

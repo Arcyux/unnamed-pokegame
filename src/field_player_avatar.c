@@ -29,7 +29,7 @@
 #include "constants/songs.h"
 #include "constants/trainer_types.h"
 
-#define NUM_FORCED_MOVEMENTS 18
+#define NUM_FORCED_MOVEMENTS 16
 #define NUM_ACRO_BIKE_COLLISIONS 5
 
 static EWRAM_DATA u8 sSpinStartFacingDir = 0;
@@ -60,8 +60,6 @@ static bool8 ForcedMovement_SlideSouth(void);
 static bool8 ForcedMovement_SlideNorth(void);
 static bool8 ForcedMovement_SlideWest(void);
 static bool8 ForcedMovement_SlideEast(void);
-static bool8 ForcedMovement_MatJump(void);
-static bool8 ForcedMovement_MatSpin(void);
 static bool8 ForcedMovement_MuddySlope(void);
 
 static void MovePlayerNotOnBike(u8, u16);
@@ -107,17 +105,6 @@ static bool8 PushBoulder_Start(struct Task *, struct ObjectEvent *, struct Objec
 static bool8 PushBoulder_Move(struct Task *, struct ObjectEvent *, struct ObjectEvent *);
 static bool8 PushBoulder_End(struct Task *, struct ObjectEvent *, struct ObjectEvent *);
 
-static void DoPlayerMatJump(void);
-static void DoPlayerAvatarSecretBaseMatJump(u8);
-static u8 PlayerAvatar_DoSecretBaseMatJump(struct Task *, struct ObjectEvent *);
-
-static void DoPlayerMatSpin(void);
-static void PlayerAvatar_DoSecretBaseMatSpin(u8);
-static bool8 PlayerAvatar_SecretBaseMatSpinStep0(struct Task *, struct ObjectEvent *);
-static bool8 PlayerAvatar_SecretBaseMatSpinStep1(struct Task *, struct ObjectEvent *);
-static bool8 PlayerAvatar_SecretBaseMatSpinStep2(struct Task *, struct ObjectEvent *);
-static bool8 PlayerAvatar_SecretBaseMatSpinStep3(struct Task *, struct ObjectEvent *);
-
 static void CreateStopSurfingTask(u8);
 static void Task_StopSurfingInit(u8);
 static void Task_WaitStopSurfing(u8);
@@ -160,8 +147,6 @@ static bool8 (*const sForcedMovementTestFuncs[NUM_FORCED_MOVEMENTS])(u8) =
     MetatileBehavior_IsSlideWest,
     MetatileBehavior_IsSlideEast,
     MetatileBehavior_IsWaterfall,
-    MetatileBehavior_IsSecretBaseJumpMat,
-    MetatileBehavior_IsSecretBaseSpinMat,
     MetatileBehavior_IsMuddySlope,
 };
 
@@ -184,8 +169,6 @@ static bool8 (*const sForcedMovementFuncs[NUM_FORCED_MOVEMENTS + 1])(void) =
     ForcedMovement_SlideWest,
     ForcedMovement_SlideEast,
     ForcedMovement_PushedSouthByCurrent,
-    ForcedMovement_MatJump,
-    ForcedMovement_MatSpin,
     ForcedMovement_MuddySlope,
 };
 
@@ -304,19 +287,6 @@ static bool8 (*const sPushBoulderFuncs[])(struct Task *, struct ObjectEvent *, s
     PushBoulder_Start,
     PushBoulder_Move,
     PushBoulder_End,
-};
-
-static bool8 (*const sPlayerAvatarSecretBaseMatJump[])(struct Task *, struct ObjectEvent *) =
-{
-    PlayerAvatar_DoSecretBaseMatJump,
-};
-
-static bool8 (*const sPlayerAvatarSecretBaseMatSpin[])(struct Task *, struct ObjectEvent *) =
-{
-    PlayerAvatar_SecretBaseMatSpinStep0,
-    PlayerAvatar_SecretBaseMatSpinStep1,
-    PlayerAvatar_SecretBaseMatSpinStep2,
-    PlayerAvatar_SecretBaseMatSpinStep3,
 };
 
 void MovementType_Player(struct Sprite *sprite)
@@ -565,18 +535,6 @@ static bool8 ForcedMovement_SlideWest(void)
 static bool8 ForcedMovement_SlideEast(void)
 {
     return ForcedMovement_Slide(DIR_EAST, PlayerWalkFast);
-}
-
-static bool8 ForcedMovement_MatJump(void)
-{
-    DoPlayerMatJump();
-    return TRUE;
-}
-
-static bool8 ForcedMovement_MatSpin(void)
-{
-    DoPlayerMatSpin();
-    return TRUE;
 }
 
 static bool8 ForcedMovement_MuddySlope(void)
@@ -1541,111 +1499,6 @@ static bool8 PushBoulder_End(struct Task *task, struct ObjectEvent *player, stru
 #undef tState
 #undef tBoulderObjId
 #undef tDirection
-
-/* Some field effect */
-
-static void DoPlayerMatJump(void)
-{
-    DoPlayerAvatarSecretBaseMatJump(CreateTask(DoPlayerAvatarSecretBaseMatJump, 0xFF));
-}
-
-static void DoPlayerAvatarSecretBaseMatJump(u8 taskId)
-{
-    while (sPlayerAvatarSecretBaseMatJump[gTasks[taskId].data[0]](&gTasks[taskId], &gObjectEvents[gPlayerAvatar.objectEventId]))
-        ;
-}
-
-// because data[0] is used to call this, it can be inferred that there may have been multiple mat jump functions at one point, so the name for these groups of functions is appropriate in assuming the sole use of mat jump.
-static u8 PlayerAvatar_DoSecretBaseMatJump(struct Task *task, struct ObjectEvent *objectEvent)
-{
-    gPlayerAvatar.preventStep = TRUE;
-    if (ObjectEventClearHeldMovementIfFinished(objectEvent))
-    {
-        PlaySE(SE_LEDGE);
-        ObjectEventSetHeldMovement(objectEvent, GetJumpInPlaceMovementAction(objectEvent->facingDirection));
-        task->data[1]++;
-        if (task->data[1] > 1)
-        {
-            gPlayerAvatar.preventStep = FALSE;
-            gPlayerAvatar.transitionFlags |= PLAYER_AVATAR_FLAG_CONTROLLABLE;
-            DestroyTask(FindTaskIdByFunc(DoPlayerAvatarSecretBaseMatJump));
-        }
-    }
-    return FALSE;
-}
-
-/* Some field effect */
-
-static void DoPlayerMatSpin(void)
-{
-    u8 taskId = CreateTask(PlayerAvatar_DoSecretBaseMatSpin, 0xFF);
-
-    PlayerAvatar_DoSecretBaseMatSpin(taskId);
-}
-
-static void PlayerAvatar_DoSecretBaseMatSpin(u8 taskId)
-{
-    while (sPlayerAvatarSecretBaseMatSpin[gTasks[taskId].data[0]](&gTasks[taskId], &gObjectEvents[gPlayerAvatar.objectEventId]))
-        ;
-}
-
-static bool8 PlayerAvatar_SecretBaseMatSpinStep0(struct Task *task, struct ObjectEvent *objectEvent)
-{
-    task->data[0]++;
-    task->data[1] = objectEvent->movementDirection;
-    gPlayerAvatar.preventStep = TRUE;
-    LockPlayerFieldControls();
-    PlaySE(SE_WARP_IN);
-    return TRUE;
-}
-
-static bool8 PlayerAvatar_SecretBaseMatSpinStep1(struct Task *task, struct ObjectEvent *objectEvent)
-{
-    u8 directions[] = {DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH};
-
-    if (ObjectEventClearHeldMovementIfFinished(objectEvent))
-    {
-        u8 direction;
-
-        ObjectEventSetHeldMovement(objectEvent, GetFaceDirectionMovementAction(direction = directions[objectEvent->movementDirection - 1]));
-        if (direction == (u8)task->data[1])
-            task->data[2]++;
-        task->data[0]++;
-        if (task->data[2] > 3 && direction == GetOppositeDirection(task->data[1]))
-            task->data[0]++;
-    }
-    return FALSE;
-}
-
-static bool8 PlayerAvatar_SecretBaseMatSpinStep2(struct Task *task, struct ObjectEvent *objectEvent)
-{
-    const u8 actions[] = {
-        MOVEMENT_ACTION_DELAY_1,
-        MOVEMENT_ACTION_DELAY_1,
-        MOVEMENT_ACTION_DELAY_2,
-        MOVEMENT_ACTION_DELAY_4,
-        MOVEMENT_ACTION_DELAY_8,
-    };
-
-    if (ObjectEventClearHeldMovementIfFinished(objectEvent))
-    {
-        ObjectEventSetHeldMovement(objectEvent, actions[task->data[2]]);
-        task->data[0] = 1;
-    }
-    return FALSE;
-}
-
-static bool8 PlayerAvatar_SecretBaseMatSpinStep3(struct Task *task, struct ObjectEvent *objectEvent)
-{
-    if (ObjectEventClearHeldMovementIfFinished(objectEvent))
-    {
-        ObjectEventSetHeldMovement(objectEvent, GetWalkSlowMovementAction(GetOppositeDirection(task->data[1])));
-        UnlockPlayerFieldControls();
-        gPlayerAvatar.preventStep = FALSE;
-        DestroyTask(FindTaskIdByFunc(PlayerAvatar_DoSecretBaseMatSpin));
-    }
-    return FALSE;
-}
 
 static void CreateStopSurfingTask(u8 direction)
 {

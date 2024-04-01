@@ -191,21 +191,21 @@
 #define FLAG_RECEIVED_TM_AERIAL_ACE          0xAA
 #define FLAG_RECEIVED_TM_CALM_MIND           0xAB
 #define FLAG_RECEIVED_TM_WATER_PULSE         0xAC
-#define FLAG_HIDE_SECRET_BASE_TRAINER        0xAD
-#define FLAG_DECORATION_1                    0xAE
-#define FLAG_DECORATION_2                    0xAF
-#define FLAG_DECORATION_3                    0xB0
-#define FLAG_DECORATION_4                    0xB1
-#define FLAG_DECORATION_5                    0xB2
-#define FLAG_DECORATION_6                    0xB3
-#define FLAG_DECORATION_7                    0xB4
-#define FLAG_DECORATION_8                    0xB5
-#define FLAG_DECORATION_9                    0xB6
-#define FLAG_DECORATION_10                   0xB7
-#define FLAG_DECORATION_11                   0xB8
-#define FLAG_DECORATION_12                   0xB9
-#define FLAG_DECORATION_13                   0xBA
-#define FLAG_DECORATION_14                   0xBB
+#define FLAG_UNUSED_0xAD                     0xAD
+#define FLAG_UNUSED_0xAE                     0xAE
+#define FLAG_UNUSED_0xAF                     0xAF
+#define FLAG_UNUSED_0xB0                     0xB0
+#define FLAG_UNUSED_0xB1                     0xB1
+#define FLAG_UNUSED_0xB2                     0xB2
+#define FLAG_UNUSED_0xB3                     0xB3
+#define FLAG_UNUSED_0xB4                     0xB4
+#define FLAG_UNUSED_0xB5                     0xB5
+#define FLAG_UNUSED_0xB6                     0xB6
+#define FLAG_UNUSED_0xB7                     0xB7
+#define FLAG_UNUSED_0xB8                     0xB8
+#define FLAG_UNUSED_0xB9                     0xB9
+#define FLAG_UNUSED_0xBA                     0xBA
+#define FLAG_UNUSED_0xBB                     0xBB
 #define FLAG_RECEIVED_POKENAV                0xBC
 #define FLAG_DELIVERED_STEVEN_LETTER         0xBD
 #define FLAG_DEFEATED_WALLY_MAUVILLE         0xBE
@@ -290,7 +290,7 @@
 #define FLAG_RECEIVED_TM_TORMENT             0x109
 #define FLAG_RECEIVED_LAVARIDGE_EGG          0x10A
 #define FLAG_RECEIVED_REVIVED_FOSSIL_MON     0x10B
-#define FLAG_SECRET_BASE_REGISTRY_ENABLED    0x10C
+#define FLAG_UNUSED_0x10C                    0x10C
 #define FLAG_RECEIVED_TM_THIEF               0x10D
 #define FLAG_CONTEST_SKETCH_CREATED          0x10E  // Set but never read
 #define FLAG_EVIL_TEAM_ESCAPED_STERN_SPOKE   0x10F
@@ -1566,7 +1566,7 @@
 #define DAILY_FLAGS_START                           (FLAG_UNUSED_0x91F + (8 - FLAG_UNUSED_0x91F % 8))
 #define FLAG_UNUSED_0x920                           (DAILY_FLAGS_START + 0x0)  // Unused Flag
 #define FLAG_DAILY_CONTEST_LOBBY_RECEIVED_BERRY     (DAILY_FLAGS_START + 0x1)
-#define FLAG_DAILY_SECRET_BASE                      (DAILY_FLAGS_START + 0x2)
+#define FLAG_UNUSED_0x922                           (DAILY_FLAGS_START + 0x2)
 #define FLAG_UNUSED_0x923                           (DAILY_FLAGS_START + 0x3)  // Unused Flag
 #define FLAG_UNUSED_0x924                           (DAILY_FLAGS_START + 0x4)  // Unused Flag
 #define FLAG_UNUSED_0x925                           (DAILY_FLAGS_START + 0x5)  // Unused Flag
