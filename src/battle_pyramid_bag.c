@@ -202,7 +202,6 @@ static const u8 sTextColors[][3] =
 {
     [COLORID_DARK_GRAY]  = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY,  TEXT_COLOR_LIGHT_GRAY},
     [COLORID_LIGHT_GRAY] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_GRAY, TEXT_COLOR_WHITE},
-    [COLORID_WHITE_BG]   = {TEXT_COLOR_WHITE,       TEXT_COLOR_DARK_GRAY,  TEXT_COLOR_LIGHT_GRAY}, // Unused
 };
 
 static const struct WindowTemplate sWindowTemplates[] =
@@ -280,15 +279,6 @@ static const struct WindowTemplate sWindowTemplates_MenuActions[] =
         .tilemapTop = 15,
         .width = 14,
         .height = 4,
-        .paletteNum = 15,
-        .baseBlock = 472
-    },
-    [MENU_WIN_2x3] = { // Unused
-        .bg = 1,
-        .tilemapLeft = 15,
-        .tilemapTop = 13,
-        .width = 14,
-        .height = 6,
         .paletteNum = 15,
         .baseBlock = 472
     },
@@ -379,12 +369,6 @@ void InitBattlePyramidBagCursorPosition(void)
 void CB2_PyramidBagMenuFromStartMenu(void)
 {
     GoToBattlePyramidBagMenu(PYRAMIDBAG_LOC_FIELD, CB2_ReturnToFieldWithOpenMenu);
-}
-
-// CB2_BagMenuFromBattle is used instead
-static void UNUSED OpenBattlePyramidBagInBattle(void)
-{
-    GoToBattlePyramidBagMenu(PYRAMIDBAG_LOC_BATTLE, CB2_SetUpReshowBattleScreenAfterMenu2);
 }
 
 // If the player finishes a round at the Battle Pyramid with insufficient space in their
@@ -1481,11 +1465,6 @@ static void DrawTossNumberWindow(u8 windowId)
 {
     DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, 1, 0xE);
     ScheduleBgCopyTilemapToVram(1);
-}
-
-static u8 UNUSED GetMenuActionWindowId(u8 windowArrayId)
-{
-    return gPyramidBagMenu->windowIds[windowArrayId];
 }
 
 static u8 OpenMenuActionWindowById(u8 windowArrayId)

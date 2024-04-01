@@ -7213,17 +7213,6 @@ static const struct TrainerMon sParty_GruntSeafloorCavern5[] = {
     }
 };
 
-static const struct TrainerMon sParty_GruntUnused[] = {
-    {
-    .lvl = 31,
-    .species = SPECIES_WAILMER,
-    },
-    {
-    .lvl = 31,
-    .species = SPECIES_ZUBAT,
-    }
-};
-
 static const struct TrainerMon sParty_GruntMtPyre4[] = {
     {
     .lvl = 30,

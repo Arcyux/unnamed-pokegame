@@ -1014,9 +1014,8 @@
 	.4byte \failInstr
 	.endm
 
-	.macro copyfoestats unused:req
+	.macro copyfoestats
 	.byte 0xbd
-	.4byte \unused
 	.endm
 
 	.macro rapidspinfree
@@ -1204,11 +1203,6 @@
 	.4byte \failInstr
 	.endm
 
-	.macro unused2 ptr:req
-	.byte 0xe1
-	.4byte \ptr
-	.endm
-
 	.macro switchoutabilities battler:req
 	.byte 0xe2
 	.byte \battler
@@ -1228,14 +1222,6 @@
 
 	.macro pickup
 	.byte 0xe5
-	.endm
-
-	.macro unused3
-	.byte 0xe6
-	.endm
-
-	.macro unused4
-	.byte 0xe7
 	.endm
 
 	.macro settypebasedhalvers failInstr:req
@@ -1332,11 +1318,6 @@
 	.macro jumpifoppositegenders jumpInstr:req
 	.byte 0xfc
 	.4byte \jumpInstr
-	.endm
-
-	.macro unused ptr:req
-	.byte 0xfd
-	.4byte \ptr
 	.endm
 
 	.macro tryworryseed failInstr:req

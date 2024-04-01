@@ -42,7 +42,6 @@ enum
 {
     ENABLE,
     DISABLE,
-    CHECK // unused
 };
 
 // Do save types
@@ -53,7 +52,6 @@ enum
     SAVE_EREADER, // deprecated in Emerald
     SAVE_HALL_OF_FAME,
     SAVE_OVERWRITE_DIFFERENT_FILE,
-    SAVE_HALL_OF_FAME_ERASE_BEFORE // unused
 };
 
 // A save sector location holds a pointer to the data for a particular sector

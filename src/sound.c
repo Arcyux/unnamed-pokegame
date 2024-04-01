@@ -156,15 +156,6 @@ void FadeOutAndFadeInNewMapMusic(u16 songNum, u8 fadeOutSpeed, u8 fadeInSpeed)
     sMapMusicFadeInSpeed = fadeInSpeed;
 }
 
-static void UNUSED FadeInNewMapMusic(u16 songNum, u8 speed)
-{
-    FadeInNewBGM(songNum, speed);
-    sCurrentMapMusic = songNum;
-    sNextMapMusic = 0;
-    sMapMusicState = 2;
-    sMapMusicFadeInSpeed = 0;
-}
-
 bool8 IsNotWaitingForBGMStop(void)
 {
     if (sMapMusicState == 6)
@@ -201,12 +192,6 @@ bool8 WaitFanfare(bool8 stop)
 
         return TRUE;
     }
-}
-
-// Unused
-void StopFanfareByFanfareNum(u8 fanfareNum)
-{
-    m4aSongNumStop(sFanfares[fanfareNum].songNum);
 }
 
 void PlayFanfare(u16 songNum)

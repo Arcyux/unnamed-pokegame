@@ -84,7 +84,6 @@ static void GetInBattlePyramid(void);
 static void UpdatePyramidLightRadius(void);
 static void ClearPyramidPartyHeldItems(void);
 static void SetPyramidFloorPalette(void);
-static void BattlePyramidStartMenu(void);
 static void RestorePyramidPlayerParty(void);
 static void InitPyramidBagItems(u8);
 static u8 GetPyramidFloorTemplateId(void);
@@ -682,7 +681,6 @@ static void (* const sBattlePyramidFunctions[])(void) =
     [BATTLE_PYRAMID_FUNC_UPDATE_LIGHT]      = UpdatePyramidLightRadius,
     [BATTLE_PYRAMID_FUNC_CLEAR_HELD_ITEMS]  = ClearPyramidPartyHeldItems,
     [BATTLE_PYRAMID_FUNC_SET_FLOOR_PALETTE] = SetPyramidFloorPalette,
-    [BATTLE_PYRAMID_FUNC_START_MENU]        = BattlePyramidStartMenu,
     [BATTLE_PYRAMID_FUNC_RESTORE_PARTY]     = RestorePyramidPlayerParty,
 };
 
@@ -1070,12 +1068,6 @@ static void Task_SetPyramidFloorPalette(u8 taskId)
         CpuCopy16(gBattlePyramidFloor_Pal[gSaveBlock2Ptr->frontier.curChallengeBattleNum], &gPlttBufferUnfaded[BG_PLTT_ID(6)], PLTT_SIZE_4BPP);
         DestroyTask(taskId);
     }
-}
-
-// Unused. Handled by BuildStartMenuActions
-static void BattlePyramidStartMenu(void)
-{
-    ShowBattlePyramidStartMenu();
 }
 
 static void RestorePyramidPlayerParty(void)
@@ -1555,10 +1547,6 @@ u8 GetTrainerEncounterMusicIdInBattlePyramid(u16 trainerId)
             return sTrainerClassEncounterMusic[i].trainerEncounterMusic;
     }
     return TRAINER_ENCOUNTER_MUSIC_MALE;
-}
-
-static void UNUSED BattlePyramidRetireChallenge(void)
-{
 }
 
 void GenerateBattlePyramidFloorLayout(u16 *backupMapData, bool8 setPlayerPosition)

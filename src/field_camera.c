@@ -12,8 +12,6 @@
 #include "sprite.h"
 #include "text.h"
 
-EWRAM_DATA bool8 gUnusedBikeCameraAheadPanback = FALSE;
-
 struct FieldCameraOffset
 {
     u8 xPixelOffset;
@@ -423,15 +421,6 @@ void CameraUpdate(void)
     gTotalCameraPixelOffsetY -= movementSpeedY;
 }
 
-void MoveCameraAndRedrawMap(int deltaX, int deltaY) //unused
-{
-    CameraMove(deltaX, deltaY);
-    UpdateObjectEventsForCameraUpdate(deltaX, deltaY);
-    DrawWholeMapView();
-    gTotalCameraPixelOffsetX -= deltaX * 16;
-    gTotalCameraPixelOffsetY -= deltaY * 16;
-}
-
 void SetCameraPanningCallback(void (*callback)(void))
 {
     sFieldCameraPanningCallback = callback;
@@ -462,44 +451,5 @@ void UpdateCameraPanning(void)
 
 static void CameraPanningCB_PanAhead(void)
 {
-    u8 var;
-
-    if (gUnusedBikeCameraAheadPanback == FALSE)
-    {
-        InstallCameraPanAheadCallback();
-    }
-    else
-    {
-        // this code is never reached
-        if (gPlayerAvatar.tileTransitionState == T_TILE_TRANSITION)
-        {
-            sBikeCameraPanFlag ^= 1;
-            if (sBikeCameraPanFlag == FALSE)
-                return;
-        }
-        else
-        {
-            sBikeCameraPanFlag = FALSE;
-        }
-
-        var = GetPlayerMovementDirection();
-        if (var == 2)
-        {
-            if (sVerticalCameraPan > -8)
-                sVerticalCameraPan -= 2;
-        }
-        else if (var == 1)
-        {
-            if (sVerticalCameraPan < 72)
-                sVerticalCameraPan += 2;
-        }
-        else if (sVerticalCameraPan < 32)
-        {
-            sVerticalCameraPan += 2;
-        }
-        else if (sVerticalCameraPan > 32)
-        {
-            sVerticalCameraPan -= 2;
-        }
-    }
+    InstallCameraPanAheadCallback();
 }

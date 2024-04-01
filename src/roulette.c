@@ -192,7 +192,6 @@ enum {
     SPR_WHEEL_ICON_ORANGE_AZURILL,
     SPR_WHEEL_ICON_GREEN_SKITTY,
     SPR_WHEEL_ICON_PURPLE_MAKUHITA,
-    SPR_19, // Unused
     SPR_CREDIT,
     SPR_CREDIT_DIG_1,
     SPR_CREDIT_DIG_10,
@@ -231,12 +230,6 @@ enum {
     SPR_CLEAR_MON, // Shroomish/Taillow
     SPR_CLEAR_MON_SHADOW_1,
     SPR_CLEAR_MON_SHADOW_2,
-    SPR_58, // Here below unused
-    SPR_59,
-    SPR_60,
-    SPR_61,
-    SPR_62,
-    SPR_63,
 };
 
 // Start points for sprite IDs that are looped over
@@ -310,7 +303,6 @@ static EWRAM_DATA struct Roulette
     bool8 ballUnstuck:1;
     bool8 ballRolling:1; // Never read
     u8 tableId:2;
-    u8 unused:5;
     bool8 isSpecialRate:1;
     u32 hitFlags;
     u8 hitSquares[BALLS_PER_ROUND];
@@ -348,11 +340,9 @@ static EWRAM_DATA struct Roulette
     f32 varA0;
     u8 playTaskId;
     u8 spinTaskId;
-    u8 filler_1[2];
     u16 taskWaitDelay;
     u16 taskWaitKey;
     TaskFunc nextTask;
-    u8 filler_2[4];
     TaskFunc prevTask;
     struct RouletteFlashUtil flashUtil;
     u16 tilemapBuffers[7][0x400];
@@ -2318,7 +2308,6 @@ static void UpdateWheelPosition(void)
     SetGpuReg(REG_OFFSET_BG2Y_H, (bg2y & 0x0fff0000) >> 16);
 }
 
-static const u8 sFiller[3] = {};
 static const u16 sShadow_Pal[] = INCBIN_U16("graphics/roulette/shadow.gbapal");
 static const u16 sBall_Pal[] = INCBIN_U16("graphics/roulette/ball.gbapal");
 static const u16 sBallCounter_Pal[] = INCBIN_U16("graphics/roulette/ball_counter.gbapal");
@@ -2331,10 +2320,6 @@ static const u16 sWynaut_Pal[] = INCBIN_U16("graphics/roulette/wynaut.gbapal");
 static const u16 sAzurill_Pal[] = INCBIN_U16("graphics/roulette/azurill.gbapal");
 static const u16 sSkitty_Pal[] = INCBIN_U16("graphics/roulette/skitty.gbapal");
 static const u16 sMakuhita_Pal[] = INCBIN_U16("graphics/roulette/makuhita.gbapal");
-static const u16 sUnused1_Pal[] = INCBIN_U16("graphics/roulette/unused_1.gbapal");
-static const u16 sUnused2_Pal[] = INCBIN_U16("graphics/roulette/unused_2.gbapal");
-static const u16 sUnused3_Pal[] = INCBIN_U16("graphics/roulette/unused_3.gbapal");
-static const u16 sUnused4_Pal[] = INCBIN_U16("graphics/roulette/unused_4.gbapal");
 static const u32 sBall_Gfx[] = INCBIN_U32("graphics/roulette/ball.4bpp.lz");
 static const u32 sBallCounter_Gfx[] = INCBIN_U32("graphics/roulette/ball_counter.4bpp.lz");
 static const u32 sShroomishTaillow_Gfx[] = INCBIN_U32("graphics/roulette/roulette_tilt.4bpp.lz");
@@ -2386,27 +2371,6 @@ static const struct OamData sOam_WheelIcon =
     .shape = SPRITE_SHAPE(16x32),
     .size = SPRITE_SIZE(16x32),
     .priority = 2,
-};
-
-static const union AnimCmd sAffineAnim_Unused1[] =
-{
-    ANIMCMD_FRAME(0, 0),
-    ANIMCMD_END
-};
-
-static const union AnimCmd *const sAffineAnims_Unused1[] =
-{
-    sAffineAnim_Unused1
-};
-
-static const union AffineAnimCmd sAffineAnim_Unused2[] =
-{
-    AFFINEANIMCMD_END
-};
-
-static const union AffineAnimCmd *const sAffineAnims_Unused2[] =
-{
-    sAffineAnim_Unused2
 };
 
 static const struct CompressedSpriteSheet sSpriteSheet_WheelIcons =
@@ -3272,13 +3236,6 @@ static const struct CompressedSpriteSheet sSpriteSheet_Shadow =
     .tag = GFXTAG_SHADOW
 };
 
-static const union AffineAnimCmd sAffineAnim_Unused3[] =
-{
-    AFFINEANIMCMD_FRAME(0x80, 0x80, 0, 0),
-    AFFINEANIMCMD_FRAME(2,    2,    0, 60),
-    AFFINEANIMCMD_END
-};
-
 static const union AffineAnimCmd sAffineAnim_TaillowShadow[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
@@ -3288,25 +3245,9 @@ static const union AffineAnimCmd sAffineAnim_TaillowShadow[] =
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd *const sAffineAnims_Unused3[] =
-{
-    sAffineAnim_Unused3
-};
-
 static const union AffineAnimCmd *const sAffineAnims_TaillowShadow[] =
 {
     sAffineAnim_TaillowShadow
-};
-
-static const union AffineAnimCmd sAffineAnim_Unused4[] =
-{
-    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
-    AFFINEANIMCMD_END
-};
-
-static const union AffineAnimCmd *const sAffineAnims_Unused4[] =
-{
-    sAffineAnim_Unused4
 };
 
 static const union AnimCmd sAnim_ShroomishBallShadow[] =
@@ -3489,7 +3430,6 @@ static void LoadOrFreeMiscSpritePalettesAndSheets(bool8 free)
     }
     else
     {
-        // Unused
         FreeSpriteTilesByTag(GFXTAG_SHADOW);
         FreeSpriteTilesByTag(GFXTAG_SHROOMISH_TAILLOW);
         FreeSpriteTilesByTag(GFXTAG_BALL);
@@ -3549,15 +3489,6 @@ static void CreateGridSprites(void)
     {
         spriteId = sRoulette->spriteIds[i + SPR_COLOR_HEADERS] = CreateSprite(&sSpriteTemplates_ColorHeaders[i], 126, (i * 24) + 92, 30);
         gSprites[spriteId].animPaused = TRUE;
-    }
-}
-
-static void UNUSED DestroyGridSprites(void)
-{
-    u8 i;
-    for (i = 0; i < NUM_ROULETTE_SLOTS; i++)
-    {
-        DestroySprite(&gSprites[sRoulette->spriteIds[i + SPR_GRID_ICONS]]);
     }
 }
 
@@ -4348,10 +4279,8 @@ static void CreateShroomishSprite(struct Sprite *ball)
         {116, 44},
         {116, 112}
     };
-    struct Roulette UNUSED *roulette;
 
     t = ball->data[7] - 2;
-    roulette = sRoulette;  // Unnecessary, needed to match
     sRoulette->spriteIds[SPR_CLEAR_MON] = CreateSprite(&sSpriteTemplate_Shroomish, 36, -12, 50);
     sRoulette->spriteIds[SPR_CLEAR_MON_SHADOW_1] = CreateSprite(&sSpriteTemplate_ShroomishShadow[0], coords[ball->sStuckOnWheelLeft][0], coords[ball->sStuckOnWheelLeft][1], 59);
     sRoulette->spriteIds[SPR_CLEAR_MON_SHADOW_2] = CreateSprite(&sSpriteTemplate_ShroomishShadow[1], 36, 140, 51);

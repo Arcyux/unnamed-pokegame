@@ -83,28 +83,6 @@ static const struct WindowTemplate sListIndexWindowTemplate =
     .baseBlock = 0x36
 };
 
-static const struct WindowTemplate sUnusedWindowTemplate1 =
-{
-    .bg = 1,
-    .tilemapLeft = 1,
-    .tilemapTop = 0x1C,
-    .width = 5,
-    .height = 2,
-    .paletteNum = 15,
-    .baseBlock = 0x44
-};
-
-static const struct WindowTemplate sUnusedWindowTemplate2 =
-{
-    .bg = 1,
-    .tilemapLeft = 13,
-    .tilemapTop = 0x1C,
-    .width = 3,
-    .height = 2,
-    .paletteNum = 15,
-    .baseBlock = 0x44
-};
-
 static const LoopedTask sLoopedTaskFuncs[] =
 {
     [CONDITION_FUNC_NONE]           = NULL,
@@ -122,7 +100,6 @@ struct Pokenav_ConditionMenuGfx
 {
     u32 loopedTaskId;
     TilemapBuffer tilemapBuffers[3];
-    u8 filler[2];
     u8 partyPokeballSpriteIds[PARTY_SIZE + 1];
     u32 (*callback)(void);
     s16 monTransitionX;
@@ -132,13 +109,10 @@ struct Pokenav_ConditionMenuGfx
     void *monGfxPtr;
     u8 nameGenderWindowId;
     u8 listIndexWindowId;
-    u8 unusedWindowId1;
-    u8 unusedWindowId2;
     struct MonMarkingsMenu marksMenu;
     struct Sprite *monMarksSprite;
     struct Sprite *conditionSparkleSprites[MAX_CONDITION_SPARKLES];
     u8 windowModeState;
-    u8 filler2[0xFA3];
 };
 
 extern s8 GetConditionGraphMenuCurrentLoadIndex(void); // This function's declaration here is s8 vs. u8 in pokenav_conditions.c
@@ -147,7 +121,6 @@ static u32 LoopedTask_OpenConditionGraphMenu(s32);
 static u32 GetConditionGraphMenuLoopedTaskActive(void);
 static void CreateConditionMonPic(u8);
 static void CreateMonMarkingsOrPokeballIndicators(void);
-static void CopyUnusedConditionWindowsToVram(void);
 static bool32 UpdateConditionGraphMenuWindows(u8, u16, bool8);
 static void VBlankCB_PokenavConditionGraph(void);
 static void DoConditionGraphEnterTransition(void);
@@ -254,8 +227,6 @@ static u32 LoopedTask_OpenConditionGraphMenu(s32 state)
         if (IsConditionMenuSearchMode() == TRUE)
         {
             menu->listIndexWindowId = AddWindow(&sListIndexWindowTemplate);
-            menu->unusedWindowId1 = AddWindow(&sUnusedWindowTemplate1);
-            menu->unusedWindowId2 = AddWindow(&sUnusedWindowTemplate2);
         }
         DeactivateAllTextPrinters();
         return LT_INC_AND_PAUSE;
@@ -267,7 +238,6 @@ static u32 LoopedTask_OpenConditionGraphMenu(s32 state)
         return LT_INC_AND_PAUSE;
     case 9:
         if (IsConditionMenuSearchMode() == TRUE)
-            CopyUnusedConditionWindowsToVram();
         return LT_INC_AND_PAUSE;
     case 10:
         UpdateConditionGraphMenuWindows(0, GetConditionGraphMenuCurrentLoadIndex(), TRUE);
@@ -285,8 +255,6 @@ static u32 LoopedTask_OpenConditionGraphMenu(s32 state)
         if (IsConditionMenuSearchMode() == TRUE)
         {
             PutWindowTilemap(menu->listIndexWindowId);
-            PutWindowTilemap(menu->unusedWindowId1);
-            PutWindowTilemap(menu->unusedWindowId2);
         }
         return LT_INC_AND_PAUSE;
     case 14:
@@ -548,14 +516,6 @@ static u32 LoopedTask_CloseMonMarkingsWindow(s32 state)
     return LT_FINISH;
 }
 
-static u8 UNUSED *UnusedPrintNumberString(u8 *dst, u16 num)
-{
-    u8 *txtPtr = ConvertIntToDecimalStringN(dst, num, STR_CONV_MODE_RIGHT_ALIGN, 4);
-    txtPtr = StringCopy(txtPtr, gText_Number2);
-
-    return txtPtr;
-}
-
 static bool32 UpdateConditionGraphMenuWindows(u8 mode, u16 bufferIndex, bool8 winMode)
 {
     u8 text[32];
@@ -623,14 +583,6 @@ static bool32 UpdateConditionGraphMenuWindows(u8 mode, u16 bufferIndex, bool8 wi
     }
 
     return FALSE;
-}
-
-static void CopyUnusedConditionWindowsToVram(void)
-{
-    struct Pokenav_ConditionMenuGfx *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH_MENU_GFX);
-
-    CopyWindowToVram(menu->unusedWindowId1, COPYWIN_FULL);
-    CopyWindowToVram(menu->unusedWindowId2, COPYWIN_FULL);
 }
 
 static void SpriteCB_PartyPokeball(struct Sprite *sprite)
@@ -781,8 +733,6 @@ void FreeConditionGraphMenuSubstruct2(void)
     if (IsConditionMenuSearchMode() == TRUE)
     {
         RemoveWindow(menu->listIndexWindowId);
-        RemoveWindow(menu->unusedWindowId1);
-        RemoveWindow(menu->unusedWindowId2);
     }
     else
     {

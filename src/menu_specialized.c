@@ -107,16 +107,6 @@ static const struct WindowTemplate sMoveRelearnerWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 0x202
     },
-    // Unused. Identical to sMoveRelearnerYesNoMenuTemplate
-    [RELEARNERWIN_YESNO] = {
-        .bg = 0,
-        .tilemapLeft = 22,
-        .tilemapTop = 8,
-        .width = 5,
-        .height = 4,
-        .paletteNum = 15,
-        .baseBlock = 0x25A
-    },
     DUMMY_WIN_TEMPLATE
 };
 

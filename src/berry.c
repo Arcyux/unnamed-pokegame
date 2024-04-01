@@ -2320,7 +2320,6 @@ static u8 TryForMutation(u8 berryTreeId, u8 berry)
 struct TreeMutationBitfield {
   u8 a: 2;
   u8 b: 2;
-  u8 unused: 4;
 };
 
 union TreeMutation {

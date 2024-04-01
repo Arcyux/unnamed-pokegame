@@ -57,7 +57,6 @@ static void Anim_HorizontalSlide(struct Sprite *sprite);
 static void Anim_VerticalSlide(struct Sprite *sprite);
 static void Anim_BounceRotateToSides(struct Sprite *sprite);
 static void Anim_VerticalJumpsHorizontalJumps(struct Sprite *sprite);
-static void Anim_RotateToSides(struct Sprite *sprite);
 static void Anim_RotateToSides_Twice(struct Sprite *sprite);
 static void Anim_GrowVibrate(struct Sprite *sprite);
 static void Anim_ZigzagFast(struct Sprite *sprite);
@@ -81,40 +80,22 @@ static void Anim_HorizontalPivot(struct Sprite *sprite);
 static void Anim_VerticalSlideWobble(struct Sprite *sprite);
 static void Anim_HorizontalSlideWobble(struct Sprite *sprite);
 static void Anim_VerticalJumps_Big(struct Sprite *sprite);
-static void Anim_Spin_Long(struct Sprite *sprite);
 static void Anim_GlowOrange(struct Sprite *sprite);
-static void Anim_GlowRed(struct Sprite *sprite);
 static void Anim_GlowBlue(struct Sprite *sprite);
-static void Anim_GlowYellow(struct Sprite *sprite);
-static void Anim_GlowPurple(struct Sprite *sprite);
 static void Anim_BackAndLunge(struct Sprite *sprite);
-static void Anim_BackFlip(struct Sprite *sprite);
-static void Anim_Flicker(struct Sprite *sprite);
-static void Anim_BackFlipBig(struct Sprite *sprite);
 static void Anim_FrontFlip(struct Sprite *sprite);
-static void Anim_TumblingFrontFlip(struct Sprite *sprite);
 static void Anim_Figure8(struct Sprite *sprite);
 static void Anim_FlashYellow(struct Sprite *sprite);
 static void Anim_SwingConcave_FastShort(struct Sprite *sprite);
-static void Anim_SwingConvex_FastShort(struct Sprite *sprite);
 static void Anim_RotateUpSlamDown(struct Sprite *sprite);
 static void Anim_DeepVerticalSquishBounce(struct Sprite *sprite);
 static void Anim_HorizontalJumps(struct Sprite *sprite);
 static void Anim_HorizontalJumpsVerticalStretch(struct Sprite *sprite);
-static void Anim_RotateToSides_Fast(struct Sprite *sprite);
 static void Anim_RotateUpToSides(struct Sprite *sprite);
 static void Anim_FlickerIncreasing(struct Sprite *sprite);
-static void Anim_TipHopForward(struct Sprite *sprite);
-static void Anim_PivotShake(struct Sprite *sprite);
-static void Anim_TipAndShake(struct Sprite *sprite);
-static void Anim_VibrateToCorners(struct Sprite *sprite);
 static void Anim_GrowInStages(struct Sprite *sprite);
-static void Anim_VerticalSpring(struct Sprite *sprite);
-static void Anim_VerticalRepeatedSpring(struct Sprite *sprite);
-static void Anim_SpringRising(struct Sprite *sprite);
 static void Anim_HorizontalSpring(struct Sprite *sprite);
 static void Anim_HorizontalRepeatedSpring_Slow(struct Sprite *sprite);
-static void Anim_HorizontalSlideShrink(struct Sprite *sprite);
 static void Anim_LungeGrow(struct Sprite *sprite);
 static void Anim_CircleIntoBackground(struct Sprite *sprite);
 static void Anim_RapidHorizontalHops(struct Sprite *sprite);
@@ -127,15 +108,11 @@ static void Anim_BounceRotateToSides_Slow(struct Sprite *sprite);
 static void Anim_BounceRotateToSides_SmallSlow(struct Sprite *sprite);
 static void Anim_ZigzagSlow(struct Sprite *sprite);
 static void Anim_HorizontalShake_Slow(struct Sprite *sprite);
-static void Anim_VertialShake_Slow(struct Sprite *sprite);
 static void Anim_Twist_Twice(struct Sprite *sprite);
 static void Anim_CircleCounterclockwise_Slow(struct Sprite *sprite);
-static void Anim_VerticalShakeTwice_Slow(struct Sprite *sprite);
 static void Anim_VerticalSlideWobble_Small(struct Sprite *sprite);
 static void Anim_VerticalJumps_Small(struct Sprite *sprite);
 static void Anim_Spin(struct Sprite *sprite);
-static void Anim_TumblingFrontFlip_Twice(struct Sprite *sprite);
-static void Anim_DeepVerticalSquishBounce_Twice(struct Sprite *sprite);
 static void Anim_HorizontalJumpsVerticalStretch_Twice(struct Sprite *sprite);
 static void Anim_VerticalShakeBack(struct Sprite *sprite);
 static void Anim_VerticalShakeBack_Slow(struct Sprite *sprite);
@@ -247,7 +224,6 @@ static void (* const sMonAnimFunctions[])(struct Sprite *sprite) =
     [ANIM_V_SLIDE]                           = Anim_VerticalSlide,
     [ANIM_BOUNCE_ROTATE_TO_SIDES]            = Anim_BounceRotateToSides,
     [ANIM_V_JUMPS_H_JUMPS]                   = Anim_VerticalJumpsHorizontalJumps,
-    [ANIM_ROTATE_TO_SIDES]                   = Anim_RotateToSides, // Unused
     [ANIM_ROTATE_TO_SIDES_TWICE]             = Anim_RotateToSides_Twice,
     [ANIM_GROW_VIBRATE]                      = Anim_GrowVibrate,
     [ANIM_ZIGZAG_FAST]                       = Anim_ZigzagFast,
@@ -271,40 +247,22 @@ static void (* const sMonAnimFunctions[])(struct Sprite *sprite) =
     [ANIM_V_SLIDE_WOBBLE]                    = Anim_VerticalSlideWobble,
     [ANIM_H_SLIDE_WOBBLE]                    = Anim_HorizontalSlideWobble,
     [ANIM_V_JUMPS_BIG]                       = Anim_VerticalJumps_Big,
-    [ANIM_SPIN_LONG]                         = Anim_Spin_Long, // Unused
     [ANIM_GLOW_ORANGE]                       = Anim_GlowOrange,
-    [ANIM_GLOW_RED]                          = Anim_GlowRed, // Unused
     [ANIM_GLOW_BLUE]                         = Anim_GlowBlue,
-    [ANIM_GLOW_YELLOW]                       = Anim_GlowYellow, // Unused
-    [ANIM_GLOW_PURPLE]                       = Anim_GlowPurple, // Unused
     [ANIM_BACK_AND_LUNGE]                    = Anim_BackAndLunge,
-    [ANIM_BACK_FLIP]                         = Anim_BackFlip, // Unused
-    [ANIM_FLICKER]                           = Anim_Flicker, // Unused
-    [ANIM_BACK_FLIP_BIG]                     = Anim_BackFlipBig, // Unused
     [ANIM_FRONT_FLIP]                        = Anim_FrontFlip,
-    [ANIM_TUMBLING_FRONT_FLIP]               = Anim_TumblingFrontFlip, // Unused
     [ANIM_FIGURE_8]                          = Anim_Figure8,
     [ANIM_FLASH_YELLOW]                      = Anim_FlashYellow,
     [ANIM_SWING_CONCAVE_FAST_SHORT]          = Anim_SwingConcave_FastShort,
-    [ANIM_SWING_CONVEX_FAST_SHORT]           = Anim_SwingConvex_FastShort, // Unused
     [ANIM_ROTATE_UP_SLAM_DOWN]               = Anim_RotateUpSlamDown,
     [ANIM_DEEP_V_SQUISH_AND_BOUNCE]          = Anim_DeepVerticalSquishBounce,
     [ANIM_H_JUMPS]                           = Anim_HorizontalJumps,
     [ANIM_H_JUMPS_V_STRETCH]                 = Anim_HorizontalJumpsVerticalStretch,
-    [ANIM_ROTATE_TO_SIDES_FAST]              = Anim_RotateToSides_Fast, // Unused
     [ANIM_ROTATE_UP_TO_SIDES]                = Anim_RotateUpToSides,
     [ANIM_FLICKER_INCREASING]                = Anim_FlickerIncreasing,
-    [ANIM_TIP_HOP_FORWARD]                   = Anim_TipHopForward, // Unused
-    [ANIM_PIVOT_SHAKE]                       = Anim_PivotShake, // Unused
-    [ANIM_TIP_AND_SHAKE]                     = Anim_TipAndShake, // Unused
-    [ANIM_VIBRATE_TO_CORNERS]                = Anim_VibrateToCorners, // Unused
     [ANIM_GROW_IN_STAGES]                    = Anim_GrowInStages,
-    [ANIM_V_SPRING]                          = Anim_VerticalSpring, // Unused
-    [ANIM_V_REPEATED_SPRING]                 = Anim_VerticalRepeatedSpring, // Unused
-    [ANIM_SPRING_RISING]                     = Anim_SpringRising, // Unused
     [ANIM_H_SPRING]                          = Anim_HorizontalSpring,
     [ANIM_H_REPEATED_SPRING_SLOW]            = Anim_HorizontalRepeatedSpring_Slow,
-    [ANIM_H_SLIDE_SHRINK]                    = Anim_HorizontalSlideShrink, // Unused
     [ANIM_LUNGE_GROW]                        = Anim_LungeGrow,
     [ANIM_CIRCLE_INTO_BG]                    = Anim_CircleIntoBackground,
     [ANIM_RAPID_H_HOPS]                      = Anim_RapidHorizontalHops,
@@ -317,15 +275,11 @@ static void (* const sMonAnimFunctions[])(struct Sprite *sprite) =
     [ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL_SLOW] = Anim_BounceRotateToSides_SmallSlow,
     [ANIM_ZIGZAG_SLOW]                       = Anim_ZigzagSlow,
     [ANIM_H_SHAKE_SLOW]                      = Anim_HorizontalShake_Slow,
-    [ANIM_V_SHAKE_SLOW]                      = Anim_VertialShake_Slow, // Unused
     [ANIM_TWIST_TWICE]                       = Anim_Twist_Twice,
     [ANIM_CIRCLE_C_CLOCKWISE_SLOW]           = Anim_CircleCounterclockwise_Slow,
-    [ANIM_V_SHAKE_TWICE_SLOW]                = Anim_VerticalShakeTwice_Slow, // Unused
     [ANIM_V_SLIDE_WOBBLE_SMALL]              = Anim_VerticalSlideWobble_Small,
     [ANIM_V_JUMPS_SMALL]                     = Anim_VerticalJumps_Small,
     [ANIM_SPIN]                              = Anim_Spin,
-    [ANIM_TUMBLING_FRONT_FLIP_TWICE]         = Anim_TumblingFrontFlip_Twice,
-    [ANIM_DEEP_V_SQUISH_AND_BOUNCE_TWICE]    = Anim_DeepVerticalSquishBounce_Twice, // Unused
     [ANIM_H_JUMPS_V_STRETCH_TWICE]           = Anim_HorizontalJumpsVerticalStretch_Twice,
     [ANIM_V_SHAKE_BACK]                      = Anim_VerticalShakeBack,
     [ANIM_V_SHAKE_BACK_SLOW]                 = Anim_VerticalShakeBack_Slow,
@@ -1105,16 +1059,6 @@ static void Spin(struct Sprite *sprite)
     sprite->data[2]++;
 }
 
-static void Anim_Spin_Long(struct Sprite *sprite)
-{
-    u8 id = sprite->data[0] = AddNewAnim();
-
-    sAnims[id].delay = 60;
-    sAnims[id].data = 20;
-    Spin(sprite);
-    sprite->callback = Spin;
-}
-
 static void CircleCounterclockwise(struct Sprite *sprite)
 {
     u8 id = sprite->data[0];
@@ -1619,24 +1563,9 @@ static void Anim_GlowOrange(struct Sprite *sprite)
     GlowColor(RGB(31, 22, 0), 12, 2);
 }
 
-static void Anim_GlowRed(struct Sprite *sprite)
-{
-    GlowColor(RGB_RED, 12, 2);
-}
-
 static void Anim_GlowBlue(struct Sprite *sprite)
 {
     GlowColor(RGB_BLUE, 12, 2);
-}
-
-static void Anim_GlowYellow(struct Sprite *sprite)
-{
-    GlowColor(RGB_YELLOW, 12, 2);
-}
-
-static void Anim_GlowPurple(struct Sprite *sprite)
-{
-    GlowColor(RGB_PURPLE, 12, 2);
 }
 
 static void BackAndLunge_0(struct Sprite *sprite);
@@ -1756,163 +1685,6 @@ static void BackAndLunge_4(struct Sprite *sprite)
     TryFlipX(sprite);
 }
 
-static void BackFlip_0(struct Sprite *sprite);
-static void BackFlip_1(struct Sprite *sprite);
-static void BackFlip_2(struct Sprite *sprite);
-
-static void Anim_BackFlip(struct Sprite *sprite)
-{
-    HandleStartAffineAnim(sprite);
-    sprite->data[3] = 0;
-    sprite->callback = BackFlip_0;
-}
-
-static void BackFlip_0(struct Sprite *sprite)
-{
-    TryFlipX(sprite);
-    sprite->x2++;
-    sprite->y2--;
-
-    if (sprite->x2 % 2 == 0 && sprite->data[3] <= 0)
-        sprite->data[3] = 10;
-    if (sprite->x2 > 7)
-    {
-        sprite->x2 = 8;
-        sprite->y2 = -8;
-        sprite->data[4] = 0;
-        sprite->callback = BackFlip_1;
-    }
-
-    TryFlipX(sprite);
-}
-
-static void BackFlip_1(struct Sprite *sprite)
-{
-    TryFlipX(sprite);
-    sprite->x2 = Cos(sprite->data[4], 16) - 8;
-    sprite->y2 = Sin(sprite->data[4], 16) - 8;
-
-    if (sprite->data[4] > 63)
-    {
-        sprite->data[2] = 160;
-        sprite->data[3] = 10;
-        sprite->callback = BackFlip_2;
-    }
-    sprite->data[4] += 8;
-    if (sprite->data[4] > 64)
-        sprite->data[4] = 64;
-
-    TryFlipX(sprite);
-}
-
-static void BackFlip_2(struct Sprite *sprite)
-{
-    TryFlipX(sprite);
-
-    if (sprite->data[3] > 0)
-    {
-        sprite->data[3]--;
-    }
-    else
-    {
-        u32 rotation;
-
-        sprite->x2 = Cos(sprite->data[2], 5) - 4;
-        sprite->y2 = -(Sin(sprite->data[2], 5)) + 4;
-        sprite->data[2] -= 4;
-        rotation = sprite->data[2] - 32;
-        HandleSetAffineData(sprite, 256, 256, rotation * 512);
-
-        if (sprite->data[2] <= 32)
-        {
-            sprite->x2 = 0;
-            sprite->y2 = 0;
-            ResetSpriteAfterAnim(sprite);
-            sprite->callback = WaitAnimEnd;
-        }
-    }
-
-    TryFlipX(sprite);
-}
-
-static void Anim_Flicker(struct Sprite *sprite)
-{
-    if (sprite->data[3] > 0)
-    {
-        sprite->data[3]--;
-    }
-    else
-    {
-        sprite->data[4] = (sprite->data[4] == 0) ? TRUE : FALSE;
-        sprite->invisible = sprite->data[4];
-        if (++sprite->data[2] > 19)
-        {
-            sprite->invisible = FALSE;
-            sprite->callback = WaitAnimEnd;
-        }
-        sprite->data[3] = 2;
-    }
-}
-
-static void BackFlipBig_0(struct Sprite *sprite);
-static void BackFlipBig_1(struct Sprite *sprite);
-static void BackFlipBig_2(struct Sprite *sprite);
-
-static void Anim_BackFlipBig(struct Sprite *sprite)
-{
-    HandleStartAffineAnim(sprite);
-    sprite->callback = BackFlipBig_0;
-}
-
-static void BackFlipBig_0(struct Sprite *sprite)
-{
-    TryFlipX(sprite);
-    sprite->x2--;
-    sprite->y2++;
-
-    if (sprite->x2 <= -16)
-    {
-        sprite->x2 = -16;
-        sprite->y2 = 16;
-        sprite->callback = BackFlipBig_1;
-        sprite->data[2] = 160;
-    }
-
-    TryFlipX(sprite);
-}
-
-static void BackFlipBig_1(struct Sprite *sprite)
-{
-    u32 rotation;
-
-    TryFlipX(sprite);
-    sprite->data[2] -= 4;
-    sprite->x2 = Cos(sprite->data[2], 22);
-    sprite->y2 = -(Sin(sprite->data[2], 22));
-    rotation = sprite->data[2] - 32;
-    HandleSetAffineData(sprite, 256, 256, rotation * 512);
-
-    if (sprite->data[2] <= 32)
-        sprite->callback = BackFlipBig_2;
-
-    TryFlipX(sprite);
-}
-
-static void BackFlipBig_2(struct Sprite *sprite)
-{
-    TryFlipX(sprite);
-    sprite->x2--;
-    sprite->y2++;
-
-    if (sprite->x2 <= 0)
-    {
-        ResetSpriteAfterAnim(sprite);
-        sprite->callback = WaitAnimEnd;
-    }
-
-    TryFlipX(sprite);
-}
-
 static void FrontFlip_0(struct Sprite *sprite);
 static void FrontFlip_1(struct Sprite *sprite);
 static void FrontFlip_2(struct Sprite *sprite);
@@ -1975,75 +1747,6 @@ static void FrontFlip_2(struct Sprite *sprite)
     }
 
     TryFlipX(sprite);
-}
-
-static void TumblingFrontFlip(struct Sprite *sprite);
-
-static void Anim_TumblingFrontFlip(struct Sprite *sprite)
-{
-    u8 id = sprite->data[0] = AddNewAnim();
-    sAnims[id].speed = 2;
-    TumblingFrontFlip(sprite);
-    sprite->callback = TumblingFrontFlip;
-}
-
-static void TumblingFrontFlip(struct Sprite *sprite)
-{
-    if (sAnims[sprite->data[0]].delay != 0)
-    {
-        sAnims[sprite->data[0]].delay--;
-    }
-    else
-    {
-        TryFlipX(sprite);
-        if (sprite->data[2] == 0)
-        {
-            sprite->data[2]++;
-            HandleStartAffineAnim(sprite);
-            sprite->data[7] = sAnims[sprite->data[0]].speed;
-            sprite->data[3] = -1;
-            sprite->data[4] = -1;
-            sprite->data[5] = 0;
-            sprite->data[6] = 0;
-        }
-
-        sprite->x2 += (sprite->data[7] * 2 * sprite->data[3]);
-        sprite->y2 += (sprite->data[7] * sprite->data[4]);
-        sprite->data[6] += 8;
-        if (sprite->x2 <= -16 || sprite->x2 >= 16)
-        {
-            sprite->x2 = sprite->data[3] * 16;
-            sprite->data[3] *= -1;
-            sprite->data[5]++;
-        }
-        else if (sprite->y2 <= -16 || sprite->y2 >= 16)
-        {
-            sprite->y2 = sprite->data[4] * 16;
-            sprite->data[4] *= -1;
-            sprite->data[5]++;
-        }
-
-        if (sprite->data[5] > 5 && sprite->x2 <= 0)
-        {
-            sprite->x2 = 0;
-            sprite->y2 = 0;
-            if (sAnims[sprite->data[0]].runs > 1)
-            {
-                sAnims[sprite->data[0]].runs--;
-                sprite->data[5] = 0;
-                sprite->data[6] = 0;
-                sAnims[sprite->data[0]].delay = 10;
-            }
-            else
-            {
-                ResetSpriteAfterAnim(sprite);
-                sprite->callback = WaitAnimEnd;
-            }
-        }
-
-        HandleSetAffineData(sprite, 256, 256, sprite->data[6] << 8);
-        TryFlipX(sprite);
-    }
 }
 
 static void Figure8(struct Sprite *sprite);
@@ -2193,14 +1896,6 @@ static void SwingConvex(struct Sprite *sprite)
 
     sprite->data[2]++;
     TryFlipX(sprite);
-}
-
-static void Anim_SwingConvex_FastShort(struct Sprite *sprite)
-{
-    u8 id = sprite->data[0] = AddNewAnim();
-    sAnims[id].data = 50;
-    SwingConvex(sprite);
-    sprite->callback = SwingConvex;
 }
 
 static void RotateUpSlamDown_0(struct Sprite *sprite);
@@ -2521,14 +2216,6 @@ static void RotateToSides(struct Sprite *sprite)
     }
 }
 
-static void Anim_RotateToSides_Fast(struct Sprite *sprite)
-{
-    u8 id = sprite->data[0] = AddNewAnim();
-    sAnims[id].rotation = 4;
-    RotateToSides(sprite);
-    sprite->callback = RotateToSides;
-}
-
 static void Anim_RotateUpToSides(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
@@ -2582,231 +2269,6 @@ static void Anim_FlickerIncreasing(struct Sprite *sprite)
         sprite->invisible = FALSE;
         sprite->callback = WaitAnimEnd;
     }
-}
-
-static void TipHopForward_0(struct Sprite *sprite);
-static void TipHopForward_1(struct Sprite *sprite);
-static void TipHopForward_2(struct Sprite *sprite);
-
-static void Anim_TipHopForward(struct Sprite *sprite)
-{
-    HandleStartAffineAnim(sprite);
-    sprite->data[7] = 0;
-    sprite->callback = TipHopForward_0;
-}
-
-static void TipHopForward_0(struct Sprite *sprite)
-{
-    if (sprite->data[7] > 31)
-    {
-        sprite->data[7] = 32;
-        sprite->data[2] = 0;
-        sprite->callback = TipHopForward_1;
-    }
-    else
-    {
-        sprite->data[7] += 4;
-    }
-
-    HandleSetAffineData(sprite, 256, 256, sprite->data[7] << 8);
-}
-
-static void TipHopForward_1(struct Sprite *sprite)
-{
-    TryFlipX(sprite);
-    if (sprite->data[2] > 512)
-    {
-        sprite->callback = TipHopForward_2;
-        sprite->data[6] = 0;
-    }
-    else
-    {
-        sprite->x2 = -(sprite->data[2] * 16) / 512;
-        sprite->y2 = -(Sin(sprite->data[2] % 128, 4));
-        sprite->data[2] += 12;
-    }
-
-    TryFlipX(sprite);
-}
-
-static void TipHopForward_2(struct Sprite *sprite)
-{
-    TryFlipX(sprite);
-    sprite->data[7] -= 2;
-    if (sprite->data[7] < 0)
-    {
-        sprite->data[7] = 0;
-        sprite->x2 = 0;
-        ResetSpriteAfterAnim(sprite);
-        sprite->callback = WaitAnimEnd;
-    }
-    else
-    {
-        sprite->x2 = -(Sin(sprite->data[7] * 2, 16));
-    }
-
-    HandleSetAffineData(sprite, 256, 256, sprite->data[7] << 8);
-    TryFlipX(sprite);
-}
-
-static void Anim_PivotShake(struct Sprite *sprite)
-{
-    u16 rotation;
-
-    if (sprite->data[2] == 0)
-    {
-        HandleStartAffineAnim(sprite);
-        sprite->data[2]++;
-        sprite->data[7] = 0;
-    }
-
-    TryFlipX(sprite);
-    if (sprite->data[7] > 255)
-    {
-        sprite->x2 = 0;
-        sprite->y2 = 0;
-        sprite->data[7] = 0;
-        ResetSpriteAfterAnim(sprite);
-        sprite->callback = WaitAnimEnd;
-    }
-    else
-    {
-        sprite->data[7] += 16;
-        sprite->x2 = -(Sin(sprite->data[7] % 128, 8));
-        sprite->y2 = -(Sin(sprite->data[7] % 128, 8));
-    }
-
-    rotation = Sin(sprite->data[7] % 128, 16);
-    HandleSetAffineData(sprite, 256, 256, rotation << 8);
-    TryFlipX(sprite);
-}
-
-static void TipAndShake_0(struct Sprite *sprite);
-static void TipAndShake_1(struct Sprite *sprite);
-static void TipAndShake_2(struct Sprite *sprite);
-static void TipAndShake_3(struct Sprite *sprite);
-
-static void Anim_TipAndShake(struct Sprite *sprite)
-{
-    HandleStartAffineAnim(sprite);
-    sprite->data[7] = 0;
-    sprite->data[4] = 0;
-    sprite->callback = TipAndShake_0;
-}
-
-static void TipAndShake_0(struct Sprite *sprite)
-{
-    TryFlipX(sprite);
-    if (sprite->data[7] > 24)
-    {
-        if (++sprite->data[4] > 4)
-        {
-            sprite->data[4] = 0;
-            sprite->callback = TipAndShake_1;
-        }
-    }
-    else
-    {
-        sprite->data[7] += 2;
-        sprite->x2 = Sin(sprite->data[7], 8);
-        sprite->y2 = -(Sin(sprite->data[7], 8));
-    }
-
-    HandleSetAffineData(sprite, 256, 256, -(sprite->data[7]) << 8);
-    TryFlipX(sprite);
-}
-
-static void TipAndShake_1(struct Sprite *sprite)
-{
-    TryFlipX(sprite);
-    if (sprite->data[7] > 32)
-    {
-        sprite->data[6] = 1;
-        sprite->callback = TipAndShake_2;
-    }
-    else
-    {
-        sprite->data[7] += 2;
-        sprite->x2 = Sin(sprite->data[7], 8);
-        sprite->y2 = -(Sin(sprite->data[7], 8));
-    }
-
-    HandleSetAffineData(sprite, 256, 256, -(sprite->data[7]) << 8);
-    TryFlipX(sprite);
-}
-
-static void TipAndShake_2(struct Sprite *sprite)
-{
-    TryFlipX(sprite);
-    sprite->data[7] += (sprite->data[6] * 4);
-    if (sprite->data[5] > 9)
-    {
-        sprite->data[7] = 32;
-        sprite->callback = TipAndShake_3;
-    }
-
-    sprite->x2 = Sin(sprite->data[7], 8);
-    sprite->y2 = -(Sin(sprite->data[7], 8));
-    if (sprite->data[7] <= 28 || sprite->data[7] >= 36)
-    {
-        sprite->data[6] *= -1;
-        sprite->data[5]++;
-    }
-
-    HandleSetAffineData(sprite, 256, 256, -(sprite->data[7]) << 8);
-    TryFlipX(sprite);
-}
-
-static void TipAndShake_3(struct Sprite *sprite)
-{
-    TryFlipX(sprite);
-    if (sprite->data[7] <= 0)
-    {
-        sprite->data[7] = 0;
-        ResetSpriteAfterAnim(sprite);
-        sprite->callback = WaitAnimEnd;
-    }
-    else
-    {
-        sprite->data[7] -= 2;
-        sprite->x2 = Sin(sprite->data[7], 8);
-        sprite->y2 = -(Sin(sprite->data[7], 8));
-    }
-
-    HandleSetAffineData(sprite, 256, 256, -(sprite->data[7]) << 8);
-    TryFlipX(sprite);
-}
-
-static void Anim_VibrateToCorners(struct Sprite *sprite)
-{
-    TryFlipX(sprite);
-    if (sprite->data[2] > 40)
-    {
-        sprite->callback = WaitAnimEnd;
-        sprite->x2 = 0;
-    }
-    else
-    {
-        s8 sign;
-        if (!(sprite->data[2] & 1))
-            sign = 1;
-        else
-            sign = -1;
-
-        if ((sprite->data[2] % 4) / 2 == 0)
-        {
-            sprite->x2 = Sin((sprite->data[2] * 128 / 40) % 256, 16) * sign;
-            sprite->y2 = -(sprite->x2);
-        }
-        else
-        {
-            sprite->x2 = -(Sin((sprite->data[2] * 128 / 40) % 256, 16)) * sign;
-            sprite->y2 = sprite->x2;
-        }
-    }
-
-    sprite->data[2]++;
-    TryFlipX(sprite);
 }
 
 static void Anim_GrowInStages(struct Sprite *sprite)
@@ -2877,147 +2339,6 @@ static void Anim_GrowInStages(struct Sprite *sprite)
     TryFlipX(sprite);
 }
 
-static void Anim_VerticalSpring(struct Sprite *sprite)
-{
-    if (sprite->data[2] == 0)
-    {
-        HandleStartAffineAnim(sprite);
-        sprite->data[2]++;
-        sprite->data[7] = 0;
-    }
-
-    if (sprite->data[7] > 512)
-    {
-        sprite->y2 = 0;
-        HandleSetAffineData(sprite, 256, 256, 0);
-        ResetSpriteAfterAnim(sprite);
-        sprite->callback = WaitAnimEnd;
-    }
-    else
-    {
-        s16 yScale;
-
-        sprite->y2 = Sin(sprite->data[7] % 256, 8);
-        sprite->data[7] += 8;
-        yScale = Sin(sprite->data[7] % 128, 96);
-        HandleSetAffineData(sprite, 256, yScale + 256, 0);
-    }
-}
-
-static void Anim_VerticalRepeatedSpring(struct Sprite *sprite)
-{
-    if (sprite->data[2] == 0)
-    {
-        HandleStartAffineAnim(sprite);
-        sprite->data[2]++;
-        sprite->data[7] = 0;
-    }
-
-    if (sprite->data[7] > 256)
-    {
-        sprite->y2 = 0;
-        HandleSetAffineData(sprite, 256, 256, 0);
-        ResetSpriteAfterAnim(sprite);
-        sprite->callback = WaitAnimEnd;
-    }
-    else
-    {
-        s16 yScale;
-
-        sprite->y2 = Sin(sprite->data[7], 16);
-        sprite->data[7] += 4;
-        yScale = Sin((sprite->data[7] % 64) * 2, 128);
-        HandleSetAffineData(sprite, 256, yScale + 256, 0);
-    }
-}
-
-static void SpringRising_0(struct Sprite *sprite);
-static void SpringRising_1(struct Sprite *sprite);
-static void SpringRising_2(struct Sprite *sprite);
-
-static void Anim_SpringRising(struct Sprite *sprite)
-{
-    HandleStartAffineAnim(sprite);
-    sprite->callback = SpringRising_0;
-    sprite->data[7] = 0;
-}
-
-static void SpringRising_0(struct Sprite *sprite)
-{
-    s16 yScale;
-
-    sprite->data[7] += 8;
-    if (sprite->data[7] > 63)
-    {
-        sprite->data[7] = 0;
-        sprite->data[6] = 0;
-        sprite->callback = SpringRising_1;
-        yScale = Sin(64, 128); // 128 * 1 = 128
-    }
-    else
-    {
-        yScale = Sin(sprite->data[7], 128);
-    }
-
-    HandleSetAffineData(sprite, 256, 256 + yScale, 0);
-}
-
-static void SpringRising_1(struct Sprite *sprite)
-{
-    s16 yScale;
-
-    sprite->data[7] += 4;
-    if (sprite->data[7] > 95)
-    {
-        yScale = Cos(0, 128); // 128 * (-1) = -128
-        sprite->data[7] = 0;
-        sprite->data[6]++;
-    }
-    else
-    {
-        s16 sign, index;
-
-        sprite->y2 = -(sprite->data[6] * 4) - Sin(sprite->data[7], 8);
-        if (sprite->data[7] > 63)
-        {
-            sign = -1;
-            index = sprite->data[7] - 64;
-        }
-        else
-        {
-            sign = 1;
-            index = 0;
-        }
-
-        yScale = Cos((index * 2) + sprite->data[7], 128) * sign;
-    }
-
-    HandleSetAffineData(sprite, 256, 256 + yScale, 0);
-    if (sprite->data[6] == 3)
-    {
-        sprite->data[7] = 0;
-        sprite->callback = SpringRising_2;
-    }
-}
-
-static void SpringRising_2(struct Sprite *sprite)
-{
-    s16 yScale;
-
-    sprite->data[7] += 8;
-    yScale = Cos(sprite->data[7], 128);
-    sprite->y2 = -(Cos(sprite->data[7], 12));
-    if (sprite->data[7] > 63)
-    {
-        ResetSpriteAfterAnim(sprite);
-        sprite->callback = WaitAnimEnd;
-        sprite->y2 = 0;
-        HandleSetAffineData(sprite, 256, 256, 0);
-    }
-
-    HandleSetAffineData(sprite, 256, 256 + yScale, 0);
-}
-
 static void HorizontalSpring(struct Sprite *sprite)
 {
     if (sprite->data[7] > sprite->data[5])
@@ -3086,36 +2407,6 @@ static void Anim_HorizontalRepeatedSpring_Slow(struct Sprite *sprite)
     }
 
     HorizontalRepeatedSpring(sprite);
-}
-
-static void Anim_HorizontalSlideShrink(struct Sprite *sprite)
-{
-    TryFlipX(sprite);
-    if (sprite->data[2] == 0)
-    {
-        HandleStartAffineAnim(sprite);
-        sprite->data[2]++;
-        sprite->data[7] = 0;
-    }
-
-    if (sprite->data[7] > 512)
-    {
-        sprite->x2 = 0;
-        ResetSpriteAfterAnim(sprite);
-        HandleSetAffineData(sprite, 256, 256, 0);
-        sprite->callback = WaitAnimEnd;
-    }
-    else
-    {
-        s16 scale;
-
-        sprite->x2 = Sin(sprite->data[7] % 256, 8);
-        sprite->data[7] += 8;
-        scale = Sin(sprite->data[7] % 128, 96);
-        HandleSetAffineData(sprite, 256 + scale, 256 + scale, 0);
-    }
-
-    TryFlipX(sprite);
 }
 
 static void Anim_LungeGrow(struct Sprite *sprite)
@@ -3336,13 +2627,6 @@ static void Anim_HorizontalShake_Slow(struct Sprite *sprite)
     sprite->callback = HorizontalShake;
 }
 
-static void Anim_VertialShake_Slow(struct Sprite *sprite)
-{
-    sprite->data[0] = 30;
-    VerticalShake(sprite);
-    sprite->callback = VerticalShake;
-}
-
 static void Anim_Twist_Twice(struct Sprite *sprite)
 {
     u8 id = sprite->data[0] = AddNewAnim();
@@ -3363,13 +2647,6 @@ static void Anim_CircleCounterclockwise_Slow(struct Sprite *sprite)
     sAnims[id].speed = 12;
     CircleCounterclockwise(sprite);
     sprite->callback = CircleCounterclockwise;
-}
-
-static void Anim_VerticalShakeTwice_Slow(struct Sprite *sprite)
-{
-    sprite->data[0] = 24;
-    VerticalShakeTwice(sprite);
-    sprite->callback = VerticalShakeTwice;
 }
 
 static void Anim_VerticalSlideWobble_Small(struct Sprite *sprite)
@@ -3396,26 +2673,6 @@ static void Anim_Spin(struct Sprite *sprite)
     sprite->callback = Spin;
 }
 
-static void Anim_TumblingFrontFlip_Twice(struct Sprite *sprite)
-{
-    u8 id = sprite->data[0] = AddNewAnim();
-
-    sAnims[id].speed = 1;
-    sAnims[id].runs = 2;
-    TumblingFrontFlip(sprite);
-    sprite->callback = TumblingFrontFlip;
-}
-
-static void Anim_DeepVerticalSquishBounce_Twice(struct Sprite *sprite)
-{
-    u8 id = sprite->data[0] = AddNewAnim();
-
-    sAnims[id].rotation = 4;
-    sAnims[id].runs = 2;
-    DeepVerticalSquishBounce(sprite);
-    sprite->callback = DeepVerticalSquishBounce;
-}
-
 static void Anim_HorizontalJumpsVerticalStretch_Twice(struct Sprite *sprite)
 {
     u8 id = sprite->data[0] = AddNewAnim();
@@ -3426,15 +2683,6 @@ static void Anim_HorizontalJumpsVerticalStretch_Twice(struct Sprite *sprite)
     sprite->data[3] = 0;
     HorizontalJumpsVerticalStretch_0(sprite);
     sprite->callback = HorizontalJumpsVerticalStretch_0;
-}
-
-static void Anim_RotateToSides(struct Sprite *sprite)
-{
-    u8 id = sprite->data[0] = AddNewAnim();
-
-    sAnims[id].rotation = 2;
-    RotateToSides(sprite);
-    sprite->callback = RotateToSides;
 }
 
 static void Anim_RotateToSides_Twice(struct Sprite *sprite)

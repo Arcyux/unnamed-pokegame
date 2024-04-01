@@ -99,7 +99,7 @@ enum {
     WIN_TMHM_INFO,
     WIN_TMHM_TYPE,
     WIN_TMHM_CAT,
-    WIN_MESSAGE, // Identical to ITEMWIN_MESSAGE. Unused?
+    WIN_MESSAGE, // Identical to ITEMWIN_MESSAGE
 };
 
 // Item list ID for toSwapPos to indicate an item is not currently being swapped
@@ -118,7 +118,6 @@ struct TempWallyBag {
     struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
     u16 cursorPosition[POCKETS_COUNT];
     u16 scrollPosition[POCKETS_COUNT];
-    u16 unused;
     u16 pocket;
 };
 
@@ -375,7 +374,6 @@ enum {
     COLORID_NORMAL,
     COLORID_POCKET_NAME,
     COLORID_GRAY_CURSOR,
-    COLORID_UNUSED,
     COLORID_TMHM_INFO,
     COLORID_NONE = 0xFF
 };
@@ -384,7 +382,6 @@ static const u8 sFontColorTable[][3] = {
     [COLORID_NORMAL]      = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,      TEXT_COLOR_LIGHT_GRAY},
     [COLORID_POCKET_NAME] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,      TEXT_COLOR_RED},
     [COLORID_GRAY_CURSOR] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_GRAY, TEXT_COLOR_GREEN},
-    [COLORID_UNUSED]      = {TEXT_COLOR_DARK_GRAY,   TEXT_COLOR_WHITE,      TEXT_COLOR_LIGHT_GRAY},
     [COLORID_TMHM_INFO]   = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY,  TEXT_COLOR_LIGHT_GRAY}
 };
 
@@ -2480,11 +2477,6 @@ static void LoadBagMenuTextWindows(void)
 static void BagMenu_Print(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorIndex)
 {
     AddTextPrinterParameterized4(windowId, fontId, left, top, letterSpacing, lineSpacing, sFontColorTable[colorIndex], speed, str);
-}
-
-static u8 UNUSED BagMenu_GetWindowId(u8 windowType)
-{
-    return gBagMenu->windowIds[windowType];
 }
 
 static u8 BagMenu_AddWindow(u8 windowType)

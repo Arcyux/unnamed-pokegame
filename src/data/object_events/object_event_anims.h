@@ -1140,9 +1140,6 @@ static const union AffineAnimCmd *const sAffineAnimTable_KyogreGroudon[] = {
     sAffineAnim_KyogreGroudon_GoSouthStart, // Used by Kyogre/Groudon when awakened
     sAffineAnim_KyogreGroudon_GoSouth,      // Used by Kyogre/Groudon when awakened
     sAffineAnim_KyogreGroudon_AttackWest,   // Used by Kyogre during Sootopolis fight
-    sAffineAnim_KyogreGroudon_AttackEast,   // Unused
-    sAffineAnim_KyogreGroudon_DipWest,      // Unused
-    sAffineAnim_KyogreGroudon_DipEast,      // Unused
 };
 
 // For animations with alternating steps

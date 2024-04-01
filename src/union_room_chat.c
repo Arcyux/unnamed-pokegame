@@ -125,12 +125,9 @@ enum {
 
 struct UnionRoomChat
 {
-    u32 filler1;
     u16 funcId;
     u16 funcState;
-    u16 filler2;
     u16 exitDelayTimer;
-    u8 filler3;
     u8 linkPlayerCount;
     u8 handleInputTask;
     u8 receiveMessagesTask;
@@ -148,7 +145,6 @@ struct UnionRoomChat
     u8 receivedMessage[64];
     u8 hostName[64];
     u8 registeredTexts[UNION_ROOM_KB_ROW_COUNT][21];
-    u8 filler4[5];
     u8 sendMessageBuffer[40];
     u16 tryQuitAgainTimer;
 };
@@ -526,7 +522,6 @@ static const u8 *const sUnionRoomKeyboardText[UNION_ROOM_KB_PAGE_COUNT - 1][UNIO
     }
 };
 
-static const u16 sUnusedPalette[] = INCBIN_U16("graphics/union_room_chat/unused.gbapal"); // Loaded but never apparently used
 static const u16 sChatMessagesWindow_Pal[] = INCBIN_U16("graphics/union_room_chat/chat_messages_window.gbapal");
 
 static const struct BgTemplate sBgTemplates[] = {
@@ -3101,7 +3096,6 @@ static void LoadChatWindowGfx(void)
 
 static void LoadChatUnkPalette(void)
 {
-    LoadPalette(sUnusedPalette, BG_PLTT_ID(8), sizeof(sUnusedPalette));
     RequestDma3Fill(0, (void *)BG_CHAR_ADDR(1) + TILE_SIZE_4BPP, TILE_SIZE_4BPP, 1);
 }
 
@@ -3147,7 +3141,6 @@ static void InitScanlineEffect(void)
     params.dmaControl = SCANLINE_EFFECT_DMACNT_16BIT;
     params.dmaDest = &REG_BG1HOFS;
     params.initState = 1;
-    params.unused9 = 0;
     sDisplay->bg1hofs = 0;
     CpuFastFill(0, gScanlineEffectRegBuffers, sizeof(gScanlineEffectRegBuffers));
     ScanlineEffect_SetParams(params);

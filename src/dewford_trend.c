@@ -331,13 +331,6 @@ static bool8 CompareTrends(struct DewfordTrend *a, struct DewfordTrend *b, u8 mo
         if (a->maxTrendiness > b->maxTrendiness) return TRUE;
         if (a->maxTrendiness < b->maxTrendiness) return FALSE;
         break;
-    case SORT_MODE_MAX_FIRST: // Unused
-        if (a->maxTrendiness > b->maxTrendiness) return TRUE;
-        if (a->maxTrendiness < b->maxTrendiness) return FALSE;
-
-        if (a->trendiness > b->trendiness) return TRUE;
-        if (a->trendiness < b->trendiness) return FALSE;
-        break;
     case SORT_MODE_FULL:
         if (a->trendiness > b->trendiness) return TRUE;
         if (a->trendiness < b->trendiness) return FALSE;

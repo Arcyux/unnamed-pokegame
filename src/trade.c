@@ -57,7 +57,6 @@ enum {
     CB_SHOW_MON_SUMMARY,
     CB_CONFIRM_TRADE_PROMPT,
     CB_CANCEL_TRADE_PROMPT,
-    CB_READY_WAIT, // Unused in Emerald, equivalent to CB_IDLE
     CB_SET_SELECTED_MONS,
     CB_PRINT_IS_THIS_OKAY,
     CB_HANDLE_TRADE_CANCELED,
@@ -67,7 +66,6 @@ enum {
     CB_EXIT_CANCELED_TRADE,
     CB_START_LINK_TRADE,
     CB_INIT_CONFIRM_TRADE_PROMPT,
-    CB_UNUSED_CLOSE_MSG,
     CB_WAIT_TO_START_RFU_TRADE,
     CB_PARTNER_MON_INVALID,
     CB_IDLE = 100,
@@ -102,8 +100,6 @@ enum {
     QUEUE_STANDBY,
     QUEUE_ONLY_MON1,
     QUEUE_ONLY_MON2,
-    QUEUE_UNUSED1, // Presumably intended for MSG_WAITING_FOR_FRIEND
-    QUEUE_UNUSED2, // Presumably intended for MSG_FRIEND_WANTS_TO_TRADE
     QUEUE_MON_CANT_BE_TRADED,
     QUEUE_EGG_CANT_BE_TRADED,
     QUEUE_FRIENDS_MON_CANT_BE_TRADED,
@@ -174,7 +170,6 @@ EWRAM_DATA u8 gSelectedTradeMonPositions[2] = {0};
 static EWRAM_DATA struct {
     u8 bg2hofs;
     u8 bg3hofs;
-    u8 filler_2[38];
     u8 partySpriteIds[2][PARTY_SIZE];
     u8 cursorSpriteId;
     u8 cursorPosition;
@@ -184,7 +179,6 @@ static EWRAM_DATA struct {
     bool8 isEgg[2][PARTY_SIZE];
     u8 hpBarLevels[2][PARTY_SIZE];
     u8 bufferPartyState;
-    u8 filler_6A[5];
     u8 callbackId;
     u8 neverRead_70;
     u16 bottomTextTileStart;
@@ -194,12 +188,10 @@ static EWRAM_DATA struct {
     u8 partnerSelectStatus;
     u8 playerConfirmStatus;
     u8 partnerConfirmStatus;
-    u8 filler_7C[2];
     u8 partnerCursorPosition;
     u16 linkData[20];
     u8 timer;
     u8 giftRibbons[GIFT_RIBBONS_COUNT];
-    u8 filler_B4[0x81C];
     struct {
         bool8 active;
         u16 delay;
@@ -212,7 +204,6 @@ static EWRAM_DATA struct {
     struct Pokemon tempMon; // Used as a temp variable when swapping Pokémon
     u32 timer;
     u32 monPersonalities[2];
-    u8 filler_70[2];
     u8 playerFinishStatus;
     u8 partnerFinishStatus;
     u16 linkData[10];
@@ -226,7 +217,6 @@ static EWRAM_DATA struct {
     u8 cableEndSpriteId;
     u8 scheduleLinkTransfer;
     u16 state;
-    u8 filler_96[0x3C];
     u8 releasePokeballSpriteId;
     u8 bouncingPokeballSpriteId;
     u16 texX;
@@ -246,7 +236,6 @@ static EWRAM_DATA struct {
     u16 monSpecies[2];
     u16 cachedMapMusic;
     u8 textColors[3];
-    u8 filler_F9;
     bool8 isCableTrade;
     u8 wirelessWinLeft;
     u8 wirelessWinTop;
@@ -1528,15 +1517,6 @@ static void CB_ProcessSelectedMonInput(void)
     }
 }
 
-static void CB_ChooseMonAfterButtonPress(void)
-{
-    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
-    {
-        PlaySE(SE_SELECT);
-        RedrawChooseAPokemonWindow();
-    }
-}
-
 static void CB_ShowTradeMonSummaryScreen(void)
 {
     if (!gPaletteFade.active)
@@ -1820,9 +1800,6 @@ static void RunTradeMenuCallback(void)
         break;
     case CB_INIT_CONFIRM_TRADE_PROMPT:
         CB_InitConfirmTradePrompt();
-        break;
-    case CB_UNUSED_CLOSE_MSG:
-        CB_ChooseMonAfterButtonPress();
         break;
     case CB_WAIT_TO_START_RFU_TRADE:
         CB_WaitToStartRfuTrade();
@@ -2184,8 +2161,6 @@ static void DoQueuedActions(void)
                     PrintTradeMessage(MSG_ONLY_MON1);
                     break;
                 case QUEUE_ONLY_MON2:
-                case QUEUE_UNUSED1:
-                case QUEUE_UNUSED2:
                     PrintTradeMessage(MSG_ONLY_MON2);
                     break;
                 case QUEUE_MON_CANT_BE_TRADED:
@@ -3066,10 +3041,6 @@ static void UpdatePokedexForReceivedMon(u8 partyIdx)
 // Functionally nop after commented code
 static void TryEnableNationalDexFromLinkPartner(void)
 {
-    u8 UNUSED mpId = GetMultiplayerId();
-    // Originally in Ruby but commented out
-    /*if (gLinkPlayers[mpId ^ 1].lp_field_2 == 0x8000)
-        EnableNationalPokedex();*/
 }
 
 static void TradeMons(u8 playerPartyIdx, u8 partnerPartyIdx)
@@ -3331,13 +3302,11 @@ static bool8 DoTradeAnim(void)
 enum {
     STATE_START,
     STATE_MON_SLIDE_IN,
-    // 2-9 unused
     STATE_SEND_MSG = 10,
     STATE_BYE_BYE,
     STATE_POKEBALL_DEPART,
     STATE_POKEBALL_DEPART_WAIT,
     STATE_FADE_OUT_TO_GBA_SEND,
-    // 15-19 unused
     STATE_WAIT_FADE_OUT_TO_GBA_SEND = 20,
     STATE_FADE_IN_TO_GBA_SEND,
     STATE_WAIT_FADE_IN_TO_GBA_SEND,
@@ -3367,11 +3336,9 @@ enum {
     STATE_LINK_MON_ARRIVED_DELAY,
     STATE_MOVE_GBA_TO_CENTER,
     STATE_GBA_FLASH_RECV,
-    STATE_UNUSED,
     STATE_GBA_STOP_FLASH_RECV,
     STATE_GBA_ZOOM_IN,
     STATE_FADE_OUT_TO_NEW_MON,
-    // 53-59 unused
     STATE_WAIT_FADE_OUT_TO_NEW_MON = 60,
     STATE_FADE_IN_TO_NEW_MON,
     STATE_WAIT_FADE_IN_TO_NEW_MON,

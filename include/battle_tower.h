@@ -16,7 +16,6 @@ struct RSBattleTowerRecord
 struct BattleFrontierTrainer
 {
     u8 facilityClass;
-    u8 filler1[3];
     u8 trainerName[PLAYER_NAME_LENGTH + 1];
     u16 speechBefore[EASY_CHAT_BATTLE_WORDS_COUNT];
     u16 speechWin[EASY_CHAT_BATTLE_WORDS_COUNT];
@@ -82,7 +81,6 @@ u8 SetFacilityPtrsGetLevel(void);
 u8 GetFrontierEnemyMonLevel(u8 lvlMode);
 s32 GetHighestLevelInPlayerParty(void);
 u16 FacilityClassToGraphicsId(u8 facilityClass);
-bool32 ValidateBattleTowerRecord(u8 recordId); // unused
 void TrySetLinkBattleTowerEnemyPartyLevel(void);
 
 #endif //GUARD_BATTLE_TOWER_H

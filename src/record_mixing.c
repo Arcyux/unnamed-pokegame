@@ -53,7 +53,6 @@ struct PlayerRecordRS
     struct DewfordTrend dewfordTrends[SAVED_TRENDS_COUNT];
     struct RSBattleTowerRecord battleTowerRecord;
     u16 giftItem;
-    u16 filler[50];
 };
 
 struct PlayerRecordEmerald
@@ -65,7 +64,6 @@ struct PlayerRecordEmerald
     /* 0x1214 */ LilycoveLady lilycoveLady;
     /* 0x1254 */ struct Apprentice apprentices[2];
     /* 0x12DC */ struct PlayerHallRecords hallRecords;
-    /* 0x1434 */ u8 filler_1434[16];
 }; // 0x1444
 
 union PlayerRecord

@@ -82,7 +82,6 @@ static const u8 sMovement_FaceUp[] =
 };
 
 static void SaveRotatingTileObject(u8, u8);
-static void TurnUnsavedRotatingTileObject(u8, u8);
 
 EWRAM_DATA static struct RotatingTilePuzzle *sRotatingTilePuzzle = NULL;
 
@@ -175,11 +174,6 @@ u16 MoveRotatingTileObjects(u8 puzzleNumber)
                 SaveRotatingTileObject(i, puzzleTileNum);
                 localId = objectEvents[i].localId;
                 ScriptMovement_StartObjectMovementScript(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, movementScript);
-            }
-            // Never reached in normal gameplay
-            else
-            {
-                TurnUnsavedRotatingTileObject(i, puzzleTileNum);
             }
         }
     }
@@ -308,74 +302,4 @@ static void SaveRotatingTileObject(u8 eventTemplateId, u8 puzzleTileNum)
     sRotatingTilePuzzle->objects[sRotatingTilePuzzle->numObjects].eventTemplateId = eventTemplateId;
     sRotatingTilePuzzle->objects[sRotatingTilePuzzle->numObjects].prevPuzzleTileNum = puzzleTileNum;
     sRotatingTilePuzzle->numObjects++;
-}
-
-// Functionally unused
-static void TurnUnsavedRotatingTileObject(u8 eventTemplateId, u8 puzzleTileNum)
-{
-    s8 tileDifference;
-    s32 rotation;
-    s32 puzzleTileStart;
-    u16 movementType;
-    struct ObjectEventTemplate *objectEvents = gSaveBlock1Ptr->objectEventTemplates;
-    s16 x = objectEvents[eventTemplateId].x + MAP_OFFSET;
-    s16 y = objectEvents[eventTemplateId].y + MAP_OFFSET;
-    u16 metatile = MapGridGetMetatileIdAt(x, y);
-
-    if (!sRotatingTilePuzzle->isTrickHouse)
-        puzzleTileStart = METATILE_MossdeepGym_YellowArrow_Right;
-    else
-        puzzleTileStart = METATILE_TrickHousePuzzle_Arrow_YellowOnWhite_Right;
-
-    tileDifference = (u8)((metatile - puzzleTileStart) % METATILE_ROW_WIDTH);
-    tileDifference -= puzzleTileNum;
-
-    if (tileDifference < 0 || tileDifference == 3)
-        rotation = ROTATE_COUNTERCLOCKWISE;
-    else if (tileDifference > 0 || tileDifference == -3)
-        rotation = ROTATE_CLOCKWISE;
-    else
-        rotation = ROTATE_NONE;
-
-    movementType = objectEvents[eventTemplateId].movementType;
-    if (rotation == ROTATE_COUNTERCLOCKWISE)
-    {
-        switch (movementType)
-        {
-        case MOVEMENT_TYPE_FACE_RIGHT:
-            objectEvents[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_UP;
-            break;
-        case MOVEMENT_TYPE_FACE_DOWN:
-            objectEvents[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_RIGHT;
-            break;
-        case MOVEMENT_TYPE_FACE_LEFT:
-            objectEvents[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_DOWN;
-            break;
-        case MOVEMENT_TYPE_FACE_UP:
-            objectEvents[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_LEFT;
-            break;
-        default:
-            break;
-        }
-    }
-    else if (rotation == ROTATE_CLOCKWISE)
-    {
-        switch (movementType)
-        {
-        case MOVEMENT_TYPE_FACE_RIGHT:
-            objectEvents[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_DOWN;
-            break;
-        case MOVEMENT_TYPE_FACE_DOWN:
-            objectEvents[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_LEFT;
-            break;
-        case MOVEMENT_TYPE_FACE_LEFT:
-            objectEvents[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_UP;
-            break;
-        case MOVEMENT_TYPE_FACE_UP:
-            objectEvents[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_RIGHT;
-            break;
-        default:
-            break;
-        }
-    }
 }

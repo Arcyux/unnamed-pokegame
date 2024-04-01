@@ -329,7 +329,6 @@ u16 rfu_getRFUStatus(u8 *rfuState)
  * struct RfuMbootLL
  * {
  *   struct RfuLinkStatus status;
- *   u8 filler_B4[0x3C];
  *   char name[10];
  *   u16 checksum;
  * }

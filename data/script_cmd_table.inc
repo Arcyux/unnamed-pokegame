@@ -61,7 +61,7 @@ gScriptCmdTable::
 	.4byte ScrCmd_warpsilent                        @ 0x3a
 	.4byte ScrCmd_warpdoor                          @ 0x3b
 	.4byte ScrCmd_warphole                          @ 0x3c
-	.4byte ScrCmd_warpteleport                      @ 0x3d
+	.4byte 0                                        @ 0x3d
 	.4byte ScrCmd_setwarp                           @ 0x3e
 	.4byte ScrCmd_setdynamicwarp                    @ 0x3f
 	.4byte ScrCmd_setdivewarp                       @ 0x40

@@ -54,13 +54,8 @@ static const u32 sTextboxBorder_Gfx[] = INCBIN_U32("graphics/interface/mystery_g
 struct MysteryGiftTaskData
 {
     u16 var; // Multipurpose
-    u16 unused1;
-    u16 unused2;
-    u16 unused3;
     u8 state;
     u8 textState;
-    u8 unused4;
-    u8 unused5;
     bool8 isWonderNews;
     bool8 sourceIsFriend;
     u8 msgId;
@@ -355,13 +350,6 @@ static const struct ListMenuTemplate sListMenu_Receive = {
     .cursorKind = CURSOR_BLACK_ARROW
 };
 
-static const u8 *const sUnusedMenuTexts[] = {
-    gText_VarietyOfEventsImportedWireless,
-    gText_WonderCardsInPossession,
-    gText_ReadNewsThatArrived,
-    gText_ReturnToTitle
-};
-
 ALIGNED(2) static const u8 sTextColors_Header[]      = { TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,     TEXT_COLOR_DARK_GRAY };
 ALIGNED(2) static const u8 sTextColors_Header_Copy[] = { TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,     TEXT_COLOR_DARK_GRAY };
 ALIGNED(2) static const u8 sMG_Ereader_TextColor_2[] = { TEXT_COLOR_WHITE,       TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY };
@@ -587,33 +575,6 @@ bool32 PrintMysteryGiftMenuMessage(u8 *textState, const u8 *str)
     return FALSE;
 }
 
-static void HideDownArrow(void)
-{
-    DrawDownArrow(WIN_MSG, DOWN_ARROW_X, DOWN_ARROW_Y, 1, FALSE, &sDownArrowCounterAndYCoordIdx[0], &sDownArrowCounterAndYCoordIdx[1]);
-}
-
-static void ShowDownArrow(void)
-{
-    DrawDownArrow(WIN_MSG, DOWN_ARROW_X, DOWN_ARROW_Y, 1, TRUE, &sDownArrowCounterAndYCoordIdx[0], &sDownArrowCounterAndYCoordIdx[1]);
-}
-
-static bool32 UNUSED HideDownArrowAndWaitButton(u8 *textState)
-{
-    switch (*textState)
-    {
-    case 0:
-        HideDownArrow();
-        if (JOY_NEW(A_BUTTON | B_BUTTON))
-            (*textState)++;
-        break;
-    case 1:
-        ShowDownArrow();
-        *textState = 0;
-        return TRUE;
-    }
-    return FALSE;
-}
-
 static bool32 PrintStringAndWait2Seconds(u8 *counter, const u8 *str)
 {
     if (*counter == 0)
@@ -721,7 +682,6 @@ s8 DoMysteryGiftYesNo(u8 *textState, u16 * windowId, bool8 yesNoBoxPlacement, co
 // Handle the "Receive/Send/Toss" menu that appears when selecting Wonder Card/News
 static s32 HandleGiftSelectMenu(u8 *textState, u16 * windowId, bool32 cannotToss, bool32 cannotSend)
 {
-    struct WindowTemplate UNUSED windowTemplate;
     s32 input;
 
     switch (*textState)
@@ -741,7 +701,6 @@ static s32 HandleGiftSelectMenu(u8 *textState, u16 * windowId, bool32 cannotToss
         (*textState)++;
         break;
     case 1:
-        windowTemplate = sWindowTemplate_YesNoBox;
         if (cannotSend)
         {
             if (!cannotToss)
@@ -1087,7 +1046,6 @@ enum {
     MG_STATE_CLIENT_ERROR,
     MG_STATE_SAVE_LOAD_GIFT,
     MG_STATE_LOAD_GIFT,
-    MG_STATE_UNUSED,
     MG_STATE_HANDLE_GIFT_INPUT,
     MG_STATE_HANDLE_GIFT_SELECT,
     MG_STATE_ASK_TOSS,
@@ -1114,14 +1072,9 @@ static void CreateMysteryGiftTask(void)
     struct MysteryGiftTaskData * data = (void *)gTasks[taskId].data;
     data->state = MG_STATE_TO_MAIN_MENU;
     data->textState = 0;
-    data->unused4 = 0;
-    data->unused5 = 0;
     data->isWonderNews = 0;
     data->sourceIsFriend = 0;
     data->var = 0;
-    data->unused1 = 0;
-    data->unused2 = 0;
-    data->unused3 = 0;
     data->msgId = 0;
     data->clientMsg = AllocZeroed(CLIENT_MAX_MSG_SIZE);
 }

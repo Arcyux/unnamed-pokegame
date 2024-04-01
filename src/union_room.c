@@ -189,7 +189,6 @@ enum {
     PLIST_NONE,
     PLIST_NEW_PLAYER,
     PLIST_RECENT_UPDATE,
-    PLIST_UNUSED,
     PLIST_CONTACTED,
 };
 
@@ -277,7 +276,6 @@ static bool8 ArePlayersDifferent(struct RfuPlayerData *, const struct RfuPlayerD
 static void ItemPrintFunc_PossibleGroupMembers(u8, u32, u8);
 static void ListMenuItemPrintFunc_UnionRoomGroups(u8, u32, u8);
 static void TradeBoardListMenuItemPrintFunc(u8, u32, u8);
-static void ItemPrintFunc_EmptyList(u8, u32, u8);
 
 #include "data/union_room.h"
 
@@ -1031,9 +1029,6 @@ static void Task_TryJoinLinkGroup(u8 taskId)
             id = ListMenu_ProcessInput(data->listTaskId);
             if (JOY_NEW(A_BUTTON) && id != LIST_NOTHING_CHOSEN)
             {
-                // Needed to match
-                u32 UNUSED activity = data->playerList->players[id].rfu.data.activity;
-
                 if (data->playerList->players[id].groupScheduledAnim == UNION_ROOM_SPAWN_IN && !data->playerList->players[id].rfu.data.startedActivity)
                 {
                     u32 readyStatus = IsTryingToTradeAcrossVersionTooSoon(data, id);
@@ -2126,9 +2121,6 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
             id = ListMenu_ProcessInput(data->listTaskId);
             if (JOY_NEW(A_BUTTON) && id != LIST_NOTHING_CHOSEN)
             {
-                // Needed to match
-                u32 UNUSED activity = data->playerList->players[id].rfu.data.activity;
-
                 if (data->playerList->players[id].groupScheduledAnim == UNION_ROOM_SPAWN_IN && !data->playerList->players[id].rfu.data.startedActivity)
                 {
                     data->leaderId = id;
@@ -3335,8 +3327,6 @@ static void Task_InitUnionRoom(u8 taskId)
                 }
             }
             break;
-        case PLIST_UNUSED:
-            break;
         }
         break;
     case 4:
@@ -4064,10 +4054,6 @@ static s32 UnionRoomGetPlayerInteractionResponse(struct RfuPlayerList *list, boo
         }
         return 0;
     }
-}
-
-static void ItemPrintFunc_EmptyList(u8 windowId, u32 itemId, u8 y)
-{
 }
 
 static void TradeBoardPrintItemInfo(u8 windowId, u8 y, struct RfuGameData * data, const u8 *playerName, u8 colorIdx)

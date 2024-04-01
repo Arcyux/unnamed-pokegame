@@ -70,53 +70,7 @@ enum
      * |
      */
     GATE_SHAPE_T3,
-
-    /*
-     * An unused T-shape gate
-     * |
-     * +--
-     * |
-     * |
-     */
-    GATE_SHAPE_T4,
-
-    /*
-     * An unused T-shape gate
-     * |
-     * |
-     * +----
-     * |
-     */
-    GATE_SHAPE_UNUSED_T1,
-
-    /*
-     * An unused T-shape gate
-     * |
-     * |
-     * +--
-     * |
-     * |
-     */
-    GATE_SHAPE_UNUSED_T2,
-
-    /*
-     * An unused T-shape gate
-     * |
-     * +----
-     * |
-     * |
-     */
-    GATE_SHAPE_UNUSED_T3,
-
-    /*
-     * An unused T-shape gate
-     * |
-     * |
-     * +----
-     * |
-     * |
-     */
-    GATE_SHAPE_UNUSED_T4,
+    GATE_SHAPE_T4
 };
 
 enum
@@ -584,34 +538,6 @@ static const u8 sRotatingGate_ArmLayout[][4 * 2] =
     {
         1, 0,
         1, 0,
-        1, 1,
-        0, 0,
-    },
-
-    // Unused T-shape gates
-    // These have 2-3 long arms and cannot actually be used anywhere
-    // since configuration for them is missing from the other tables.
-    {
-        1, 1,
-        1, 1,
-        1, 0,
-        0, 0,
-    },
-    {
-        1, 1,
-        1, 0,
-        1, 1,
-        0, 0,
-    },
-    {
-        1, 0,
-        1, 1,
-        1, 1,
-        0, 0,
-    },
-    {
-        1, 1,
-        1, 1,
         1, 1,
         0, 0,
     },

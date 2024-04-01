@@ -15,10 +15,6 @@ enum {
     REQUEST_PPMOVE2_BATTLE,
     REQUEST_PPMOVE3_BATTLE,
     REQUEST_PPMOVE4_BATTLE,
-    REQUEST_UNUSED_13_BATTLE,
-    REQUEST_UNUSED_14_BATTLE,
-    REQUEST_UNUSED_15_BATTLE,
-    REQUEST_UNUSED_16_BATTLE,
     REQUEST_OTID_BATTLE,
     REQUEST_EXP_BATTLE,
     REQUEST_HP_EV_BATTLE,
@@ -101,12 +97,6 @@ enum {
 #define RET_MEGA_EVOLUTION (1 << 7)
 #define RET_ULTRA_BURST    (1 << 6)
 #define RET_DYNAMAX        (1 << 5)
-
-struct UnusedControllerStruct
-{
-    u8 unk:7;
-    u8 flag:1;
-};
 
 struct HpAndStatus
 {
@@ -199,7 +189,6 @@ enum
     CONTROLLER_CMDS_COUNT
 };
 
-extern struct UnusedControllerStruct gUnusedControllerStruct;
 extern void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT])(u32 battler);
 extern void (*gBattlerControllerEndFuncs[MAX_BATTLERS_COUNT])(u32 battler);
 extern u8 gBattleControllerData[MAX_BATTLERS_COUNT];

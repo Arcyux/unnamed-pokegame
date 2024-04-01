@@ -17,8 +17,6 @@ struct MemBlock
     // Whether this block is currently allocated.
     u16 allocated:1;
 
-    u16 unused_00:4;
-
     // High 11 bits of location pointer.
     u16 locationHi:11;
 

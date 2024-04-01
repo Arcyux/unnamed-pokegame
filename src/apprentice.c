@@ -89,11 +89,9 @@ static void ExecuteFuncAfterButtonPress(void (*func)(void));
 
 static void Script_GivenApprenticeLvlMode(void);
 static void Script_SetApprenticeLvlMode(void);
-static void Script_SetApprenticeId(void);
 static void ShuffleApprenticeSpecies(void);
 static void Script_SetRandomQuestionData(void);
 static void IncrementQuestionsAnswered(void);
-static void IsFinalQuestion(void);
 static void Script_CreateApprenticeMenu(void);
 static void Script_PrintApprenticeMessage(void);
 static void Script_ResetPlayerApprentice(void);
@@ -109,7 +107,6 @@ static void SetLeadApprenticeMon(void);
 static void Script_ApprenticeOpenBagMenu(void);
 static void TrySetApprenticeHeldItem(void);
 static void SaveApprentice(void);
-static void SetSavedApprenticeTrainerGfxId(void);
 static void SetPlayerApprenticeTrainerGfxId(void);
 static void GetShouldApprenticeLeave(void);
 static void ShiftSavedApprentices(void);
@@ -741,12 +738,6 @@ static void Script_SetApprenticeLvlMode(void)
     SetPlayersApprenticeLvlMode(gSpecialVar_0x8005);
 }
 
-// Never called, APPRENTICE_FUNC_SET_ID is unused
-static void Script_SetApprenticeId(void)
-{
-    SetApprenticeId();
-}
-
 static void Script_SetRandomQuestionData(void)
 {
     SetRandomQuestionData();
@@ -762,28 +753,6 @@ static void IncrementQuestionsAnswered(void)
 static void GetNumApprenticePartyMonsAssigned(void)
 {
     gSpecialVar_Result = PLAYER_APPRENTICE.questionsAnswered;
-}
-
-// Never called, APPRENTICE_FUNC_IS_FINAL_QUESTION is unused
-static void IsFinalQuestion(void)
-{
-    s32 questionNum = CURRENT_QUESTION_NUM;
-
-    if (questionNum < 0)
-    {
-        // Not finished asking initial questions
-        gSpecialVar_Result = FALSE;
-    }
-    else
-    {
-        if (questionNum > APPRENTICE_MAX_QUESTIONS - 1)
-            gSpecialVar_Result = TRUE;
-
-        if (PLAYER_APPRENTICE.questions[questionNum].questionId == QUESTION_ID_WIN_SPEECH)
-            gSpecialVar_Result = TRUE;
-        else
-            gSpecialVar_Result = FALSE;
-    }
 }
 
 static void Script_CreateApprenticeMenu(void)
@@ -1177,31 +1146,6 @@ static void SaveApprentice(void)
     CalcApprenticeChecksum(&gSaveBlock2Ptr->apprentices[0]);
 }
 
-// Never called, APPRENTICE_FUNC_SET_GFX_SAVED is unused
-static void SetSavedApprenticeTrainerGfxId(void)
-{
-    u8 i;
-    u16 objectEventGfxId;
-    u8 class = gApprentices[gSaveBlock2Ptr->apprentices[0].id].facilityClass;
-
-    for (i = 0; i < ARRAY_COUNT(gTowerMaleFacilityClasses) && gTowerMaleFacilityClasses[i] != class; i++)
-        ;
-    if (i != ARRAY_COUNT(gTowerMaleFacilityClasses))
-    {
-        objectEventGfxId = gTowerMaleTrainerGfxIds[i];
-        VarSet(VAR_OBJ_GFX_ID_0, objectEventGfxId);
-        return;
-    }
-
-    for (i = 0; i < ARRAY_COUNT(gTowerFemaleFacilityClasses) && gTowerFemaleFacilityClasses[i] != class; i++)
-        ;
-    if (i != ARRAY_COUNT(gTowerFemaleFacilityClasses))
-    {
-        objectEventGfxId = gTowerFemaleTrainerGfxIds[i];
-        VarSet(VAR_OBJ_GFX_ID_0, objectEventGfxId);
-    }
-}
-
 static void SetPlayerApprenticeTrainerGfxId(void)
 {
     u8 i;
@@ -1260,12 +1204,6 @@ const u8 *GetApprenticeNameInLanguage(u32 apprenticeId, s32 language)
     }
 }
 
-static void UNUSED Task_SwitchToFollowupFuncAfterButtonPress(u8 taskId)
-{
-    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
-        SwitchTaskToFollowupFunc(taskId);
-}
-
 static void Task_ExecuteFuncAfterButtonPress(u8 taskId)
 {
     if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
@@ -1281,10 +1219,4 @@ static void ExecuteFuncAfterButtonPress(void (*func)(void))
     u8 taskId = CreateTask(Task_ExecuteFuncAfterButtonPress, 1);
     gTasks[taskId].data[0] = (u32)(func);
     gTasks[taskId].data[1] = (u32)(func) >> 16;
-}
-
-static void UNUSED ExecuteFollowupFuncAfterButtonPress(TaskFunc task)
-{
-    u8 taskId = CreateTask(Task_SwitchToFollowupFuncAfterButtonPress, 1);
-    SetTaskFuncWithFollowupFunc(taskId, Task_SwitchToFollowupFuncAfterButtonPress, task);
 }
