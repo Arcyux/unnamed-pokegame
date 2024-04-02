@@ -38,6 +38,7 @@
 #include "field_specials.h"
 #include "mystery_gift.h"
 #include "union_room_chat.h"
+#include "constants/map_groups.h"
 #include "constants/items.h"
 
 extern const u8 EventScript_ResetAllMapFlags[];
@@ -193,6 +194,14 @@ void NewGameInitData(void)
     ResetContestLinkResults();
     
     memset(&gSaveBlock2Ptr->follower, 0, sizeof(gSaveBlock2Ptr->follower));
+    
+    memset(gSaveBlock1Ptr->dexNavSearchLevels, 0, sizeof(gSaveBlock1Ptr->dexNavSearchLevels));
+    gSaveBlock1Ptr->dexNavChain = 0;
+
+    GetSetPokedexFlag(SPECIES_UNOWN, FLAG_SET_SEEN);
+    GetSetPokedexFlag(SPECIES_SUNKERN, FLAG_SET_SEEN);
+    GetSetPokedexFlag(SPECIES_SNOM, FLAG_SET_SEEN);
+    GetSetPokedexFlag(SPECIES_KRICKETOT, FLAG_SET_SEEN);
 }
 
 static void ResetMiniGamesRecords(void)

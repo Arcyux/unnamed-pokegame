@@ -348,7 +348,7 @@ SECTIONS {
         src/pokemon_debug.o(.text);
         src/expansion_intro.o(.text);
         src/follow_me.o(.text);
-    } > ROM =0
+		src/dexnav.o(.text);
 
     script_data :
     ALIGN(4)
@@ -705,6 +705,7 @@ SECTIONS {
         src/pokemon_debug.o(.rodata);
         src/expansion_intro.o(.rodata);
         src/follow_me.o(.rodata);
+		src/dexnav.o(.rodata);
     } > ROM =0
 
     song_data :

@@ -152,8 +152,8 @@ gSpecials::
 	def_special Special_ViewWallClock
 	def_special ChooseStarter
 	def_special StartWallyTutorialBattle
+	def_special ChangePokemonNickname
 	def_special ChoosePartyMon
-	def_special 0
 	def_special PlayRoulette
 	def_special IsFanClubMemberFanOfPlayer
 	def_special GetNumFansOfPlayerInTrainerFanClub
@@ -452,6 +452,7 @@ gSpecials::
 	def_special StartMirageTowerShake
 	def_special StartMirageTowerFossilFallAndSink
 	def_special GetPCBoxToSendMon
+	def_special ChangeBoxPokemonNickname
 	def_special ShouldShowBoxWasFullMessage
 	def_special SetMatchCallRegisteredFlag
 	def_special DoDomeConfetti

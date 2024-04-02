@@ -31,7 +31,6 @@
 static void SetInitialEggData(struct Pokemon *mon, u16 species, struct DayCare *daycare);
 static void DaycarePrintMonInfo(u8 windowId, u32 daycareSlotId, u8 y);
 static u8 ModifyBreedingScoreForOvalCharm(u8 score);
-static u8 GetEggMoves(struct Pokemon *pokemon, u16 *eggMoves);
 
 // RAM buffers used to assist with BuildEggMoveset()
 EWRAM_DATA static u16 sHatchedEggLevelUpMoves[EGG_LVL_UP_MOVES_ARRAY_COUNT] = {0};
@@ -643,7 +642,7 @@ static void InheritAbility(struct Pokemon *egg, struct BoxPokemon *father, struc
 
 // Counts the number of egg moves a Pokémon learns and stores the moves in
 // the given array.
-static u8 GetEggMoves(struct Pokemon *pokemon, u16 *eggMoves)
+u8 GetEggMoves(struct Pokemon *pokemon, u16 *eggMoves)
 {
     u16 eggMoveIdx;
     u16 numEggMoves;

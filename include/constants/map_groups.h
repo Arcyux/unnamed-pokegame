@@ -8,7 +8,8 @@
 // gMapGroup_TownsAndRoutes
 
 // gMapGroup_Dungeons
-#define MAP_MYSTERIOUS_CAVE (0 | (1 << 8))
+#define MAP_MYSTERIOUS_CAVE       (0 | (1 << 8))
+#define MAP_MYSTERIOUS_CAVE_1F_2R (1 | (1 << 8))
 
 // gMapGroup_IndoorDynamic
 

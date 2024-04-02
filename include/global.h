@@ -984,6 +984,8 @@ struct SaveBlock1
     /*0x3???*/ struct TrainerHillSave trainerHill;
 #endif //FREE_TRAINER_HILL
     /*0x3???*/ struct WaldaPhrase waldaPhrase;
+               u8 dexNavSearchLevels[NUM_SPECIES];
+               u8 dexNavChain;
     // sizeof: 0x3???
 };
 

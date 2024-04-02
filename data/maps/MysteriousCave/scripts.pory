@@ -3,6 +3,8 @@ const ENCOUNTER_OBJID = 1
 mapscripts MysteriousCave_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         setrespawn(HEAL_LOCATION_MYSTERIOUS_CAVE)
+        call(RandomArceusStarter)
+        setflag(FLAG_DEFEATED_FIRST_ENCOUNTER)
     }
 
     MAP_SCRIPT_ON_RESUME {
@@ -102,13 +104,13 @@ script(local) RandomArceusStarter {
         call(RandomArceus)
 
         givemon(SPECIES_ARCEUS, 1, ITEM_LEGEND_PLATE,,,,,,,,,,,,,,,,,,, MOVE_JUDGMENT,,,, VAR_TEMP_2)
-        msgbox(format("{PLAYER} recieved an Arceus holding a plate!"))
-        bufferspeciesname(STR_VAR_1, SPECIES_ARCEUS)
-        msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
+        //msgbox(format("{PLAYER} recieved an Arceus holding a plate!"))
+        //bufferspeciesname(STR_VAR_1, SPECIES_ARCEUS)
+        //msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
         
         if (var(VAR_RESULT) == YES) {
-            call(Common_EventScript_GetGiftMonPartySlot)
-            call(Common_EventScript_NameReceivedPartyMon)
+            //call(Common_EventScript_GetGiftMonPartySlot)
+            //call(Common_EventScript_NameReceivedPartyMon)
         }
 
         setflag(FLAG_STARTER_GIVEN)
@@ -136,9 +138,9 @@ script RandomArceusEncounter {
 
     if (var(VAR_RESULT) == B_OUTCOME_WON) {
         playse(SE_CLICK)
-        //removeobject(ENCOUNTER_OBJID)
+        removeobject(ENCOUNTER_OBJID)
 
-        //setflag(FLAG_DEFEATED_FIRST_ENCOUNTER)
+        setflag(FLAG_DEFEATED_FIRST_ENCOUNTER)
 
         call(OpenCloseExit)
     }

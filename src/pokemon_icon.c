@@ -241,6 +241,15 @@ void LoadMonIconPalettePersonality(u16 species, u32 personality)
         LoadSpritePalette(&gMonIconPaletteTable[palIndex]);
 }
 
+// unused
+// used by dexnav
+void SafeFreeMonIconPalette(u16 species)
+{
+    u8 palIndex;
+    palIndex = gSpeciesInfo[SanitizeSpeciesId(species)].iconPalIndex;
+    FreeSpritePaletteByTag(gMonIconPaletteTable[palIndex].tag);
+}
+
 void FreeMonIconPalettes(void)
 {
     u8 i;

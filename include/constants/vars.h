@@ -269,8 +269,8 @@
 #define VAR_WILD_AI_FLAGS                                0x40F9 // Unused Var
 #define VAR_LAST_REPEL_LURE_USED                         0x40FA // Unused Var
 #define VAR_LEVEL_CAP                                    0x40FB // Unused Var
-#define VAR_UNUSED_0x40FC                                0x40FC // Unused Var
-#define VAR_UNUSED_0x40FD                                0x40FD // Unused Var
+#define VAR_DEXNAV_SPECIES                               0x40FC // Registered dexnav species
+#define VAR_DEXNAV_STEP_COUNTER                          0x40FD // steps for finding hidden pokemon
 #define VAR_UNUSED_0x40FE                                0x40FE // Unused Var
 #define VAR_UNUSED_0x40FF                                0x40FF // Unused Var
 

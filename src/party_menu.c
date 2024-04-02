@@ -74,6 +74,7 @@
 #include "constants/party_menu.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "naming_screen.h"
 
 #if (DECAP_ENABLED) && (DECAP_MIRRORING) && !(DECAP_PARTY_MENU)
 #define gStringVar4 (MirrorPtr(gStringVar4))
@@ -450,6 +451,8 @@ static void Task_PartyMenuWaitForFade(u8 taskId);
 static void Task_ChooseContestMon(u8 taskId);
 static void CB2_ChooseContestMon(void);
 static void Task_ChoosePartyMon(u8 taskId);
+static void ChangePokemonNickname_CB(void);
+static void ChangeBoxPokemonNickname_CB(void);
 static void Task_ChooseMonForMoveRelearner(u8);
 static void CB2_ChooseMonForMoveRelearner(void);
 static void Task_BattlePyramidChooseMonHeldItems(u8);
@@ -4035,7 +4038,7 @@ static void ShowOrHideHeldItemSprite(u16 item, struct PartyMenuBox *menuBox)
 
 void LoadHeldItemIcons(void)
 {
-    LoadSpriteSheet(&sSpriteSheet_HeldItem);
+    LoadSpriteSheet(&gSpriteSheet_HeldItem);
     LoadSpritePalette(&sSpritePalette_HeldItem);
 }
 
@@ -7213,6 +7216,35 @@ static void Task_ChoosePartyMon(u8 taskId)
         InitPartyMenu(PARTY_MENU_TYPE_CHOOSE_MON, PARTY_LAYOUT_SINGLE, PARTY_ACTION_CHOOSE_AND_CLOSE, FALSE, PARTY_MSG_CHOOSE_MON, Task_HandleChooseMonInput, BufferMonSelection);
         DestroyTask(taskId);
     }
+}
+
+void ChangePokemonNickname(void)
+{
+    GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar3);
+    GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar2);
+    DoNamingScreen(NAMING_SCREEN_NICKNAME, gStringVar2, GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES, NULL), GetMonGender(&gPlayerParty[gSpecialVar_0x8004]), GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_PERSONALITY, NULL), ChangePokemonNickname_CB);
+}
+
+static void ChangePokemonNickname_CB(void)
+{
+    SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar2);
+    CB2_ReturnToFieldContinueScriptPlayMapMusic();
+}
+
+void ChangeBoxPokemonNickname(void)
+{
+    struct BoxPokemon *boxMon;
+
+    boxMon = GetBoxedMonPtr(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos);
+    GetBoxMonData(boxMon, MON_DATA_NICKNAME, gStringVar3);
+    GetBoxMonData(boxMon, MON_DATA_NICKNAME, gStringVar2);
+    DoNamingScreen(NAMING_SCREEN_NICKNAME, gStringVar2, GetBoxMonData(boxMon, MON_DATA_SPECIES, NULL), GetBoxMonGender(boxMon), GetBoxMonData(boxMon, MON_DATA_PERSONALITY, NULL), ChangeBoxPokemonNickname_CB);
+}
+
+static void ChangeBoxPokemonNickname_CB(void)
+{
+    SetBoxMonNickAt(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos, gStringVar2);
+    CB2_ReturnToFieldContinueScriptPlayMapMusic();
 }
 
 void ChooseMonForMoveRelearner(void)

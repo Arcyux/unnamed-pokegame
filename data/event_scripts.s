@@ -311,6 +311,7 @@ Common_EventScript_FerryDepartIsland::
 
 Common_EventScript_NameReceivedPartyMon::
 	fadescreen FADE_TO_BLACK
+	special ChangePokemonNickname
 	waitstate
 	return
 
@@ -542,3 +543,7 @@ EventScript_VsSeekerChargingDone::
 	.include "data/text/birch_speech.inc"
 
 	.include "data/maps/MysteriousCave/scripts.inc"
+    .include "data/scripts/dexnav.inc"
+    
+
+	.include "data/maps/MysteriousCave_1F_2R/scripts.inc"

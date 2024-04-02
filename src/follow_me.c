@@ -1,4 +1,5 @@
 #include "global.h"
+#include "global.fieldmap.h"
 #include "follow_me.h"
 #include "event_object_movement.h"
 #include "field_door.h"
@@ -35,9 +36,6 @@ Known Issues:
     -follower gets messed up if you go into a map with a maximum number of event objects
         -inherits incorrect palette, may get directionally confused
 */
-
-// Defines
-#define PLAYER_AVATAR_FLAG_BIKE    PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE
 
 struct FollowerSpriteGraphics
 {

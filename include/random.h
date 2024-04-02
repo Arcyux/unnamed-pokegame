@@ -63,7 +63,6 @@ static inline u16 Random(void)
 void SeedRng(u32 seed);
 void SeedRng2(u32 seed);
 rng_value_t LocalRandomSeed(u32 seed);
-
 static inline u16 Random2(void)
 {
     return Random2_32() >> 16;
@@ -104,6 +103,8 @@ static inline rng_value_t LocalRandomSeed(u32 seed)
 }
 
 #endif
+
+u16 RandRange(u16 min, u16 max);
 
 extern rng_value_t gRngValue;
 extern rng_value_t gRng2Value;
