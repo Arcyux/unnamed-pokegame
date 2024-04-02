@@ -61,7 +61,7 @@ gScriptCmdTable::
 	.4byte ScrCmd_warpsilent                        @ 0x3a
 	.4byte ScrCmd_warpdoor                          @ 0x3b
 	.4byte ScrCmd_warphole                          @ 0x3c
-	.4byte 0                                        @ 0x3d
+	.4byte ScrCmd_nop1                              @ 0x3d
 	.4byte ScrCmd_setwarp                           @ 0x3e
 	.4byte ScrCmd_setdynamicwarp                    @ 0x3f
 	.4byte ScrCmd_setdivewarp                       @ 0x40
@@ -75,10 +75,10 @@ gScriptCmdTable::
 	.4byte ScrCmd_checkitemtype                     @ 0x48
 	.4byte ScrCmd_addpcitem                         @ 0x49
 	.4byte ScrCmd_checkpcitem                       @ 0x4a
-	.4byte 0                                        @ 0x4b
-	.4byte 0                                        @ 0x4c
-	.4byte 0                                        @ 0x4d
-	.4byte 0                                        @ 0x4e
+	.4byte ScrCmd_nop1                              @ 0x4b
+	.4byte ScrCmd_nop1                              @ 0x4c
+	.4byte ScrCmd_nop1                              @ 0x4d
+	.4byte ScrCmd_nop1                              @ 0x4e
 	.4byte ScrCmd_applymovement                     @ 0x4f
 	.4byte ScrCmd_applymovementat                   @ 0x50
 	.4byte ScrCmd_waitmovement                      @ 0x51
@@ -129,14 +129,14 @@ gScriptCmdTable::
 	.4byte ScrCmd_bufferleadmonspeciesname          @ 0x7e
 	.4byte ScrCmd_bufferpartymonnick                @ 0x7f
 	.4byte ScrCmd_bufferitemname                    @ 0x80
-	.4byte 0                                        @ 0x81
+	.4byte ScrCmd_nop1                              @ 0x81
 	.4byte ScrCmd_buffermovename                    @ 0x82
 	.4byte ScrCmd_buffernumberstring                @ 0x83
 	.4byte ScrCmd_bufferstdstring                   @ 0x84
 	.4byte ScrCmd_bufferstring                      @ 0x85
 	.4byte ScrCmd_pokemart                          @ 0x86
-	.4byte 0                                        @ 0x87
-	.4byte 0                                        @ 0x88
+	.4byte ScrCmd_nop1                              @ 0x87
+	.4byte ScrCmd_nop1                              @ 0x88
 	.4byte ScrCmd_playslotmachine                   @ 0x89
 	.4byte ScrCmd_setberrytree                      @ 0x8a
 	.4byte ScrCmd_choosecontestmon                  @ 0x8b
@@ -229,6 +229,11 @@ gScriptCmdTable::
 	.4byte ScrCmd_bufferitemnameplural              @ 0xe2
 	.4byte ScrCmd_dynmultichoice                    @ 0xe3
 	.4byte ScrCmd_dynmultipush                      @ 0xe4
+    .4byte ScrCmd_setfollower					    @ 0xe5
+    .4byte ScrCmd_destroyfollower			        @ 0xe6
+    .4byte ScrCmd_facefollower				        @ 0xe7
+    .4byte ScrCmd_checkfollower				        @ 0xe8
+	.4byte ScrCmd_objectfaceplayer                  @ 0xe9
 
 gScriptCmdTableEnd::
 	.4byte ScrCmd_nop

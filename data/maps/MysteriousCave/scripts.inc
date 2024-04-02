@@ -309,7 +309,33 @@ RandomArceusEncounter_2:
 	goto RandomArceusEncounter_1
 
 
+FollowPlayer::
+# 150 "data/maps/MysteriousCave/scripts.pory"
+	lock
+# 151 "data/maps/MysteriousCave/scripts.pory"
+	faceplayer
+# 152 "data/maps/MysteriousCave/scripts.pory"
+	loadword 0, TalkToPlayer
+# 153 "data/maps/MysteriousCave/scripts.pory"
+	setfollower 2, FOLLOWER_FLAG_ALL | FOLLOWER_FLAG_CUSTOM_FOLLOW_SCRIPT
+# 154 "data/maps/MysteriousCave/scripts.pory"
+	release
+	return
+
+
+TalkToPlayer::
+# 158 "data/maps/MysteriousCave/scripts.pory"
+	objectfaceplayer OBJ_EVENT_ID_FOLLOWER
+# 159 "data/maps/MysteriousCave/scripts.pory"
+	msgbox TalkToPlayer_Text_0, MSGBOX_AUTOCLOSE
+	return
+
+
 RandomArceusStarter_Text_0:
 # 105 "data/maps/MysteriousCave/scripts.pory"
 	.string "{PLAYER} recieved an Arceus holding a\n"
 	.string "plate!$"
+
+TalkToPlayer_Text_0:
+# 159 "data/maps/MysteriousCave/scripts.pory"
+	.string "Yo.$"

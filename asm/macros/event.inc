@@ -654,6 +654,12 @@
 	.byte \direction
 	.endm
 
+	@ Turns the specified object to face the player.
+	.macro objectfaceplayer localId:req
+	.byte 0xe9
+	.2byte \localId
+	.endm
+
 	@ Configures the arguments for a trainer battle, then jumps to the appropriate script in scripts/trainer_battle.inc
 	.macro trainerbattle type:req, trainer:req, local_id:req, pointer1:req, pointer2, pointer3, pointer4
 	.byte 0x5c
@@ -1720,6 +1726,28 @@
 	.2byte \item
 	.2byte \quantity
 	.endm
+    
+    @ sets an NPC up to follow the player
+    .macro setfollower localId:req, flags:req
+    .byte 0xe5
+    .byte \localId
+    .2byte \flags
+    .endm
+    
+    @ remove the following NPC (assumes there will only ever be one)
+    .macro destroyfollower
+    .byte 0xe6
+    .endm
+    
+    @ makes the player and follower face one another
+    .macro facefollower
+    .byte 0xe7
+    .endm
+    
+    @ checks if you have a follower. returns the result to VAR_RESULT
+    .macro checkfollower
+    .byte 0xe8
+    .endm
 
 	.macro _dynmultichoice left:req, top:req, ignoreBPress:req, maxBeforeScroll:req, shouldSort:req, initialSelected:req, callbacks:req argv:vararg
 	.byte 0xe3

@@ -145,3 +145,16 @@ script RandomArceusEncounter {
 
     releaseall()
 }
+
+script FollowPlayer {
+    lock()
+    faceplayer()
+    loadword(0, TalkToPlayer)
+    setfollower(2, FOLLOWER_FLAG_ALL | FOLLOWER_FLAG_CUSTOM_FOLLOW_SCRIPT)
+    release()
+}
+
+script TalkToPlayer {
+    objectfaceplayer(OBJ_EVENT_ID_FOLLOWER)
+    msgbox("Yo.", MSGBOX_AUTOCLOSE)
+}
