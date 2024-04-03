@@ -349,6 +349,7 @@ SECTIONS {
         src/expansion_intro.o(.text);
         src/follow_me.o(.text);
 		src/dexnav.o(.text);
+        src/quests.o(.text);
 
     script_data :
     ALIGN(4)
@@ -706,6 +707,7 @@ SECTIONS {
         src/expansion_intro.o(.rodata);
         src/follow_me.o(.rodata);
 		src/dexnav.o(.rodata);
+        src/quests.o(.rodata);
     } > ROM =0
 
     song_data :

@@ -39,6 +39,7 @@
 #include "mystery_gift.h"
 #include "union_room_chat.h"
 #include "constants/map_groups.h"
+#include "quests.h"
 #include "constants/items.h"
 
 extern const u8 EventScript_ResetAllMapFlags[];
@@ -197,6 +198,8 @@ void NewGameInitData(void)
     
     memset(gSaveBlock1Ptr->dexNavSearchLevels, 0, sizeof(gSaveBlock1Ptr->dexNavSearchLevels));
     gSaveBlock1Ptr->dexNavChain = 0;
+    
+    QuestMenu_ResetMenuSaveData();
 
     GetSetPokedexFlag(SPECIES_UNOWN, FLAG_SET_SEEN);
     GetSetPokedexFlag(SPECIES_SUNKERN, FLAG_SET_SEEN);

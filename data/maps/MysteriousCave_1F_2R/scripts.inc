@@ -8,5 +8,7 @@ MysteriousCave_1F_2R_MapScripts_MAP_SCRIPT_ON_LOAD:
 	setflag FLAG_SYS_DEXNAV_GET
 # 4 "data/maps/MysteriousCave_1F_2R/scripts.pory"
 	setflag FLAG_SYS_DETECTOR_MODE
+# 5 "data/maps/MysteriousCave_1F_2R/scripts.pory"
+	setflag FLAG_SYS_QUEST_MENU_GET
 	return
 
