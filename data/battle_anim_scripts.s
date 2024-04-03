@@ -20,861 +20,863 @@ gMovesWithQuietBGM::
 
 	.align 2
 gBattleAnims_Moves::
-	.4byte Move_NONE
-	.4byte Move_POUND
-	.4byte Move_KARATE_CHOP
-	.4byte Move_DOUBLE_SLAP
-	.4byte Move_COMET_PUNCH
-	.4byte Move_MEGA_PUNCH
-	.4byte Move_PAY_DAY
-	.4byte Move_FIRE_PUNCH
-	.4byte Move_ICE_PUNCH
-	.4byte Move_THUNDER_PUNCH
-	.4byte Move_SCRATCH
-	.4byte Move_VICE_GRIP
-	.4byte Move_GUILLOTINE
-	.4byte Move_RAZOR_WIND
-	.4byte Move_SWORDS_DANCE
-	.4byte Move_CUT
-	.4byte Move_GUST
-	.4byte Move_WING_ATTACK
-	.4byte Move_WHIRLWIND
-	.4byte Move_FLY
-	.4byte Move_BIND
-	.4byte Move_SLAM
-	.4byte Move_VINE_WHIP
-	.4byte Move_STOMP
-	.4byte Move_DOUBLE_KICK
-	.4byte Move_MEGA_KICK
-	.4byte Move_JUMP_KICK
-	.4byte Move_ROLLING_KICK
-	.4byte Move_SAND_ATTACK
-	.4byte Move_HEADBUTT
-	.4byte Move_HORN_ATTACK
-	.4byte Move_FURY_ATTACK
-	.4byte Move_HORN_DRILL
-	.4byte Move_TACKLE
-	.4byte Move_BODY_SLAM
-	.4byte Move_WRAP
-	.4byte Move_TAKE_DOWN
-	.4byte Move_THRASH
-	.4byte Move_DOUBLE_EDGE
-	.4byte Move_TAIL_WHIP
-	.4byte Move_POISON_STING
-	.4byte Move_TWINEEDLE
-	.4byte Move_PIN_MISSILE
-	.4byte Move_LEER
-	.4byte Move_BITE
-	.4byte Move_GROWL
-	.4byte Move_ROAR
-	.4byte Move_SING
-	.4byte Move_SUPERSONIC
-	.4byte Move_SONIC_BOOM
-	.4byte Move_DISABLE
-	.4byte Move_ACID
-	.4byte Move_EMBER
-	.4byte Move_FLAMETHROWER
-	.4byte Move_MIST
-	.4byte Move_WATER_GUN
-	.4byte Move_HYDRO_PUMP
-	.4byte Move_SURF
-	.4byte Move_ICE_BEAM
-	.4byte Move_BLIZZARD
-	.4byte Move_PSYBEAM
-	.4byte Move_BUBBLE_BEAM
-	.4byte Move_AURORA_BEAM
-	.4byte Move_HYPER_BEAM
-	.4byte Move_PECK
-	.4byte Move_DRILL_PECK
-	.4byte Move_SUBMISSION
-	.4byte Move_LOW_KICK
-	.4byte Move_COUNTER
-	.4byte Move_SEISMIC_TOSS
-	.4byte Move_STRENGTH
-	.4byte Move_ABSORB
-	.4byte Move_MEGA_DRAIN
-	.4byte Move_LEECH_SEED
-	.4byte Move_GROWTH
-	.4byte Move_RAZOR_LEAF
-	.4byte Move_SOLAR_BEAM
-	.4byte Move_POISON_POWDER
-	.4byte Move_STUN_SPORE
-	.4byte Move_SLEEP_POWDER
-	.4byte Move_PETAL_DANCE
-	.4byte Move_STRING_SHOT
-	.4byte Move_DRAGON_RAGE
-	.4byte Move_FIRE_SPIN
-	.4byte Move_THUNDER_SHOCK
-	.4byte Move_THUNDERBOLT
-	.4byte Move_THUNDER_WAVE
-	.4byte Move_THUNDER
-	.4byte Move_ROCK_THROW
-	.4byte Move_EARTHQUAKE
-	.4byte Move_FISSURE
-	.4byte Move_DIG
-	.4byte Move_TOXIC
-	.4byte Move_CONFUSION
-	.4byte Move_PSYCHIC
-	.4byte Move_HYPNOSIS
-	.4byte Move_MEDITATE
-	.4byte Move_AGILITY
-	.4byte Move_QUICK_ATTACK
-	.4byte Move_RAGE
-	.4byte Move_TELEPORT
-	.4byte Move_NIGHT_SHADE
-	.4byte Move_MIMIC
-	.4byte Move_SCREECH
-	.4byte Move_DOUBLE_TEAM
-	.4byte Move_RECOVER
-	.4byte Move_HARDEN
-	.4byte Move_MINIMIZE
-	.4byte Move_SMOKESCREEN
-	.4byte Move_CONFUSE_RAY
-	.4byte Move_WITHDRAW
-	.4byte Move_DEFENSE_CURL
-	.4byte Move_BARRIER
-	.4byte Move_LIGHT_SCREEN
-	.4byte Move_HAZE
-	.4byte Move_REFLECT
-	.4byte Move_FOCUS_ENERGY
-	.4byte Move_BIDE
-	.4byte Move_METRONOME
-	.4byte Move_MIRROR_MOVE @ doesnt have an actual animation
-	.4byte Move_SELF_DESTRUCT
-	.4byte Move_EGG_BOMB
-	.4byte Move_LICK
-	.4byte Move_SMOG
-	.4byte Move_SLUDGE
-	.4byte Move_BONE_CLUB
-	.4byte Move_FIRE_BLAST
-	.4byte Move_WATERFALL
-	.4byte Move_CLAMP
-	.4byte Move_SWIFT
-	.4byte Move_SKULL_BASH
-	.4byte Move_SPIKE_CANNON
-	.4byte Move_CONSTRICT
-	.4byte Move_AMNESIA
-	.4byte Move_KINESIS
-	.4byte Move_SOFT_BOILED
-	.4byte Move_HIGH_JUMP_KICK
-	.4byte Move_GLARE
-	.4byte Move_DREAM_EATER
-	.4byte Move_POISON_GAS
-	.4byte Move_BARRAGE
-	.4byte Move_LEECH_LIFE
-	.4byte Move_LOVELY_KISS
-	.4byte Move_SKY_ATTACK
-	.4byte Move_TRANSFORM
-	.4byte Move_BUBBLE
-	.4byte Move_DIZZY_PUNCH
-	.4byte Move_SPORE
-	.4byte Move_FLASH
-	.4byte Move_PSYWAVE
-	.4byte Move_SPLASH
-	.4byte Move_ACID_ARMOR
-	.4byte Move_CRABHAMMER
-	.4byte Move_EXPLOSION
-	.4byte Move_FURY_SWIPES
-	.4byte Move_BONEMERANG
-	.4byte Move_REST
-	.4byte Move_ROCK_SLIDE
-	.4byte Move_HYPER_FANG
-	.4byte Move_SHARPEN
-	.4byte Move_CONVERSION
-	.4byte Move_TRI_ATTACK
-	.4byte Move_SUPER_FANG
-	.4byte Move_SLASH
-	.4byte Move_SUBSTITUTE
-	.4byte Move_STRUGGLE
-	.4byte Move_SKETCH
-	.4byte Move_TRIPLE_KICK
-	.4byte Move_THIEF
-	.4byte Move_SPIDER_WEB
-	.4byte Move_MIND_READER
-	.4byte Move_NIGHTMARE
-	.4byte Move_FLAME_WHEEL
-	.4byte Move_SNORE
-	.4byte Move_CURSE
-	.4byte Move_FLAIL
-	.4byte Move_CONVERSION_2
-	.4byte Move_AEROBLAST
-	.4byte Move_COTTON_SPORE
-	.4byte Move_REVERSAL
-	.4byte Move_SPITE
-	.4byte Move_POWDER_SNOW
-	.4byte Move_PROTECT
-	.4byte Move_MACH_PUNCH
-	.4byte Move_SCARY_FACE
-	.4byte Move_FAINT_ATTACK
-	.4byte Move_SWEET_KISS
-	.4byte Move_BELLY_DRUM
-	.4byte Move_SLUDGE_BOMB
-	.4byte Move_MUD_SLAP
-	.4byte Move_OCTAZOOKA
-	.4byte Move_SPIKES
-	.4byte Move_ZAP_CANNON
-	.4byte Move_FORESIGHT
-	.4byte Move_DESTINY_BOND
-	.4byte Move_PERISH_SONG
-	.4byte Move_ICY_WIND
-	.4byte Move_DETECT
-	.4byte Move_BONE_RUSH
-	.4byte Move_LOCK_ON
-	.4byte Move_OUTRAGE
-	.4byte Move_SANDSTORM
-	.4byte Move_GIGA_DRAIN
-	.4byte Move_ENDURE
-	.4byte Move_CHARM
-	.4byte Move_ROLLOUT
-	.4byte Move_FALSE_SWIPE
-	.4byte Move_SWAGGER
-	.4byte Move_MILK_DRINK
-	.4byte Move_SPARK
-	.4byte Move_FURY_CUTTER
-	.4byte Move_STEEL_WING
-	.4byte Move_MEAN_LOOK
-	.4byte Move_ATTRACT
-	.4byte Move_SLEEP_TALK
-	.4byte Move_HEAL_BELL
-	.4byte Move_RETURN
-	.4byte Move_PRESENT
-	.4byte Move_FRUSTRATION
-	.4byte Move_SAFEGUARD
-	.4byte Move_PAIN_SPLIT
-	.4byte Move_SACRED_FIRE
-	.4byte Move_MAGNITUDE
-	.4byte Move_DYNAMIC_PUNCH
-	.4byte Move_MEGAHORN
-	.4byte Move_DRAGON_BREATH
-	.4byte Move_BATON_PASS
-	.4byte Move_ENCORE
-	.4byte Move_PURSUIT
-	.4byte Move_RAPID_SPIN
-	.4byte Move_SWEET_SCENT
-	.4byte Move_IRON_TAIL
-	.4byte Move_METAL_CLAW
-	.4byte Move_VITAL_THROW
-	.4byte Move_MORNING_SUN
-	.4byte Move_SYNTHESIS
-	.4byte Move_MOONLIGHT
-	.4byte Move_HIDDEN_POWER
-	.4byte Move_CROSS_CHOP
-	.4byte Move_TWISTER
-	.4byte Move_RAIN_DANCE
-	.4byte Move_SUNNY_DAY
-	.4byte Move_CRUNCH
-	.4byte Move_MIRROR_COAT
-	.4byte Move_PSYCH_UP
-	.4byte Move_EXTREME_SPEED
-	.4byte Move_ANCIENT_POWER
-	.4byte Move_SHADOW_BALL
-	.4byte Move_FUTURE_SIGHT
-	.4byte Move_ROCK_SMASH
-	.4byte Move_WHIRLPOOL
-	.4byte Move_BEAT_UP
-	.4byte Move_FAKE_OUT
-	.4byte Move_UPROAR
-	.4byte Move_STOCKPILE
-	.4byte Move_SPIT_UP
-	.4byte Move_SWALLOW
-	.4byte Move_HEAT_WAVE
-	.4byte Move_HAIL
-	.4byte Move_TORMENT
-	.4byte Move_FLATTER
-	.4byte Move_WILL_O_WISP
-	.4byte Move_MEMENTO
-	.4byte Move_FACADE
-	.4byte Move_FOCUS_PUNCH
-	.4byte Move_SMELLING_SALTS
-	.4byte Move_FOLLOW_ME
-	.4byte Move_NATURE_POWER
-	.4byte Move_CHARGE
-	.4byte Move_TAUNT
-	.4byte Move_HELPING_HAND
-	.4byte Move_TRICK
-	.4byte Move_ROLE_PLAY
-	.4byte Move_WISH
-	.4byte Move_ASSIST
-	.4byte Move_INGRAIN
-	.4byte Move_SUPERPOWER
-	.4byte Move_MAGIC_COAT
-	.4byte Move_RECYCLE
-	.4byte Move_REVENGE
-	.4byte Move_BRICK_BREAK
-	.4byte Move_YAWN
-	.4byte Move_KNOCK_OFF
-	.4byte Move_ENDEAVOR
-	.4byte Move_ERUPTION
-	.4byte Move_SKILL_SWAP
-	.4byte Move_IMPRISON
-	.4byte Move_REFRESH
-	.4byte Move_GRUDGE
-	.4byte Move_SNATCH
-	.4byte Move_SECRET_POWER
-	.4byte Move_DIVE
-	.4byte Move_ARM_THRUST
-	.4byte Move_CAMOUFLAGE
-	.4byte Move_TAIL_GLOW
-	.4byte Move_LUSTER_PURGE
-	.4byte Move_MIST_BALL
-	.4byte Move_FEATHER_DANCE
-	.4byte Move_TEETER_DANCE
-	.4byte Move_BLAZE_KICK
-	.4byte Move_MUD_SPORT
-	.4byte Move_ICE_BALL
-	.4byte Move_NEEDLE_ARM
-	.4byte Move_SLACK_OFF
-	.4byte Move_HYPER_VOICE
-	.4byte Move_POISON_FANG
-	.4byte Move_CRUSH_CLAW
-	.4byte Move_BLAST_BURN
-	.4byte Move_HYDRO_CANNON
-	.4byte Move_METEOR_MASH
-	.4byte Move_ASTONISH
-	.4byte Move_WEATHER_BALL
-	.4byte Move_AROMATHERAPY
-	.4byte Move_FAKE_TEARS
-	.4byte Move_AIR_CUTTER
-	.4byte Move_OVERHEAT
-	.4byte Move_ODOR_SLEUTH
-	.4byte Move_ROCK_TOMB
-	.4byte Move_SILVER_WIND
-	.4byte Move_METAL_SOUND
-	.4byte Move_GRASS_WHISTLE
-	.4byte Move_TICKLE
-	.4byte Move_COSMIC_POWER
-	.4byte Move_WATER_SPOUT
-	.4byte Move_SIGNAL_BEAM
-	.4byte Move_SHADOW_PUNCH
-	.4byte Move_EXTRASENSORY
-	.4byte Move_SKY_UPPERCUT
-	.4byte Move_SAND_TOMB
-	.4byte Move_SHEER_COLD
-	.4byte Move_MUDDY_WATER
-	.4byte Move_BULLET_SEED
-	.4byte Move_AERIAL_ACE
-	.4byte Move_ICICLE_SPEAR
-	.4byte Move_IRON_DEFENSE
-	.4byte Move_BLOCK
-	.4byte Move_HOWL
-	.4byte Move_DRAGON_CLAW
-	.4byte Move_FRENZY_PLANT
-	.4byte Move_BULK_UP
-	.4byte Move_BOUNCE
-	.4byte Move_MUD_SHOT
-	.4byte Move_POISON_TAIL
-	.4byte Move_COVET
-	.4byte Move_VOLT_TACKLE
-	.4byte Move_MAGICAL_LEAF
-	.4byte Move_WATER_SPORT
-	.4byte Move_CALM_MIND
-	.4byte Move_LEAF_BLADE
-	.4byte Move_DRAGON_DANCE
-	.4byte Move_ROCK_BLAST
-	.4byte Move_SHOCK_WAVE
-	.4byte Move_WATER_PULSE
-	.4byte Move_DOOM_DESIRE
-	.4byte Move_PSYCHO_BOOST
+	.4byte Move_NONE				@ 0
+	.4byte Move_POUND				@ 1
+	.4byte Move_KARATE_CHOP			@ 2
+	.4byte Move_DOUBLE_SLAP			@ 3
+	.4byte Move_COMET_PUNCH			@ 4
+	.4byte Move_MEGA_PUNCH			@ 5
+	.4byte Move_PAY_DAY				@ 6
+	.4byte Move_FIRE_PUNCH			@ 7
+	.4byte Move_ICE_PUNCH			@ 8
+	.4byte Move_THUNDER_PUNCH		@ 9
+	.4byte Move_SCRATCH				@ 10
+	.4byte Move_VICE_GRIP			@ 11
+	.4byte Move_GUILLOTINE			@ 12
+	.4byte Move_RAZOR_WIND			@ 13
+	.4byte Move_SWORDS_DANCE		@ 14
+	.4byte Move_CUT					@ 15
+	.4byte Move_GUST				@ 16
+	.4byte Move_WING_ATTACK			@ 17
+	.4byte Move_WHIRLWIND			@ 18
+	.4byte Move_FLY					@ 19
+	.4byte Move_BIND				@ 20
+	.4byte Move_SLAM				@ 21
+	.4byte Move_VINE_WHIP			@ 22
+	.4byte Move_STOMP				@ 23
+	.4byte Move_DOUBLE_KICK			@ 24
+	.4byte Move_MEGA_KICK			@ 25
+	.4byte Move_JUMP_KICK			@ 26
+	.4byte Move_ROLLING_KICK		@ 27
+	.4byte Move_SAND_ATTACK			@ 28
+	.4byte Move_HEADBUTT			@ 29
+	.4byte Move_HORN_ATTACK			@ 30
+	.4byte Move_FURY_ATTACK			@ 31
+	.4byte Move_HORN_DRILL			@ 32
+	.4byte Move_TACKLE				@ 33
+	.4byte Move_BODY_SLAM			@ 34
+	.4byte Move_WRAP				@ 35
+	.4byte Move_TAKE_DOWN			@ 36
+	.4byte Move_THRASH				@ 37
+	.4byte Move_DOUBLE_EDGE			@ 38
+	.4byte Move_TAIL_WHIP			@ 39
+	.4byte Move_POISON_STING		@ 40
+	.4byte Move_TWINEEDLE			@ 41
+	.4byte Move_PIN_MISSILE			@ 42
+	.4byte Move_LEER				@ 43
+	.4byte Move_BITE				@ 44
+	.4byte Move_GROWL				@ 45
+	.4byte Move_ROAR				@ 46
+	.4byte Move_SING				@ 47
+	.4byte Move_SUPERSONIC			@ 48
+	.4byte Move_SONIC_BOOM			@ 49
+	.4byte Move_DISABLE				@ 50
+	.4byte Move_ACID				@ 51
+	.4byte Move_EMBER				@ 52
+	.4byte Move_FLAMETHROWER		@ 53
+	.4byte Move_MIST				@ 54
+	.4byte Move_WATER_GUN			@ 55
+	.4byte Move_HYDRO_PUMP			@ 56
+	.4byte Move_SURF				@ 57
+	.4byte Move_ICE_BEAM			@ 58
+	.4byte Move_BLIZZARD			@ 59
+	.4byte Move_PSYBEAM				@ 60
+	.4byte Move_BUBBLE_BEAM			@ 61
+	.4byte Move_AURORA_BEAM			@ 62
+	.4byte Move_HYPER_BEAM			@ 63
+	.4byte Move_PECK				@ 64
+	.4byte Move_DRILL_PECK			@ 65
+	.4byte Move_SUBMISSION			@ 66
+	.4byte Move_LOW_KICK			@ 67
+	.4byte Move_COUNTER				@ 68
+	.4byte Move_SEISMIC_TOSS		@ 69
+	.4byte Move_STRENGTH			@ 70
+	.4byte Move_ABSORB				@ 71
+	.4byte Move_MEGA_DRAIN			@ 72
+	.4byte Move_LEECH_SEED			@ 73
+	.4byte Move_GROWTH				@ 74
+	.4byte Move_RAZOR_LEAF			@ 75
+	.4byte Move_SOLAR_BEAM			@ 76
+	.4byte Move_POISON_POWDER		@ 77
+	.4byte Move_STUN_SPORE			@ 78
+	.4byte Move_SLEEP_POWDER		@ 79
+	.4byte Move_PETAL_DANCE			@ 80
+	.4byte Move_STRING_SHOT			@ 81
+	.4byte Move_DRAGON_RAGE			@ 82
+	.4byte Move_FIRE_SPIN			@ 83
+	.4byte Move_THUNDER_SHOCK		@ 84
+	.4byte Move_THUNDERBOLT			@ 85
+	.4byte Move_THUNDER_WAVE		@ 86
+	.4byte Move_THUNDER				@ 87
+	.4byte Move_ROCK_THROW			@ 88
+	.4byte Move_EARTHQUAKE			@ 89
+	.4byte Move_FISSURE				@ 90
+	.4byte Move_DIG					@ 91
+	.4byte Move_TOXIC				@ 92
+	.4byte Move_CONFUSION			@ 93
+	.4byte Move_PSYCHIC				@ 94
+	.4byte Move_HYPNOSIS			@ 95
+	.4byte Move_MEDITATE			@ 96
+	.4byte Move_AGILITY				@ 97
+	.4byte Move_QUICK_ATTACK		@ 98
+	.4byte Move_RAGE				@ 99
+	.4byte Move_TELEPORT			@ 100
+	.4byte Move_NIGHT_SHADE			@ 101
+	.4byte Move_MIMIC				@ 102
+	.4byte Move_SCREECH				@ 103
+	.4byte Move_DOUBLE_TEAM			@ 104
+	.4byte Move_RECOVER				@ 105
+	.4byte Move_HARDEN				@ 106
+	.4byte Move_MINIMIZE			@ 107
+	.4byte Move_SMOKESCREEN			@ 108
+	.4byte Move_CONFUSE_RAY			@ 109
+	.4byte Move_WITHDRAW			@ 110
+	.4byte Move_DEFENSE_CURL		@ 111
+	.4byte Move_BARRIER				@ 112
+	.4byte Move_LIGHT_SCREEN		@ 113
+	.4byte Move_HAZE				@ 114
+	.4byte Move_REFLECT				@ 115
+	.4byte Move_FOCUS_ENERGY		@ 116
+	.4byte Move_BIDE				@ 117
+	.4byte Move_METRONOME			@ 118
+	.4byte Move_MIRROR_MOVE			@ 119 @ doesnt have an actual animation
+	.4byte Move_SELF_DESTRUCT		@ 120
+	.4byte Move_EGG_BOMB			@ 121
+	.4byte Move_LICK				@ 122
+	.4byte Move_SMOG				@ 123
+	.4byte Move_SLUDGE				@ 124
+	.4byte Move_BONE_CLUB			@ 125
+	.4byte Move_FIRE_BLAST			@ 126
+	.4byte Move_WATERFALL			@ 127
+	.4byte Move_CLAMP				@ 128
+	.4byte Move_SWIFT				@ 129
+	.4byte Move_SKULL_BASH			@ 130
+	.4byte Move_SPIKE_CANNON		@ 131
+	.4byte Move_CONSTRICT			@ 132
+	.4byte Move_AMNESIA				@ 133
+	.4byte Move_KINESIS				@ 134
+	.4byte Move_SOFT_BOILED			@ 135
+	.4byte Move_HIGH_JUMP_KICK		@ 136
+	.4byte Move_GLARE				@ 137
+	.4byte Move_DREAM_EATER			@ 138
+	.4byte Move_POISON_GAS			@ 139
+	.4byte Move_BARRAGE				@ 140
+	.4byte Move_LEECH_LIFE			@ 141
+	.4byte Move_LOVELY_KISS			@ 142
+	.4byte Move_SKY_ATTACK			@ 143
+	.4byte Move_TRANSFORM			@ 144
+	.4byte Move_BUBBLE				@ 145
+	.4byte Move_DIZZY_PUNCH			@ 146
+	.4byte Move_SPORE				@ 147
+	.4byte Move_FLASH				@ 148
+	.4byte Move_PSYWAVE				@ 149
+	.4byte Move_SPLASH				@ 150
+	.4byte Move_ACID_ARMOR			@ 151
+	.4byte Move_CRABHAMMER			@ 152
+	.4byte Move_EXPLOSION			@ 153
+	.4byte Move_FURY_SWIPES			@ 154
+	.4byte Move_BONEMERANG			@ 155
+	.4byte Move_REST				@ 156
+	.4byte Move_ROCK_SLIDE			@ 157
+	.4byte Move_HYPER_FANG			@ 158
+	.4byte Move_SHARPEN				@ 159
+	.4byte Move_CONVERSION			@ 160
+	.4byte Move_TRI_ATTACK			@ 161
+	.4byte Move_SUPER_FANG			@ 162
+	.4byte Move_SLASH				@ 163
+	.4byte Move_SUBSTITUTE			@ 164
+	.4byte Move_STRUGGLE			@ 165
+	.4byte Move_SKETCH				@ 166
+	.4byte Move_TRIPLE_KICK			@ 167
+	.4byte Move_THIEF				@ 168
+	.4byte Move_SPIDER_WEB			@ 169
+	.4byte Move_MIND_READER			@ 170
+	.4byte Move_NIGHTMARE			@ 171
+	.4byte Move_FLAME_WHEEL			@ 172
+	.4byte Move_SNORE				@ 173
+	.4byte Move_CURSE				@ 174
+	.4byte Move_FLAIL				@ 175
+	.4byte Move_CONVERSION_2		@ 176
+	.4byte Move_AEROBLAST			@ 177
+	.4byte Move_COTTON_SPORE		@ 178
+	.4byte Move_REVERSAL			@ 179
+	.4byte Move_SPITE				@ 180
+	.4byte Move_POWDER_SNOW			@ 181
+	.4byte Move_PROTECT				@ 182
+	.4byte Move_MACH_PUNCH			@ 183
+	.4byte Move_SCARY_FACE			@ 184
+	.4byte Move_FAINT_ATTACK		@ 185
+	.4byte Move_SWEET_KISS			@ 186
+	.4byte Move_BELLY_DRUM			@ 187
+	.4byte Move_SLUDGE_BOMB			@ 188
+	.4byte Move_MUD_SLAP			@ 189
+	.4byte Move_OCTAZOOKA			@ 190
+	.4byte Move_SPIKES				@ 191
+	.4byte Move_ZAP_CANNON			@ 192
+	.4byte Move_FORESIGHT			@ 193
+	.4byte Move_DESTINY_BOND		@ 194
+	.4byte Move_PERISH_SONG			@ 195
+	.4byte Move_ICY_WIND			@ 196
+	.4byte Move_DETECT				@ 197
+	.4byte Move_BONE_RUSH			@ 198
+	.4byte Move_LOCK_ON				@ 199
+	.4byte Move_OUTRAGE				@ 200
+	.4byte Move_SANDSTORM			@ 201
+	.4byte Move_GIGA_DRAIN			@ 202
+	.4byte Move_ENDURE				@ 203
+	.4byte Move_CHARM				@ 204
+	.4byte Move_ROLLOUT				@ 205
+	.4byte Move_FALSE_SWIPE			@ 206
+	.4byte Move_SWAGGER				@ 207
+	.4byte Move_MILK_DRINK			@ 208
+	.4byte Move_SPARK				@ 209
+	.4byte Move_FURY_CUTTER			@ 210
+	.4byte Move_STEEL_WING			@ 211
+	.4byte Move_MEAN_LOOK			@ 212
+	.4byte Move_ATTRACT				@ 213
+	.4byte Move_SLEEP_TALK			@ 214
+	.4byte Move_HEAL_BELL			@ 215
+	.4byte Move_RETURN				@ 216
+	.4byte Move_PRESENT				@ 217
+	.4byte Move_FRUSTRATION			@ 218
+	.4byte Move_SAFEGUARD			@ 219
+	.4byte Move_PAIN_SPLIT			@ 220
+	.4byte Move_SACRED_FIRE			@ 221
+	.4byte Move_MAGNITUDE			@ 222
+	.4byte Move_DYNAMIC_PUNCH		@ 223
+	.4byte Move_MEGAHORN			@ 224
+	.4byte Move_DRAGON_BREATH		@ 225
+	.4byte Move_BATON_PASS			@ 226
+	.4byte Move_ENCORE				@ 227
+	.4byte Move_PURSUIT				@ 228
+	.4byte Move_RAPID_SPIN			@ 229
+	.4byte Move_SWEET_SCENT			@ 230
+	.4byte Move_IRON_TAIL			@ 231
+	.4byte Move_METAL_CLAW			@ 232
+	.4byte Move_VITAL_THROW			@ 233
+	.4byte Move_MORNING_SUN			@ 234
+	.4byte Move_SYNTHESIS			@ 235
+	.4byte Move_MOONLIGHT			@ 236
+	.4byte Move_HIDDEN_POWER		@ 237
+	.4byte Move_CROSS_CHOP			@ 238
+	.4byte Move_TWISTER				@ 239
+	.4byte Move_RAIN_DANCE			@ 240
+	.4byte Move_SUNNY_DAY			@ 241
+	.4byte Move_CRUNCH				@ 242
+	.4byte Move_MIRROR_COAT			@ 243
+	.4byte Move_PSYCH_UP			@ 244
+	.4byte Move_EXTREME_SPEED		@ 245
+	.4byte Move_ANCIENT_POWER		@ 246
+	.4byte Move_SHADOW_BALL			@ 247
+	.4byte Move_FUTURE_SIGHT		@ 248
+	.4byte Move_ROCK_SMASH			@ 249
+	.4byte Move_WHIRLPOOL			@ 250
+	.4byte Move_BEAT_UP				@ 251
+	.4byte Move_FAKE_OUT			@ 252
+	.4byte Move_UPROAR				@ 253
+	.4byte Move_STOCKPILE			@ 254
+	.4byte Move_SPIT_UP				@ 255
+	.4byte Move_SWALLOW				@ 256
+	.4byte Move_HEAT_WAVE			@ 257
+	.4byte Move_HAIL				@ 258
+	.4byte Move_TORMENT				@ 259
+	.4byte Move_FLATTER				@ 260
+	.4byte Move_WILL_O_WISP			@ 261
+	.4byte Move_MEMENTO				@ 262
+	.4byte Move_FACADE				@ 263
+	.4byte Move_FOCUS_PUNCH			@ 264
+	.4byte Move_SMELLING_SALTS		@ 265
+	.4byte Move_FOLLOW_ME			@ 266
+	.4byte Move_NATURE_POWER		@ 267
+	.4byte Move_CHARGE				@ 268
+	.4byte Move_TAUNT				@ 269
+	.4byte Move_HELPING_HAND		@ 270
+	.4byte Move_TRICK				@ 271
+	.4byte Move_ROLE_PLAY			@ 272
+	.4byte Move_WISH				@ 273
+	.4byte Move_ASSIST				@ 274
+	.4byte Move_INGRAIN				@ 275
+	.4byte Move_SUPERPOWER			@ 276
+	.4byte Move_MAGIC_COAT			@ 277
+	.4byte Move_RECYCLE				@ 278
+	.4byte Move_REVENGE				@ 279
+	.4byte Move_BRICK_BREAK			@ 280
+	.4byte Move_YAWN				@ 281
+	.4byte Move_KNOCK_OFF			@ 282
+	.4byte Move_ENDEAVOR			@ 283
+	.4byte Move_ERUPTION			@ 284
+	.4byte Move_SKILL_SWAP			@ 285
+	.4byte Move_IMPRISON			@ 286
+	.4byte Move_REFRESH				@ 287
+	.4byte Move_GRUDGE				@ 288
+	.4byte Move_SNATCH				@ 289
+	.4byte Move_SECRET_POWER		@ 290
+	.4byte Move_DIVE				@ 291
+	.4byte Move_ARM_THRUST			@ 292
+	.4byte Move_CAMOUFLAGE			@ 293
+	.4byte Move_TAIL_GLOW			@ 294
+	.4byte Move_LUSTER_PURGE		@ 295
+	.4byte Move_MIST_BALL			@ 296
+	.4byte Move_FEATHER_DANCE		@ 298
+	.4byte Move_TEETER_DANCE		@ 298
+	.4byte Move_BLAZE_KICK			@ 299
+	.4byte Move_MUD_SPORT			@ 300
+	.4byte Move_ICE_BALL			@ 301
+	.4byte Move_NEEDLE_ARM			@ 302
+	.4byte Move_SLACK_OFF			@ 303
+	.4byte Move_HYPER_VOICE			@ 304
+	.4byte Move_POISON_FANG			@ 305
+	.4byte Move_CRUSH_CLAW			@ 306
+	.4byte Move_BLAST_BURN			@ 307
+	.4byte Move_HYDRO_CANNON		@ 308
+	.4byte Move_METEOR_MASH			@ 309
+	.4byte Move_ASTONISH			@ 310
+	.4byte Move_WEATHER_BALL		@ 311
+	.4byte Move_AROMATHERAPY		@ 312
+	.4byte Move_FAKE_TEARS			@ 313
+	.4byte Move_AIR_CUTTER			@ 314
+	.4byte Move_OVERHEAT			@ 315
+	.4byte Move_ODOR_SLEUTH			@ 316
+	.4byte Move_ROCK_TOMB			@ 317
+	.4byte Move_SILVER_WIND			@ 318
+	.4byte Move_METAL_SOUND			@ 319
+	.4byte Move_GRASS_WHISTLE		@ 320
+	.4byte Move_TICKLE				@ 321
+	.4byte Move_COSMIC_POWER		@ 322
+	.4byte Move_WATER_SPOUT			@ 323
+	.4byte Move_SIGNAL_BEAM			@ 324
+	.4byte Move_SHADOW_PUNCH		@ 325
+	.4byte Move_EXTRASENSORY		@ 326
+	.4byte Move_SKY_UPPERCUT		@ 327
+	.4byte Move_SAND_TOMB			@ 328
+	.4byte Move_SHEER_COLD			@ 329
+	.4byte Move_MUDDY_WATER			@ 330
+	.4byte Move_BULLET_SEED			@ 331
+	.4byte Move_AERIAL_ACE			@ 332
+	.4byte Move_ICICLE_SPEAR		@ 333
+	.4byte Move_IRON_DEFENSE		@ 334
+	.4byte Move_BLOCK				@ 335
+	.4byte Move_HOWL				@ 336
+	.4byte Move_DRAGON_CLAW			@ 337
+	.4byte Move_FRENZY_PLANT		@ 338
+	.4byte Move_BULK_UP				@ 339
+	.4byte Move_BOUNCE				@ 340
+	.4byte Move_MUD_SHOT			@ 341
+	.4byte Move_POISON_TAIL			@ 342
+	.4byte Move_COVET				@ 343
+	.4byte Move_VOLT_TACKLE			@ 344
+	.4byte Move_MAGICAL_LEAF		@ 345
+	.4byte Move_WATER_SPORT			@ 346
+	.4byte Move_CALM_MIND			@ 347
+	.4byte Move_LEAF_BLADE			@ 348
+	.4byte Move_DRAGON_DANCE		@ 349
+	.4byte Move_ROCK_BLAST			@ 350
+	.4byte Move_SHOCK_WAVE			@ 351
+	.4byte Move_WATER_PULSE			@ 352
+	.4byte Move_DOOM_DESIRE			@ 353
+	.4byte Move_PSYCHO_BOOST		@ 354
 @@@@@@@@@@@@ GEN 4 @@@@@@@@@@@@
-	.4byte Move_ROOST
-	.4byte Move_GRAVITY
-	.4byte Move_MIRACLE_EYE
-	.4byte Move_WAKE_UP_SLAP
-	.4byte Move_HAMMER_ARM
-	.4byte Move_GYRO_BALL
-	.4byte Move_HEALING_WISH
-	.4byte Move_BRINE
-	.4byte Move_NATURAL_GIFT
-	.4byte Move_FEINT
-	.4byte Move_PLUCK
-	.4byte Move_TAILWIND
-	.4byte Move_ACUPRESSURE
-	.4byte Move_METAL_BURST
-	.4byte Move_U_TURN
-	.4byte Move_CLOSE_COMBAT
-	.4byte Move_PAYBACK
-	.4byte Move_ASSURANCE
-	.4byte Move_EMBARGO
-	.4byte Move_FLING
-	.4byte Move_PSYCHO_SHIFT
-	.4byte Move_TRUMP_CARD
-	.4byte Move_HEAL_BLOCK
-	.4byte Move_WRING_OUT
-	.4byte Move_POWER_TRICK
-	.4byte Move_GASTRO_ACID
-	.4byte Move_LUCKY_CHANT
-	.4byte Move_ME_FIRST
-	.4byte Move_COPYCAT
-	.4byte Move_POWER_SWAP
-	.4byte Move_GUARD_SWAP
-	.4byte Move_PUNISHMENT
-	.4byte Move_LAST_RESORT
-	.4byte Move_WORRY_SEED
-	.4byte Move_SUCKER_PUNCH
-	.4byte Move_TOXIC_SPIKES
-	.4byte Move_HEART_SWAP
-	.4byte Move_AQUA_RING
-	.4byte Move_MAGNET_RISE
-	.4byte Move_FLARE_BLITZ
-	.4byte Move_FORCE_PALM
-	.4byte Move_AURA_SPHERE
-	.4byte Move_ROCK_POLISH
-	.4byte Move_POISON_JAB
-	.4byte Move_DARK_PULSE
-	.4byte Move_NIGHT_SLASH
-	.4byte Move_AQUA_TAIL
-	.4byte Move_SEED_BOMB
-	.4byte Move_AIR_SLASH
-	.4byte Move_XSCISSOR
-	.4byte Move_BUG_BUZZ
-	.4byte Move_DRAGON_PULSE
-	.4byte Move_DRAGON_RUSH
-	.4byte Move_POWER_GEM
-	.4byte Move_DRAIN_PUNCH
-	.4byte Move_VACUUM_WAVE
-	.4byte Move_FOCUS_BLAST
-	.4byte Move_ENERGY_BALL
-	.4byte Move_BRAVE_BIRD
-	.4byte Move_EARTH_POWER
-	.4byte Move_SWITCHEROO
-	.4byte Move_GIGA_IMPACT
-	.4byte Move_NASTY_PLOT
-	.4byte Move_BULLET_PUNCH
-	.4byte Move_AVALANCHE
-	.4byte Move_ICE_SHARD
-	.4byte Move_SHADOW_CLAW
-	.4byte Move_THUNDER_FANG
-	.4byte Move_ICE_FANG
-	.4byte Move_FIRE_FANG
-	.4byte Move_SHADOW_SNEAK
-	.4byte Move_MUD_BOMB
-	.4byte Move_PSYCHO_CUT
-	.4byte Move_ZEN_HEADBUTT
-	.4byte Move_MIRROR_SHOT
-	.4byte Move_FLASH_CANNON
-	.4byte Move_ROCK_CLIMB
-	.4byte Move_DEFOG
-	.4byte Move_TRICK_ROOM
-	.4byte Move_DRACO_METEOR
-	.4byte Move_DISCHARGE
-	.4byte Move_LAVA_PLUME
-	.4byte Move_LEAF_STORM
-	.4byte Move_POWER_WHIP
-	.4byte Move_ROCK_WRECKER
-	.4byte Move_CROSS_POISON
-	.4byte Move_GUNK_SHOT
-	.4byte Move_IRON_HEAD
-	.4byte Move_MAGNET_BOMB
-	.4byte Move_STONE_EDGE
-	.4byte Move_CAPTIVATE
-	.4byte Move_STEALTH_ROCK
-	.4byte Move_GRASS_KNOT
-	.4byte Move_CHATTER
-	.4byte Move_JUDGMENT
-	.4byte Move_BUG_BITE
-	.4byte Move_CHARGE_BEAM
-	.4byte Move_WOOD_HAMMER
-	.4byte Move_AQUA_JET
-	.4byte Move_ATTACK_ORDER
-	.4byte Move_DEFEND_ORDER
-	.4byte Move_HEAL_ORDER
-	.4byte Move_HEAD_SMASH
-	.4byte Move_DOUBLE_HIT
-	.4byte Move_ROAR_OF_TIME
-	.4byte Move_SPACIAL_REND
-	.4byte Move_LUNAR_DANCE
-	.4byte Move_CRUSH_GRIP
-	.4byte Move_MAGMA_STORM
-	.4byte Move_DARK_VOID
-	.4byte Move_SEED_FLARE
-	.4byte Move_OMINOUS_WIND
-	.4byte Move_SHADOW_FORCE
+	.4byte Move_ROOST				@ 355
+	.4byte Move_GRAVITY				@ 356
+	.4byte Move_MIRACLE_EYE			@ 357
+	.4byte Move_WAKE_UP_SLAP		@ 358
+	.4byte Move_HAMMER_ARM			@ 359
+	.4byte Move_GYRO_BALL			@ 360
+	.4byte Move_HEALING_WISH		@ 361
+	.4byte Move_BRINE				@ 362
+	.4byte Move_NATURAL_GIFT		@ 363
+	.4byte Move_FEINT				@ 364
+	.4byte Move_PLUCK				@ 365
+	.4byte Move_TAILWIND			@ 366
+	.4byte Move_ACUPRESSURE			@ 367
+	.4byte Move_METAL_BURST			@ 368
+	.4byte Move_U_TURN				@ 369
+	.4byte Move_CLOSE_COMBAT		@ 370
+	.4byte Move_PAYBACK				@ 371
+	.4byte Move_ASSURANCE			@ 372
+	.4byte Move_EMBARGO				@ 373
+	.4byte Move_FLING				@ 374
+	.4byte Move_PSYCHO_SHIFT		@ 375
+	.4byte Move_TRUMP_CARD			@ 376
+	.4byte Move_HEAL_BLOCK			@ 377
+	.4byte Move_WRING_OUT			@ 378
+	.4byte Move_POWER_TRICK			@ 379
+	.4byte Move_GASTRO_ACID			@ 380
+	.4byte Move_LUCKY_CHANT			@ 381
+	.4byte Move_ME_FIRST			@ 382
+	.4byte Move_COPYCAT				@ 383
+	.4byte Move_POWER_SWAP			@ 384
+	.4byte Move_GUARD_SWAP			@ 385
+	.4byte Move_PUNISHMENT			@ 386
+	.4byte Move_LAST_RESORT			@ 387
+	.4byte Move_WORRY_SEED			@ 388
+	.4byte Move_SUCKER_PUNCH		@ 389
+	.4byte Move_TOXIC_SPIKES		@ 390
+	.4byte Move_HEART_SWAP			@ 391
+	.4byte Move_AQUA_RING			@ 392
+	.4byte Move_MAGNET_RISE			@ 393
+	.4byte Move_FLARE_BLITZ			@ 394
+	.4byte Move_FORCE_PALM			@ 395
+	.4byte Move_AURA_SPHERE			@ 396
+	.4byte Move_ROCK_POLISH			@ 397
+	.4byte Move_POISON_JAB			@ 398
+	.4byte Move_DARK_PULSE			@ 399
+	.4byte Move_NIGHT_SLASH			@ 400
+	.4byte Move_AQUA_TAIL			@ 401
+	.4byte Move_SEED_BOMB			@ 402
+	.4byte Move_AIR_SLASH			@ 403
+	.4byte Move_XSCISSOR			@ 404
+	.4byte Move_BUG_BUZZ			@ 405
+	.4byte Move_DRAGON_PULSE		@ 406
+	.4byte Move_DRAGON_RUSH			@ 407
+	.4byte Move_POWER_GEM			@ 408
+	.4byte Move_DRAIN_PUNCH			@ 409
+	.4byte Move_VACUUM_WAVE			@ 410
+	.4byte Move_FOCUS_BLAST			@ 411
+	.4byte Move_ENERGY_BALL			@ 412
+	.4byte Move_BRAVE_BIRD			@ 413
+	.4byte Move_EARTH_POWER			@ 414
+	.4byte Move_SWITCHEROO			@ 415
+	.4byte Move_GIGA_IMPACT			@ 416
+	.4byte Move_NASTY_PLOT			@ 417
+	.4byte Move_BULLET_PUNCH		@ 418
+	.4byte Move_AVALANCHE			@ 419
+	.4byte Move_ICE_SHARD			@ 420
+	.4byte Move_SHADOW_CLAW			@ 421
+	.4byte Move_THUNDER_FANG		@ 422
+	.4byte Move_ICE_FANG			@ 423
+	.4byte Move_FIRE_FANG			@ 424
+	.4byte Move_SHADOW_SNEAK		@ 425
+	.4byte Move_MUD_BOMB			@ 426
+	.4byte Move_PSYCHO_CUT			@ 427
+	.4byte Move_ZEN_HEADBUTT		@ 428
+	.4byte Move_MIRROR_SHOT			@ 429
+	.4byte Move_FLASH_CANNON		@ 430
+	.4byte Move_ROCK_CLIMB			@ 431
+	.4byte Move_DEFOG				@ 432
+	.4byte Move_TRICK_ROOM			@ 433
+	.4byte Move_DRACO_METEOR		@ 434
+	.4byte Move_DISCHARGE			@ 435
+	.4byte Move_LAVA_PLUME			@ 436
+	.4byte Move_LEAF_STORM			@ 437
+	.4byte Move_POWER_WHIP			@ 438
+	.4byte Move_ROCK_WRECKER		@ 439
+	.4byte Move_CROSS_POISON		@ 440
+	.4byte Move_GUNK_SHOT			@ 441
+	.4byte Move_IRON_HEAD			@ 442
+	.4byte Move_MAGNET_BOMB			@ 443
+	.4byte Move_STONE_EDGE			@ 444
+	.4byte Move_CAPTIVATE			@ 445
+	.4byte Move_STEALTH_ROCK		@ 446
+	.4byte Move_GRASS_KNOT			@ 447
+	.4byte Move_CHATTER				@ 448
+	.4byte Move_JUDGMENT			@ 449
+	.4byte Move_BUG_BITE			@ 450
+	.4byte Move_CHARGE_BEAM			@ 451
+	.4byte Move_WOOD_HAMMER			@ 452
+	.4byte Move_AQUA_JET			@ 453
+	.4byte Move_ATTACK_ORDER		@ 454
+	.4byte Move_DEFEND_ORDER		@ 455
+	.4byte Move_HEAL_ORDER			@ 456
+	.4byte Move_HEAD_SMASH			@ 457
+	.4byte Move_DOUBLE_HIT			@ 458
+	.4byte Move_ROAR_OF_TIME		@ 459
+	.4byte Move_SPACIAL_REND		@ 460
+	.4byte Move_LUNAR_DANCE			@ 461
+	.4byte Move_CRUSH_GRIP			@ 462
+	.4byte Move_MAGMA_STORM			@ 463
+	.4byte Move_DARK_VOID			@ 464
+	.4byte Move_SEED_FLARE			@ 465
+	.4byte Move_OMINOUS_WIND		@ 466
+	.4byte Move_SHADOW_FORCE		@ 467
 @@@@@@@@@@@@ GEN 5 @@@@@@@@@@@@
-	.4byte Move_HONE_CLAWS
-	.4byte Move_WIDE_GUARD
-	.4byte Move_GUARD_SPLIT
-	.4byte Move_POWER_SPLIT
-	.4byte Move_WONDER_ROOM
-	.4byte Move_PSYSHOCK
-	.4byte Move_VENOSHOCK
-	.4byte Move_AUTOTOMIZE
-	.4byte Move_RAGE_POWDER
-	.4byte Move_TELEKINESIS
-	.4byte Move_MAGIC_ROOM
-	.4byte Move_SMACK_DOWN
-	.4byte Move_STORM_THROW
-	.4byte Move_FLAME_BURST
-	.4byte Move_SLUDGE_WAVE
-	.4byte Move_QUIVER_DANCE
-	.4byte Move_HEAVY_SLAM
-	.4byte Move_SYCHRONOISE
-	.4byte Move_ELECTRO_BALL
-	.4byte Move_SOAK
-	.4byte Move_FLAME_CHARGE
-	.4byte Move_COIL
-	.4byte Move_LOW_SWEEP
-	.4byte Move_ACID_SPRAY
-	.4byte Move_FOUL_PLAY
-	.4byte Move_SIMPLE_BEAM
-	.4byte Move_ENTRAINMENT
-	.4byte Move_AFTER_YOU
-	.4byte Move_ROUND
-	.4byte Move_ECHOED_VOICE
-	.4byte Move_CHIP_AWAY
-	.4byte Move_CLEAR_SMOG
-	.4byte Move_STORED_POWER
-	.4byte Move_QUICK_GUARD
-	.4byte Move_ALLY_SWITCH
-	.4byte Move_SCALD
-	.4byte Move_SHELL_SMASH
-	.4byte Move_HEAL_PULSE
-	.4byte Move_HEX
-	.4byte Move_SKY_DROP
-	.4byte Move_SHIFT_GEAR
-	.4byte Move_CIRCLE_THROW
-	.4byte Move_INCINERATE
-	.4byte Move_QUASH
-	.4byte Move_ACROBATICS
-	.4byte Move_REFLECT_TYPE
-	.4byte Move_RETALIATE
-	.4byte Move_FINAL_GAMBIT
-	.4byte Move_BESTOW
-	.4byte Move_INFERNO
-	.4byte Move_WATER_PLEDGE
-	.4byte Move_FIRE_PLEDGE
-	.4byte Move_GRASS_PLEDGE
-	.4byte Move_VOLT_SWITCH
-	.4byte Move_STRUGGLE_BUG
-	.4byte Move_BULLDOZE
-	.4byte Move_FROST_BREATH
-	.4byte Move_DRAGON_TAIL
-	.4byte Move_WORK_UP
-	.4byte Move_ELECTROWEB
-	.4byte Move_WILD_CHARGE
-	.4byte Move_DRILL_RUN
-	.4byte Move_DUAL_CHOP
-	.4byte Move_HEART_STAMP
-	.4byte Move_HORN_LEECH
-	.4byte Move_SACRED_SWORD
-	.4byte Move_RAZOR_SHELL
-	.4byte Move_HEAT_CRASH
-	.4byte Move_LEAF_TORNADO
-	.4byte Move_STEAMROLLER
-	.4byte Move_COTTON_GUARD
-	.4byte Move_NIGHT_DAZE
-	.4byte Move_PSYSTRIKE
-	.4byte Move_TAIL_SLAP
-	.4byte Move_HURRICANE
-	.4byte Move_HEAD_CHARGE
-	.4byte Move_GEAR_GRIND
-	.4byte Move_SEARING_SHOT
-	.4byte Move_TECHNO_BLAST
-	.4byte Move_RELIC_SONG
-	.4byte Move_SECRET_SWORD
-	.4byte Move_GLACIATE
-	.4byte Move_BOLT_STRIKE
-	.4byte Move_BLUE_FLARE
-	.4byte Move_FIERY_DANCE
-	.4byte Move_FREEZE_SHOCK
-	.4byte Move_ICE_BURN
-	.4byte Move_SNARL
-	.4byte Move_ICICLE_CRASH
-	.4byte Move_V_CREATE
-	.4byte Move_FUSION_FLARE
-	.4byte Move_FUSION_BOLT
+	.4byte Move_HONE_CLAWS			@ 468
+	.4byte Move_WIDE_GUARD			@ 469
+	.4byte Move_GUARD_SPLIT			@ 470
+	.4byte Move_POWER_SPLIT			@ 471
+	.4byte Move_WONDER_ROOM			@ 472
+	.4byte Move_PSYSHOCK			@ 473
+	.4byte Move_VENOSHOCK			@ 474
+	.4byte Move_AUTOTOMIZE			@ 475
+	.4byte Move_RAGE_POWDER			@ 476
+	.4byte Move_TELEKINESIS			@ 477
+	.4byte Move_MAGIC_ROOM			@ 478
+	.4byte Move_SMACK_DOWN			@ 479
+	.4byte Move_STORM_THROW			@ 480
+	.4byte Move_FLAME_BURST			@ 481
+	.4byte Move_SLUDGE_WAVE			@ 482
+	.4byte Move_QUIVER_DANCE		@ 483
+	.4byte Move_HEAVY_SLAM			@ 484
+	.4byte Move_SYCHRONOISE			@ 485
+	.4byte Move_ELECTRO_BALL		@ 486
+	.4byte Move_SOAK				@ 487
+	.4byte Move_FLAME_CHARGE		@ 488
+	.4byte Move_COIL				@ 489
+	.4byte Move_LOW_SWEEP			@ 490
+	.4byte Move_ACID_SPRAY			@ 491
+	.4byte Move_FOUL_PLAY			@ 492
+	.4byte Move_SIMPLE_BEAM			@ 493
+	.4byte Move_ENTRAINMENT			@ 494
+	.4byte Move_AFTER_YOU			@ 495
+	.4byte Move_ROUND				@ 496
+	.4byte Move_ECHOED_VOICE		@ 497
+	.4byte Move_CHIP_AWAY			@ 498
+	.4byte Move_CLEAR_SMOG			@ 499
+	.4byte Move_STORED_POWER		@ 500
+	.4byte Move_QUICK_GUARD			@ 501
+	.4byte Move_ALLY_SWITCH			@ 502
+	.4byte Move_SCALD				@ 503
+	.4byte Move_SHELL_SMASH			@ 504
+	.4byte Move_HEAL_PULSE			@ 505
+	.4byte Move_HEX					@ 506
+	.4byte Move_SKY_DROP			@ 507
+	.4byte Move_SHIFT_GEAR			@ 508
+	.4byte Move_CIRCLE_THROW		@ 509
+	.4byte Move_INCINERATE			@ 510
+	.4byte Move_QUASH				@ 511
+	.4byte Move_ACROBATICS			@ 512
+	.4byte Move_REFLECT_TYPE		@ 513
+	.4byte Move_RETALIATE			@ 514
+	.4byte Move_FINAL_GAMBIT		@ 515
+	.4byte Move_BESTOW				@ 516
+	.4byte Move_INFERNO				@ 517
+	.4byte Move_WATER_PLEDGE		@ 518
+	.4byte Move_FIRE_PLEDGE			@ 519
+	.4byte Move_GRASS_PLEDGE		@ 520
+	.4byte Move_VOLT_SWITCH			@ 521
+	.4byte Move_STRUGGLE_BUG		@ 522
+	.4byte Move_BULLDOZE			@ 523
+	.4byte Move_FROST_BREATH		@ 524
+	.4byte Move_DRAGON_TAIL			@ 525
+	.4byte Move_WORK_UP				@ 526
+	.4byte Move_ELECTROWEB			@ 527
+	.4byte Move_WILD_CHARGE			@ 528
+	.4byte Move_DRILL_RUN			@ 529
+	.4byte Move_DUAL_CHOP			@ 530
+	.4byte Move_HEART_STAMP			@ 531
+	.4byte Move_HORN_LEECH			@ 532
+	.4byte Move_SACRED_SWORD		@ 533
+	.4byte Move_RAZOR_SHELL			@ 534
+	.4byte Move_HEAT_CRASH			@ 535
+	.4byte Move_LEAF_TORNADO		@ 536
+	.4byte Move_STEAMROLLER			@ 537
+	.4byte Move_COTTON_GUARD		@ 538
+	.4byte Move_NIGHT_DAZE			@ 539
+	.4byte Move_PSYSTRIKE			@ 540
+	.4byte Move_TAIL_SLAP			@ 541
+	.4byte Move_HURRICANE			@ 542
+	.4byte Move_HEAD_CHARGE			@ 543
+	.4byte Move_GEAR_GRIND			@ 544
+	.4byte Move_SEARING_SHOT		@ 545
+	.4byte Move_TECHNO_BLAST		@ 546
+	.4byte Move_RELIC_SONG			@ 547
+	.4byte Move_SECRET_SWORD		@ 548
+	.4byte Move_GLACIATE			@ 549
+	.4byte Move_BOLT_STRIKE			@ 550
+	.4byte Move_BLUE_FLARE			@ 551
+	.4byte Move_FIERY_DANCE			@ 552
+	.4byte Move_FREEZE_SHOCK		@ 553
+	.4byte Move_ICE_BURN			@ 554
+	.4byte Move_SNARL				@ 555
+	.4byte Move_ICICLE_CRASH		@ 556
+	.4byte Move_V_CREATE			@ 557
+	.4byte Move_FUSION_FLARE		@ 558
+	.4byte Move_FUSION_BOLT			@ 559
 @@@@@@@@@@@@ GEN 6 @@@@@@@@@@@@
-	.4byte Move_FLYING_PRESS
-	.4byte Move_MAT_BLOCK
-	.4byte Move_BELCH
-	.4byte Move_ROTOTILLER
-	.4byte Move_STICKY_WEB
-	.4byte Move_FELL_STINGER
-	.4byte Move_PHANTOM_FORCE
-	.4byte Move_TRICK_OR_TREAT
-	.4byte Move_NOBLE_ROAR
-	.4byte Move_ION_DELUGE
-	.4byte Move_PARABOLIC_CHARGE
-	.4byte Move_FORESTS_CURSE
-	.4byte Move_PETAL_BLIZZARD
-	.4byte Move_FREEZE_DRY
-	.4byte Move_DISARMING_VOICE
-	.4byte Move_PARTING_SHOT
-	.4byte Move_TOPSY_TURVY
-	.4byte Move_DRAINING_KISS
-	.4byte Move_CRAFTY_SHIELD
-	.4byte Move_FLOWER_SHIELD
-	.4byte Move_GRASSY_TERRAIN
-	.4byte Move_MISTY_TERRAIN
-	.4byte Move_ELECTRIFY
-	.4byte Move_PLAY_ROUGH
-	.4byte Move_FAIRY_WIND
-	.4byte Move_MOONBLAST
-	.4byte Move_BOOMBURST
-	.4byte Move_FAIRY_LOCK
-	.4byte Move_KINGS_SHIELD
-	.4byte Move_PLAY_NICE
-	.4byte Move_CONFIDE
-	.4byte Move_DIAMOND_STORM
-	.4byte Move_STEAM_ERUPTION
-	.4byte Move_HYPERSPACE_HOLE
-	.4byte Move_WATER_SHURIKEN
-	.4byte Move_MYSTICAL_FIRE
-	.4byte Move_SPIKY_SHIELD
-	.4byte Move_AROMATIC_MIST
-	.4byte Move_EERIE_IMPULSE
-	.4byte Move_VENOM_DRENCH
-	.4byte Move_POWDER
-	.4byte Move_GEOMANCY
-	.4byte Move_MAGNETIC_FLUX
-	.4byte Move_HAPPY_HOUR
-	.4byte Move_ELECTRIC_TERRAIN
-	.4byte Move_DAZZLING_GLEAM
-	.4byte Move_CELEBRATE
-	.4byte Move_HOLD_HANDS
-	.4byte Move_BABY_DOLL_EYES
-	.4byte Move_NUZZLE
-	.4byte Move_HOLD_BACK
-	.4byte Move_INFESTATION
-	.4byte Move_POWER_UP_PUNCH
-	.4byte Move_OBLIVION_WING
-	.4byte Move_THOUSAND_ARROWS
-	.4byte Move_THOUSAND_WAVES
-	.4byte Move_LANDS_WRATH
-	.4byte Move_LIGHT_OF_RUIN
-	.4byte Move_ORIGIN_PULSE
-	.4byte Move_PRECIPICE_BLADES
-	.4byte Move_DRAGON_ASCENT
-	.4byte Move_HYPERSPACE_FURY
+	.4byte Move_FLYING_PRESS		@ 560
+	.4byte Move_MAT_BLOCK			@ 561
+	.4byte Move_BELCH				@ 562
+	.4byte Move_ROTOTILLER			@ 563
+	.4byte Move_STICKY_WEB			@ 564
+	.4byte Move_FELL_STINGER		@ 565
+	.4byte Move_PHANTOM_FORCE		@ 566
+	.4byte Move_TRICK_OR_TREAT		@ 567
+	.4byte Move_NOBLE_ROAR			@ 568
+	.4byte Move_ION_DELUGE			@ 569
+	.4byte Move_PARABOLIC_CHARGE	@ 570
+	.4byte Move_FORESTS_CURSE		@ 571
+	.4byte Move_PETAL_BLIZZARD		@ 572
+	.4byte Move_FREEZE_DRY			@ 573
+	.4byte Move_DISARMING_VOICE		@ 574
+	.4byte Move_PARTING_SHOT		@ 575
+	.4byte Move_TOPSY_TURVY			@ 576
+	.4byte Move_DRAINING_KISS		@ 577
+	.4byte Move_CRAFTY_SHIELD		@ 578
+	.4byte Move_FLOWER_SHIELD		@ 579
+	.4byte Move_GRASSY_TERRAIN		@ 580
+	.4byte Move_MISTY_TERRAIN		@ 581
+	.4byte Move_ELECTRIFY			@ 582
+	.4byte Move_PLAY_ROUGH			@ 583
+	.4byte Move_FAIRY_WIND			@ 584
+	.4byte Move_MOONBLAST			@ 585
+	.4byte Move_BOOMBURST			@ 586
+	.4byte Move_FAIRY_LOCK			@ 587
+	.4byte Move_KINGS_SHIELD		@ 588
+	.4byte Move_PLAY_NICE			@ 589
+	.4byte Move_CONFIDE				@ 590
+	.4byte Move_DIAMOND_STORM		@ 591
+	.4byte Move_STEAM_ERUPTION		@ 592
+	.4byte Move_HYPERSPACE_HOLE		@ 593
+	.4byte Move_WATER_SHURIKEN		@ 594
+	.4byte Move_MYSTICAL_FIRE		@ 595
+	.4byte Move_SPIKY_SHIELD		@ 596
+	.4byte Move_AROMATIC_MIST		@ 597
+	.4byte Move_EERIE_IMPULSE		@ 598
+	.4byte Move_VENOM_DRENCH		@ 599
+	.4byte Move_POWDER				@ 600
+	.4byte Move_GEOMANCY			@ 601
+	.4byte Move_MAGNETIC_FLUX		@ 602
+	.4byte Move_HAPPY_HOUR			@ 603
+	.4byte Move_ELECTRIC_TERRAIN	@ 604
+	.4byte Move_DAZZLING_GLEAM		@ 605
+	.4byte Move_CELEBRATE			@ 606
+	.4byte Move_HOLD_HANDS			@ 607
+	.4byte Move_BABY_DOLL_EYES		@ 608
+	.4byte Move_NUZZLE				@ 609
+	.4byte Move_HOLD_BACK			@ 610
+	.4byte Move_INFESTATION			@ 611
+	.4byte Move_POWER_UP_PUNCH		@ 612
+	.4byte Move_OBLIVION_WING		@ 613
+	.4byte Move_THOUSAND_ARROWS		@ 614
+	.4byte Move_THOUSAND_WAVES		@ 615
+	.4byte Move_LANDS_WRATH			@ 616
+	.4byte Move_LIGHT_OF_RUIN		@ 617
+	.4byte Move_ORIGIN_PULSE		@ 618
+	.4byte Move_PRECIPICE_BLADES	@ 619
+	.4byte Move_DRAGON_ASCENT		@ 620
+	.4byte Move_HYPERSPACE_FURY		@ 621
 @@@@@@@@@@@@ GEN 7 @@@@@@@@@@@@
-	.4byte Move_SHORE_UP
-	.4byte Move_FIRST_IMPRESSION
-	.4byte Move_BANEFUL_BUNKER
-	.4byte Move_SPIRIT_SHACKLE
-	.4byte Move_DARKEST_LARIAT
-	.4byte Move_SPARKLING_ARIA
-	.4byte Move_ICE_HAMMER
-	.4byte Move_FLORAL_HEALING
-	.4byte Move_HIGH_HORSEPOWER
-	.4byte Move_STRENGTH_SAP
-	.4byte Move_SOLAR_BLADE
-	.4byte Move_LEAFAGE
-	.4byte Move_SPOTLIGHT
-	.4byte Move_TOXIC_THREAD
-	.4byte Move_LASER_FOCUS
-	.4byte Move_GEAR_UP
-	.4byte Move_THROAT_CHOP
-	.4byte Move_POLLEN_PUFF
-	.4byte Move_ANCHOR_SHOT
-	.4byte Move_PSYCHIC_TERRAIN
-	.4byte Move_LUNGE
-	.4byte Move_FIRE_LASH
-	.4byte Move_POWER_TRIP
-	.4byte Move_BURN_UP
-	.4byte Move_SPEED_SWAP
-	.4byte Move_SMART_STRIKE
-	.4byte Move_PURIFY
-	.4byte Move_REVELATION_DANCE
-	.4byte Move_CORE_ENFORCER
-	.4byte Move_TROP_KICK
-	.4byte Move_INSTRUCT
-	.4byte Move_BEAK_BLAST
-	.4byte Move_CLANGING_SCALES
-	.4byte Move_DRAGON_HAMMER
-	.4byte Move_BRUTAL_SWING
-	.4byte Move_AURORA_VEIL
-	.4byte Move_SHELL_TRAP
-	.4byte Move_FLEUR_CANNON
-	.4byte Move_PSYCHIC_FANGS
-	.4byte Move_STOMPING_TANTRUM
-	.4byte Move_SHADOW_BONE
-	.4byte Move_ACCELEROCK
-	.4byte Move_LIQUIDATION
-	.4byte Move_PRISMATIC_LASER
-	.4byte Move_SPECTRAL_THIEF
-	.4byte Move_SUNSTEEL_STRIKE
-	.4byte Move_MOONGEIST_BEAM
-	.4byte Move_TEARFUL_LOOK
-	.4byte Move_ZING_ZAP
-	.4byte Move_NATURES_MADNESS
-	.4byte Move_MULTI_ATTACK
-	.4byte Move_MIND_BLOWN
-	.4byte Move_PLASMA_FISTS
-	.4byte Move_PHOTON_GEYSER
-	.4byte Move_ZIPPY_ZAP
-	.4byte Move_SPLISHY_SPLASH
-	.4byte Move_FLOATY_FALL
-	.4byte Move_PIKA_PAPOW
-	.4byte Move_BOUNCY_BUBBLE
-	.4byte Move_BUZZY_BUZZ
-	.4byte Move_SIZZLY_SLIDE
-	.4byte Move_GLITZY_GLOW
-	.4byte Move_BADDY_BAD
-	.4byte Move_SAPPY_SEED
-	.4byte Move_FREEZY_FROST
-	.4byte Move_SPARKLY_SWIRL
-	.4byte Move_VEEVEE_VOLLEY
-	.4byte Move_DOUBLE_IRON_BASH
+	.4byte Move_SHORE_UP			@ 622
+	.4byte Move_FIRST_IMPRESSION	@ 623
+	.4byte Move_BANEFUL_BUNKER		@ 624
+	.4byte Move_SPIRIT_SHACKLE		@ 625
+	.4byte Move_DARKEST_LARIAT		@ 626
+	.4byte Move_SPARKLING_ARIA		@ 627
+	.4byte Move_ICE_HAMMER			@ 628
+	.4byte Move_FLORAL_HEALING		@ 629
+	.4byte Move_HIGH_HORSEPOWER		@ 630
+	.4byte Move_STRENGTH_SAP		@ 631
+	.4byte Move_SOLAR_BLADE			@ 632
+	.4byte Move_LEAFAGE				@ 633
+	.4byte Move_SPOTLIGHT			@ 634
+	.4byte Move_TOXIC_THREAD		@ 635
+	.4byte Move_LASER_FOCUS			@ 636
+	.4byte Move_GEAR_UP				@ 637
+	.4byte Move_THROAT_CHOP			@ 638
+	.4byte Move_POLLEN_PUFF			@ 639
+	.4byte Move_ANCHOR_SHOT			@ 640
+	.4byte Move_PSYCHIC_TERRAIN		@ 641
+	.4byte Move_LUNGE				@ 642
+	.4byte Move_FIRE_LASH			@ 643
+	.4byte Move_POWER_TRIP			@ 644
+	.4byte Move_BURN_UP				@ 645
+	.4byte Move_SPEED_SWAP			@ 646
+	.4byte Move_SMART_STRIKE		@ 647
+	.4byte Move_PURIFY				@ 648
+	.4byte Move_REVELATION_DANCE	@ 649
+	.4byte Move_CORE_ENFORCER		@ 650
+	.4byte Move_TROP_KICK			@ 651
+	.4byte Move_INSTRUCT			@ 652
+	.4byte Move_BEAK_BLAST			@ 653
+	.4byte Move_CLANGING_SCALES		@ 654
+	.4byte Move_DRAGON_HAMMER		@ 655
+	.4byte Move_BRUTAL_SWING		@ 656
+	.4byte Move_AURORA_VEIL			@ 657
+	.4byte Move_SHELL_TRAP			@ 658
+	.4byte Move_FLEUR_CANNON		@ 659
+	.4byte Move_PSYCHIC_FANGS		@ 660
+	.4byte Move_STOMPING_TANTRUM	@ 661
+	.4byte Move_SHADOW_BONE			@ 662
+	.4byte Move_ACCELEROCK			@ 663
+	.4byte Move_LIQUIDATION			@ 664
+	.4byte Move_PRISMATIC_LASER		@ 665
+	.4byte Move_SPECTRAL_THIEF		@ 666
+	.4byte Move_SUNSTEEL_STRIKE		@ 667
+	.4byte Move_MOONGEIST_BEAM		@ 668
+	.4byte Move_TEARFUL_LOOK		@ 669
+	.4byte Move_ZING_ZAP			@ 670
+	.4byte Move_NATURES_MADNESS		@ 671
+	.4byte Move_MULTI_ATTACK		@ 672
+	.4byte Move_MIND_BLOWN			@ 673
+	.4byte Move_PLASMA_FISTS		@ 674
+	.4byte Move_PHOTON_GEYSER		@ 675
+	.4byte Move_ZIPPY_ZAP			@ 676
+	.4byte Move_SPLISHY_SPLASH		@ 677
+	.4byte Move_FLOATY_FALL			@ 678
+	.4byte Move_PIKA_PAPOW			@ 679
+	.4byte Move_BOUNCY_BUBBLE		@ 680
+	.4byte Move_BUZZY_BUZZ			@ 681
+	.4byte Move_SIZZLY_SLIDE		@ 682
+	.4byte Move_GLITZY_GLOW			@ 683
+	.4byte Move_BADDY_BAD			@ 684
+	.4byte Move_SAPPY_SEED			@ 685
+	.4byte Move_FREEZY_FROST		@ 686
+	.4byte Move_SPARKLY_SWIRL		@ 687
+	.4byte Move_VEEVEE_VOLLEY		@ 688
+	.4byte Move_DOUBLE_IRON_BASH	@ 689
 @@@@@@@@@@@@ GEN 8 @@@@@@@@@@@@
-	.4byte Move_DYNAMAX_CANNON
-	.4byte Move_SNIPE_SHOT
-	.4byte Move_JAW_LOCK
-	.4byte Move_STUFF_CHEEKS
-	.4byte Move_NO_RETREAT
-	.4byte Move_TAR_SHOT
-	.4byte Move_MAGIC_POWDER
-	.4byte Move_DRAGON_DARTS
-	.4byte Move_TEATIME
-	.4byte Move_OCTOLOCK
-	.4byte Move_BOLT_BEAK
-	.4byte Move_FISHIOUS_REND
-	.4byte Move_COURT_CHANGE
-	.4byte Move_CLANGOROUS_SOUL
-	.4byte Move_BODY_PRESS
-	.4byte Move_DECORATE
-	.4byte Move_DRUM_BEATING
-	.4byte Move_SNAP_TRAP
-	.4byte Move_PYRO_BALL
-	.4byte Move_BEHEMOTH_BLADE
-	.4byte Move_BEHEMOTH_BASH
-	.4byte Move_AURA_WHEEL
-	.4byte Move_BREAKING_SWIPE
-	.4byte Move_BRANCH_POKE
-	.4byte Move_OVERDRIVE
-	.4byte Move_APPLE_ACID
-	.4byte Move_GRAV_APPLE
-	.4byte Move_SPIRIT_BREAK
-	.4byte Move_STRANGE_STEAM
-	.4byte Move_LIFE_DEW
-	.4byte Move_OBSTRUCT
-	.4byte Move_FALSE_SURRENDER
-	.4byte Move_METEOR_ASSAULT
-	.4byte Move_ETERNA_BEAM
-	.4byte Move_STEEL_BEAM
-	.4byte Move_EXPANDING_FORCE
-	.4byte Move_STEEL_ROLLER
-	.4byte Move_SCALE_SHOT
-	.4byte Move_METEOR_BEAM
-	.4byte Move_SHELL_SIDE_ARM
-	.4byte Move_MISTY_EXPLOSION
-	.4byte Move_GRASSY_GLIDE
-	.4byte Move_RISING_VOLTAGE
-	.4byte Move_TERRAIN_PULSE
-	.4byte Move_SKITTER_SMACK
-	.4byte Move_BURNING_JEALOUSY
-	.4byte Move_LASH_OUT
-	.4byte Move_POLTERGEIST
-	.4byte Move_CORROSIVE_GAS
-	.4byte Move_COACHING
-	.4byte Move_FLIP_TURN
-	.4byte Move_TRIPLE_AXEL
-	.4byte Move_DUAL_WINGBEAT
-	.4byte Move_SCORCHING_SANDS
-	.4byte Move_JUNGLE_HEALING
-	.4byte Move_WICKED_BLOW
-	.4byte Move_SURGING_STRIKES
-	.4byte Move_THUNDER_CAGE
-	.4byte Move_DRAGON_ENERGY
-	.4byte Move_FREEZING_GLARE
-	.4byte Move_FIERY_WRATH
-	.4byte Move_THUNDEROUS_KICK
-	.4byte Move_GLACIAL_LANCE
-	.4byte Move_ASTRAL_BARRAGE
-	.4byte Move_EERIE_SPELL
+	.4byte Move_DYNAMAX_CANNON		@ 690
+	.4byte Move_SNIPE_SHOT			@ 691
+	.4byte Move_JAW_LOCK			@ 692
+	.4byte Move_STUFF_CHEEKS		@ 693
+	.4byte Move_NO_RETREAT			@ 694
+	.4byte Move_TAR_SHOT			@ 695
+	.4byte Move_MAGIC_POWDER		@ 696
+	.4byte Move_DRAGON_DARTS		@ 697
+	.4byte Move_TEATIME				@ 698
+	.4byte Move_OCTOLOCK			@ 699
+	.4byte Move_BOLT_BEAK			@ 700
+	.4byte Move_FISHIOUS_REND		@ 701
+	.4byte Move_COURT_CHANGE		@ 702
+	.4byte Move_CLANGOROUS_SOUL		@ 703
+	.4byte Move_BODY_PRESS			@ 704
+	.4byte Move_DECORATE			@ 705
+	.4byte Move_DRUM_BEATING		@ 706
+	.4byte Move_SNAP_TRAP			@ 707
+	.4byte Move_PYRO_BALL			@ 708
+	.4byte Move_BEHEMOTH_BLADE		@ 709
+	.4byte Move_BEHEMOTH_BASH		@ 710
+	.4byte Move_AURA_WHEEL			@ 711
+	.4byte Move_BREAKING_SWIPE		@ 712
+	.4byte Move_BRANCH_POKE			@ 713
+	.4byte Move_OVERDRIVE			@ 714
+	.4byte Move_APPLE_ACID			@ 715
+	.4byte Move_GRAV_APPLE			@ 716
+	.4byte Move_SPIRIT_BREAK		@ 717
+	.4byte Move_STRANGE_STEAM		@ 718
+	.4byte Move_LIFE_DEW			@ 719
+	.4byte Move_OBSTRUCT			@ 720
+	.4byte Move_FALSE_SURRENDER		@ 721
+	.4byte Move_METEOR_ASSAULT		@ 722
+	.4byte Move_ETERNA_BEAM			@ 723
+	.4byte Move_STEEL_BEAM			@ 724
+	.4byte Move_EXPANDING_FORCE		@ 725
+	.4byte Move_STEEL_ROLLER		@ 726
+	.4byte Move_SCALE_SHOT			@ 727
+	.4byte Move_METEOR_BEAM			@ 728
+	.4byte Move_SHELL_SIDE_ARM		@ 729
+	.4byte Move_MISTY_EXPLOSION		@ 730
+	.4byte Move_GRASSY_GLIDE		@ 731
+	.4byte Move_RISING_VOLTAGE		@ 732
+	.4byte Move_TERRAIN_PULSE		@ 733
+	.4byte Move_SKITTER_SMACK		@ 734
+	.4byte Move_BURNING_JEALOUSY	@ 735
+	.4byte Move_LASH_OUT			@ 736
+	.4byte Move_POLTERGEIST			@ 737
+	.4byte Move_CORROSIVE_GAS		@ 738
+	.4byte Move_COACHING			@ 739
+	.4byte Move_FLIP_TURN			@ 740
+	.4byte Move_TRIPLE_AXEL			@ 741
+	.4byte Move_DUAL_WINGBEAT		@ 742
+	.4byte Move_SCORCHING_SANDS		@ 743
+	.4byte Move_JUNGLE_HEALING		@ 744
+	.4byte Move_WICKED_BLOW			@ 745
+	.4byte Move_SURGING_STRIKES		@ 746
+	.4byte Move_THUNDER_CAGE		@ 747
+	.4byte Move_DRAGON_ENERGY		@ 748
+	.4byte Move_FREEZING_GLARE		@ 749
+	.4byte Move_FIERY_WRATH			@ 750
+	.4byte Move_THUNDEROUS_KICK		@ 751
+	.4byte Move_GLACIAL_LANCE		@ 752
+	.4byte Move_ASTRAL_BARRAGE		@ 753
+	.4byte Move_EERIE_SPELL			@ 754
 @@@@ LA MOVES
-	.4byte Move_DIRE_CLAW
-	.4byte Move_PSYSHIELD_BASH
-	.4byte Move_POWER_SHIFT
-	.4byte Move_STONE_AXE
-	.4byte Move_SPRINGTIDE_STORM
-	.4byte Move_MYSTICAL_POWER
-	.4byte Move_RAGING_FURY
-	.4byte Move_WAVE_CRASH
-	.4byte Move_CHLOROBLAST
-	.4byte Move_MOUNTAIN_GALE
-	.4byte Move_VICTORY_DANCE
-	.4byte Move_HEADLONG_RUSH
-	.4byte Move_BARB_BARRAGE
-	.4byte Move_ESPER_WING
-	.4byte Move_BITTER_MALICE
-	.4byte Move_SHELTER
-	.4byte Move_TRIPLE_ARROWS
-	.4byte Move_INFERNAL_PARADE
-	.4byte Move_CEASELESS_EDGE
-	.4byte Move_BLEAKWIND_STORM
-	.4byte Move_WILDBOLT_STORM
-	.4byte Move_SANDSEAR_STORM
-	.4byte Move_LUNAR_BLESSING
-	.4byte Move_TAKE_HEART
+	.4byte Move_DIRE_CLAW			@ 755
+	.4byte Move_PSYSHIELD_BASH		@ 756
+	.4byte Move_POWER_SHIFT			@ 757
+	.4byte Move_STONE_AXE			@ 758
+	.4byte Move_SPRINGTIDE_STORM	@ 759
+	.4byte Move_MYSTICAL_POWER		@ 760
+	.4byte Move_RAGING_FURY			@ 761
+	.4byte Move_WAVE_CRASH			@ 762
+	.4byte Move_CHLOROBLAST			@ 763
+	.4byte Move_MOUNTAIN_GALE		@ 764
+	.4byte Move_VICTORY_DANCE		@ 765
+	.4byte Move_HEADLONG_RUSH		@ 766
+	.4byte Move_BARB_BARRAGE		@ 767
+	.4byte Move_ESPER_WING			@ 768
+	.4byte Move_BITTER_MALICE		@ 769
+	.4byte Move_SHELTER				@ 770
+	.4byte Move_TRIPLE_ARROWS		@ 771
+	.4byte Move_INFERNAL_PARADE		@ 772
+	.4byte Move_CEASELESS_EDGE		@ 773
+	.4byte Move_BLEAKWIND_STORM		@ 774
+	.4byte Move_WILDBOLT_STORM		@ 775
+	.4byte Move_SANDSEAR_STORM		@ 776
+	.4byte Move_LUNAR_BLESSING		@ 777
+	.4byte Move_TAKE_HEART			@ 778
 @@@@@@@@@@@@ GEN 9 @@@@@@@@@@@@
-	.4byte Move_TERA_BLAST
-	.4byte Move_SILK_TRAP
-	.4byte Move_AXE_KICK
-	.4byte Move_LAST_RESPECTS
-	.4byte Move_LUMINA_CRASH
-	.4byte Move_ORDER_UP
-	.4byte Move_JET_PUNCH
-	.4byte Move_SPICY_EXTRACT
-	.4byte Move_SPIN_OUT
-	.4byte Move_POPULATION_BOMB
-	.4byte Move_ICE_SPINNER
-	.4byte Move_GLAIVE_RUSH
-	.4byte Move_REVIVAL_BLESSING
-	.4byte Move_SALT_CURE
-	.4byte Move_TRIPLE_DIVE
-	.4byte Move_MORTAL_SPIN
-	.4byte Move_DOODLE
-	.4byte Move_FILLET_AWAY
-	.4byte Move_KOWTOW_CLEAVE
-	.4byte Move_FLOWER_TRICK
-	.4byte Move_TORCH_SONG
-	.4byte Move_AQUA_STEP
-	.4byte Move_RAGING_BULL
-	.4byte Move_MAKE_IT_RAIN
-	.4byte Move_RUINATION
-	.4byte Move_COLLISION_COURSE
-	.4byte Move_ELECTRO_DRIFT
-	.4byte Move_SHED_TAIL
-	.4byte Move_CHILLY_RECEPTION
-	.4byte Move_TIDY_UP
-	.4byte Move_SNOWSCAPE
-	.4byte Move_POUNCE
-	.4byte Move_TRAILBLAZE
-	.4byte Move_CHILLING_WATER
-	.4byte Move_HYPER_DRILL
-	.4byte Move_TWIN_BEAM
-	.4byte Move_RAGE_FIST
-	.4byte Move_ARMOR_CANNON
-	.4byte Move_BITTER_BLADE
-	.4byte Move_DOUBLE_SHOCK
-	.4byte Move_GIGATON_HAMMER
-	.4byte Move_COMEUPPANCE
-	.4byte Move_AQUA_CUTTER
-	.4byte Move_BLAZING_TORQUE
-	.4byte Move_WICKED_TORQUE
-	.4byte Move_NOXIOUS_TORQUE
-	.4byte Move_COMBAT_TORQUE
-	.4byte Move_MAGICAL_TORQUE
-	.4byte Move_PSYBLADE
-	.4byte Move_HYDRO_STEAM
-	.4byte Move_BLOOD_MOON
-	.4byte Move_MATCHA_GOTCHA
-	.4byte Move_SYRUP_BOMB
-	.4byte Move_IVY_CUDGEL
-	.4byte Move_ELECTRO_SHOT
-	.4byte Move_TERA_STARSTORM
-	.4byte Move_FICKLE_BEAM
-	.4byte Move_BURNING_BULWARK
-	.4byte Move_THUNDERCLAP
-	.4byte Move_MIGHTY_CLEAVE
-	.4byte Move_TACHYON_CUTTER
-	.4byte Move_HARD_PRESS
-	.4byte Move_DRAGON_CHEER
-	.4byte Move_ALLURING_VOICE
-	.4byte Move_TEMPER_FLARE
-	.4byte Move_SUPERCELL_SLAM
-	.4byte Move_PSYCHIC_NOISE
-	.4byte Move_UPPER_HAND
-	.4byte Move_MALIGNANT_CHAIN
+	.4byte Move_TERA_BLAST			@ 779
+	.4byte Move_SILK_TRAP			@ 780
+	.4byte Move_AXE_KICK			@ 781
+	.4byte Move_LAST_RESPECTS		@ 782
+	.4byte Move_LUMINA_CRASH		@ 783
+	.4byte Move_ORDER_UP			@ 784
+	.4byte Move_JET_PUNCH			@ 785
+	.4byte Move_SPICY_EXTRACT		@ 786
+	.4byte Move_SPIN_OUT			@ 787
+	.4byte Move_POPULATION_BOMB		@ 788
+	.4byte Move_ICE_SPINNER			@ 789
+	.4byte Move_GLAIVE_RUSH			@ 790
+	.4byte Move_REVIVAL_BLESSING	@ 791
+	.4byte Move_SALT_CURE			@ 792
+	.4byte Move_TRIPLE_DIVE			@ 793
+	.4byte Move_MORTAL_SPIN			@ 794
+	.4byte Move_DOODLE				@ 795
+	.4byte Move_FILLET_AWAY			@ 796
+	.4byte Move_KOWTOW_CLEAVE		@ 797
+	.4byte Move_FLOWER_TRICK		@ 798
+	.4byte Move_TORCH_SONG			@ 799
+	.4byte Move_AQUA_STEP			@ 800
+	.4byte Move_RAGING_BULL			@ 801
+	.4byte Move_MAKE_IT_RAIN		@ 802
+	.4byte Move_RUINATION			@ 803
+	.4byte Move_COLLISION_COURSE	@ 804
+	.4byte Move_ELECTRO_DRIFT		@ 805
+	.4byte Move_SHED_TAIL			@ 806
+	.4byte Move_CHILLY_RECEPTION	@ 807
+	.4byte Move_TIDY_UP				@ 808
+	.4byte Move_SNOWSCAPE			@ 809
+	.4byte Move_POUNCE				@ 810
+	.4byte Move_TRAILBLAZE			@ 811
+	.4byte Move_CHILLING_WATER		@ 812
+	.4byte Move_HYPER_DRILL			@ 813
+	.4byte Move_TWIN_BEAM			@ 814
+	.4byte Move_RAGE_FIST			@ 815
+	.4byte Move_ARMOR_CANNON		@ 816
+	.4byte Move_BITTER_BLADE		@ 817
+	.4byte Move_DOUBLE_SHOCK		@ 818
+	.4byte Move_GIGATON_HAMMER		@ 819
+	.4byte Move_COMEUPPANCE			@ 820
+	.4byte Move_AQUA_CUTTER			@ 821
+	.4byte Move_BLAZING_TORQUE		@ 822
+	.4byte Move_WICKED_TORQUE		@ 823
+	.4byte Move_NOXIOUS_TORQUE		@ 824
+	.4byte Move_COMBAT_TORQUE		@ 825
+	.4byte Move_MAGICAL_TORQUE		@ 826
+	.4byte Move_PSYBLADE			@ 827
+	.4byte Move_HYDRO_STEAM			@ 828
+	.4byte Move_BLOOD_MOON			@ 829
+	.4byte Move_MATCHA_GOTCHA		@ 830
+	.4byte Move_SYRUP_BOMB			@ 831
+	.4byte Move_IVY_CUDGEL			@ 832
+	.4byte Move_ELECTRO_SHOT		@ 833
+	.4byte Move_TERA_STARSTORM		@ 834
+	.4byte Move_FICKLE_BEAM			@ 835
+	.4byte Move_BURNING_BULWARK		@ 836
+	.4byte Move_THUNDERCLAP			@ 837
+	.4byte Move_MIGHTY_CLEAVE		@ 838
+	.4byte Move_TACHYON_CUTTER		@ 839
+	.4byte Move_HARD_PRESS			@ 840
+	.4byte Move_DRAGON_CHEER		@ 841
+	.4byte Move_ALLURING_VOICE		@ 842
+	.4byte Move_TEMPER_FLARE		@ 843
+	.4byte Move_SUPERCELL_SLAM		@ 844
+	.4byte Move_PSYCHIC_NOISE		@ 845
+	.4byte Move_UPPER_HAND			@ 846
+	.4byte Move_MALIGNANT_CHAIN		@ 847
+@@@@ PokeArceus Moves
+	.4byte Move_HIDDEN_POWER		@ 848
 @@@@ Z MOVES
 	.4byte Move_BREAKNECK_BLITZ
 	.4byte Move_ALL_OUT_PUMMELING

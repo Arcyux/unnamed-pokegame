@@ -1590,7 +1590,11 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_CHANGE_TYPE_ON_ITEM] =
     {
         .battleScript = BattleScript_EffectHit,
-        .battleTvScore = 0, // TODO: Assign points
+    },
+
+    [EFFECT_CHANGE_TYPE_TO_SUPEREFFECTIVE] =
+    {
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_AUTOTOMIZE] =

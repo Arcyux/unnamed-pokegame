@@ -584,6 +584,21 @@ static void InheritIVs(struct Pokemon *egg, struct DayCare *daycare)
     }
 }
 
+static void InheritHPType(struct Pokemon* egg, struct DayCare* daycare) {
+    struct BoxPokemon* mother = &daycare->mons[0].mon;
+    struct BoxPokemon* father = &daycare->mons[1].mon;
+    //u16 motherItem = GetBoxMonData(mother, MON_DATA_HELD_ITEM);
+    //u16 fatherItem = GetBoxMonData(father, MON_DATA_HELD_ITEM);
+
+    // TODO: make item to pass down hptype
+    if (FALSE || FALSE) {
+        struct BoxPokemon* passedParent = Random() % DAYCARE_MON_COUNT ? mother : father;
+        u8 hpType = GetBoxMonData(passedParent, MON_DATA_HPTYPE);
+
+        SetMonData(egg, MON_DATA_HPTYPE, &hpType);
+    }
+}
+
 static void InheritPokeball(struct Pokemon *egg, struct BoxPokemon *father, struct BoxPokemon *mother)
 {
     u16 inheritBall = ITEM_POKE_BALL;
@@ -991,6 +1006,7 @@ static void _GiveEggFromDaycare(struct DayCare *daycare)
 #endif
     SetInitialEggData(&egg, species, daycare);
     InheritIVs(&egg, daycare);
+    InheritHPType(&egg, daycare);
     InheritPokeball(&egg, &daycare->mons[parentSlots[1]].mon, &daycare->mons[parentSlots[0]].mon);
     BuildEggMoveset(&egg, &daycare->mons[parentSlots[1]].mon, &daycare->mons[parentSlots[0]].mon);
     if (P_ABILITY_INHERITANCE >= GEN_6)

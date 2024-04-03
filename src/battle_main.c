@@ -5857,6 +5857,7 @@ void SetTypeBeforeUsingMove(u32 move, u32 battlerAtk)
 {
     u32 moveType, ateType, attackerAbility;
     u16 holdEffect = GetBattlerHoldEffect(battlerAtk, TRUE);
+    u16 moveTarget = gBattleStruct->moveTarget[battlerAtk];
 
     if (move == MOVE_STRUGGLE)
         return;
@@ -5883,32 +5884,21 @@ void SetTypeBeforeUsingMove(u32 move, u32 battlerAtk)
     }
     else if (gMovesInfo[move].effect == EFFECT_HIDDEN_POWER)
     {
-        u8 typeBits  = ((gBattleMons[battlerAtk].hpIV & 1) << 0)
-                     | ((gBattleMons[battlerAtk].attackIV & 1) << 1)
-                     | ((gBattleMons[battlerAtk].defenseIV & 1) << 2)
-                     | ((gBattleMons[battlerAtk].speedIV & 1) << 3)
-                     | ((gBattleMons[battlerAtk].spAttackIV & 1) << 4)
-                     | ((gBattleMons[battlerAtk].spDefenseIV & 1) << 5);
-
-        // Subtract 4 instead of 1 below because 3 types are excluded (TYPE_NORMAL and TYPE_MYSTERY and TYPE_FAIRY)
-        // The final + 1 skips past Normal, and the following conditional skips TYPE_MYSTERY
-        gBattleStruct->dynamicMoveType = ((NUMBER_OF_MON_TYPES - 4) * typeBits) / 63 + 1;
-        if (gBattleStruct->dynamicMoveType >= TYPE_MYSTERY)
-            gBattleStruct->dynamicMoveType++;
-        gBattleStruct->dynamicMoveType |= F_DYNAMIC_TYPE_IGNORE_PHYSICALITY | F_DYNAMIC_TYPE_SET;
+        gBattleStruct->dynamicMoveType |= gBattleMons[battlerAtk].hpType | F_DYNAMIC_TYPE_IGNORE_PHYSICALITY | F_DYNAMIC_TYPE_SET;
     }
     else if (gMovesInfo[move].effect == EFFECT_CHANGE_TYPE_ON_ITEM && holdEffect == gMovesInfo[move].argument)
     {
         u8 type = ItemId_GetSecondaryId(gBattleMons[battlerAtk].item);
 
         // LEGEND PLATE
-        if (gBattleMons[battlerAtk].item == ITEM_LEGEND_PLATE) {
-            u16 moveTarget = gBattleStruct->moveTarget[battlerAtk];
-
+        if (gBattleMons[battlerAtk].item == ITEM_LEGEND_PLATE)
             type = UpdateMostEffectiveType(move, battlerAtk, moveTarget, TRUE);
-        }
         
         gBattleStruct->dynamicMoveType = type | F_DYNAMIC_TYPE_SET;
+    }
+    else if (gMovesInfo[move].effect == EFFECT_CHANGE_TYPE_TO_SUPEREFFECTIVE)
+    {
+        gBattleStruct->dynamicMoveType = UpdateMostEffectiveType(move, battlerAtk, moveTarget, FALSE);
     }
     else if (gMovesInfo[move].effect == EFFECT_REVELATION_DANCE)
     {
@@ -5961,6 +5951,7 @@ void SetTypeBeforeUsingMove(u32 move, u32 battlerAtk)
              && gMovesInfo[move].effect != EFFECT_HIDDEN_POWER
              && gMovesInfo[move].effect != EFFECT_WEATHER_BALL
              && gMovesInfo[move].effect != EFFECT_CHANGE_TYPE_ON_ITEM
+             && gMovesInfo[move].effect != EFFECT_CHANGE_TYPE_TO_SUPEREFFECTIVE
              && gMovesInfo[move].effect != EFFECT_NATURAL_GIFT
              && ((attackerAbility == ABILITY_PIXILATE && (ateType = TYPE_FAIRY))
                  || (attackerAbility == ABILITY_REFRIGERATE && (ateType = TYPE_ICE))

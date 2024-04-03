@@ -1719,6 +1719,13 @@ static void MoveSelectionDisplayMoveType(u32 battlerAtk, u32 battlerDef)
         else
             type = ItemId_GetSecondaryId(gBattleMons[battlerAtk].item);
     }
+    else if (gMovesInfo[move].effect == EFFECT_CHANGE_TYPE_TO_SUPEREFFECTIVE) {
+        type = UpdateMostEffectiveType(move, battlerAtk, battlerDef, FALSE);
+    }
+    else if (gMovesInfo[move].effect == EFFECT_HIDDEN_POWER)
+    {
+        type = gBattleMons[battlerAtk].hpType;
+    }
     else
         type = gMovesInfo[move].type;
 
@@ -1760,14 +1767,14 @@ static void MoveSelectionDisplayMoveType(u32 battlerAtk, u32 battlerDef)
     }
 
     // place all on screen
-    CopyWindowToVram(B_WIN_MOVE_CAT, COPYWIN_FULL);
     CopyWindowToVram(B_WIN_MOVE_TYPE, COPYWIN_FULL);
+    CopyWindowToVram(B_WIN_MOVE_CAT, COPYWIN_FULL);
     CopyWindowToVram(B_WIN_MOVE_EFF, COPYWIN_FULL);
-    PutWindowTilemap(B_WIN_MOVE_CAT);
     PutWindowTilemap(B_WIN_MOVE_TYPE);
+    PutWindowTilemap(B_WIN_MOVE_CAT);
     PutWindowTilemap(B_WIN_MOVE_EFF);
-    ListMenuLoadStdPalAt(BG_PLTT_ID(10), icon);
     ListMenuLoadStdPalAt(BG_PLTT_ID(9), type);
+    ListMenuLoadStdPalAt(BG_PLTT_ID(10), icon);
     ListMenuLoadStdPalAt(BG_PLTT_ID(11), MENU_TYPE_STAB);
 }
 

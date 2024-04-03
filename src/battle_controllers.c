@@ -1444,6 +1444,7 @@ static u32 GetBattlerMonData(u32 battler, struct Pokemon *party, u32 monId, u8 *
         battleMon.speedIV = GetMonData(&party[monId], MON_DATA_SPEED_IV);
         battleMon.spAttackIV = GetMonData(&party[monId], MON_DATA_SPATK_IV);
         battleMon.spDefenseIV = GetMonData(&party[monId], MON_DATA_SPDEF_IV);
+        battleMon.hpType = GetMonData(&party[monId], MON_DATA_HPTYPE);
         battleMon.personality = GetMonData(&party[monId], MON_DATA_PERSONALITY);
         battleMon.status1 = GetMonData(&party[monId], MON_DATA_STATUS);
         battleMon.level = GetMonData(&party[monId], MON_DATA_LEVEL);
@@ -1604,6 +1605,10 @@ static u32 GetBattlerMonData(u32 battler, struct Pokemon *party, u32 monId, u8 *
         dst[0] = GetMonData(&party[monId], MON_DATA_SPDEF_IV);
         size = 1;
         break;
+    case REQUEST_HPTYPE_BATTLE:
+        dst[0] = GetMonData(&party[monId], MON_DATA_HPTYPE);
+        size = 1;
+        break;
     case REQUEST_PERSONALITY_BATTLE:
         data32 = GetMonData(&party[monId], MON_DATA_PERSONALITY);
         dst[0] = (data32 & 0x000000FF);
@@ -1755,6 +1760,8 @@ static void SetBattlerMonData(u32 battler, struct Pokemon *party, u32 monId)
             SetMonData(&party[monId], MON_DATA_SPATK_IV, &iv);
             iv = battlePokemon->spDefenseIV;
             SetMonData(&party[monId], MON_DATA_SPDEF_IV, &iv);
+            iv = battlePokemon->hpType;
+            SetMonData(&party[monId], MON_DATA_HPTYPE, &iv);
             SetMonData(&party[monId], MON_DATA_PERSONALITY, &battlePokemon->personality);
             SetMonData(&party[monId], MON_DATA_STATUS, &battlePokemon->status1);
             SetMonData(&party[monId], MON_DATA_LEVEL, &battlePokemon->level);
@@ -1867,6 +1874,9 @@ static void SetBattlerMonData(u32 battler, struct Pokemon *party, u32 monId)
         break;
     case REQUEST_SPDEF_IV_BATTLE:
         SetMonData(&party[monId], MON_DATA_SPDEF_IV, &gBattleResources->bufferA[battler][3]);
+        break;
+    case REQUEST_HPTYPE_BATTLE:
+        SetMonData(&party[monId], MON_DATA_HPTYPE, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_PERSONALITY_BATTLE:
         SetMonData(&party[monId], MON_DATA_PERSONALITY, &gBattleResources->bufferA[battler][3]);

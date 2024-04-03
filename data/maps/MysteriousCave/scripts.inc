@@ -247,7 +247,7 @@ RandomArceusStarter_1:
 # 104 "data/maps/MysteriousCave/scripts.pory"
 	call RandomArceus
 # 106 "data/maps/MysteriousCave/scripts.pory"
-	givemon SPECIES_ARCEUS, 1, ITEM_LEGEND_PLATE, , , , , , , , , , , , , , , , , , , MOVE_JUDGMENT, , , , VAR_TEMP_2
+	givemon SPECIES_UNOWN, 5, ITEM_NONE, , , , , , , , , , , , , , , , , , MOVE_LEGEND_POWER, , , , , VAR_TEMP_2
 # 111 "data/maps/MysteriousCave/scripts.pory"
 	compare VAR_RESULT, YES
 	goto_if_eq RandomArceusStarter_4

@@ -985,6 +985,13 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         }
     }
 
+    // Subtract 2 instead of 1 below because TYPE_MYSTERY is excluded
+    u8 hpType = Random() % (NUMBER_OF_MON_TYPES - 2);
+    // Skip mystery type
+    if (hpType >= TYPE_MYSTERY)
+        hpType++;
+    SetBoxMonData(boxMon, MON_DATA_HPTYPE, &hpType);
+
     if (gSpeciesInfo[species].abilities[1])
     {
         value = personality & 1;
@@ -2297,6 +2304,9 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
         case MON_DATA_SPDEF_IV:
             retVal = substruct3->spDefenseIV;
             break;
+        case MON_DATA_HPTYPE:
+            retVal = substruct3->hpType;
+            break;
         case MON_DATA_IS_EGG:
             retVal = substruct3->isEgg;
             break;
@@ -2660,6 +2670,9 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
             break;
         case MON_DATA_SPDEF_IV:
             SET8(substruct3->spDefenseIV);
+            break;
+        case MON_DATA_HPTYPE:
+            SET8(substruct3->hpType);
             break;
         case MON_DATA_IS_EGG:
             SET8(substruct3->isEgg);
@@ -3089,6 +3102,7 @@ void PokemonToBattleMon(struct Pokemon *src, struct BattlePokemon *dst)
     dst->speedIV = GetMonData(src, MON_DATA_SPEED_IV, NULL);
     dst->spAttackIV = GetMonData(src, MON_DATA_SPATK_IV, NULL);
     dst->spDefenseIV = GetMonData(src, MON_DATA_SPDEF_IV, NULL);
+    dst->hpType = GetMonData(src, MON_DATA_HPTYPE, NULL);
     dst->personality = GetMonData(src, MON_DATA_PERSONALITY, NULL);
     dst->status1 = GetMonData(src, MON_DATA_STATUS, NULL);
     dst->level = GetMonData(src, MON_DATA_LEVEL, NULL);

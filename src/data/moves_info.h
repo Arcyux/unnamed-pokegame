@@ -5787,6 +5787,22 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .contestComboMoves = {0}
     },
 
+    [MOVE_LEGEND_POWER] =
+    {
+        .name = COMPOUND_STRING("Legend Power"),
+        .description = COMPOUND_STRING(
+            "Always deals supereffective\n"
+            "damage to the target."),
+        .power = 60,
+        .effect = EFFECT_CHANGE_TYPE_TO_SUPEREFFECTIVE,
+        .type = TYPE_NORMAL,
+        .accuracy = 100,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL
+    },
+
     [MOVE_CROSS_CHOP] =
     {
         .name = COMPOUND_STRING("Cross Chop"),
