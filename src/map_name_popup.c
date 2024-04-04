@@ -71,7 +71,8 @@ static const u16 sMapPopUp_Palette_Underwater[16] = INCBIN_U16("graphics/map_pop
 
 static const u8 sRegionMapSectionId_To_PopUpThemeIdMapping[] =
 {
-    [MAPSEC_MYSTERIOUS_CAVE] = MAPPOPUP_THEME_STONE
+    [MAPSEC_MYSTERIOUS_CAVE] = MAPPOPUP_THEME_STONE,
+    [MAPSEC_THE_ENTRANCE] = MAPPOPUP_THEME_WOOD,
 };
 
 static const u8 sText_PyramidFloor1[] = _("PYRAMID FLOOR 1");

@@ -45,7 +45,7 @@
 extern const u8 EventScript_ResetAllMapFlags[];
 
 static void ClearFrontierRecord(void);
-static void WarpToTruck(void);
+static void WarpToStart(void);
 static void ResetMiniGamesRecords(void);
 
 EWRAM_DATA bool8 gDifferentSaveFile = FALSE;
@@ -119,9 +119,9 @@ static void ClearFrontierRecord(void)
     gSaveBlock2Ptr->frontier.opponentNames[1][0] = EOS;
 }
 
-static void WarpToTruck(void)
+static void WarpToStart(void)
 {
-    SetWarpDestination(MAP_GROUP(MYSTERIOUS_CAVE), MAP_NUM(MYSTERIOUS_CAVE), WARP_ID_NONE, 9, 9);
+    SetWarpDestination(MAP_GROUP(THE_ENTRANCE), MAP_NUM(THE_ENTRANCE), WARP_ID_NONE, 24, 29);
     WarpIntoMap();
 }
 
@@ -180,7 +180,7 @@ void NewGameInitData(void)
     InitDewfordTrend();
     ResetFanClub();
     ResetLotteryCorner();
-    WarpToTruck();
+    WarpToStart();
     RunScriptImmediately(EventScript_ResetAllMapFlags);
     ResetMiniGamesRecords();
     InitUnionRoomChatRegisteredTexts();

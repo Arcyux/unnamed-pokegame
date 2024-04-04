@@ -235,7 +235,7 @@ static const u32 sFlyTargetIcons_Gfx[] = INCBIN_U32("graphics/pokenav/region_map
 
 static const u8 sMapHealLocations[][3] =
 {
-    [MAPSEC_MYSTERIOUS_CAVE] = { MAP_GROUP(MYSTERIOUS_CAVE), MAP_NUM(MYSTERIOUS_CAVE), HEAL_LOCATION_MYSTERIOUS_CAVE }
+    [MAPSEC_MYSTERIOUS_CAVE] = { MAP_GROUP(MYSTERIOUS_CAVE_B1F_1R), MAP_NUM(MYSTERIOUS_CAVE_B1F_1R), HEAL_LOCATION_MYSTERIOUS_CAVE }
 };
 
 static const u8 *const sEverGrandeCityNames[] =

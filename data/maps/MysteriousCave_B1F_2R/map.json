@@ -1,14 +1,14 @@
 {
-  "id": "MAP_MYSTERIOUS_CAVE_1F_2R",
-  "name": "MysteriousCave_1F_2R",
-  "layout": "LAYOUT_MYSTERIOUS_CAVE_1F_2R",
+  "id": "MAP_MYSTERIOUS_CAVE_B1F_2R",
+  "name": "MysteriousCave_B1F_2R",
+  "layout": "LAYOUT_MYSTERIOUS_CAVE_B1F_2R",
   "music": "MUS_DUMMY",
   "region_map_section": "MAPSEC_MYSTERIOUS_CAVE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_UNDERGROUND",
   "allow_cycling": true,
-  "allow_escaping": true,
+  "allow_escaping": false,
   "allow_running": true,
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
@@ -21,7 +21,7 @@
       "x": 9,
       "y": 15,
       "elevation": 0,
-      "dest_map": "MAP_MYSTERIOUS_CAVE",
+      "dest_map": "MAP_MYSTERIOUS_CAVE_B1F_1R",
       "dest_warp_id": "0"
     }
   ],

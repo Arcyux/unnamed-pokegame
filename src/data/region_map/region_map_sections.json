@@ -7,6 +7,14 @@
       "y": 0,
       "width": 28,
       "height": 15
+    },
+    {
+      "map_section": "MAPSEC_THE_ENTRANCE",
+      "name": "The Entrance",
+      "x": 0,
+      "y": 0,
+      "width": 1,
+      "height": 1
     }
   ]
 }

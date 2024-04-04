@@ -1,6 +1,6 @@
 const ENCOUNTER_OBJID = 1
 
-mapscripts MysteriousCave_MapScripts {
+mapscripts MysteriousCave_B1F_1R_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         setrespawn(HEAL_LOCATION_MYSTERIOUS_CAVE)
         call(RandomArceusStarter)
@@ -10,6 +10,11 @@ mapscripts MysteriousCave_MapScripts {
     MAP_SCRIPT_ON_RESUME {
         if (flag(FLAG_DEFEATED_FIRST_ENCOUNTER)) {
             removeobject(ENCOUNTER_OBJID)
+        }
+
+        if (flag(FLAG_SHOW_MYSTERIOUS_CAVE_NAME)) {
+            special(ShowMapNamePopup)
+            clearflag(FLAG_SHOW_MYSTERIOUS_CAVE_NAME)
         }
     }
 

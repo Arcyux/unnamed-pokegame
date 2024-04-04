@@ -95,7 +95,7 @@
 #define FLAG_STARTER_GIVEN                   0x50
 #define FLAG_SET_WALL_CLOCK                  0x51
 #define FLAG_DEFEATED_FIRST_ENCOUNTER        0x52
-#define FLAG_LEGENDARIES_IN_SOOTOPOLIS       0x53
+#define FLAG_SHOW_MYSTERIOUS_CAVE_NAME       0x53
 
 #define FLAG_UNUSED_0x054                    0x54  // Unused Flag
 #define FLAG_UNUSED_0x055                    0x55  // Unused Flag

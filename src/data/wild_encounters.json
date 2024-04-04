@@ -85,8 +85,8 @@
       ],
       "encounters": [
         {
-          "map": "MAP_MYSTERIOUS_CAVE_1F_2R",
-          "base_label": "gMysteriousCave_1F_2R0",
+          "map": "MAP_MYSTERIOUS_CAVE_B1F_2R",
+          "base_label": "gMysteriousCave_B1F_2R0",
           "land_mons": {
             "encounter_rate": 10,
             "mons": [

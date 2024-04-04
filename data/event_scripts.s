@@ -543,11 +543,12 @@ EventScript_VsSeekerChargingDone::
 	.include "data/text/frontier_brain.inc"
 	.include "data/text/save.inc"
 	.include "data/text/birch_speech.inc"
-
-	.include "data/maps/MysteriousCave/scripts.inc"
     .include "data/scripts/dexnav.inc"
-    
 
-	.include "data/maps/MysteriousCave_1F_2R/scripts.inc"
+	.include "data/maps/MysteriousCave_B1F_1R/scripts.inc"
+
+	.include "data/maps/MysteriousCave_B1F_2R/scripts.inc"
 
 	.include "data/maps/TheEntrance/scripts.inc"
+
+	.include "data/maps/MysteriousCave_1F_1R/scripts.inc"

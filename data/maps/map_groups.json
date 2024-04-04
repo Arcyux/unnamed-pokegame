@@ -6,11 +6,12 @@
     "gMapGroup_SpecialArea"
   ],
   "gMapGroup_TownsAndRoutes": [
-
+    "TheEntrance"
   ],
   "gMapGroup_Dungeons": [
-    "MysteriousCave",
-    "MysteriousCave_1F_2R"
+    "MysteriousCave_B1F_1R",
+    "MysteriousCave_B1F_2R",
+    "MysteriousCave_1F_1R"
   ],
   "gMapGroup_IndoorDynamic": [
 

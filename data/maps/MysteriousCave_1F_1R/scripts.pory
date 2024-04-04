@@ -1,0 +1,24 @@
+mapscripts MysteriousCave_1F_1R_MapScripts { }
+
+script MakeHole {
+    lock()
+
+    setvar(VAR_0x8004, 1) // vertical pan
+    setvar(VAR_0x8005, 1) // horizontal pan
+    setvar(VAR_0x8006, 8) // num shakes
+    setvar(VAR_0x8007, 5) // shake delay
+    special(ShakeCamera)
+    waitstate()
+
+    setmetatile(9, 9, METATILE_Cave_CrackedFloor_Hole, FALSE)
+    special(DrawWholeMapView)
+    playse(SE_CLICK)
+    waitse()
+    delay(20)
+
+    setflag(FLAG_SHOW_MYSTERIOUS_CAVE_NAME)
+    warphole(MAP_MYSTERIOUS_CAVE_B1F_1R)
+
+    setvar(VAR_TEMP_0, 1)
+    release()
+}
