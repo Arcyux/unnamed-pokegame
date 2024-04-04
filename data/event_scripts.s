@@ -549,3 +549,5 @@ EventScript_VsSeekerChargingDone::
     
 
 	.include "data/maps/MysteriousCave_1F_2R/scripts.inc"
+
+	.include "data/maps/TheEntrance/scripts.inc"

@@ -1,11 +1,10 @@
 #ifndef GUARD_SAVE_H
 #define GUARD_SAVE_H
 
-// Each 4 KiB flash sector contains 3968 bytes of actual data followed by 116 bytes of SaveBlock3 and then 12 bytes of footer.
+// Each 4 KiB flash sector contains 4084 bytes of actual data followed by 12 bytes of footer.
 #define SECTOR_DATA_SIZE 4084
-#define SAVE_BLOCK_3_CHUNK_SIZE 116
 #define SECTOR_FOOTER_SIZE 12
-#define SECTOR_SIZE (SECTOR_DATA_SIZE + SAVE_BLOCK_3_CHUNK_SIZE + SECTOR_FOOTER_SIZE)
+#define SECTOR_SIZE (SECTOR_DATA_SIZE + SECTOR_FOOTER_SIZE)
 
 // If the sector's signature field is not this value then the sector is either invalid or empty.
 #define SECTOR_SIGNATURE 0x8012025
@@ -65,7 +64,6 @@ struct SaveSectorLocation
 struct SaveSector
 {
     u8 data[SECTOR_DATA_SIZE];
-    u8 saveBlock3Chunk[SAVE_BLOCK_3_CHUNK_SIZE];
     u16 id;
     u16 checksum;
     u32 signature;
