@@ -507,6 +507,8 @@ static const u16 sUnownFormSpeciesIdTable[] = {
     SPECIES_UNOWN_Z,
     SPECIES_UNOWN_EMARK,
     SPECIES_UNOWN_QMARK,
+    SPECIES_UNOWN_1,
+    SPECIES_UNOWN_2,
     FORM_SPECIES_END,
 };
 #endif //P_FAMILY_UNOWN

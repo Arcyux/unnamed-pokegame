@@ -966,7 +966,7 @@
 
 	@ Gives the player a Pokémon of the specified species and level, and allows to customize extra parameters.
 	@ VAR_RESULT will be set to MON_GIVEN_TO_PARTY, MON_GIVEN_TO_PC, or MON_CANT_GIVE depending on the outcome.
-	.macro givemon species:req, level:req, item, ball, nature, abilityNum, gender, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, isShiny, ggMaxFactor, teraType
+	.macro givemon species:req, level:req, item, ball, nature, abilityNum, gender, unownLetter, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, isShiny, ggMaxFactor, teraType
 	callnative ScrCmd_givemon
 	.set givemon_flags, 0
 	.2byte \species
@@ -976,31 +976,33 @@
 	.ifnb \nature; .set givemon_flags, givemon_flags | (1 << 2); .endif
 	.ifnb \abilityNum; .set givemon_flags, givemon_flags | (1 << 3); .endif
 	.ifnb \gender; .set givemon_flags, givemon_flags | (1 << 4); .endif
-	.ifnb \hpEv; .set givemon_flags, givemon_flags | (1 << 5); .endif
-	.ifnb \atkEv; .set givemon_flags, givemon_flags | (1 << 6); .endif
-	.ifnb \defEv; .set givemon_flags, givemon_flags | (1 << 7); .endif
-	.ifnb \speedEv; .set givemon_flags, givemon_flags | (1 << 8); .endif
-	.ifnb \spAtkEv; .set givemon_flags, givemon_flags | (1 << 9); .endif
-	.ifnb \spDefEv; .set givemon_flags, givemon_flags | (1 << 10); .endif
-	.ifnb \hpIv; .set givemon_flags, givemon_flags | (1 << 11); .endif
-	.ifnb \atkIv; .set givemon_flags, givemon_flags | (1 << 12); .endif
-	.ifnb \defIv; .set givemon_flags, givemon_flags | (1 << 13); .endif
-	.ifnb \speedIv; .set givemon_flags, givemon_flags | (1 << 14); .endif
-	.ifnb \spAtkIv; .set givemon_flags, givemon_flags | (1 << 15); .endif
-	.ifnb \spDefIv; .set givemon_flags, givemon_flags | (1 << 16); .endif
-	.ifnb \move1; .set givemon_flags, givemon_flags | (1 << 17); .endif
-	.ifnb \move2; .set givemon_flags, givemon_flags | (1 << 18); .endif
-	.ifnb \move3; .set givemon_flags, givemon_flags | (1 << 19); .endif
-	.ifnb \move4; .set givemon_flags, givemon_flags | (1 << 20); .endif
-	.ifnb \isShiny; .set givemon_flags, givemon_flags | (1 << 21); .endif
-	.ifnb \ggMaxFactor; .set givemon_flags, givemon_flags | (1 << 22); .endif
-	.ifnb \teraType; .set givemon_flags, givemon_flags | (1 << 23); .endif
+	.ifnb \unownLetter; .set givemon_flags, givemon_flags | (1 << 5); .endif
+	.ifnb \hpEv; .set givemon_flags, givemon_flags | (1 << 6); .endif
+	.ifnb \atkEv; .set givemon_flags, givemon_flags | (1 << 7); .endif
+	.ifnb \defEv; .set givemon_flags, givemon_flags | (1 << 8); .endif
+	.ifnb \speedEv; .set givemon_flags, givemon_flags | (1 << 9); .endif
+	.ifnb \spAtkEv; .set givemon_flags, givemon_flags | (1 << 10); .endif
+	.ifnb \spDefEv; .set givemon_flags, givemon_flags | (1 << 11); .endif
+	.ifnb \hpIv; .set givemon_flags, givemon_flags | (1 << 12); .endif
+	.ifnb \atkIv; .set givemon_flags, givemon_flags | (1 << 13); .endif
+	.ifnb \defIv; .set givemon_flags, givemon_flags | (1 << 14); .endif
+	.ifnb \speedIv; .set givemon_flags, givemon_flags | (1 << 15); .endif
+	.ifnb \spAtkIv; .set givemon_flags, givemon_flags | (1 << 16); .endif
+	.ifnb \spDefIv; .set givemon_flags, givemon_flags | (1 << 17); .endif
+	.ifnb \move1; .set givemon_flags, givemon_flags | (1 << 18); .endif
+	.ifnb \move2; .set givemon_flags, givemon_flags | (1 << 19); .endif
+	.ifnb \move3; .set givemon_flags, givemon_flags | (1 << 20); .endif
+	.ifnb \move4; .set givemon_flags, givemon_flags | (1 << 21); .endif
+	.ifnb \isShiny; .set givemon_flags, givemon_flags | (1 << 22); .endif
+	.ifnb \ggMaxFactor; .set givemon_flags, givemon_flags | (1 << 23); .endif
+	.ifnb \teraType; .set givemon_flags, givemon_flags | (1 << 24); .endif
 	.4byte givemon_flags
 	.ifnb \item; .2byte \item; .endif
 	.ifnb \ball; .2byte \ball; .endif
 	.ifnb \nature; .2byte \nature; .endif
 	.ifnb \abilityNum; .2byte \abilityNum; .endif
 	.ifnb \gender; .2byte \gender; .endif
+	.ifnb \unownLetter; .2byte \unownLetter; .endif
 	.ifnb \hpEv; .2byte \hpEv; .endif
 	.ifnb \atkEv; .2byte \atkEv; .endif
 	.ifnb \defEv; .2byte \defEv; .endif

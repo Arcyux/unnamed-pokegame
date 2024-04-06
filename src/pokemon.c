@@ -1014,11 +1014,39 @@ void CreateMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV,
     CreateMon(mon, species, level, fixedIV, TRUE, personality, OT_ID_PLAYER_ID, 0);
 }
 
+void CreateMonWithNatureLetter(struct Pokemon* mon, u16 species, u8 level, u8 fixedIV, u8 nature, u8 unownLetter)
+{
+    u32 personality;
+
+    if (unownLetter < NUM_UNOWN_FORMS)
+    {
+        u16 actualLetter;
+
+        do
+        {
+            personality = Random32();
+            actualLetter = GET_UNOWN_LETTER(personality);
+        }
+        while (nature != GetNatureFromPersonality(personality)
+            || actualLetter != unownLetter);
+    }
+    else
+    {
+        do
+        {
+            personality = Random32();
+        }
+        while (nature != GetNatureFromPersonality(personality));
+    }
+
+    CreateMon(mon, species, level, fixedIV, TRUE, personality, OT_ID_PLAYER_ID, 0);
+}
+
 void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 gender, u8 nature, u8 unownLetter)
 {
     u32 personality;
 
-    if ((u8)(unownLetter - 1) < NUM_UNOWN_FORMS)
+    if (unownLetter < NUM_UNOWN_FORMS)
     {
         u16 actualLetter;
 
@@ -1029,7 +1057,7 @@ void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level,
         }
         while (nature != GetNatureFromPersonality(personality)
             || gender != GetGenderFromSpeciesAndPersonality(species, personality)
-            || actualLetter != unownLetter - 1);
+            || actualLetter != unownLetter);
     }
     else
     {
@@ -1897,7 +1925,9 @@ u32 GetUnownSpeciesId(u32 personality)
 
     if (unownLetter == 0)
         return SPECIES_UNOWN;
-    return unownLetter + SPECIES_UNOWN_B - 1;
+    if (unownLetter < 28)
+        return unownLetter + SPECIES_UNOWN_B - 1;
+    return unownLetter + SPECIES_UNOWN_1 - 28;
 }
 
 void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition)

@@ -288,7 +288,7 @@ void ToggleGigantamaxFactor(struct ScriptContext *ctx)
     }
 }
 
-u32 ScriptGiveMonParameterized(u16 species, u8 level, u16 item, u8 ball, u8 nature, u8 abilityNum, u8 gender, u8 *evs, u8 *ivs, u16 *moves, bool8 isShiny, bool8 ggMaxFactor, u8 teraType)
+u32 ScriptGiveMonParameterized(u16 species, u8 level, u16 item, u8 ball, u8 nature, u8 abilityNum, u8 gender, u8 unownLetter, u8 *evs, u8 *ivs, u16 *moves, bool8 isShiny, bool8 ggMaxFactor, u8 teraType)
 {
     u16 nationalDexNum;
     int sentToPc;
@@ -307,13 +307,17 @@ u32 ScriptGiveMonParameterized(u16 species, u8 level, u16 item, u8 ball, u8 natu
             nature = Random() % NUM_NATURES;
     }
 
+    // check whether to use a specific letter or a random one
+    if (nature >= NUM_UNOWN_FORMS)
+        unownLetter = Random() % NUM_UNOWN_FORMS;
+
     // create a Pokémon with basic data
     if ((gender == MON_MALE && genderRatio != MON_FEMALE && genderRatio != MON_GENDERLESS)
      || (gender == MON_FEMALE && genderRatio != MON_MALE && genderRatio != MON_GENDERLESS)
      || (gender == MON_GENDERLESS && genderRatio == MON_GENDERLESS))
-        CreateMonWithGenderNatureLetter(&mon, species, level, 32, gender, nature, 0);
+        CreateMonWithGenderNatureLetter(&mon, species, level, 32, gender, nature, unownLetter);
     else
-        CreateMonWithNature(&mon, species, level, 32, nature);
+        CreateMonWithNatureLetter(&mon, species, level, 32, nature, unownLetter);
 
     // shininess
     if (P_FLAG_FORCE_SHINY != 0 && FlagGet(P_FLAG_FORCE_SHINY))
@@ -421,7 +425,7 @@ u32 ScriptGiveMon(u16 species, u8 level, u16 item)
                                 MAX_PER_STAT_IVS + 1, MAX_PER_STAT_IVS + 1, MAX_PER_STAT_IVS + 1};  // ScriptGiveMonParameterized won't touch the stats' IV.
     u16 moves[MAX_MON_MOVES] = {MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE};
 
-    return ScriptGiveMonParameterized(species, level, item, ITEM_POKE_BALL, NUM_NATURES, NUM_ABILITY_PERSONALITY, MON_GENDERLESS, evs, ivs, moves, FALSE, FALSE, NUMBER_OF_MON_TYPES);
+    return ScriptGiveMonParameterized(species, level, item, ITEM_POKE_BALL, NUM_NATURES, NUM_ABILITY_PERSONALITY, MON_GENDERLESS, NUM_UNOWN_FORMS, evs, ivs, moves, FALSE, FALSE, NUMBER_OF_MON_TYPES);
 }
 
 #define PARSE_FLAG(n, default_) (flags & (1 << (n))) ? VarGet(ScriptReadHalfword(ctx)) : (default_)
@@ -437,31 +441,32 @@ void ScrCmd_givemon(struct ScriptContext *ctx)
     u8 nature         = PARSE_FLAG(2, NUM_NATURES);
     u8 abilityNum     = PARSE_FLAG(3, NUM_ABILITY_PERSONALITY);
     u8 gender         = PARSE_FLAG(4, MON_GENDERLESS); // TODO: Find a better way to assign a random gender.
-    u8 hpEv           = PARSE_FLAG(5, 0);
-    u8 atkEv          = PARSE_FLAG(6, 0);
-    u8 defEv          = PARSE_FLAG(7, 0);
-    u8 speedEv        = PARSE_FLAG(8, 0);
-    u8 spAtkEv        = PARSE_FLAG(9, 0);
-    u8 spDefEv        = PARSE_FLAG(10, 0);
-    u8 hpIv           = PARSE_FLAG(11, Random() % MAX_PER_STAT_IVS + 1);
-    u8 atkIv          = PARSE_FLAG(12, Random() % MAX_PER_STAT_IVS + 1);
-    u8 defIv          = PARSE_FLAG(13, Random() % MAX_PER_STAT_IVS + 1);
-    u8 speedIv        = PARSE_FLAG(14, Random() % MAX_PER_STAT_IVS + 1);
-    u8 spAtkIv        = PARSE_FLAG(15, Random() % MAX_PER_STAT_IVS + 1);
-    u8 spDefIv        = PARSE_FLAG(16, Random() % MAX_PER_STAT_IVS + 1);
-    u16 move1         = PARSE_FLAG(17, MOVE_NONE);
-    u16 move2         = PARSE_FLAG(18, MOVE_NONE);
-    u16 move3         = PARSE_FLAG(19, MOVE_NONE);
-    u16 move4         = PARSE_FLAG(20, MOVE_NONE);
-    bool8 isShiny     = PARSE_FLAG(21, FALSE);
-    bool8 ggMaxFactor = PARSE_FLAG(22, FALSE);
-    u8 teraType       = PARSE_FLAG(23, NUMBER_OF_MON_TYPES);
+    u8 unownLetter    = PARSE_FLAG(5, NUM_UNOWN_FORMS);
+    u8 hpEv           = PARSE_FLAG(6, 0);
+    u8 atkEv          = PARSE_FLAG(7, 0);
+    u8 defEv          = PARSE_FLAG(8, 0);
+    u8 speedEv        = PARSE_FLAG(9, 0);
+    u8 spAtkEv        = PARSE_FLAG(10, 0);
+    u8 spDefEv        = PARSE_FLAG(11, 0);
+    u8 hpIv           = PARSE_FLAG(12, Random() % MAX_PER_STAT_IVS + 1);
+    u8 atkIv          = PARSE_FLAG(13, Random() % MAX_PER_STAT_IVS + 1);
+    u8 defIv          = PARSE_FLAG(14, Random() % MAX_PER_STAT_IVS + 1);
+    u8 speedIv        = PARSE_FLAG(15, Random() % MAX_PER_STAT_IVS + 1);
+    u8 spAtkIv        = PARSE_FLAG(16, Random() % MAX_PER_STAT_IVS + 1);
+    u8 spDefIv        = PARSE_FLAG(17, Random() % MAX_PER_STAT_IVS + 1);
+    u16 move1         = PARSE_FLAG(18, MOVE_NONE);
+    u16 move2         = PARSE_FLAG(19, MOVE_NONE);
+    u16 move3         = PARSE_FLAG(20, MOVE_NONE);
+    u16 move4         = PARSE_FLAG(21, MOVE_NONE);
+    bool8 isShiny     = PARSE_FLAG(22, FALSE);
+    bool8 ggMaxFactor = PARSE_FLAG(23, FALSE);
+    u8 teraType       = PARSE_FLAG(24, NUMBER_OF_MON_TYPES);
 
     u8 evs[NUM_STATS]        = {hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv};
     u8 ivs[NUM_STATS]        = {hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv};
     u16 moves[MAX_MON_MOVES] = {move1, move2, move3, move4};
 
-    gSpecialVar_Result = ScriptGiveMonParameterized(species, level, item, ball, nature, abilityNum, gender, evs, ivs, moves, isShiny, ggMaxFactor, teraType);
+    gSpecialVar_Result = ScriptGiveMonParameterized(species, level, item, ball, nature, abilityNum, gender, unownLetter, evs, ivs, moves, isShiny, ggMaxFactor, teraType);
 }
 
 #undef PARSE_FLAG

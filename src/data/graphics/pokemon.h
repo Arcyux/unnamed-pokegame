@@ -3247,6 +3247,14 @@ const u8 gMonFootprint_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mar
     const u32 gMonFrontPic_UnownQuestionMark[] = INCBIN_U32("graphics/pokemon/unown/question_mark/anim_front.4bpp.lz");
     const u32 gMonBackPic_UnownQuestionMark[] = INCBIN_U32("graphics/pokemon/unown/question_mark/back.4bpp.lz");
     const u8 gMonIcon_UnownQuestionMark[] = INCBIN_U8("graphics/pokemon/unown/question_mark/icon.4bpp");
+
+    const u32 gMonFrontPic_Unown1[] = INCBIN_U32("graphics/pokemon/unown/1/anim_front.4bpp.lz");
+    const u32 gMonBackPic_Unown1[] = INCBIN_U32("graphics/pokemon/unown/1/back.4bpp.lz");
+    const u8 gMonIcon_Unown1[] = INCBIN_U8("graphics/pokemon/unown/1/icon.4bpp");
+
+    const u32 gMonFrontPic_Unown2[] = INCBIN_U32("graphics/pokemon/unown/2/anim_front.4bpp.lz");
+    const u32 gMonBackPic_Unown2[] = INCBIN_U32("graphics/pokemon/unown/2/back.4bpp.lz");
+    const u8 gMonIcon_Unown2[] = INCBIN_U8("graphics/pokemon/unown/2/icon.4bpp");
 #endif //P_FAMILY_UNOWN
 
 #if P_FAMILY_WOBBUFFET
