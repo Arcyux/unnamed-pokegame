@@ -103,7 +103,8 @@
 #define UNOWN_FORM_QMARK 27
 #define UNOWN_FORM_1     28
 #define UNOWN_FORM_2     29
-#define NUM_UNOWN_FORMS  30
+#define UNOWN_FORM_3     30
+#define NUM_UNOWN_FORMS  31
 
 // Pokémon Stats
 #define STAT_HP      0
