@@ -12,7 +12,13 @@
   "allow_running": true,
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": [
+    {
+      "map": "MAP_MYSTERIOUS_CAVE_B1F_3R",
+      "offset": 0,
+      "direction": "left"
+    }
+  ],
   "object_events": [
 
   ],

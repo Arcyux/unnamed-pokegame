@@ -12,6 +12,7 @@
 #define MAP_MYSTERIOUS_CAVE_B1F_1R (0 | (1 << 8))
 #define MAP_MYSTERIOUS_CAVE_B1F_2R (1 | (1 << 8))
 #define MAP_MYSTERIOUS_CAVE_1F_1R  (2 | (1 << 8))
+#define MAP_MYSTERIOUS_CAVE_B1F_3R (3 | (1 << 8))
 
 // gMapGroup_IndoorDynamic
 

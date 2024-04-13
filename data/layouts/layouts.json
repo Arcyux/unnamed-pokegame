@@ -40,6 +40,16 @@
       "secondary_tileset": "gTileset_Cave",
       "border_filepath": "data/layouts/MysteriousCave_1F_1R/border.bin",
       "blockdata_filepath": "data/layouts/MysteriousCave_1F_1R/map.bin"
+    },
+    {
+      "id": "LAYOUT_MYSTERIOUS_CAVE_B1F_3R",
+      "name": "MysteriousCave_B1F_3R_Layout",
+      "width": 19,
+      "height": 19,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/MysteriousCave_B1F_3R/border.bin",
+      "blockdata_filepath": "data/layouts/MysteriousCave_B1F_3R/map.bin"
     }
   ]
 }

@@ -114,8 +114,7 @@ script(local) RandomArceusStarter {
 
         setvar(VAR_TEMP_0, ITEM_TM01)
         while (var(VAR_TEMP_0) <= ITEM_HM08) {
-            additem(ITEM_TM01)
-            
+            additem(VAR_TEMP_0)
             addvar(VAR_TEMP_0, 1)
         }
 

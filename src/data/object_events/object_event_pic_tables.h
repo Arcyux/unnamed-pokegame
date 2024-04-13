@@ -954,8 +954,8 @@ static const struct SpriteFrameImage sPicTable_KyogreSide[] = {
 };
 
 static const struct SpriteFrameImage sPicTable_GroudonSide[] = {
-    overworld_frame(gObjectEventPic_Groudon, 4, 4, 2),
-    overworld_frame(gObjectEventPic_Groudon, 4, 4, 2),
+    overworld_frame(gObjectEventPic_Groudon, 4, 4, 0),
+    overworld_frame(gObjectEventPic_Groudon, 4, 4, 1),
     overworld_frame(gObjectEventPic_Groudon, 4, 4, 2),
     overworld_frame(gObjectEventPic_Groudon, 4, 4, 3),
     overworld_frame(gObjectEventPic_Groudon, 4, 4, 3),

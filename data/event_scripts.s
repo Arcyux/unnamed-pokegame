@@ -552,3 +552,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/TheEntrance/scripts.inc"
 
 	.include "data/maps/MysteriousCave_1F_1R/scripts.inc"
+
+	.include "data/maps/MysteriousCave_B1F_3R/scripts.inc"
