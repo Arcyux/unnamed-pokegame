@@ -32,13 +32,14 @@ enum class Directive
     String,
     Braille,
     FixedString,
+    Enum,
     Unknown
 };
 
 class AsmFile
 {
 public:
-    AsmFile(std::string filename);
+    AsmFile(std::string filename, bool isStdin);
     AsmFile(AsmFile&& other);
     AsmFile(const AsmFile&) = delete;
     ~AsmFile();
@@ -50,6 +51,7 @@ public:
     bool IsAtEnd();
     void OutputLine();
     void OutputLocation();
+    bool ParseEnum();
 
 private:
     char* m_buffer;
@@ -69,6 +71,10 @@ private:
     void RaiseError(const char* format, ...);
     void RaiseWarning(const char* format, ...);
     void VerifyStringLength(int length);
+    int SkipWhitespaceAndEol();
+    int FindLastLineNumber(std::string& filename);
+    std::string ReadIdentifier();
+    long ReadInteger(std::string filename, long line);
 };
 
 #endif // ASM_FILE_H
