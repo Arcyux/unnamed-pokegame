@@ -143,3 +143,4 @@
 	.include "src/pokedex_plus_hgss.o"
 	.include "src/dexnav.o"
 	.include "src/quests.o"
+	.include "src/tm_case.o"

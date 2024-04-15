@@ -137,7 +137,6 @@ static void DrawPocketIndicatorSquare(u8, bool8);
 static void CreatePocketScrollArrowPair(void);
 static void CreatePocketSwitchArrowPair(void);
 static void DestroyPocketSwitchArrowPair(void);
-static void PrepareTMHMMoveWindow(void);
 static bool8 IsWallysBag(void);
 static void Task_WallyTutorialBagMenu(u8);
 static void Task_BagMenu_HandleInput(u8);
@@ -159,7 +158,6 @@ static void Task_SwitchBagPocket(u8);
 static void Task_HandleSwappingItemsInput(u8);
 static void DoItemSwap(u8);
 static void CancelItemSwap(u8);
-static void PrintTMHMMoveData(u16);
 static void PrintContextMenuItems(u8);
 static void PrintContextMenuItemGrid(u8, u8, u8);
 static void Task_ItemContext_SingleRow(u8);
@@ -956,7 +954,13 @@ static void GetItemName(u8 *dest, u16 itemId)
         StringExpandPlaceholders(dest, gText_NumberItem_TMBerry);
         break;
     default:
-        CopyItemName(itemId, dest);
+        if (itemId == ITEM_TM_CASE)
+        {
+            CopyItemName(itemId, gStringVar2);
+            StringExpandPlaceholders(dest, gText_TMCase_Blue);
+        }
+        else
+            CopyItemName(itemId, dest);
         break;
     }
 }
@@ -2593,7 +2597,7 @@ static void RemoveMoneyWindow(void)
     RemoveMoneyLabelObject();
 }
 
-static void PrepareTMHMMoveWindow()
+void PrepareTMHMMoveWindow()
 {
     FillWindowPixelBuffer(WIN_TMHM_INFO_ICONS, PIXEL_FILL(0));
     BlitMenuInfoIcon(WIN_TMHM_INFO_ICONS, MENU_INFO_ICON_POWER, 0, 4);
@@ -2602,7 +2606,7 @@ static void PrepareTMHMMoveWindow()
     CopyWindowToVram(WIN_TMHM_INFO_ICONS, COPYWIN_GFX);
 }
 
-static void PrintTMHMMoveData(u16 itemId)
+void PrintTMHMMoveData(u16 itemId)
 {
     u8 i;
     u16 moveId;
@@ -2620,7 +2624,6 @@ static void PrintTMHMMoveData(u16 itemId)
     else
     {
         moveId = ItemIdToBattleMoveId(itemId);
-        ListMenuLoadStdPalAt(BG_PLTT_ID(11), gMovesInfo[moveId].type);
         BlitMenuInfoIcon(WIN_TMHM_TYPE, gMovesInfo[moveId].type, 3, 0);
         BlitMenuInfoIcon(WIN_TMHM_CAT, gMovesInfo[moveId].category + MENU_TYPE_CAT_PHYSICAL, 4, 0);
 
@@ -2634,7 +2637,7 @@ static void PrintTMHMMoveData(u16 itemId)
             ConvertIntToDecimalStringN(gStringVar1, gMovesInfo[moveId].power, STR_CONV_MODE_RIGHT_ALIGN, 3);
             text = gStringVar1;
         }
-        BagMenu_Print(WIN_TMHM_INFO, FONT_NORMAL, text, 7, 4, 0, 0, TEXT_SKIP_DRAW, COLORID_TMHM_INFO);
+        BagMenu_Print(WIN_TMHM_INFO, FONT_NORMAL, text, 7, 3, 0, 0, TEXT_SKIP_DRAW, COLORID_TMHM_INFO);
 
         // Print TMHM accuracy
         if (gMovesInfo[moveId].accuracy == 0)
@@ -2646,16 +2649,19 @@ static void PrintTMHMMoveData(u16 itemId)
             ConvertIntToDecimalStringN(gStringVar1, gMovesInfo[moveId].accuracy, STR_CONV_MODE_RIGHT_ALIGN, 3);
             text = gStringVar1;
         }
-        BagMenu_Print(WIN_TMHM_INFO, FONT_NORMAL, text, 7, 16, 0, 0, TEXT_SKIP_DRAW, COLORID_TMHM_INFO);
+        BagMenu_Print(WIN_TMHM_INFO, FONT_NORMAL, text, 7, 15, 0, 0, TEXT_SKIP_DRAW, COLORID_TMHM_INFO);
 
         // Print TMHM pp
         ConvertIntToDecimalStringN(gStringVar1, gMovesInfo[moveId].pp, STR_CONV_MODE_RIGHT_ALIGN, 3);
-        BagMenu_Print(WIN_TMHM_INFO, FONT_NORMAL, gStringVar1, 7, 28, 0, 0, TEXT_SKIP_DRAW, COLORID_TMHM_INFO);
+        BagMenu_Print(WIN_TMHM_INFO, FONT_NORMAL, gStringVar1, 7, 27, 0, 0, TEXT_SKIP_DRAW, COLORID_TMHM_INFO);
 
         CopyWindowToVram(WIN_TMHM_INFO_ICONS, COPYWIN_GFX);
         CopyWindowToVram(WIN_TMHM_INFO, COPYWIN_GFX);
         CopyWindowToVram(WIN_TMHM_TYPE, COPYWIN_GFX);
         CopyWindowToVram(WIN_TMHM_CAT, COPYWIN_GFX);
+        PutWindowTilemap(WIN_TMHM_TYPE);
+        PutWindowTilemap(WIN_TMHM_CAT);
+        ListMenuLoadStdPalAt(BG_PLTT_ID(11), gMovesInfo[moveId].type);
     }
 }
 
