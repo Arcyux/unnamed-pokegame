@@ -123,7 +123,7 @@ static void PlaceHMTileInWindow(u8 windowId, u8 x, u8 y);
 static u8 AddTMContextMenu(u8 * a0, u8 a1);
 static void RemoveTMContextMenu(u8 * a0);
 static void DrawPartyMonIcons(void);
-static void TintPartyMonIcons(u8 tm);
+static void TintPartyMonIcons(u16 move);
 
 static const struct BgTemplate sBGTemplates[] = {
     {
@@ -643,7 +643,7 @@ static void TMCase_MoveCursor_UpdatePrintedDescription(s32 itemIndex)
     AddTextPrinterParameterized_ColorByIndex(WIN_DESCRIPTION, 2, str, 2, 3, 1, 0, 0, 0);
 
     // update icons
-    TintPartyMonIcons(itemId - ITEM_TM01);
+    TintPartyMonIcons(gItemsInfo[itemId].secondaryId);
 }
 
 static void FillBG2RowWithPalette_2timesNplus1(s32 a0)
@@ -1144,12 +1144,11 @@ static void DrawPartyMonIcons(void)
 
         //Set priority, stop movement and save original palette position
         gSprites[spriteIdData[i]].oam.priority = 0;
-        StartSpriteAnim(&gSprites[spriteIdData[i]], 4); //full stop
         spriteIdPalette[i] = gSprites[spriteIdData[i]].oam.paletteNum; //save correct palette number to array
     }
 }
 
-static void TintPartyMonIcons(u8 tm)
+static void TintPartyMonIcons(u16 move)
 {
     u8 i;
     u16 species;
@@ -1157,14 +1156,24 @@ static void TintPartyMonIcons(u8 tm)
     for (i = 0; i < gPlayerPartyCount; i++)
     {
         species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
-        if (!CanLearnTeachableMove(species, tm))
+        if (!CanLearnTeachableMove(species, move)) // Can't learn move
         {
-            gSprites[spriteIdData[i]].oam.paletteNum = 7 + spriteIdPalette[i];
+            StartSpriteAnim(&gSprites[spriteIdData[i]], 4); // full stop
+            gSprites[spriteIdData[i]].oam.paletteNum = 7 + spriteIdPalette[i]; // grayed
         }
-        else
+        else if (MonKnowsMove(&gPlayerParty[i], move)) // Knows move
         {
-            gSprites[spriteIdData[i]].oam.paletteNum = spriteIdPalette[i];
+            StartSpriteAnim(&gSprites[spriteIdData[i]], 4); // full stop
+            gSprites[spriteIdData[i]].oam.paletteNum = spriteIdPalette[i]; // color
         }
+        else // Can learn move
+        {
+            StartSpriteAnim(&gSprites[spriteIdData[i]], 0); // animated
+            gSprites[spriteIdData[i]].oam.paletteNum = spriteIdPalette[i]; // color
+        }
+
+        // reset animation instantly
+        SeekSpriteAnim(&gSprites[spriteIdData[i]], 0);
+        gSprites[spriteIdData[i]].animDelayCounter = 0;
     }
-    
 }
