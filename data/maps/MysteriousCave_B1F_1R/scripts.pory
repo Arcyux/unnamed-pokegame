@@ -113,6 +113,7 @@ script(local) RandomArceusStarter {
         givemon(SPECIES_UNOWN, 5, ITEM_NONE,,,,, UNOWN_FORM_3,,,,,,,,,,,,,, MOVE_LEGEND_POWER,,,,, VAR_TEMP_2)
         givemon(SPECIES_ARCEUS, 5)
         givemon(SPECIES_MEW, 5)
+        giveegg(SPECIES_MEW)
 
         setvar(VAR_TEMP_0, ITEM_TM01)
         while (var(VAR_TEMP_0) <= ITEM_HM08) {

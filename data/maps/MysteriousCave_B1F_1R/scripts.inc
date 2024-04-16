@@ -266,28 +266,30 @@ RandomArceusStarter_1:
 	givemon SPECIES_ARCEUS, 5
 # 115 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
 	givemon SPECIES_MEW, 5
-# 117 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
+# 116 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
+	giveegg SPECIES_MEW
+# 118 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
 	setvar VAR_TEMP_0, ITEM_TM01
 RandomArceusStarter_4:
-# 118 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
+# 119 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
 	compare VAR_TEMP_0, ITEM_HM08
 	goto_if_le RandomArceusStarter_5
-# 127 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
+# 128 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
 	compare VAR_RESULT, YES
 	goto_if_eq RandomArceusStarter_8
 RandomArceusStarter_7:
-# 132 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
-	setflag FLAG_STARTER_GIVEN
 # 133 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
-	setflag FLAG_SYS_POKEMON_GET
+	setflag FLAG_STARTER_GIVEN
 # 134 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
+	setflag FLAG_SYS_POKEMON_GET
+# 135 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
 	setflag FLAG_SYS_POKEDEX_GET
 	return
 
 RandomArceusStarter_5:
-# 119 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
-	additem VAR_TEMP_0
 # 120 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
+	additem VAR_TEMP_0
+# 121 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
 	addvar VAR_TEMP_0, 1
 	goto RandomArceusStarter_4
 
@@ -296,70 +298,70 @@ RandomArceusStarter_8:
 
 
 RandomArceusEncounter::
-# 139 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
-	lock
 # 140 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
+	lock
+# 141 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
 	waitse
-# 142 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
+# 143 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
 	call RandomArceusStarter
-# 144 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
-	playmoncry SPECIES_ARCEUS, CRY_MODE_ENCOUNTER
 # 145 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
+	playmoncry SPECIES_ARCEUS, CRY_MODE_ENCOUNTER
+# 146 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
 	waitmoncry
-# 147 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
-	call RandomArceus
 # 148 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
-	copyvar VAR_TEMP_3, VAR_TEMP_0
-# 149 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
-	copyvar VAR_TEMP_4, VAR_TEMP_1
-# 150 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
 	call RandomArceus
-# 152 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
-	setwildbattle VAR_TEMP_0, 1, VAR_TEMP_1, VAR_TEMP_3, 1, VAR_TEMP_4
+# 149 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
+	copyvar VAR_TEMP_3, VAR_TEMP_0
+# 150 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
+	copyvar VAR_TEMP_4, VAR_TEMP_1
+# 151 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
+	call RandomArceus
 # 153 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
+	setwildbattle VAR_TEMP_0, 1, VAR_TEMP_1, VAR_TEMP_3, 1, VAR_TEMP_4
+# 154 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
 	dowildbattle
-# 155 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
+# 156 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
 	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq RandomArceusEncounter_2
 RandomArceusEncounter_1:
-# 164 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
+# 165 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
 	releaseall
 	return
 
 RandomArceusEncounter_2:
-# 156 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
-	playse SE_CLICK
 # 157 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
+	playse SE_CLICK
+# 158 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
 	removeobject 1
-# 159 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
+# 160 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
 	setflag FLAG_DEFEATED_FIRST_ENCOUNTER
-# 161 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
+# 162 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
 	call OpenCloseExit
 	goto RandomArceusEncounter_1
 
 
 FollowPlayer::
-# 168 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
-	lock
 # 169 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
-	faceplayer
+	lock
 # 170 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
-	loadword 0, TalkToPlayer
+	faceplayer
 # 171 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
-	setfollower 2, FOLLOWER_FLAG_ALL | FOLLOWER_FLAG_CUSTOM_FOLLOW_SCRIPT
+	loadword 0, TalkToPlayer
 # 172 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
+	setfollower 2, FOLLOWER_FLAG_ALL | FOLLOWER_FLAG_CUSTOM_FOLLOW_SCRIPT
+# 173 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
 	release
 	return
 
 
 TalkToPlayer::
-# 176 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
-	objectfaceplayer OBJ_EVENT_ID_FOLLOWER
 # 177 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
+	objectfaceplayer OBJ_EVENT_ID_FOLLOWER
+# 178 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
 	msgbox TalkToPlayer_Text_0, MSGBOX_AUTOCLOSE
 	return
 
 
 TalkToPlayer_Text_0:
-# 177 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
+# 178 "data/maps/MysteriousCave_B1F_1R/scripts.pory"
 	.string "Yo.$"
