@@ -79,7 +79,7 @@ static EWRAM_DATA struct UnkStruct_203B10C sTMCaseStaticResources = {};
 static EWRAM_DATA struct UnkStruct_203B118 * sTMCaseDynamicResources = NULL;
 static EWRAM_DATA void * sTilemapBuffer = NULL; // tilemap buffer
 static EWRAM_DATA struct ListMenuItem * sListMenuItemsBuffer = NULL;
-static EWRAM_DATA u8 (* sListMenuStringsBuffer)[29] = NULL;
+static EWRAM_DATA u8 (* sListMenuStringsBuffer)[32] = NULL;
 static EWRAM_DATA u16 * sTMSpritePaletteBuffer = NULL;
 static EWRAM_DATA u8    spriteIdData[PARTY_SIZE] = {};
 static EWRAM_DATA u16   spriteIdPalette[PARTY_SIZE] = {};
@@ -552,7 +552,7 @@ static void InitTMCaseListMenuItems(void)
     // sListMenuItemsBuffer[i].id = -2;
     gMultiuseListMenuTemplate.items = sListMenuItemsBuffer;
     gMultiuseListMenuTemplate.totalItems = sTMCaseDynamicResources->numTMs;
-    gMultiuseListMenuTemplate.windowId = 0;
+    gMultiuseListMenuTemplate.windowId = WIN_ITEM_LIST;
     gMultiuseListMenuTemplate.header_X = 0;
     gMultiuseListMenuTemplate.item_X = 8;
     gMultiuseListMenuTemplate.cursor_X = 0;
@@ -583,7 +583,7 @@ static void GetTMNumberAndMoveString(u8 * dest, u16 itemId)
     else
     {
         StringAppend(gStringVar4, gText_NumberClear01);
-        ConvertIntToDecimalStringN(gStringVar1, itemId - ITEM_TM01 + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
+        ConvertIntToDecimalStringN(gStringVar1, itemId - ITEM_TM01 + 1, STR_CONV_MODE_LEADING_ZEROS, 3);
         StringAppend(gStringVar4, gStringVar1);
     }
     StringAppend(gStringVar4, sText_SingleSpace);
@@ -614,7 +614,7 @@ static void TMCase_ItemPrintFunc(u8 windowId, u32 itemId, u8 y)
 {
     if (itemId != -2)
     {
-        if (itemId < ITEM_HM01)
+        if (BagGetItemIdByPocketPosition(POCKET_TM_HM, itemId) < ITEM_HM01)
         {
             // ConvertIntToDecimalStringN(gStringVar1, BagGetQuantityByPocketPosition(POCKET_TM_HM, itemId), STR_CONV_MODE_RIGHT_ALIGN, 3);
             // StringExpandPlaceholders(gStringVar4, gText_xVar1);
