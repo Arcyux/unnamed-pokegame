@@ -978,13 +978,13 @@ s8 Menu_ProcessInputNoWrap(void)
     else if (JOY_NEW(DPAD_UP))
     {
         if (oldPos != Menu_MoveCursorNoWrapAround(-1))
-            PlaySE(SE_RG_BAG_CURSOR);
+            PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
     else if (JOY_NEW(DPAD_DOWN))
     {
         if (oldPos != Menu_MoveCursorNoWrapAround(1))
-            PlaySE(SE_RG_BAG_CURSOR);
+            PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
 

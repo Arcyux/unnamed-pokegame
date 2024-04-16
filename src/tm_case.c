@@ -603,7 +603,7 @@ static void TMCase_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *
 
     if (onInit != TRUE)
     {
-        PlaySE(SE_SELECT);
+        PlaySE(SE_RG_BAG_CURSOR);
         // InitSelectedTMSpriteData(sTMCaseDynamicResources->tmSpriteId, itemId);
     }
     TMCase_MoveCursor_UpdatePrintedDescription(itemIndex);
