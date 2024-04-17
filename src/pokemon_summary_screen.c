@@ -1693,6 +1693,9 @@ static void Task_ChangeSummaryMon(u8 taskId)
         if (ExtractMonDataToSummaryStruct(&sMonSummaryScreen->currentMon) == FALSE)
             return;
         break;
+    case 5:
+        // would be markings (removed)
+        break;
     case 6:
         CreateCaughtBallSprite(&sMonSummaryScreen->currentMon);
         break;
