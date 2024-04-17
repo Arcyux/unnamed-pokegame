@@ -19,7 +19,7 @@
   "warp_events": [
     {
       "x": 9,
-      "y": 13,
+      "y": 12,
       "elevation": 0,
       "dest_map": "MAP_THE_ENTRANCE",
       "dest_warp_id": "0"
